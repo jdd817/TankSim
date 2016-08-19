@@ -1,0 +1,21 @@
+﻿<html>
+<head>
+    <script>var application_path="@Url.Content("~/")";</script>
+
+    @using System.Web.Optimization
+    @Scripts.Render("~/jslibs")
+    @Scripts.Render("~/jsapp")
+
+    <link rel="stylesheet" href="@Url.Content("~/Styles/Tank.css")" />
+</head>
+<body ng-app="Tank.Web" ng-controller="TankController">
+    <script type="text/javascript">
+    angular.module("Tank.Web")
+        .constant("apiUrl",
+            {
+                apiUrl: '@Url.Content("~/api")'
+            });
+    </script>
+    <tank-ui></tank-ui>
+</body>
+</html>

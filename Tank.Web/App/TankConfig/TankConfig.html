@@ -1,0 +1,52 @@
+﻿<div class="tankConfig">
+    <div class="tableSection classSection">        
+        <div>
+            <span>Class:</span><span><select ng-model="Class" ng-options="class as class.Name for class in tankClasses"></select></span>
+        </div>
+        <div>
+            <span>Name:</span><span><input type="text" style="width:125px;" ng-model="tank.Name" /></span>
+        </div>
+    </div>
+    <div class="tableSection statsSection">
+        <h4>Stats</h4>
+        <div ng-show="Class.PrimaryStat=='Strength'">
+            <span>Strength</span>
+            <span><input type="text" ng-model="tank.Strength" /></span>
+        </div>
+        <div ng-show="Class.PrimaryStat=='Agility'">
+            <span>Agility</span>
+            <span><input type="text" ng-model="tank.Agility" /></span>
+        </div>
+        <div>
+            <span>Max Health</span>
+            <span><input type="text" ng-model="tank.MaxHealth" /></span>
+        </div>
+        <div>
+            <span>Mastery Rating</span>
+            <span><input type="text" ng-model="tank.Mastery" /></span>
+        </div>
+        <div>
+            <span>Crit Rating</span>
+            <span><input type="text" ng-model="tank.Crit" /></span>
+        </div>
+        <div>
+            <span>Haste Rating</span>
+            <span><input type="text" ng-model="tank.Haste" /></span>
+        </div>
+        <div>
+            <span>Versatility Rating</span>
+            <span><input type="text" ng-model="tank.Versatility" /></span>
+        </div>
+    </div>
+    <div class="tableSection weaponSection">
+        <h4>Weapon</h4>
+        <div>
+            <span>Damage</span>
+            <span><input type="text" ng-model="tank.WeaponLowDamage" /> - <input type="text" ng-model="tank.WeaponHighDamage" /></span>
+        </div>
+        <div>
+            <span>Speed</span>
+            <span><input type="text" ng-model="tank.WeaponSpeed" /></span>
+        </div>
+    </div>
+</div>

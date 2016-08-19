@@ -1,0 +1,19 @@
+﻿<div class="mobConfig">
+    <div>
+        <span>Name:</span>
+        <span><input type="text" ng-model="mob.Name"/></span>
+    </div>
+    <h4>Mob Attacks</h4>    
+    <div class="tableSection mobAttackContainer"  ng-repeat="attack in mob.Attacks">
+        <div>
+            <span>Damage</span>
+            <span><input type="text" ng-model="attack.Damage" /></span>
+            <span class="clickable" ng-click="removeAttack($index)"> x </span>
+        </div>
+        <div>
+            <span>Speed</span>
+            <span><input type="text" ng-model="attack.Period" /></span>
+        </div>
+    </div>
+    <div><span class="clickable" ng-click="addAttack()">+</span></div>
+</div>

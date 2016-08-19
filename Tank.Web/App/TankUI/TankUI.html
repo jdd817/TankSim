@@ -1,0 +1,55 @@
+﻿<div>
+    <div class="configArea">
+        <div class="tankSection">
+            <h4>Tanks</h4>
+            <div ng-repeat="tank in parameters.Tanks" class="mobContainer">
+                <div><span class="clickable" ng-click="removeTank($index)">x</span></div>
+                <tank-config tank="tank"></tank-config>
+            </div>
+            <div><span class="clickable" ng-click="addTank()">Add</span></div>
+        </div>
+        <div class="mobSection">
+            <h4>Mobs</h4>
+            <div ng-repeat="mob in parameters.Mobs" class="mobContainer">
+                <div><span class="clickable" ng-click="removeMob($index)">x</span></div>
+                <mob-config mob="mob"></mob-config>
+            </div>
+            <div><span class="clickable" ng-click="addMob()">Add</span></div>
+        </div>
+        <heals-config healers="parameters.Healers"></heals-config>
+        <div class="tableSection">
+            <span>
+                Seed: <input type="text" ng-model="parameters.Seed" /> <span class="clickable" ng-click="randomizeSeed()">randomize</span>
+            </span>
+            <span>
+                Run Count: <input type="text" ng-model="parameters.RunCount"/>
+            </span>
+        </div>
+    </div>
+    <div style="height:25px;">
+        <span class="clickable" ng-click="showJsonator=!showJsonator">{}</span>
+    </div>
+    <div class="jsonator" ng-show="showJsonator">
+        <div>
+            <span class="clickable" ng-click="loadJson()">Load Data</span><span class="clickable" ng-click="getJson()">Get Data</span>
+            <span class="clickable" ng-click="getBaseline()">Baseline Data</span>
+        </div>
+        <textarea ng-model="jsonData"></textarea>
+    </div>
+    <button ng-click="runSimulation()">Run Simulation</button>
+    <loading-indicator></loading-indicator>
+    <div class="resultsArea">
+        <h4>Results</h4>
+        <div class="tableSection">
+            <div>
+                <span><input type="checkbox" ng-model="chartOptions.series.lines.show" style="width:15px;"/></span>
+                <span>Show Lines</span>
+                <span><input type="checkbox" ng-model="chartOptions.series.points.show" style="width:15px;"/></span>
+                <span>Show Points</span>
+            </div>
+        </div>
+        <div style="display:inline-block" ng-repeat="result in results">
+            <flot dataset="result" options="chartOptions" width="500px" height="300px"></flot>
+        </div>
+    </div>
+</div>

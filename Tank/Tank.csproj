@@ -1,0 +1,148 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">x86</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{57CDE6CD-8F93-4B5D-BF61-3F2E03B4E0F4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tank</RootNamespace>
+    <AssemblyName>Tank</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject />
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Abilities\Ability.cs" />
+    <Compile Include="Abilities\AbilityResult.cs" />
+    <Compile Include="Abilities\Attack.cs" />
+    <Compile Include="Abilities\DeathKnight\BloodBoil.cs" />
+    <Compile Include="Abilities\DeathKnight\Consumption.cs" />
+    <Compile Include="Abilities\DeathKnight\DeathAndDecay.cs" />
+    <Compile Include="Abilities\DeathKnight\DeathStrike.cs" />
+    <Compile Include="Abilities\DeathKnight\HeartStrike.cs" />
+    <Compile Include="Abilities\DeathKnight\Marrowrend.cs" />
+    <Compile Include="Abilities\DeathKnight\VampiricBlood.cs" />
+    <Compile Include="Abilities\DemonHunter\DemonSpikes.cs" />
+    <Compile Include="Abilities\DemonHunter\ImmolationAura.cs" />
+    <Compile Include="Abilities\DemonHunter\Shear.cs" />
+    <Compile Include="Abilities\DemonHunter\SigilOfFlame.cs" />
+    <Compile Include="Abilities\DemonHunter\SoulCleave.cs" />
+    <Compile Include="Abilities\Monk\BlackoutStrike.cs" />
+    <Compile Include="Abilities\Monk\HealingElixer.cs" />
+    <Compile Include="Abilities\Monk\IronskinBrew.cs" />
+    <Compile Include="Abilities\Monk\KegSmash.cs" />
+    <Compile Include="Abilities\Monk\PurifyingBrew.cs" />
+    <Compile Include="Abilities\Monk\TigerPalm.cs" />
+    <Compile Include="Abilities\Warrior\Devastate.cs" />
+    <Compile Include="Abilities\Warrior\Revenge.cs" />
+    <Compile Include="Abilities\Warrior\IgnorePain.cs" />
+    <Compile Include="Abilities\Warrior\ShieldBlock.cs" />
+    <Compile Include="Abilities\Warrior\ShieldSlam.cs" />
+    <Compile Include="Abilities\Warrior\ThunderClap.cs" />
+    <Compile Include="Actor.cs" />
+    <Compile Include="Artifacts\DeathKnight.cs" />
+    <Compile Include="Artifacts\IArtifact.cs" />
+    <Compile Include="BuffManager.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\AllConsumingRot.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\BloodFeast.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\Bonebreaker.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\Consumption.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\MeatShield.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\RattlingBones.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\SanguinaryAffinity.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\SkeletalShattering.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\UnendingThirst.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\VampiricFangs.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\Veinrender.cs" />
+    <Compile Include="Buffs\DeathKnight\BloodPlague.cs" />
+    <Compile Include="Buffs\DeathKnight\BloodShield.cs" />
+    <Compile Include="Buffs\DeathKnight\BoneShield.cs" />
+    <Compile Include="Buffs\DeathKnight\CrimsonScourge.cs" />
+    <Compile Include="Buffs\DeathKnight\DeathAndDecay.cs" />
+    <Compile Include="Buffs\DeathKnight\VampiricBlood.cs" />
+    <Compile Include="Buffs\Buff.cs" />
+    <Compile Include="Buffs\DemonHunter\DemonSpikes.cs" />
+    <Compile Include="Buffs\DemonHunter\FeastOfSouls.cs" />
+    <Compile Include="Buffs\DemonHunter\ImmolationAura.cs" />
+    <Compile Include="Buffs\DemonHunter\SoulFragment.cs" />
+    <Compile Include="Buffs\Monk\ElusiveBrawler.cs" />
+    <Compile Include="Buffs\Monk\EyeOfTheTiger.cs" />
+    <Compile Include="Buffs\Monk\HealingOrb.cs" />
+    <Compile Include="Buffs\Monk\IronskinBrew.cs" />
+    <Compile Include="Buffs\Monk\Stagger.cs" />
+    <Compile Include="Buffs\Warrior\IgnorePain.cs" />
+    <Compile Include="Buffs\Warrior\ShieldBlock.cs" />
+    <Compile Include="Buffs\Warrior\SwordAndBoard.cs" />
+    <Compile Include="Buffs\Warrior\WeakenedBlows.cs" />
+    <Compile Include="Classes\DeathKnight.cs" />
+    <Compile Include="Classes\DemonHunter.cs" />
+    <Compile Include="Classes\Monk.cs" />
+    <Compile Include="CombatEngine.cs" />
+    <Compile Include="CombatTable.cs" />
+    <Compile Include="DataLogging\GraphLogger.cs" />
+    <Compile Include="DataLogging\StreamLogger.cs" />
+    <Compile Include="DataLogging\CsvLogger.cs" />
+    <Compile Include="DataLogging\DamageEvent.cs" />
+    <Compile Include="DataLogging\DatabaseLogger.cs" />
+    <Compile Include="DataLogging\DataLogManager.cs" />
+    <Compile Include="DataLogging\IDataLogger.cs" />
+    <Compile Include="DataLogging\SummaryLogger.cs" />
+    <Compile Include="ExtensionMethods.cs" />
+    <Compile Include="Healer.cs" />
+    <Compile Include="HitTableModifiers.cs" />
+    <Compile Include="Mob.cs" />
+    <Compile Include="Player.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RatingConverter.cs" />
+    <Compile Include="RNG.cs" />
+    <Compile Include="StatType.cs" />
+    <Compile Include="Classes\Warrior.cs" />
+    <Compile Include="Weapon.cs" />
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

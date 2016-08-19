@@ -1,0 +1,9 @@
+﻿
+<div class="healerSection">
+    <h4>Heals</h4>
+    <div ng-repeat="healer in healers">
+        <span class="clickable" ng-click="removeHealer($index)">-</span>
+        Heal for <input type="text" ng-model="healer.HealAmount" /> every <input type="text" ng-model="healer.HealPeriod" /> seconds.
+    </div>
+    <div><span class="clickable" ng-click="addHealer()">+</span></div>
+</div>

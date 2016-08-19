@@ -1,0 +1,83 @@
+﻿body {
+    background-color:#111111;
+    color:#EEEEEE;
+}
+
+input{
+    width:75px;
+}
+
+.clickable{
+    cursor:pointer;
+    border:1px solid black;
+    box-shadow:1px solid gray;
+    background-color:#333333;
+    padding:3px;
+    color:#DDDDEE
+}
+
+.loadingIndicator{
+    background-color:#554400;
+    color:#888888;
+    text-align:center;
+}
+
+.tableSection>div{
+    display:table-row;
+}
+.tableSection>div>span{
+    display:table-cell;
+}
+
+.configArea{
+
+}
+
+.resultsArea{
+
+}
+
+.jsonator{
+    background-color:#444444;
+}
+
+.jsonator textarea{
+    width:800px;
+    height:400px;
+}
+
+.tankSection{
+    background-color:#336633;
+    border:3px solid #888888;
+    display:inline-block;
+    width:450px;
+}
+
+.tankContainer{
+    border: 2px solid #003300;
+    display:inline-block;
+}
+
+.healerSection{
+    background-color:#333366;
+    border:3px solid #888888;
+    display:inline-block;
+}
+
+
+
+.mobSection{
+    background-color:#663333;
+    border:3px solid #888888;
+    display:inline-block;
+    width:475px;
+}
+
+.mobContainer{
+    border: 2px solid #330000;
+    display:inline-block;
+}
+
+.mobAttackContainer{
+    border: 1px solid #330000;
+}

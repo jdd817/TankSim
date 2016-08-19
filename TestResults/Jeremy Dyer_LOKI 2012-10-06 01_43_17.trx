@@ -1,0 +1,243 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<TestRun id="8bec1b2a-7ede-42e7-b575-b2bf49937ed0" name="Jeremy Dyer@LOKI 2012-10-06 01:43:17" runUser="LOKI\Jeremy Dyer" xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
+  <TestSettings name="Local" id="73811cf1-0644-4df3-9da5-552245f53791">
+    <Description>These are default test settings for a local test run.</Description>
+    <Deployment enabled="false" runDeploymentRoot="Jeremy Dyer_LOKI 2012-10-06 01_43_17">
+      <DeploymentItem filename="C:\Users\Jeremy Dyer\Dropbox\Tank\Tank\bin\Debug\Tank.exe" />
+    </Deployment>
+    <Execution>
+      <TestTypeSpecific />
+      <AgentRule name="Execution Agents">
+      </AgentRule>
+    </Execution>
+  </TestSettings>
+  <Times creation="2012-10-06T01:43:17.9190000-05:00" queuing="2012-10-06T01:43:21.7280000-05:00" start="2012-10-06T01:43:22.1240000-05:00" finish="2012-10-06T01:43:34.1560000-05:00" />
+  <ResultSummary outcome="Error">
+    <Counters total="30" executed="1" error="0" failed="0" timeout="0" aborted="1" inconclusive="0" passedButRunAborted="0" notRunnable="0" notExecuted="29" disconnected="0" warning="0" passed="0" completed="0" inProgress="0" pending="0" />
+    <RunInfos>
+      <RunInfo computerName="LOKI" outcome="Error" timestamp="2012-10-06T01:43:34.1540000-05:00">
+        <Text>Test host process exited unexpectedly.</Text>
+      </RunInfo>
+    </RunInfos>
+  </ResultSummary>
+  <TestDefinitions>
+    <UnitTest name="GetDodgedReductionTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="803553fc-9749-de85-88a7-f11a4050a013">
+      <Execution id="9774d009-76c4-4f67-ba37-42aa3a9a6d45" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetDodgedReductionTest" />
+    </UnitTest>
+    <UnitTest name="WarriorConstructorTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="c7b5a89c-eb69-c7c6-995e-d4923780635d">
+      <Execution id="92144ace-5f02-4b27-967d-8a09a61ee120" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.WarriorTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="WarriorConstructorTest" />
+    </UnitTest>
+    <UnitTest name="DodgeRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="734e80e5-2165-ee4c-aae0-2d317a81e7d8">
+      <Execution id="912661fa-1c4d-4289-b597-15e9fd41b05e" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="DodgeRatingTest" />
+    </UnitTest>
+    <UnitTest name="GetParriedReductionTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="d9d5c7ee-5b7c-4f29-340f-a5b46767eea3">
+      <Execution id="60f0df62-095d-4df7-bffc-be705c4ca092" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetParriedReductionTest" />
+    </UnitTest>
+    <UnitTest name="CritRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="fa00ea69-7143-e4c6-d9f0-8b6809e2116c">
+      <Execution id="44cf5a26-dc56-4985-a848-e284dfdb9f2c" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CritRatingTest" />
+    </UnitTest>
+    <UnitTest name="CombatTableConstructorTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="759972dc-e340-f5d6-5e06-9a4ed1dfef3f">
+      <Execution id="f619f403-903a-4f1a-86a1-51728dce5815" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.CombatTableTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CombatTableConstructorTest" />
+    </UnitTest>
+    <UnitTest name="GetDiminishedAvoidanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="31681d11-ba08-1ef7-2ad2-d0aa7f00a561">
+      <Execution id="695a4676-79ab-4ed2-bca2-cc0840f3ab0a" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetDiminishedAvoidanceTest" />
+    </UnitTest>
+    <UnitTest name="GetAbilityUsedTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="ffc1c08a-f9bb-edf0-8728-dfbf6471835f">
+      <Execution id="5e46f0b8-e64b-4a1e-ab10-8f07efbd15e3" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.WarriorTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetAbilityUsedTest" />
+    </UnitTest>
+    <UnitTest name="DodgeChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="8ad0a74d-da2f-8eda-cd2c-37a2875e324f">
+      <Execution id="10a9dc74-ac0c-4ce9-a62d-0c5011b734fc" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="DodgeChanceTest" />
+    </UnitTest>
+    <UnitTest name="MasteryRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="b6162ab0-3919-c90e-70fa-2ffb0fb89f1b">
+      <Execution id="6e7040a1-5180-4daa-98b2-14787b46f798" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="MasteryRatingTest" />
+    </UnitTest>
+    <UnitTest name="MissChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="9a8d28cf-e370-5fbf-cca4-c330161bfc57">
+      <Execution id="c57dc4b6-4af9-4334-a65c-def8dc8b06ca" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="MissChanceTest" />
+    </UnitTest>
+    <UnitTest name="CritChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="f2b8d5fd-2375-6be2-d74a-b706ba31705d">
+      <Execution id="fae65cb5-3c16-4b60-ba11-5a81af76efb4" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CritChanceTest" />
+    </UnitTest>
+    <UnitTest name="BlockChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="6c615630-248e-bd45-e523-7b7f3728cdba">
+      <Execution id="b7e43cab-35ed-4742-b567-a74aff821224" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BlockChanceTest" />
+    </UnitTest>
+    <UnitTest name="BuffsTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="0ecc8273-e507-83c4-6643-6d1c321afbce">
+      <Execution id="1962b92a-0a37-4736-985a-1f0b7ec63e82" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BuffsTest" />
+    </UnitTest>
+    <UnitTest name="GetDodgedReductionTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="526883a8-ebd6-af51-65b4-507a4e56585e">
+      <Execution id="67f2e580-00d3-43d2-84fb-fb213e24f4c6" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetDodgedReductionTest" />
+    </UnitTest>
+    <UnitTest name="BuffsTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="596a4b09-f5c4-61dc-91c6-18aa54517928">
+      <Execution id="5b929ee7-29fe-4b33-b40e-d9c9da2f7ffe" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BuffsTest" />
+    </UnitTest>
+    <UnitTest name="GetAbilityUsedTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="cb218054-223a-b9dd-fa19-7e1475f7747a">
+      <Execution id="8bbc0b04-32d7-446d-9112-ab72d055e2a0" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetAbilityUsedTest" />
+    </UnitTest>
+    <UnitTest name="ParryChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="0f6b5679-40e2-b78b-8572-e19498c3bbbd">
+      <Execution id="92956d2f-168b-4e50-8bb3-206d32dc2f6d" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ParryChanceTest" />
+    </UnitTest>
+    <UnitTest name="MissChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="c28217fd-7498-4fc3-07e6-e01762803f3c">
+      <Execution id="28153bec-233e-4ef4-a036-a421e1ab9950" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="MissChanceTest" />
+    </UnitTest>
+    <UnitTest name="ExpertiseRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="6ce7ffba-6107-e932-ce50-c8254ac53a5c">
+      <Execution id="34b2280f-dea3-4342-8e82-96bcb6444787" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ExpertiseRatingTest" />
+    </UnitTest>
+    <UnitTest name="BuffManagerFullTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="b603a618-543d-d56a-5d8c-43cfd9e7e29f">
+      <Execution id="c2318a26-2912-4b6a-98f7-51949d92d542" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.BuffManagerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BuffManagerFullTest" />
+    </UnitTest>
+    <UnitTest name="BlockChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="86a002dc-367a-ca7a-cec3-160d405e44ef">
+      <Execution id="cc5edc6b-d0cf-448b-baf6-f421aaa8eeab" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="BlockChanceTest" />
+    </UnitTest>
+    <UnitTest name="HitRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="3fab7319-7f0b-8148-7942-01ec8b665c68">
+      <Execution id="d0e6a5b8-678c-409f-b9e0-f4282ca68982" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HitRatingTest" />
+    </UnitTest>
+    <UnitTest name="DodgeChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="a3c5f275-7294-8bf8-ff47-af4097fbb65d">
+      <Execution id="e5dd3b5b-5a00-4108-acea-ee506a81798e" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="DodgeChanceTest" />
+    </UnitTest>
+    <UnitTest name="ParryRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="99456207-a5f7-1a18-f5a7-6f6dcfb11273">
+      <Execution id="229d29b5-2470-4d88-8142-95c8f91ed700" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ParryRatingTest" />
+    </UnitTest>
+    <UnitTest name="MobConstructorTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="e819a9e5-6522-f6bf-dc3d-f166da94195e">
+      <Execution id="8fa5fbc4-8fe3-448b-bb44-aa1334436a19" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="MobConstructorTest" />
+    </UnitTest>
+    <UnitTest name="GetParriedReductionTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="16d3e9f8-6ab7-b186-28b4-a485d182aacd">
+      <Execution id="0a86ba63-22f8-42b2-b9e1-66fb4f69c049" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="GetParriedReductionTest" />
+    </UnitTest>
+    <UnitTest name="ParryChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="8085ac79-0487-3247-d7d8-6dc0997fcf83">
+      <Execution id="9a1ba398-9598-4b24-935e-03cee5387b98" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.MobTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="ParryChanceTest" />
+    </UnitTest>
+    <UnitTest name="CritChanceTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="7b08e3eb-febe-5382-f90d-a6fe9ed5002d">
+      <Execution id="7467949b-ef2c-4cba-bb6c-a3aa7f20e592" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="CritChanceTest" />
+    </UnitTest>
+    <UnitTest name="HasteRatingTest" storage="c:\users\jeremy dyer\dropbox\tank\tanktests\bin\debug\tanktests.dll" id="5dff9af9-884d-c867-268e-50d02b71fc35">
+      <Execution id="0470d630-9519-4082-bb3a-ff4d3aba9e3f" />
+      <TestMethod codeBase="C:/Users/Jeremy Dyer/Dropbox/Tank/TankTests/bin/Debug/TankTests.DLL" adapterTypeName="Microsoft.VisualStudio.TestTools.TestTypes.Unit.UnitTestAdapter, Microsoft.VisualStudio.QualityTools.Tips.UnitTest.Adapter, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" className="TankTests.PlayerTest, TankTests, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" name="HasteRatingTest" />
+    </UnitTest>
+  </TestDefinitions>
+  <TestLists>
+    <TestList name="Results Not in a List" id="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestList name="All Loaded Results" id="19431567-8539-422a-85d7-44ee4e166bda" />
+  </TestLists>
+  <TestEntries>
+    <TestEntry testId="b603a618-543d-d56a-5d8c-43cfd9e7e29f" executionId="c2318a26-2912-4b6a-98f7-51949d92d542" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="cb218054-223a-b9dd-fa19-7e1475f7747a" executionId="8bbc0b04-32d7-446d-9112-ab72d055e2a0" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="31681d11-ba08-1ef7-2ad2-d0aa7f00a561" executionId="695a4676-79ab-4ed2-bca2-cc0840f3ab0a" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6c615630-248e-bd45-e523-7b7f3728cdba" executionId="b7e43cab-35ed-4742-b567-a74aff821224" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="596a4b09-f5c4-61dc-91c6-18aa54517928" executionId="5b929ee7-29fe-4b33-b40e-d9c9da2f7ffe" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="7b08e3eb-febe-5382-f90d-a6fe9ed5002d" executionId="7467949b-ef2c-4cba-bb6c-a3aa7f20e592" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="fa00ea69-7143-e4c6-d9f0-8b6809e2116c" executionId="44cf5a26-dc56-4985-a848-e284dfdb9f2c" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8ad0a74d-da2f-8eda-cd2c-37a2875e324f" executionId="10a9dc74-ac0c-4ce9-a62d-0c5011b734fc" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="734e80e5-2165-ee4c-aae0-2d317a81e7d8" executionId="912661fa-1c4d-4289-b597-15e9fd41b05e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="6ce7ffba-6107-e932-ce50-c8254ac53a5c" executionId="34b2280f-dea3-4342-8e82-96bcb6444787" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="803553fc-9749-de85-88a7-f11a4050a013" executionId="9774d009-76c4-4f67-ba37-42aa3a9a6d45" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="16d3e9f8-6ab7-b186-28b4-a485d182aacd" executionId="0a86ba63-22f8-42b2-b9e1-66fb4f69c049" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="5dff9af9-884d-c867-268e-50d02b71fc35" executionId="0470d630-9519-4082-bb3a-ff4d3aba9e3f" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="3fab7319-7f0b-8148-7942-01ec8b665c68" executionId="d0e6a5b8-678c-409f-b9e0-f4282ca68982" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="b6162ab0-3919-c90e-70fa-2ffb0fb89f1b" executionId="6e7040a1-5180-4daa-98b2-14787b46f798" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c28217fd-7498-4fc3-07e6-e01762803f3c" executionId="28153bec-233e-4ef4-a036-a421e1ab9950" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0f6b5679-40e2-b78b-8572-e19498c3bbbd" executionId="92956d2f-168b-4e50-8bb3-206d32dc2f6d" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="99456207-a5f7-1a18-f5a7-6f6dcfb11273" executionId="229d29b5-2470-4d88-8142-95c8f91ed700" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="c7b5a89c-eb69-c7c6-995e-d4923780635d" executionId="92144ace-5f02-4b27-967d-8a09a61ee120" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="ffc1c08a-f9bb-edf0-8728-dfbf6471835f" executionId="5e46f0b8-e64b-4a1e-ab10-8f07efbd15e3" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="e819a9e5-6522-f6bf-dc3d-f166da94195e" executionId="8fa5fbc4-8fe3-448b-bb44-aa1334436a19" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="86a002dc-367a-ca7a-cec3-160d405e44ef" executionId="cc5edc6b-d0cf-448b-baf6-f421aaa8eeab" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="0ecc8273-e507-83c4-6643-6d1c321afbce" executionId="1962b92a-0a37-4736-985a-1f0b7ec63e82" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="f2b8d5fd-2375-6be2-d74a-b706ba31705d" executionId="fae65cb5-3c16-4b60-ba11-5a81af76efb4" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="a3c5f275-7294-8bf8-ff47-af4097fbb65d" executionId="e5dd3b5b-5a00-4108-acea-ee506a81798e" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="526883a8-ebd6-af51-65b4-507a4e56585e" executionId="67f2e580-00d3-43d2-84fb-fb213e24f4c6" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="d9d5c7ee-5b7c-4f29-340f-a5b46767eea3" executionId="60f0df62-095d-4df7-bffc-be705c4ca092" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="9a8d28cf-e370-5fbf-cca4-c330161bfc57" executionId="c57dc4b6-4af9-4334-a65c-def8dc8b06ca" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="8085ac79-0487-3247-d7d8-6dc0997fcf83" executionId="9a1ba398-9598-4b24-935e-03cee5387b98" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+    <TestEntry testId="759972dc-e340-f5d6-5e06-9a4ed1dfef3f" executionId="f619f403-903a-4f1a-86a1-51728dce5815" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" />
+  </TestEntries>
+  <Results>
+    <UnitTestResult executionId="c2318a26-2912-4b6a-98f7-51949d92d542" testId="b603a618-543d-d56a-5d8c-43cfd9e7e29f" testName="BuffManagerFullTest" computerName="LOKI" duration="00:00:11.4220000" startTime="2012-10-06T01:43:22.7330000-05:00" endTime="2012-10-06T01:43:34.1550000-05:00" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="Aborted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c2318a26-2912-4b6a-98f7-51949d92d542">
+    </UnitTestResult>
+    <UnitTestResult executionId="8bbc0b04-32d7-446d-9112-ab72d055e2a0" testId="cb218054-223a-b9dd-fa19-7e1475f7747a" testName="GetAbilityUsedTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8bbc0b04-32d7-446d-9112-ab72d055e2a0">
+    </UnitTestResult>
+    <UnitTestResult executionId="695a4676-79ab-4ed2-bca2-cc0840f3ab0a" testId="31681d11-ba08-1ef7-2ad2-d0aa7f00a561" testName="GetDiminishedAvoidanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="695a4676-79ab-4ed2-bca2-cc0840f3ab0a">
+    </UnitTestResult>
+    <UnitTestResult executionId="b7e43cab-35ed-4742-b567-a74aff821224" testId="6c615630-248e-bd45-e523-7b7f3728cdba" testName="BlockChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="b7e43cab-35ed-4742-b567-a74aff821224">
+    </UnitTestResult>
+    <UnitTestResult executionId="5b929ee7-29fe-4b33-b40e-d9c9da2f7ffe" testId="596a4b09-f5c4-61dc-91c6-18aa54517928" testName="BuffsTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5b929ee7-29fe-4b33-b40e-d9c9da2f7ffe">
+    </UnitTestResult>
+    <UnitTestResult executionId="7467949b-ef2c-4cba-bb6c-a3aa7f20e592" testId="7b08e3eb-febe-5382-f90d-a6fe9ed5002d" testName="CritChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="7467949b-ef2c-4cba-bb6c-a3aa7f20e592">
+    </UnitTestResult>
+    <UnitTestResult executionId="44cf5a26-dc56-4985-a848-e284dfdb9f2c" testId="fa00ea69-7143-e4c6-d9f0-8b6809e2116c" testName="CritRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="44cf5a26-dc56-4985-a848-e284dfdb9f2c">
+    </UnitTestResult>
+    <UnitTestResult executionId="10a9dc74-ac0c-4ce9-a62d-0c5011b734fc" testId="8ad0a74d-da2f-8eda-cd2c-37a2875e324f" testName="DodgeChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="10a9dc74-ac0c-4ce9-a62d-0c5011b734fc">
+    </UnitTestResult>
+    <UnitTestResult executionId="912661fa-1c4d-4289-b597-15e9fd41b05e" testId="734e80e5-2165-ee4c-aae0-2d317a81e7d8" testName="DodgeRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="912661fa-1c4d-4289-b597-15e9fd41b05e">
+    </UnitTestResult>
+    <UnitTestResult executionId="34b2280f-dea3-4342-8e82-96bcb6444787" testId="6ce7ffba-6107-e932-ce50-c8254ac53a5c" testName="ExpertiseRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="34b2280f-dea3-4342-8e82-96bcb6444787">
+    </UnitTestResult>
+    <UnitTestResult executionId="9774d009-76c4-4f67-ba37-42aa3a9a6d45" testId="803553fc-9749-de85-88a7-f11a4050a013" testName="GetDodgedReductionTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9774d009-76c4-4f67-ba37-42aa3a9a6d45">
+    </UnitTestResult>
+    <UnitTestResult executionId="0a86ba63-22f8-42b2-b9e1-66fb4f69c049" testId="16d3e9f8-6ab7-b186-28b4-a485d182aacd" testName="GetParriedReductionTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0a86ba63-22f8-42b2-b9e1-66fb4f69c049">
+    </UnitTestResult>
+    <UnitTestResult executionId="0470d630-9519-4082-bb3a-ff4d3aba9e3f" testId="5dff9af9-884d-c867-268e-50d02b71fc35" testName="HasteRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="0470d630-9519-4082-bb3a-ff4d3aba9e3f">
+    </UnitTestResult>
+    <UnitTestResult executionId="d0e6a5b8-678c-409f-b9e0-f4282ca68982" testId="3fab7319-7f0b-8148-7942-01ec8b665c68" testName="HitRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="d0e6a5b8-678c-409f-b9e0-f4282ca68982">
+    </UnitTestResult>
+    <UnitTestResult executionId="6e7040a1-5180-4daa-98b2-14787b46f798" testId="b6162ab0-3919-c90e-70fa-2ffb0fb89f1b" testName="MasteryRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="6e7040a1-5180-4daa-98b2-14787b46f798">
+    </UnitTestResult>
+    <UnitTestResult executionId="28153bec-233e-4ef4-a036-a421e1ab9950" testId="c28217fd-7498-4fc3-07e6-e01762803f3c" testName="MissChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="28153bec-233e-4ef4-a036-a421e1ab9950">
+    </UnitTestResult>
+    <UnitTestResult executionId="92956d2f-168b-4e50-8bb3-206d32dc2f6d" testId="0f6b5679-40e2-b78b-8572-e19498c3bbbd" testName="ParryChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92956d2f-168b-4e50-8bb3-206d32dc2f6d">
+    </UnitTestResult>
+    <UnitTestResult executionId="229d29b5-2470-4d88-8142-95c8f91ed700" testId="99456207-a5f7-1a18-f5a7-6f6dcfb11273" testName="ParryRatingTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="229d29b5-2470-4d88-8142-95c8f91ed700">
+    </UnitTestResult>
+    <UnitTestResult executionId="92144ace-5f02-4b27-967d-8a09a61ee120" testId="c7b5a89c-eb69-c7c6-995e-d4923780635d" testName="WarriorConstructorTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="92144ace-5f02-4b27-967d-8a09a61ee120">
+    </UnitTestResult>
+    <UnitTestResult executionId="5e46f0b8-e64b-4a1e-ab10-8f07efbd15e3" testId="ffc1c08a-f9bb-edf0-8728-dfbf6471835f" testName="GetAbilityUsedTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="5e46f0b8-e64b-4a1e-ab10-8f07efbd15e3">
+    </UnitTestResult>
+    <UnitTestResult executionId="8fa5fbc4-8fe3-448b-bb44-aa1334436a19" testId="e819a9e5-6522-f6bf-dc3d-f166da94195e" testName="MobConstructorTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="8fa5fbc4-8fe3-448b-bb44-aa1334436a19">
+    </UnitTestResult>
+    <UnitTestResult executionId="cc5edc6b-d0cf-448b-baf6-f421aaa8eeab" testId="86a002dc-367a-ca7a-cec3-160d405e44ef" testName="BlockChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="cc5edc6b-d0cf-448b-baf6-f421aaa8eeab">
+    </UnitTestResult>
+    <UnitTestResult executionId="1962b92a-0a37-4736-985a-1f0b7ec63e82" testId="0ecc8273-e507-83c4-6643-6d1c321afbce" testName="BuffsTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="1962b92a-0a37-4736-985a-1f0b7ec63e82">
+    </UnitTestResult>
+    <UnitTestResult executionId="fae65cb5-3c16-4b60-ba11-5a81af76efb4" testId="f2b8d5fd-2375-6be2-d74a-b706ba31705d" testName="CritChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="fae65cb5-3c16-4b60-ba11-5a81af76efb4">
+    </UnitTestResult>
+    <UnitTestResult executionId="e5dd3b5b-5a00-4108-acea-ee506a81798e" testId="a3c5f275-7294-8bf8-ff47-af4097fbb65d" testName="DodgeChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="e5dd3b5b-5a00-4108-acea-ee506a81798e">
+    </UnitTestResult>
+    <UnitTestResult executionId="67f2e580-00d3-43d2-84fb-fb213e24f4c6" testId="526883a8-ebd6-af51-65b4-507a4e56585e" testName="GetDodgedReductionTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="67f2e580-00d3-43d2-84fb-fb213e24f4c6">
+    </UnitTestResult>
+    <UnitTestResult executionId="60f0df62-095d-4df7-bffc-be705c4ca092" testId="d9d5c7ee-5b7c-4f29-340f-a5b46767eea3" testName="GetParriedReductionTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="60f0df62-095d-4df7-bffc-be705c4ca092">
+    </UnitTestResult>
+    <UnitTestResult executionId="c57dc4b6-4af9-4334-a65c-def8dc8b06ca" testId="9a8d28cf-e370-5fbf-cca4-c330161bfc57" testName="MissChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="c57dc4b6-4af9-4334-a65c-def8dc8b06ca">
+    </UnitTestResult>
+    <UnitTestResult executionId="9a1ba398-9598-4b24-935e-03cee5387b98" testId="8085ac79-0487-3247-d7d8-6dc0997fcf83" testName="ParryChanceTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="9a1ba398-9598-4b24-935e-03cee5387b98">
+    </UnitTestResult>
+    <UnitTestResult executionId="f619f403-903a-4f1a-86a1-51728dce5815" testId="759972dc-e340-f5d6-5e06-9a4ed1dfef3f" testName="CombatTableConstructorTest" computerName="LOKI" testType="13cdc9d9-ddb5-4fa4-a97d-d965ccfc6d4b" outcome="NotExecuted" testListId="8c84fa94-04c1-424b-9868-57a2d4851a1d" relativeResultsDirectory="f619f403-903a-4f1a-86a1-51728dce5815">
+    </UnitTestResult>
+  </Results>
+</TestRun>
