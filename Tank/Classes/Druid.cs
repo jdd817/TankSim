@@ -1,0 +1,238 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+
+using Tank.Buffs.Warrior;
+using System.Xml.Serialization;
+using Tank.Abilities;
+
+namespace Tank.Classes
+{
+    public class Druid : Player
+    {
+        static Druid()
+        {
+            BaseDodge = 0.10m;
+            BaseParry = 0.00m;
+            BaseBlock = 0.00m;
+        }
+
+        public Druid()
+        {
+            RageCap = 100;
+            Reset();
+        }
+
+        public override void Reset()
+        {
+            Buffs.ClearAllNonPermanent();
+
+            Rage = 0;
+
+            MangleCD = 0m;
+            ThrashCD = 0m;
+            IronfurCD = 0m;
+            FrenziedRegenCharges = 2;
+            FrenziedRegenRecharge = 0m;
+            BristlingFurCD = 0m;
+            YserasGiftCD = 0m;
+
+            CurrentHealth = MaxHealth;
+
+        }
+
+        [XmlIgnore]
+        public override decimal ParryChance
+        {
+            get
+            {
+                return 0;
+            }
+        }
+
+        public override decimal DodgeChance
+        {
+            get
+            {
+                return BaseDodge
+                    + GetDiminishedAvoidance(
+                        RatingConverter.GetRating(StatType.Dodge, CritRating + Buffs.GetRatingAdjustment(StatType.Dodge))
+                            + Buffs.GetPercentageAdjustment(StatType.Dodge));
+            }
+        }
+
+        private int _rage;
+
+        private int Rage
+        {
+            get { return _rage; }
+            set { _rage = Math.Min(value, RageCap); }
+        }
+
+        public int RageCap
+        { get; set; }
+
+        #region class-specific counters
+
+        private decimal MangleCD;
+        private decimal ThrashCD;
+        private decimal IronfurCD;
+        private int FrenziedRegenCharges;
+        private decimal FrenziedRegenRecharge;
+        private decimal BristlingFurCD;
+        private decimal YserasGiftCD;
+
+        #endregion
+
+        #region class-specific calculated values
+        
+        public override int AttackPower
+        {
+            get
+            {
+                return (int)((
+                    Agility
+                    + Buffs.GetRatingAdjustment(StatType.AttackPower))
+                    * (1 + Buffs.GetPercentageAdjustment(StatType.AttackPower)));
+            }
+        }
+
+        #endregion 
+
+
+        public override Abilities.Ability GetAbilityUsed(BuffManager MobBuffs)
+        {
+            if (GCD <= 0)
+            {
+                if (Buffs.GetBuff<Buffs.Druid.GalacticGuardian>() != null)
+                    return new Abilities.Druid.Moonfire();
+                if (MangleCD <= 0m)
+                {
+                    MangleCD = 6m;
+                    return new Abilities.Druid.Mangle();
+                }
+                if (ThrashCD <= 0m && Rage >= 15)
+                {
+                    ThrashCD = 6m;
+                    return new Abilities.Druid.Thrash();
+                }
+                var moonfireDebuff = MobBuffs.GetBuff<Buffs.Druid.Moonfire>();
+                if (moonfireDebuff == null || moonfireDebuff.TimeRemaining <= GCDLength * 2m)
+                {
+                    return new Abilities.Druid.Moonfire();
+                }
+                if (Rage >= RageCap - 30)
+                    return new Abilities.Druid.Maul();
+                return new Abilities.Druid.Swipe();
+
+            }
+
+            if (BristlingFurCD <= 0)
+            {
+                BristlingFurCD = 45m;
+                return new Abilities.Druid.BristlingFur();
+            }
+
+            if (Rage >= 10 && FrenziedRegenCharges > 0 && HealthPercentage < 0.5m && Buffs.GetBuff<Buffs.Druid.FrenziedRegeneration>() == null)
+            {
+                FrenziedRegenCharges--;
+                if (FrenziedRegenCharges == 1)
+                    FrenziedRegenRecharge = 24m;
+                return new Abilities.Druid.FrenziedRegeneration();
+            }
+
+            if (Rage >= 45 && IronfurCD <= 0)
+            {
+                IronfurCD = 0.5m;
+                return new Abilities.Druid.Ironfur();
+            }
+
+            if (Rage >= 10 && FrenziedRegenCharges > 0 && Abilities.Druid.FrenziedRegeneration.HealAmount+CurrentHealth<=MaxHealth)
+            {
+                FrenziedRegenCharges--;
+                if (FrenziedRegenCharges == 1)
+                    FrenziedRegenRecharge = 24m;
+                return new Abilities.Druid.FrenziedRegeneration();
+            }
+
+            return null;
+        }
+
+        public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
+        {
+            Rage -= Result.ResourceCost;
+            ApplyHealing(Result.SelfHealing);
+            if (Ability.GetType() == typeof(Abilities.Attack))
+                Rage += 8;
+
+            if((Ability.GetType()==typeof(Abilities.Druid.Thrash) || Ability.GetType() == typeof(Abilities.Druid.Swipe) || Ability.GetType() == typeof(Abilities.Druid.Moonfire))
+                && RNG.NextDouble()<=0.15)
+            {
+                Buffs.AddBuff(new Buffs.Druid.Gore());
+                MangleCD = 0;
+            }
+
+        }
+
+        public override void UpdateTimeElapsed(decimal DeltaTime)
+        {
+            UpdateTimers(DeltaTime);
+
+            if (FrenziedRegenCharges < 2)
+            {
+                FrenziedRegenRecharge -= DeltaTime;
+                if (FrenziedRegenRecharge <= 0)
+                {
+                    FrenziedRegenCharges++;
+                    if (FrenziedRegenCharges < 2)
+                        FrenziedRegenRecharge += 24;
+                }
+            }
+
+            if(YserasGiftCD<=0 && CurrentHealth<MaxHealth)
+            {
+                YserasGiftCD = 5m;
+                ApplyHealing((int)(MaxHealth * 0.03m));
+            }
+
+
+            MangleCD = Math.Max(0, MangleCD - DeltaTime);
+            ThrashCD = Math.Max(0, ThrashCD - DeltaTime);
+            IronfurCD = Math.Max(0, IronfurCD - DeltaTime);
+            BristlingFurCD = Math.Max(0, BristlingFurCD - DeltaTime);
+            YserasGiftCD = Math.Max(0, YserasGiftCD - DeltaTime);
+        }
+
+        public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
+        {
+            DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()
+            {
+                Time = CurrentTime,
+                Result = Result,
+                DamageTaken = MobAttack.Damage
+            };
+
+            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
+            {
+                DamageEvent.DamageTaken = 0;
+            }
+
+            DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * (1m - VersatilityDamageReduction));
+
+            //get rage
+            //from blue: 50 * DamageTaken / MaxHealth
+            if (Buffs.GetBuff<Buffs.Druid.BristlingFur>() != null)
+                Rage += (int)((50m * DamageEvent.DamageTaken) / MaxHealth);
+
+            if(RNG.NextDouble()<=0.10)
+            {
+                Buffs.AddBuff(new Buffs.Druid.GalacticGuardian());
+            }
+
+            CurrentHealth -= DamageEvent.DamageTaken;
+
+            DataLogging.DataLogManager.LogEvent(DamageEvent);
+        }
+    }
+}

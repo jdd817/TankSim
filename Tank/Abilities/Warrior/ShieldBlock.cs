@@ -7,9 +7,6 @@ namespace Tank.Abilities.Warrior
 {
     public class ShieldBlock : Ability
     {
-        public override AbilityType AbilityType { get { return AbilityType.Self; } }
-
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

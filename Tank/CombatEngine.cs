@@ -93,6 +93,9 @@ namespace Tank
                     var modifiers = MobAttack.GetModifiers(Mob.Buffs, Tank.Buffs);
                     AttackResult Result = CombatTable.GetAttackResult(Mob, Tank,
                         modifiers);
+
+                    if (Tank.Armor > 0)
+                        MobAttack.Damage = (int)(MobAttack.Damage * (1m - Tank.ArmorDamageReduction));
                     
                     Tank.UpdateFromMobAttack(Time, MobAttack, Result);
                 }

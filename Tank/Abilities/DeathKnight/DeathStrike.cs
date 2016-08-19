@@ -13,8 +13,6 @@ namespace Tank.Abilities.DeathKnight
             ResourceCost = 45;
         }
 
-        public override AbilityType AbilityType { get { return AbilityType.Melee; } }
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var healingDone = HealingAmount(Caster);

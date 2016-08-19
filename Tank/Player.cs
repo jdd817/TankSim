@@ -106,6 +106,9 @@ namespace Tank
         public int Agility
         { get; set; }
 
+        public int Armor
+        { get; set; }
+
         #endregion
 
         #region calculated properties        
@@ -180,6 +183,10 @@ namespace Tank
         [XmlIgnore]
         public decimal LeechPercentage
         { get { return RatingConverter.GetRating(StatType.Leech, Leech) + Buffs.GetPercentageAdjustment(StatType.Leech); } }
+
+        [XmlIgnore]
+        public decimal ArmorDamageReduction
+        { get { return RatingConverter.GetRating(StatType.Armor, (int)((Armor + Buffs.GetRatingAdjustment(StatType.Armor)) * (1 + Buffs.GetPercentageAdjustment(StatType.Armor)))); } }
 
         #endregion
 
@@ -274,7 +281,12 @@ namespace Tank
         /// <param name="Result"></param>
         public abstract void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result);
 
-        public abstract void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs);
+        public virtual void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
+
+        {
+            foreach (var hot in TickingBuffs.OfBaseType<Buffs.HealOverTime>())
+                ApplyHealing(hot.HealingPerTick);
+        }
 
         public abstract void Reset();
 

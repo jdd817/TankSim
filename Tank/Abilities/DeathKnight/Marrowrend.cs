@@ -13,9 +13,7 @@ namespace Tank.Abilities.DeathKnight
             SecondaryResourceCost = 2;
             ResourceGain = 20;
         }
-
-        public override AbilityType AbilityType { get { return AbilityType.Melee; } }
-
+        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var boneCharges = 3;

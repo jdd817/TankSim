@@ -9,6 +9,14 @@
     </div>
     <div class="tableSection statsSection">
         <h4>Stats</h4>
+        <div>
+            <span>Max Health</span>
+            <span><input type="text" ng-model="tank.MaxHealth" /></span>
+        </div>
+        <div>
+            <span>Armor</span>
+            <span><input type="text" ng-model="tank.Armor" /></span>
+        </div>
         <div ng-show="Class.PrimaryStat=='Strength'">
             <span>Strength</span>
             <span><input type="text" ng-model="tank.Strength" /></span>
@@ -16,11 +24,7 @@
         <div ng-show="Class.PrimaryStat=='Agility'">
             <span>Agility</span>
             <span><input type="text" ng-model="tank.Agility" /></span>
-        </div>
-        <div>
-            <span>Max Health</span>
-            <span><input type="text" ng-model="tank.MaxHealth" /></span>
-        </div>
+        </div>        
         <div>
             <span>Mastery Rating</span>
             <span><input type="text" ng-model="tank.Mastery" /></span>

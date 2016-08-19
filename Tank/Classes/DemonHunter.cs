@@ -151,8 +151,7 @@ namespace Tank.Classes
 
         public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
         {
-            foreach (var hot in TickingBuffs.OfType<Buffs.DemonHunter.FeastOfSouls>())
-                CurrentHealth += hot.HealingPerTick;
+            base.UpdateFromTickingBuffs(TickingBuffs);
             foreach (var aura in TickingBuffs.OfType<Buffs.DemonHunter.ImmolationAura>())
                 Pain += 2;
         }

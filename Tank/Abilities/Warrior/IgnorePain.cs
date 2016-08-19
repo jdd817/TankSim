@@ -7,8 +7,6 @@ namespace Tank.Abilities.Warrior
 {
     public class IgnorePain : Ability
     {
-        public override AbilityType AbilityType { get { return AbilityType.Self; } }
-
         public int DamageAbsorbed
         { get; set; }
 

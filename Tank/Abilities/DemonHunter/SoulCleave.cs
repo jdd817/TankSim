@@ -12,9 +12,7 @@ namespace Tank.Abilities.DemonHunter
         {
             ResourceCost = 60;
         }
-
-        public override AbilityType AbilityType { get { return AbilityType.Melee; } }
-
+        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var dh = Caster as Player;

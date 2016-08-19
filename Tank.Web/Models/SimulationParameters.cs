@@ -21,6 +21,7 @@ namespace Tank.Web.Models
         public int Strength { get; set; }
         public int Agility { get; set; }
         public int MaxHealth { get; set; }
+        public int Armor { get; set; }
         public int Mastery { get; set; }
         public int Crit { get; set; }
         public int Haste { get; set; }

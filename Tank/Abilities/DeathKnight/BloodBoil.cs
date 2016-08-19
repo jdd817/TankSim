@@ -8,8 +8,6 @@ namespace Tank.Abilities.DeathKnight
 {
     public class BloodBoil : Ability
     {
-        public override AbilityType AbilityType { get { return AbilityType.Melee; } }
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

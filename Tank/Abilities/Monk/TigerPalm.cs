@@ -8,11 +8,6 @@ namespace Tank.Abilities.Monk
 {
     public class TigerPalm : Ability
     {
-        public override AbilityType AbilityType
-        {
-            get { return AbilityType.Melee; }
-        }
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

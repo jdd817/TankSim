@@ -43,7 +43,7 @@ namespace Tank.Buffs
         /// <returns></returns>
         public abstract decimal GetPercentageModifier(StatType Stat);
 
-        public string Name
+        public virtual string Name
         { get { return this.GetType().Name; } }
 
         public virtual void Refresh(Buff NewBuff)
@@ -68,6 +68,7 @@ namespace Tank.Buffs
                     Name,
                     TimeRemaining);
         }
+        
     }
 
     public abstract class PermanentBuff : Buff

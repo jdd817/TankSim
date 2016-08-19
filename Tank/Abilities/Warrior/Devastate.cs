@@ -7,8 +7,6 @@ namespace Tank.Abilities.Warrior
 {
     class Devastate : Ability
     {
-        public override AbilityType AbilityType { get { return AbilityType.Melee; } }
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

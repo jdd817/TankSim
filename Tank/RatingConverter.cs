@@ -30,6 +30,8 @@ namespace Tank
                 case StatType.Parry:
                 case StatType.Dodge:
                     return Rating / 16200.0m;
+                case StatType.Armor:
+                    return Rating / (Rating + 3609.9m);
                 default:
                     return 0;
                     throw new InvalidOperationException("Unknown rating");

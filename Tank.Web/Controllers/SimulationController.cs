@@ -164,6 +164,7 @@ namespace Tank.Web.Controllers
             tank.Strength = tankData.Strength;
             tank.Agility = tankData.Agility;
             tank.MaxHealth = tankData.MaxHealth;
+            tank.Armor = tankData.Armor;
             tank.MasteryRating = tankData.Mastery;
             tank.CritRating = tankData.Crit;
             tank.HasteRating = tankData.Haste;
@@ -204,6 +205,11 @@ namespace Tank.Web.Controllers
                     return new Classes.Monk
                     {
                         EnergyCap = 100
+                    };
+                case "Druid":
+                    return new Classes.Druid
+                    {
+                        RageCap = 100
                     };
                 default:
                     throw new InvalidOperationException("Unkown tank class");

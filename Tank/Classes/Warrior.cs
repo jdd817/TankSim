@@ -27,7 +27,7 @@ namespace Tank.Classes
         {
             Buffs.ClearAllNonPermanent();
 
-            Rage = 20;
+            Rage = 0;
             RageCounter = 0;
 
             ShieldBlockRecharge = 0;
@@ -144,7 +144,8 @@ namespace Tank.Classes
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
             Rage -= Result.ResourceCost;
-            if(Ability.GetType()==typeof(Abilities.Warrior.ShieldSlam))
+            ApplyHealing(Result.SelfHealing);
+            if (Ability.GetType()==typeof(Abilities.Warrior.ShieldSlam))
             {
                 var shieldBlock = Buffs.GetBuff(typeof(ShieldBlock));
                 if (shieldBlock != null)
@@ -230,8 +231,5 @@ namespace Tank.Classes
 
             DataLogging.DataLogManager.LogEvent(DamageEvent);
         }
-
-        public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
-        { }
     }
 }

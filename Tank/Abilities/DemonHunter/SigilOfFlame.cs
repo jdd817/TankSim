@@ -10,9 +10,7 @@ namespace Tank.Abilities.DemonHunter
         public SigilOfFlame()
         {
         }
-
-        public override AbilityType AbilityType { get { return AbilityType.Spell; } }
-
+        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

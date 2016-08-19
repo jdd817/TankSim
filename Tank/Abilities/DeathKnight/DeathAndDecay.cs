@@ -13,9 +13,7 @@ namespace Tank.Abilities.DeathKnight
             SecondaryResourceCost = 1;
             ResourceGain = 10;
         }
-
-        public override AbilityType AbilityType { get { return AbilityType.Spell; } }
-
+        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

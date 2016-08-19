@@ -287,17 +287,5 @@ namespace Tank.Classes
 
             DataLogging.DataLogManager.LogEvent(DamageEvent);
         }
-
-        public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
-        {
-            foreach (var buff in TickingBuffs)
-            {
-                if (buff.GetType() == typeof(BloodPlague))
-                {
-
-                }
-            }
-        }
-
     }
 }

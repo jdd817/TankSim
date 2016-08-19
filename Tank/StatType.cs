@@ -15,6 +15,7 @@
         Versatility,
         Leech,
         DamageReduction,
-        Stamina
+        Stamina,
+        Armor
     }
 }

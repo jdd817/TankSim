@@ -33,9 +33,6 @@ namespace Tank.Abilities
             return new HitTableModifiers();
         }
 
-        public abstract AbilityType AbilityType
-        { get; }
-
         public virtual bool OnGCD { get { return true; } }
 
         public abstract AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target);

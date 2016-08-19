@@ -8,14 +8,6 @@ namespace Tank.Abilities.Monk
 {
     public class HealingElixer : Ability
     {
-        public override AbilityType AbilityType
-        {
-            get
-            {
-                throw new NotImplementedException();
-            }
-        }
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

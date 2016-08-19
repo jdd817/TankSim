@@ -1,0 +1,40 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Tank.Abilities.Druid
+{
+    public class FrenziedRegeneration : Ability
+    {
+        public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
+        {
+            var amountHealed = HealAmount;
+
+            if (Caster.Buffs.GetBuff<Buffs.Druid.GuardianOfElune>() != null)
+            {
+                amountHealed = (int)(amountHealed * 1.20m);
+                Caster.Buffs.ClearBuff<Buffs.Druid.GuardianOfElune>();
+            }
+            return new AbilityResult
+            {
+                ResourceCost = 10,
+                CasterBuffsApplied = new[]
+                {
+                    new Buffs.Druid.FrenziedRegeneration(amountHealed)
+                }
+            };
+        }
+
+        public static int HealAmount
+        {
+            get
+            {
+                return (int)(
+                        DataLogging.DataLogManager.DamageSince(DataLogging.DataLogManager.CurrentTime - 5.0m)
+                        * 0.5m);
+            }
+        }
+    }
+}

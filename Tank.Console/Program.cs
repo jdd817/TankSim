@@ -23,7 +23,7 @@ namespace Tank.Console
             Classes.DeathKnight Bart = new Classes.DeathKnight()
             {
                 Name = "DK",
-                //Armor=50659,
+                Armor=2350,
                 MasteryRating = 1466,
                 CritRating = 1400,
                 HasteRating = 1418,
@@ -45,7 +45,7 @@ namespace Tank.Console
             Classes.Warrior Dul = new Classes.Warrior()
             {
                 Name = "War",
-                //Armor=50659,
+                Armor=3110,
                 MasteryRating = 1736,
                 CritRating = 1210,
                 HasteRating = 800,
@@ -67,7 +67,7 @@ namespace Tank.Console
             Classes.DemonHunter Gut = new Classes.DemonHunter()
             {
                 Name = "DHunter",
-                //Armor=50659,
+                Armor=2605,
                 MasteryRating = 1486,
                 CritRating = 2077,
                 HasteRating = 1951,
@@ -89,7 +89,7 @@ namespace Tank.Console
             Classes.Monk Gut2 = new Classes.Monk()
             {
                 Name = "Monk",
-                //Armor=50659,
+                Armor=1170,
                 MasteryRating = 1689,
                 CritRating = 1623,
                 HasteRating = 946,

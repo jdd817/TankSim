@@ -11,9 +11,7 @@ namespace Tank.Abilities
         {
             Damage = damage;
         }
-
-        public override AbilityType AbilityType { get { return AbilityType.Melee; } }
-
+        
         public int Damage
         { get; set; }
 

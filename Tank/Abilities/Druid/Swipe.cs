@@ -4,16 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Tank.Abilities.Monk
+namespace Tank.Abilities.Druid
 {
-    public class IronskinBrew : Ability
+    public class Swipe : Ability
     {
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
-            {
-                CasterBuffsApplied = new[] { new Buffs.Monk.IronskinBrew() }
-            };
+            { };
         }
     }
 }

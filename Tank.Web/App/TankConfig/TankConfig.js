@@ -13,7 +13,8 @@
                         { Name: "Death Knight", PrimaryStat: "Strength" },
                         { Name: "Demon Hunter", PrimaryStat: "Agility" },
                         { Name: "Warrior", PrimaryStat: "Strength" },
-                        { Name: "Monk", PrimaryStat: "Agility" }
+                        { Name: "Monk", PrimaryStat: "Agility" },
+                        { Name: "Druid", PrimaryStat: "Agility" }
                     ];
 
                     if ($scope.tank && $scope.tank.Class)

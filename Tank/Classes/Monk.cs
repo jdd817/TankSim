@@ -47,6 +47,17 @@ namespace Tank.Classes
         public int EnergyCap
         { get; set; }
 
+        public override decimal DodgeChance
+        {
+            get
+            {
+                return BaseDodge
+                    + GetDiminishedAvoidance(
+                        RatingConverter.GetRating(StatType.Dodge, Agility + Buffs.GetRatingAdjustment(StatType.Dodge))
+                            + Buffs.GetPercentageAdjustment(StatType.Dodge));
+            }
+        }
+
         #region class-specific counters
 
         private int BrewCharges;
@@ -255,6 +266,7 @@ namespace Tank.Classes
 
         public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
         {
+            base.UpdateFromTickingBuffs(TickingBuffs);
             foreach (var stagger in TickingBuffs.OfType<Buffs.Monk.Stagger>())
             {
                 int damageTaken;
@@ -264,10 +276,6 @@ namespace Tank.Classes
                     damageTaken = stagger.DamageDelayed;
                 CurrentHealth -= damageTaken;
                 stagger.DamageDelayed -= damageTaken;
-            }
-            foreach (var hot in TickingBuffs.OfBaseType<Buffs.HealOverTime>())
-            {
-                ApplyHealing(hot.HealingPerTick);
             }
         }
 

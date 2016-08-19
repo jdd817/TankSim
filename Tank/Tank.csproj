@@ -64,6 +64,14 @@
     <Compile Include="Abilities\DemonHunter\Shear.cs" />
     <Compile Include="Abilities\DemonHunter\SigilOfFlame.cs" />
     <Compile Include="Abilities\DemonHunter\SoulCleave.cs" />
+    <Compile Include="Abilities\Druid\BristlingFur.cs" />
+    <Compile Include="Abilities\Druid\FrenziedRegeneration.cs" />
+    <Compile Include="Abilities\Druid\Ironfur.cs" />
+    <Compile Include="Abilities\Druid\Mangle.cs" />
+    <Compile Include="Abilities\Druid\Maul.cs" />
+    <Compile Include="Abilities\Druid\Moonfire.cs" />
+    <Compile Include="Abilities\Druid\Swipe.cs" />
+    <Compile Include="Abilities\Druid\Thrash.cs" />
     <Compile Include="Abilities\Monk\BlackoutStrike.cs" />
     <Compile Include="Abilities\Monk\HealingElixer.cs" />
     <Compile Include="Abilities\Monk\IronskinBrew.cs" />
@@ -102,6 +110,14 @@
     <Compile Include="Buffs\DemonHunter\FeastOfSouls.cs" />
     <Compile Include="Buffs\DemonHunter\ImmolationAura.cs" />
     <Compile Include="Buffs\DemonHunter\SoulFragment.cs" />
+    <Compile Include="Buffs\Druid\BristlingFur.cs" />
+    <Compile Include="Buffs\Druid\FrenziedRegeneration.cs" />
+    <Compile Include="Buffs\Druid\GalacticGuardian.cs" />
+    <Compile Include="Buffs\Druid\Gore.cs" />
+    <Compile Include="Buffs\Druid\GuardianOfElune.cs" />
+    <Compile Include="Buffs\Druid\Ironfur.cs" />
+    <Compile Include="Buffs\Druid\Moonfire.cs" />
+    <Compile Include="Buffs\Druid\RendAndTear.cs" />
     <Compile Include="Buffs\Monk\ElusiveBrawler.cs" />
     <Compile Include="Buffs\Monk\EyeOfTheTiger.cs" />
     <Compile Include="Buffs\Monk\HealingOrb.cs" />
@@ -113,6 +129,7 @@
     <Compile Include="Buffs\Warrior\WeakenedBlows.cs" />
     <Compile Include="Classes\DeathKnight.cs" />
     <Compile Include="Classes\DemonHunter.cs" />
+    <Compile Include="Classes\Druid.cs" />
     <Compile Include="Classes\Monk.cs" />
     <Compile Include="CombatEngine.cs" />
     <Compile Include="CombatTable.cs" />
