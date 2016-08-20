@@ -12,6 +12,7 @@ namespace Tank.Web
 {
     public class Global : HttpApplication
     {
+        //msbuild Tank.Web.csproj /t:Package /p:DeployIisAppPath="Default Web Site"
         void Application_Start(object sender, EventArgs e)
         {
             // Code that runs on application startup
