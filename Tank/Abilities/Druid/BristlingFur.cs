@@ -8,6 +8,11 @@ namespace Tank.Abilities.Druid
 {
     public class BristlingFur : Ability
     {
+        public BristlingFur()
+        {
+            Cooldown = 45m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
@@ -15,5 +20,7 @@ namespace Tank.Abilities.Druid
                 CasterBuffsApplied = new[] { new Buffs.Druid.BristlingFur() }
             };
         }
+
+        public override bool OnGCD { get { return false; } }
     }
 }

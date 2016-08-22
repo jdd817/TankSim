@@ -8,6 +8,11 @@ namespace Tank.Abilities.Druid
 {
     public class Ironfur : Ability
     {
+        public Ironfur()
+        {
+            Cooldown = 0.5m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var buff = new Buffs.Druid.Ironfur();
@@ -24,5 +29,7 @@ namespace Tank.Abilities.Druid
                 CasterBuffsApplied = new[] { buff }
             };
         }
+
+        public override bool OnGCD { get { return false; } }
     }
 }

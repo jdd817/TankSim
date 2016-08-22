@@ -9,7 +9,8 @@ namespace Tank.Abilities.DemonHunter
     {
         public DemonSpikes()
         {
-            ResourceCost = 20;
+            MaxCharges = 2;
+            Cooldown = 15m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)

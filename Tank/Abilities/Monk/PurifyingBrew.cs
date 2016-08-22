@@ -14,5 +14,15 @@ namespace Tank.Abilities.Monk
             {
             };
         }
+
+        public override Type CooldownType
+        {
+            get
+            {
+                return typeof(IronskinBrew);
+            }
+        }
+
+        public override bool OnGCD { get { return false; } }
     }
 }

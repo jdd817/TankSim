@@ -8,6 +8,12 @@ namespace Tank.Abilities.Druid
 {
     public class FrenziedRegeneration : Ability
     {
+        public FrenziedRegeneration()
+        {
+            MaxCharges = 2;
+            Cooldown = 24m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var amountHealed = HealAmount;
@@ -36,5 +42,7 @@ namespace Tank.Abilities.Druid
                         * 0.5m);
             }
         }
+
+        public override bool OnGCD { get { return false; } }
     }
 }

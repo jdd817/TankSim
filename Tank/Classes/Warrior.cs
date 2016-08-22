@@ -26,14 +26,11 @@ namespace Tank.Classes
         public override void Reset()
         {
             Buffs.ClearAllNonPermanent();
+            Cooldowns.Reset();
+            Cooldowns.GCDLength = GCDLength;
 
             Rage = 0;
-            RageCounter = 0;
-
-            ShieldBlockRecharge = 0;
-            ShieldBlockCharges = 2;
-            ShieldSlamCD = 0;
-            RevengeCD = 0;
+            
             RevengeResetICD = 0;
             CurrentHealth = MaxHealth;
 
@@ -63,12 +60,7 @@ namespace Tank.Classes
         { get; set; }
 
         #region class-specific counters
-
-        private decimal RageCounter;
-        private decimal ShieldBlockRecharge;
-        private int ShieldBlockCharges;
-        private decimal ShieldSlamCD;
-        private decimal RevengeCD;
+        
         private decimal RevengeResetICD;
 
         #endregion
@@ -105,30 +97,18 @@ namespace Tank.Classes
 
         public override Abilities.Ability GetAbilityUsed(BuffManager MobBuffs)
         {
-            if (GCD <= 0)
+            if (Cooldowns.OffGCD)
             {
-                if (ShieldSlamCD <= 0)
-                {
-                    ShieldSlamCD = 9.0m;
-                    if (Buffs.GetBuff(typeof(Buffs.Warrior.SwordAndBoard)) != null)
-                        Buffs.ClearBuff(typeof(Buffs.Warrior.SwordAndBoard));
+                if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldSlam>())
                     return new Abilities.Warrior.ShieldSlam();
-                }
-                if (RevengeCD <= 0)
-                {
-                    RevengeCD = 9.0m;
+                if (Cooldowns.AbilityReady<Abilities.Warrior.Revenge>())
                     return new Abilities.Warrior.Revenge();
-                }
                 return new Abilities.Warrior.Devastate();
             }
 
-            if (ShieldBlockCharges > 0 && Rage >= 10 && Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) == null)
-            {
-                ShieldBlockCharges--;
-                if (ShieldBlockCharges == 0)
-                    ShieldBlockRecharge = 13;
+            if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldBlock>() && Rage >= 10 && Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) == null)
                 return new Abilities.Warrior.ShieldBlock();
-            }
+
             if (Rage >= 60 && Buffs.GetBuff(typeof(IgnorePain)) == null)
             {
                 return new Abilities.Warrior.IgnorePain()
@@ -156,31 +136,7 @@ namespace Tank.Classes
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
             UpdateTimers(DeltaTime);
-            RageCounter += DeltaTime;
-            /*if (RageCounter >= 3)
-            {
-                RageCounter = 0;
-                Rage++;
-            }*/
-
-            if (ShieldBlockCharges < 2)
-            {
-                ShieldBlockRecharge -= DeltaTime;
-                if (ShieldBlockRecharge <= 0)
-                {
-                    ShieldBlockCharges++;
-                    if (ShieldBlockCharges < 2)
-                        ShieldBlockRecharge += 13;
-                }
-            }
-
-            ShieldSlamCD = Math.Max(0, ShieldSlamCD - DeltaTime);
-            RevengeCD = Math.Max(0, RevengeCD - DeltaTime);
             RevengeResetICD = Math.Max(0, RevengeResetICD - DeltaTime);
-            if (Buffs.GetBuff(typeof(SwordAndBoard)) != null)
-            {
-                ShieldSlamCD = 0;
-            }
         }
 
         public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
@@ -194,9 +150,9 @@ namespace Tank.Classes
 
             if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
             {
-                if (RevengeResetICD <= 0 && RevengeCD>0)
+                if (RevengeResetICD <= 0 && !Cooldowns.AbilityReady<Abilities.Warrior.Revenge>())
                 {
-                    RevengeCD = 0;
+                    Cooldowns.ReduceTimers(new CooldownReduction { Ability = typeof(Abilities.Warrior.Revenge), Amount = 0, ReductionType = ReductionType.By });
                     RevengeResetICD = 3.0m;
                 }
                 DamageEvent.DamageTaken = 0;

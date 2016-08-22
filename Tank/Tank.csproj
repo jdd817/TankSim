@@ -127,7 +127,6 @@
     <Compile Include="Buffs\Monk\Stagger.cs" />
     <Compile Include="Buffs\Warrior\IgnorePain.cs" />
     <Compile Include="Buffs\Warrior\ShieldBlock.cs" />
-    <Compile Include="Buffs\Warrior\SwordAndBoard.cs" />
     <Compile Include="Buffs\Warrior\WeakenedBlows.cs" />
     <Compile Include="Classes\DeathKnight.cs" />
     <Compile Include="Classes\DemonHunter.cs" />
@@ -135,6 +134,7 @@
     <Compile Include="Classes\Monk.cs" />
     <Compile Include="CombatEngine.cs" />
     <Compile Include="CombatTable.cs" />
+    <Compile Include="CooldownManager.cs" />
     <Compile Include="DataLogging\GraphLogger.cs" />
     <Compile Include="DataLogging\StreamLogger.cs" />
     <Compile Include="DataLogging\CsvLogger.cs" />

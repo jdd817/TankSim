@@ -9,13 +9,14 @@ namespace Tank.Abilities.Warrior
     {
         public Revenge()
         {
-            ResourceGain = 15;
+            Cooldown = 9m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
             {
+                ResourceCost = -15
             };
         }
     }

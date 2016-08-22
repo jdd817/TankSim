@@ -9,7 +9,7 @@ namespace Tank.Abilities.DemonHunter
     {
         public ImmolationAura()
         {
-            ResourceCost = 0;
+            Cooldown = 15m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)

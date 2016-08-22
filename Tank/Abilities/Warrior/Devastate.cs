@@ -11,14 +11,14 @@ namespace Tank.Abilities.Warrior
         {
             return new AbilityResult
             {
-                CasterBuffsApplied = GetCasterBuffs().ToArray()
+                CooldownReduction = GetCooldownRedutions().ToArray()
             };
         }
 
-        public IEnumerable<Buffs.Buff> GetCasterBuffs()
+        public IEnumerable<CooldownReduction> GetCooldownRedutions()
         {
             if (RNG.NextDouble() <= 0.30)
-                yield return new Buffs.Warrior.SwordAndBoard();
+                yield return new CooldownReduction { Ability = typeof(Warrior.ShieldBlock), Amount = 0, ReductionType = ReductionType.To };
         }
     }
 }

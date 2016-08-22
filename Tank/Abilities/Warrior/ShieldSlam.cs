@@ -9,7 +9,7 @@ namespace Tank.Abilities.Warrior
     {
         public ShieldSlam()
         {
-            ResourceGain = 20;
+            Cooldown = 9m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)

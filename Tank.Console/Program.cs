@@ -107,7 +107,28 @@ namespace Tank.Console
                 }
             };
 
-            var tanks = new Player[] { Bart, Dul, Gut, Gut2 };
+            Classes.Druid Val = new Classes.Druid()
+            {
+                Name="Druid",
+                MaxHealth = 711166,
+                Armor = 2458,
+                Agility = 4619,
+                MasteryRating = 2196,
+                CritRating = 2024,
+                HasteRating = 1627,
+                VersatilityRating = 291,
+                Weapons =
+                {
+                    new Weapon()
+                    {
+                        LowDamage=7992,
+                        HighDamage=8883,
+                        Speed=3.1m
+                    }
+                }
+            };
+
+            var tanks = new Player[] { Bart, Dul, Gut, Gut2, Val };
 
             var dps = 125000m;
 

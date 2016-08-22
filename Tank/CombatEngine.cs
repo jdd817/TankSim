@@ -52,9 +52,6 @@ namespace Tank
 
                 if (PlayerAction != null)
                 {
-                    if (PlayerAction.OnGCD)
-                        Tank.GCD += Tank.GCDLength;
-
                     var modifiers = PlayerAction.GetModifiers(Tank.Buffs, Mob.Buffs);
 
                     AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
@@ -63,6 +60,8 @@ namespace Tank
                     var actionResult = PlayerAction.GetAbilityResult(Result, Tank, Mob);
                     actionResult.AttackResult = Result;
                     actionResult.Time = Time;
+
+                    Tank.Cooldowns.AbilityUsed(PlayerAction, actionResult);
 
                     DataLogging.DataLogManager.UsedAbility(Time, PlayerAction.GetType().Name, actionResult);
 
@@ -116,6 +115,7 @@ namespace Tank
                 Tank.UpdateFromTickingBuffs(Tank.Buffs.DecrementBuffTimers(TimeIncrement));
                 Mob.Buffs.DecrementBuffTimers(TimeIncrement);
 
+                Tank.Cooldowns.UpdateTimers(TimeIncrement);
                 Tank.UpdateTimeElapsed(TimeIncrement);
                 Mob.UpdateTimeElapsed(TimeIncrement);
 

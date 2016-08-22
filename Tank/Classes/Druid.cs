@@ -27,19 +27,14 @@ namespace Tank.Classes
         public override void Reset()
         {
             Buffs.ClearAllNonPermanent();
+            Cooldowns.Reset();
+            Cooldowns.GCDLength = GCDLength;
 
             Rage = 0;
 
-            MangleCD = 0m;
-            ThrashCD = 0m;
-            IronfurCD = 0m;
-            FrenziedRegenCharges = 2;
-            FrenziedRegenRecharge = 0m;
-            BristlingFurCD = 0m;
             YserasGiftCD = 0m;
 
             CurrentHealth = MaxHealth;
-
         }
 
         [XmlIgnore]
@@ -74,13 +69,7 @@ namespace Tank.Classes
         { get; set; }
 
         #region class-specific counters
-
-        private decimal MangleCD;
-        private decimal ThrashCD;
-        private decimal IronfurCD;
-        private int FrenziedRegenCharges;
-        private decimal FrenziedRegenRecharge;
-        private decimal BristlingFurCD;
+        
         private decimal YserasGiftCD;
 
         #endregion
@@ -103,20 +92,14 @@ namespace Tank.Classes
 
         public override Abilities.Ability GetAbilityUsed(BuffManager MobBuffs)
         {
-            if (GCD <= 0)
+            if (Cooldowns.OffGCD)
             {
                 if (Buffs.GetBuff<Buffs.Druid.GalacticGuardian>() != null)
                     return new Abilities.Druid.Moonfire();
-                if (MangleCD <= 0m)
-                {
-                    MangleCD = 6m;
+                if (Cooldowns.AbilityReady<Abilities.Druid.Mangle>())
                     return new Abilities.Druid.Mangle();
-                }
-                if (ThrashCD <= 0m && Rage >= 15)
-                {
-                    ThrashCD = 6m;
+                if (Cooldowns.AbilityReady<Abilities.Druid.Thrash>() && Rage >= 15)
                     return new Abilities.Druid.Thrash();
-                }
                 var moonfireDebuff = MobBuffs.GetBuff<Buffs.Druid.Moonfire>();
                 if (moonfireDebuff == null || moonfireDebuff.TimeRemaining <= GCDLength * 2m)
                 {
@@ -128,33 +111,17 @@ namespace Tank.Classes
 
             }
 
-            if (BristlingFurCD <= 0)
-            {
-                BristlingFurCD = 45m;
+            if (Cooldowns.AbilityReady<Abilities.Druid.BristlingFur>())
                 return new Abilities.Druid.BristlingFur();
-            }
 
-            if (Rage >= 10 && FrenziedRegenCharges > 0 && HealthPercentage < 0.5m && Buffs.GetBuff<Buffs.Druid.FrenziedRegeneration>() == null)
-            {
-                FrenziedRegenCharges--;
-                if (FrenziedRegenCharges == 1)
-                    FrenziedRegenRecharge = 24m;
+            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && HealthPercentage < 0.5m && Buffs.GetBuff<Buffs.Druid.FrenziedRegeneration>() == null)
                 return new Abilities.Druid.FrenziedRegeneration();
-            }
 
-            if (Rage >= 45 && IronfurCD <= 0)
-            {
-                IronfurCD = 0.5m;
+            if (Rage >= 45 && Cooldowns.AbilityReady<Abilities.Druid.Ironfur>())
                 return new Abilities.Druid.Ironfur();
-            }
 
-            if (Rage >= 10 && FrenziedRegenCharges > 0 && Abilities.Druid.FrenziedRegeneration.HealAmount+CurrentHealth<=MaxHealth)
-            {
-                FrenziedRegenCharges--;
-                if (FrenziedRegenCharges == 1)
-                    FrenziedRegenRecharge = 24m;
+            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && Abilities.Druid.FrenziedRegeneration.HealAmount+CurrentHealth<=MaxHealth)
                 return new Abilities.Druid.FrenziedRegeneration();
-            }
 
             return null;
         }
@@ -165,42 +132,19 @@ namespace Tank.Classes
             ApplyHealing(Result.SelfHealing);
             if (Ability.GetType() == typeof(Abilities.Attack))
                 Rage += 8;
-
-            if((Ability.GetType()==typeof(Abilities.Druid.Thrash) || Ability.GetType() == typeof(Abilities.Druid.Swipe) || Ability.GetType() == typeof(Abilities.Druid.Moonfire))
-                && RNG.NextDouble()<=0.15)
-            {
-                Buffs.AddBuff(new Buffs.Druid.Gore());
-                MangleCD = 0;
-            }
-
+            
         }
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
             UpdateTimers(DeltaTime);
 
-            if (FrenziedRegenCharges < 2)
-            {
-                FrenziedRegenRecharge -= DeltaTime;
-                if (FrenziedRegenRecharge <= 0)
-                {
-                    FrenziedRegenCharges++;
-                    if (FrenziedRegenCharges < 2)
-                        FrenziedRegenRecharge += 24;
-                }
-            }
-
             if(YserasGiftCD<=0 && CurrentHealth<MaxHealth)
             {
                 YserasGiftCD = 5m;
                 ApplyHealing((int)(MaxHealth * 0.03m));
             }
-
-
-            MangleCD = Math.Max(0, MangleCD - DeltaTime);
-            ThrashCD = Math.Max(0, ThrashCD - DeltaTime);
-            IronfurCD = Math.Max(0, IronfurCD - DeltaTime);
-            BristlingFurCD = Math.Max(0, BristlingFurCD - DeltaTime);
+            
             YserasGiftCD = Math.Max(0, YserasGiftCD - DeltaTime);
         }
 
@@ -237,7 +181,7 @@ namespace Tank.Classes
 
         public override void ApplyHealing(int healingAmount)
         {
-            base.ApplyHealing((int)(healingAmount * Mastery * 1.25m));
+            base.ApplyHealing((int)(healingAmount * (1 + Mastery) * 1.25m));
         }
     }
 }

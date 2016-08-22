@@ -7,6 +7,12 @@ namespace Tank.Abilities.Warrior
 {
     public class ShieldBlock : Ability
     {
+        public ShieldBlock()
+        {
+            MaxCharges = 2;
+            Cooldown = 13m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

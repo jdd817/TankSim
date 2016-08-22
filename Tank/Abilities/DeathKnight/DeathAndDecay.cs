@@ -10,8 +10,7 @@ namespace Tank.Abilities.DeathKnight
     {
         public DeathAndDecay()
         {
-            SecondaryResourceCost = 1;
-            ResourceGain = 10;
+            Cooldown = 30m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)

@@ -8,6 +8,11 @@ namespace Tank.Abilities.Druid
 {
     public class Mangle : Ability
     {
+        public Mangle()
+        {
+            Cooldown = 6m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var rageGen = -6;

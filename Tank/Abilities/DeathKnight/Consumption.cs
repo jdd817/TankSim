@@ -10,6 +10,7 @@ namespace Tank.Abilities.DeathKnight
     {
         public Consumption()
         {
+            Cooldown = 45m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)

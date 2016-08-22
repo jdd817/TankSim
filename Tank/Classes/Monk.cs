@@ -24,16 +24,11 @@ namespace Tank.Classes
         public override void Reset()
         {
             Buffs.ClearAllNonPermanent();
+            Cooldowns.Reset();
+            Cooldowns.GCDLength = GCDLength;
 
             Energy = 0;
             CurrentHealth = MaxHealth;
-
-            BrewCharges = 3;
-            BrewChargeCD = 0;
-            KegSmashCD = 0;
-            BlackoutStrikeCD = 0;
-            HealingElixerCharges = 2;
-            HealingElixerRecharge = 0;
         }
 
         private int _energy;
@@ -60,13 +55,6 @@ namespace Tank.Classes
 
         #region class-specific counters
 
-        private int BrewCharges;
-        private decimal BrewChargeCD;
-        private decimal KegSmashCD;
-        private decimal BlackoutStrikeCD;
-        private int HealingElixerCharges;
-        private decimal HealingElixerRecharge;
-
         #endregion
 
         #region class-specific calculated values
@@ -87,67 +75,35 @@ namespace Tank.Classes
 
         public override Abilities.Ability GetAbilityUsed(BuffManager MobBuffs)
         {
-            if (GCD <= 0)
+            if (Cooldowns.OffGCD)
             {
-                if (KegSmashCD <= 0)
-                {
-                    KegSmashCD = 8;
-                    if (BrewCharges < 3)
-                        BrewChargeCD -= 4m;
+                if (Cooldowns.AbilityReady<Abilities.Monk.KegSmash>())
                     return new Abilities.Monk.KegSmash();
-                }
                 if (Energy >= 65)
-                {
-                    if (BrewCharges < 3)
-                        BrewChargeCD -= 1m;
                     return new Abilities.Monk.TigerPalm();
-                }
-                if (BlackoutStrikeCD <= 0)
-                {
-                    BlackoutStrikeCD = 3;
+                if (Cooldowns.AbilityReady<Abilities.Monk.BlackoutStrike>())
                     return new Abilities.Monk.BlackoutStrike();
-                }
             }
 
-            if (HealthPercentage <= 0.85m && HealingElixerCharges == 2)
-            {
-                HealingElixerCharges = 1;
-                HealingElixerRecharge = 30;
+            if (HealthPercentage <= 0.85m && Cooldowns.ChargesAvailable<Abilities.Monk.HealingElixer>() == 2)
                 return new Abilities.Monk.HealingElixer();
-            }
 
-            if (CurrentHealth < MaxHealth * 0.35 && BrewCharges>=2 && Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew))==null)
-            {
-                BrewCharges--;
-                if (BrewCharges == 2)
-                    BrewChargeCD = 21;
+            if (CurrentHealth < MaxHealth * 0.35
+                    && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() >= 2
+                    && Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) == null)
                 return new Abilities.Monk.IronskinBrew();
-            }
+            
 
+            //both ironskin and purifying brews are tracked under ironskin
             var stagger = Buffs.GetBuff(typeof(Buffs.Monk.Stagger)) as Buffs.Monk.Stagger;
-            if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.25m && BrewChargeCD > 0)
-            {
-                BrewCharges--;
-                if (BrewCharges == 2)
-                    BrewChargeCD = 21;
+            if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.25m && Cooldowns.AbilityReady<Abilities.Monk.IronskinBrew>())
                 return new Abilities.Monk.PurifyingBrew();
-            }
 
-            if(stagger!=null && BrewCharges==3 && stagger.DamageDelayed>=MaxHealth*0.10m)
-            {
-                BrewCharges--;
-                if (BrewCharges == 2)
-                    BrewChargeCD = 21;
+            if (stagger != null && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3 && stagger.DamageDelayed >= MaxHealth * 0.20m)
                 return new Abilities.Monk.PurifyingBrew();
-            }
 
-            if (BrewCharges == 3)
-            {
-                BrewCharges--;
-                if (BrewCharges == 2)
-                    BrewChargeCD = 21;
+            if (Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3)
                 return new Abilities.Monk.IronskinBrew();
-            }
 
             return null;
         }
@@ -170,32 +126,7 @@ namespace Tank.Classes
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
             UpdateTimers(DeltaTime);
-
-            if (BrewCharges < 3)
-            {
-                BrewChargeCD -= DeltaTime;
-                if (BrewChargeCD <= 0)
-                {
-                    BrewCharges++;
-                    if (BrewCharges < 3)
-                        BrewChargeCD += 21;
-                }
-            }
-
-            if (HealingElixerCharges < 2)
-            {
-                HealingElixerRecharge -= DeltaTime;
-                if (HealingElixerRecharge <= 0)
-                {
-                    HealingElixerCharges++;
-                    if (HealingElixerCharges < 3)
-                        HealingElixerRecharge += 21;
-                }
-            }
-
-            KegSmashCD = Math.Max(0, KegSmashCD - DeltaTime);
-            BlackoutStrikeCD = Math.Max(0, BlackoutStrikeCD - DeltaTime);
-
+            
             var healingOrbs = Buffs.GetBuff<Buffs.Monk.HealingOrb>();
             if (healingOrbs != null)
             {
@@ -249,14 +180,12 @@ namespace Tank.Classes
 
                 Buffs.AddBuff(new Buffs.Monk.Stagger((int)(DamageEvent.DamageTaken * staggerAmount)));
 
-                if (CurrentHealth + DamageEvent.DamageTaken > MaxHealth * 0.35m && CurrentHealth < MaxHealth * 0.35m && HealingElixerCharges > 0)
+                if (CurrentHealth + DamageEvent.DamageTaken > MaxHealth * 0.35m && CurrentHealth < MaxHealth * 0.35m && Cooldowns.ChargesAvailable<Abilities.Monk.HealingElixer>() > 0)
                 {
-                    HealingElixerCharges--;
-                    if (HealingElixerCharges == 1)
-                        HealingElixerRecharge = 30;
                     var elixer = new Abilities.Monk.HealingElixer();
                     var result = elixer.GetAbilityResult(AttackResult.Hit, this, null);
                     ApplyHealing(result.SelfHealing);
+                    Cooldowns.AbilityUsed(elixer, result);
                     DataLogging.DataLogManager.UsedAbility(DamageEvent.Time, elixer.GetType().Name, result);
                 }
             }

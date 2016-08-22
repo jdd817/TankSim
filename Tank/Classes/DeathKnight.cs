@@ -27,17 +27,14 @@ namespace Tank.Classes
         public override void Reset()
         {
             Buffs.ClearAllNonPermanent();
+            Cooldowns.Reset();
+            Cooldowns.GCDLength = GCDLength;
 
             RunicPower = 0;
             RunesAvailable = 6;
 
             RuneCounters = new List<decimal>();
-
-            BloodBoilCharges = 2;
-            BloodBoilRecharge = 0;
-            DeathAndDecayCD = 0;
-            VampiricBloodCD = 0;
-            ConsumptionCD = 0;
+            
             CurrentHealth = MaxHealth;
 
             //blues state this 0.018, testing indicates the number below - changed since said blue post? or armory not correct?
@@ -72,11 +69,6 @@ namespace Tank.Classes
         #region class-specific counters
 
         private List<decimal> RuneCounters;
-        private int BloodBoilCharges;
-        private decimal BloodBoilRecharge;
-        private decimal DeathAndDecayCD;
-        private decimal VampiricBloodCD;
-        private decimal ConsumptionCD;
 
         #endregion
 
@@ -100,15 +92,12 @@ namespace Tank.Classes
 
         public override Abilities.Ability GetAbilityUsed(BuffManager MobBuffs)
         {
-            if (GCD <= 0)
+            if (Cooldowns.OffGCD)
             {
                 var disease = MobBuffs.GetBuff(typeof(BloodPlague));
 
-                if ((disease == null || disease.TimeRemaining <= GCDLength) && BloodBoilCharges > 0)
+                if ((disease == null || disease.TimeRemaining <= GCDLength*2) && Cooldowns.AbilityReady<Abilities.DeathKnight.BloodBoil>())
                 {
-                    BloodBoilCharges--;
-                    if (BloodBoilRecharge <= 0)
-                        BloodBoilRecharge = 7.5m;
                     return new Abilities.DeathKnight.BloodBoil();
                 }
                 if (Buffs.GetBuff(typeof(CrimsonScourge)) != null)
@@ -140,17 +129,13 @@ namespace Tank.Classes
                 if (RunicPower >= 45 && Abilities.DeathKnight.DeathStrike.HealingAmount(this) >= MaxHealth * 0.40m)
                     return new Abilities.DeathKnight.DeathStrike();
 
-                if (Buffs.GetStacks(typeof(Artifact.Consumption)) > 0 && ConsumptionCD <= 0 && CurrentHealth <= MaxHealth * 0.80m)
+                if (Buffs.GetStacks(typeof(Artifact.Consumption)) > 0 && Cooldowns.AbilityReady<Abilities.DeathKnight.Consumption>() && CurrentHealth <= MaxHealth * 0.80m)
                 {
-                    ConsumptionCD = 45m;
                     return new Abilities.DeathKnight.Consumption();
                 }
 
-                if (BloodBoilCharges > 0)
+                if (Cooldowns.AbilityReady<Abilities.DeathKnight.BloodBoil>())
                 {
-                    BloodBoilCharges--;
-                    if (BloodBoilRecharge <= 0)
-                        BloodBoilRecharge = 7.5m;
                     return new Abilities.DeathKnight.BloodBoil();
                 }
 
@@ -158,11 +143,8 @@ namespace Tank.Classes
                 {
                     if(RunesAvailable>0)
                     {
-                        if (DeathAndDecayCD <= 0)
-                        {
-                            DeathAndDecayCD = 30;
+                        if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
                             return new Abilities.DeathKnight.DeathAndDecay();
-                        }
                         else
                             return new Abilities.DeathKnight.HeartStrike();
                     }
@@ -173,11 +155,8 @@ namespace Tank.Classes
                             && (RunesAvailable>=3 || (RuneCounters.Where(rc=>rc<boneShield.TimeRemaining-GCDLength).Count() + RunesAvailable)>=3))))
                 //if(RunesAvailable>=1)
                 {
-                    if (DeathAndDecayCD <= 0)
-                    {
-                        DeathAndDecayCD = 30;
+                    if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
                         return new Abilities.DeathKnight.DeathAndDecay();
-                    }
                     else
                         return new Abilities.DeathKnight.HeartStrike();
                 }
@@ -191,8 +170,6 @@ namespace Tank.Classes
             if (Buffs.GetBuff(typeof(DeathAndDecay)) != null && Result.ResourceCost < 0)
                 Result.ResourceCost = (int)(Result.ResourceCost * 1.15m);
             RunicPower -= Result.ResourceCost;
-            if (Result.ResourceCost > 0 && VampiricBloodCD > 0)
-                VampiricBloodCD -= Result.ResourceCost / 10 * 2;
             if (RunicPower > RunicPowerCap)
                 RunicPower = RunicPowerCap;
             if (Ability.SecondaryResourceCost > 0)
@@ -203,7 +180,7 @@ namespace Tank.Classes
                         RuneCounters.Add(10.0m / (1.0m + Haste));
             }
 
-            CurrentHealth += Result.SelfHealing;
+            ApplyHealing(Result.SelfHealing);
         }
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
@@ -215,26 +192,8 @@ namespace Tank.Classes
 
             RunesAvailable += RuneCounters.Count(rc => rc <= 0);
             RuneCounters = RuneCounters.Where(rc => rc > 0).ToList();
-            while(RuneCounters.Count<3 && RuneCounters.Count+RunesAvailable<6)
+            while (RuneCounters.Count < 3 && RuneCounters.Count + RunesAvailable < 6)
                 RuneCounters.Add(10.0m / (1.0m + Haste));
-
-            if (BloodBoilCharges < 2)
-            {
-                BloodBoilRecharge -= DeltaTime;
-                if (BloodBoilRecharge <= 0)
-                {
-                    BloodBoilCharges++;
-                    if (BloodBoilCharges < 2)
-                        BloodBoilRecharge += 7.5m;
-                }
-            }
-
-            if (DeathAndDecayCD >= 0)
-                DeathAndDecayCD -= DeltaTime;
-            if (VampiricBloodCD >= 0)
-                VampiricBloodCD -= DeltaTime;
-            if (ConsumptionCD >= 0)
-                ConsumptionCD -= DeltaTime;
         }
 
         private decimal _lastMobHit = -10;

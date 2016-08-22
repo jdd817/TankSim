@@ -5,10 +5,6 @@ using System.Text;
 
 namespace Tank.Abilities
 {
-    public enum AbilityType
-    {
-        Melee, Ranged, Spell, Self
-    }
 
     public abstract class Ability
     {
@@ -17,6 +13,9 @@ namespace Tank.Abilities
             ResourceCost = 0;
             ResourceGain = 0;
             SecondaryResourceCost = 0;
+            
+            Cooldown = 0;
+            MaxCharges = 1;
         }
 
         public int ResourceCost
@@ -27,6 +26,14 @@ namespace Tank.Abilities
 
         public int SecondaryResourceCost
         { get; set; }
+        
+
+        public decimal Cooldown { get; set; }
+        public int MaxCharges { get; set; }
+        public virtual Type CooldownType
+        {
+            get { return this.GetType(); }
+        }
 
         public virtual HitTableModifiers GetModifiers(BuffManager CaseterBuffs, BuffManager TargetBuffs)
         {

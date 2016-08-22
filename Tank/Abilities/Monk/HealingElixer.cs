@@ -8,6 +8,12 @@ namespace Tank.Abilities.Monk
 {
     public class HealingElixer : Ability
     {
+        public HealingElixer()
+        {
+            Cooldown = 30m;
+            MaxCharges = 2;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
@@ -15,5 +21,7 @@ namespace Tank.Abilities.Monk
                 SelfHealing = (int)(Caster.MaxHealth * 0.15m)
             };
         }
+
+        public override bool OnGCD { get { return false; } }
     }
 }

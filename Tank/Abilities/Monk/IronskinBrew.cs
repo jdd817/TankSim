@@ -8,6 +8,12 @@ namespace Tank.Abilities.Monk
 {
     public class IronskinBrew : Ability
     {
+        public IronskinBrew()
+        {
+            Cooldown = 21m;
+            MaxCharges = 3;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
@@ -15,5 +21,7 @@ namespace Tank.Abilities.Monk
                 CasterBuffsApplied = new[] { new Buffs.Monk.IronskinBrew() }
             };
         }
+
+        public override bool OnGCD { get { return false; } }
     }
 }

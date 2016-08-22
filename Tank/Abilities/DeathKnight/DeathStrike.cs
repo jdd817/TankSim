@@ -35,7 +35,8 @@ namespace Tank.Abilities.DeathKnight
                 ResourceCost = resourceCost,
                 DamageDealt = 0,
                 SelfHealing = healingDone,
-                CasterBuffsApplied = new[] { new Buffs.DeathKnight.BloodShield((int)(healingDone * shieldModifier)) }
+                CasterBuffsApplied = new[] { new Buffs.DeathKnight.BloodShield((int)(healingDone * shieldModifier)) },
+                CooldownReduction = new[] { new CooldownReduction { Ability = typeof(VampiricBlood), Amount = resourceCost / 10 * 2, ReductionType = ReductionType.By } }
             };
         }
 

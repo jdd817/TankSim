@@ -16,6 +16,7 @@ namespace Tank
         public Player()
         {
             Buffs = new BuffManager();
+            Cooldowns = new CooldownManager();
             Weapons = new List<Weapon>();
             GCDLength = 1.5m;
         }
@@ -194,6 +195,10 @@ namespace Tank
 
         [XmlIgnore]
         public BuffManager Buffs
+        { get; set; }
+
+        [XmlIgnore]
+        public CooldownManager Cooldowns
         { get; set; }
 
         public List<Weapon> Weapons

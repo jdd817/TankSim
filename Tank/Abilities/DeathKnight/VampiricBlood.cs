@@ -8,6 +8,11 @@ namespace Tank.Abilities.DeathKnight
 {
     public class VampiricBlood : Ability
     {
+        public VampiricBlood()
+        {
+            Cooldown = 60m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

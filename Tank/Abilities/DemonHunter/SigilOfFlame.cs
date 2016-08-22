@@ -9,6 +9,7 @@ namespace Tank.Abilities.DemonHunter
     {
         public SigilOfFlame()
         {
+            Cooldown = 30m;
         }
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
