@@ -234,5 +234,10 @@ namespace Tank.Classes
 
             DataLogging.DataLogManager.LogEvent(DamageEvent);
         }
+
+        public override void ApplyHealing(int healingAmount)
+        {
+            base.ApplyHealing((int)(healingAmount * Mastery * 1.25m));
+        }
     }
 }
