@@ -11,6 +11,7 @@ namespace Tank.Abilities
         {
             CasterBuffsApplied = new Buffs.Buff[0];
             TargetBuffsApplied = new Buffs.Buff[0];
+            CooldownReduction = new Abilities.CooldownReduction[0];
         }
         public decimal Time { get; set; }
         public AttackResult AttackResult { get; set; }
@@ -21,5 +22,19 @@ namespace Tank.Abilities
         public int DamageDealt { get; set; }
         public int SelfHealing { get; set; }
         public int TartgetHealing { get; set; }
+        public CooldownReduction[] CooldownReduction { get; set; }
+    }
+
+    public class CooldownReduction
+    {
+        public Type Ability { get; set; }
+        public ReductionType ReductionType { get; set; }
+        public decimal Amount { get; set; }
+    }
+
+    public enum ReductionType
+    {
+        To,
+        By
     }
 }

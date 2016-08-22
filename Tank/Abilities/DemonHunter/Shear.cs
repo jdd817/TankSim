@@ -9,8 +9,6 @@ namespace Tank.Abilities.DemonHunter
 {
     public class Shear : Ability
     {
-        private static int ShearsSinceLastSoulFragment = 0;
-
         public Shear()
         {
             ResourceCost = -10;
@@ -26,28 +24,38 @@ namespace Tank.Abilities.DemonHunter
             + (10% if Frail) , but that may change in tuning.
             */
 
-            var shearChance = GetShearChance();
+            var dh = Caster as Classes.DemonHunter;
+
+            var shearChance = GetShearChance(dh.ShearsSinceLastSoulFragment);
+
+            CooldownReduction[] cdReduction;
+
+            if (RNG.NextDouble() <= 0.10)
+                cdReduction = new[] { new CooldownReduction { Ability = typeof(Abilities.DemonHunter.FelBlade), ReductionType = ReductionType.To, Amount = 0 } };
+            else
+                cdReduction = new CooldownReduction[0];
 
             if (RNG.NextDouble() <= shearChance)
             {
                 buffs = new[] { new SoulFragment() };
-                ShearsSinceLastSoulFragment = 0;
+                dh.ShearsSinceLastSoulFragment = 0;
             }
             else
             {
                 buffs = new Buff[0];
-                ShearsSinceLastSoulFragment++;
+                dh.ShearsSinceLastSoulFragment++;
             }
 
             return new AbilityResult
             {
                 ResourceCost = -10,
                 DamageDealt = 0,
-                CasterBuffsApplied = buffs
+                CasterBuffsApplied = buffs,
+                CooldownReduction = cdReduction
             };
         }
 
-        private double GetShearChance()
+        private double GetShearChance(int ShearsSinceLastSoulFragment)
         {
             switch (ShearsSinceLastSoulFragment)
             {

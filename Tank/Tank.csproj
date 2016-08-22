@@ -60,6 +60,8 @@
     <Compile Include="Abilities\DeathKnight\Marrowrend.cs" />
     <Compile Include="Abilities\DeathKnight\VampiricBlood.cs" />
     <Compile Include="Abilities\DemonHunter\DemonSpikes.cs" />
+    <Compile Include="Abilities\DemonHunter\FelBlade.cs" />
+    <Compile Include="Abilities\DemonHunter\FelDevestation.cs" />
     <Compile Include="Abilities\DemonHunter\ImmolationAura.cs" />
     <Compile Include="Abilities\DemonHunter\Shear.cs" />
     <Compile Include="Abilities\DemonHunter\SigilOfFlame.cs" />
