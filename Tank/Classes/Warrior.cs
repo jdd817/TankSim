@@ -95,7 +95,7 @@ namespace Tank.Classes
         #endregion 
 
 
-        public override Abilities.Ability GetAbilityUsed(BuffManager MobBuffs)
+        public override Abilities.Ability GetAbilityUsed(IBuffManager MobBuffs)
         {
             if (Cooldowns.OffGCD)
             {

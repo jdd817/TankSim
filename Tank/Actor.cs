@@ -17,7 +17,7 @@ namespace Tank
         decimal GetDodgedReduction { get; }
         decimal GetParriedReduction { get; }
 
-        BuffManager Buffs { get; }
+        IBuffManager Buffs { get; }
 
         List<Weapon> Weapons
         { get; set; }

@@ -194,11 +194,11 @@ namespace Tank
         #region state properties
 
         [XmlIgnore]
-        public BuffManager Buffs
+        public IBuffManager Buffs
         { get; set; }
 
         [XmlIgnore]
-        public CooldownManager Cooldowns
+        public ICooldownManager Cooldowns
         { get; set; }
 
         public List<Weapon> Weapons
@@ -253,7 +253,7 @@ namespace Tank
         /// Gets the next ability that the player uses
         /// </summary>
         /// <returns>An ability if one is used, null otherwise</returns>
-        public abstract Abilities.Ability GetAbilityUsed(BuffManager MobBuffs);
+        public abstract Abilities.Ability GetAbilityUsed(IBuffManager MobBuffs);
 
         /// <summary>
         /// Update state based on the result of an ability

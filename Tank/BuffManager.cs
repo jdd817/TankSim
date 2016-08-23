@@ -7,7 +7,7 @@ using Tank.Buffs;
 
 namespace Tank
 {
-    public class BuffManager
+    public class BuffManager : IBuffManager
     {
         public BuffManager()
         {
@@ -85,6 +85,11 @@ namespace Tank
                 return Buffs[BuffName];
             else
                 return null;
+        }
+
+        public int GetStacks<T>() where T : Buff
+        {
+            return GetStacks(typeof(T));
         }
 
         public int GetStacks(Type BuffType)

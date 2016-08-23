@@ -45,7 +45,7 @@ namespace Tank
         { get; set; }
 
         [XmlIgnore]
-        public BuffManager Buffs
+        public IBuffManager Buffs
         { get; set; }
 
         public Abilities.Attack GetAttack()

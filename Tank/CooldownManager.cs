@@ -7,7 +7,7 @@ using Tank.Abilities;
 
 namespace Tank
 {
-    public class CooldownManager
+    public class CooldownManager : ICooldownManager
     {
         public CooldownManager()
         {

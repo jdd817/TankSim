@@ -35,7 +35,7 @@ namespace Tank.Abilities
             get { return this.GetType(); }
         }
 
-        public virtual HitTableModifiers GetModifiers(BuffManager CaseterBuffs, BuffManager TargetBuffs)
+        public virtual HitTableModifiers GetModifiers(IBuffManager CaseterBuffs, IBuffManager TargetBuffs)
         {
             return new HitTableModifiers();
         }

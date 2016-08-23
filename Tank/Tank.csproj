@@ -146,6 +146,8 @@
     <Compile Include="ExtensionMethods.cs" />
     <Compile Include="Healer.cs" />
     <Compile Include="HitTableModifiers.cs" />
+    <Compile Include="IBuffManager.cs" />
+    <Compile Include="ICooldownManager.cs" />
     <Compile Include="Mob.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
