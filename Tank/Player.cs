@@ -224,9 +224,10 @@ namespace Tank
             return ((Avoidance * 100m) / ((Avoidance * 100m) * V + (1.0m / 0.94m))) / 100m;
         }
 
-        public virtual void ApplyHealing(int healingAmount)
+        public virtual int ApplyHealing(int healingAmount)
         {
             CurrentHealth += healingAmount;
+            return healingAmount;
         }
 
         #endregion

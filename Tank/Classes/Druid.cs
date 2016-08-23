@@ -133,7 +133,7 @@ namespace Tank.Classes
 
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
-            ApplyHealing(Result.SelfHealing);
+            Result.SelfHealing = ApplyHealing(Result.SelfHealing);
             Rage -= Result.ResourceCost;
             if (Ability.GetType() == typeof(Abilities.Attack))
                 Rage += 8;
@@ -146,7 +146,13 @@ namespace Tank.Classes
             if(YserasGiftCD<=0 && CurrentHealth<MaxHealth)
             {
                 YserasGiftCD = 5m;
-                ApplyHealing((int)(MaxHealth * 0.03m));
+                var healingAmount = (int)(MaxHealth * 0.03m);
+                CurrentHealth += healingAmount;
+                DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                {
+                    Time = DataLogging.DataLogManager.CurrentTime,
+                    DamageHealed = healingAmount
+                });
             }
             
             YserasGiftCD = Math.Max(0, YserasGiftCD - DeltaTime);
@@ -171,7 +177,7 @@ namespace Tank.Classes
             //get rage
             //from blue: 50 * DamageTaken / MaxHealth
             if (Buffs.GetBuff<Buffs.Druid.BristlingFur>() != null)
-                Rage += (int)((50m * DamageEvent.DamageTaken) / MaxHealth);
+                Rage += (int)((100m * DamageEvent.DamageTaken) / MaxHealth);
 
             if(RNG.NextDouble()<=0.10)
             {
@@ -183,9 +189,9 @@ namespace Tank.Classes
             DataLogging.DataLogManager.LogEvent(DamageEvent);
         }
 
-        public override void ApplyHealing(int healingAmount)
+        public override int ApplyHealing(int healingAmount)
         {
-            base.ApplyHealing((int)(healingAmount * (1 + Mastery * 1.25m)));
+            return base.ApplyHealing((int)(healingAmount * (1 + Mastery * 1.25m)));
         }
     }
 }

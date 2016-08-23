@@ -111,7 +111,7 @@ namespace Tank.Classes
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
             Energy -= Result.ResourceCost;
-            ApplyHealing(Result.SelfHealing);
+            Result.SelfHealing = ApplyHealing(Result.SelfHealing);
 
             if (Ability.GetType()==typeof(Abilities.Monk.PurifyingBrew))
             {
@@ -140,8 +140,14 @@ namespace Tank.Classes
 
                 if(absorbOrbs)
                 {
-                    CurrentHealth = (int)(CurrentHealth + healingOrbs.Stacks * AttackPower * 7.5m);
+                    var healingAmount = ApplyHealing((int)(healingOrbs.Stacks * AttackPower * 7.5m));
                     Buffs.ClearBuff<Buffs.Monk.HealingOrb>();
+                    DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                    {
+                        Time = DataLogging.DataLogManager.CurrentTime,
+                        DamageTaken = healingAmount,
+                        Result = AttackResult.Hit
+                    });
                 }
             }
         }
@@ -184,7 +190,7 @@ namespace Tank.Classes
                 {
                     var elixer = new Abilities.Monk.HealingElixer();
                     var result = elixer.GetAbilityResult(AttackResult.Hit, this, null);
-                    ApplyHealing(result.SelfHealing);
+                    result.SelfHealing = ApplyHealing(result.SelfHealing);
                     Cooldowns.AbilityUsed(elixer, result);
                     DataLogging.DataLogManager.UsedAbility(DamageEvent.Time, elixer.GetType().Name, result);
                 }
@@ -205,15 +211,24 @@ namespace Tank.Classes
                     damageTaken = stagger.DamageDelayed;
                 CurrentHealth -= damageTaken;
                 stagger.DamageDelayed -= damageTaken;
+                DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                {
+                    Time = DataLogging.DataLogManager.CurrentTime,
+                    DamageTaken = damageTaken,
+                    Result = AttackResult.Hit
+                });
             }
         }
 
-        public override void ApplyHealing(int healingAmount)
+        public override int ApplyHealing(int healingAmount)
         {
+            var actualHealing = healingAmount;
             if (RNG.NextDouble() < (double)CritChance)
-                CurrentHealth = (int)(CurrentHealth + healingAmount * 1.65m);
-            else
-                CurrentHealth += healingAmount;
+                actualHealing= (int)( healingAmount * 1.65m);
+            
+            CurrentHealth += actualHealing;
+
+            return actualHealing;
         }
     }
 }
