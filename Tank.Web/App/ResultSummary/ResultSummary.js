@@ -1,10 +1,11 @@
 ﻿angular.module("Tank.Web")
-    .directive("resultsView", [
+    .directive("resultSummary", [
         function () {
             return {
                 restrict: 'E',
-                templateUrl: $.url('app/ResultsView/ResultsView.html'),
+                templateUrl: $.url('app/ResultSummary/ResultSummary.html'),
                 scope: {
+                    summary: "="
                 },
                 link: function ($scope) {
                 }

@@ -3,7 +3,6 @@
         function () {
             return {
                 restrict: 'E',
-                transclude: true,
                 templateUrl: $.url('app/TankConfig/TankConfig.html'),
                 scope: {
                     tank: "="

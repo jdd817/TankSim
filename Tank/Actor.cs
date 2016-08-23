@@ -14,8 +14,6 @@ namespace Tank
         decimal BlockChance { get; }
         decimal MissChance { get; }
         decimal CritChance { get; }
-        decimal GetDodgedReduction { get; }
-        decimal GetParriedReduction { get; }
 
         IBuffManager Buffs { get; }
 

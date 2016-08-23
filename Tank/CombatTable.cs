@@ -24,13 +24,13 @@ namespace Tank
                 return AttackResult.Miss;
             AttackRoll -= Attacker.MissChance - modifiers.HitModifiers;
 
-            if (AttackRoll <= Defender.DodgeChance - Attacker.GetDodgedReduction - modifiers.DodgeModifiers)
+            if (AttackRoll <= Defender.DodgeChance - modifiers.DodgeModifiers)
                 return AttackResult.Dodge;
-            AttackRoll -= Defender.DodgeChance - Attacker.GetDodgedReduction - modifiers.DodgeModifiers;
+            AttackRoll -= Defender.DodgeChance - modifiers.DodgeModifiers;
 
-            if (AttackRoll <= Defender.ParryChance - Attacker.GetParriedReduction - modifiers.ParryModifiers)
+            if (AttackRoll <= Defender.ParryChance - modifiers.ParryModifiers)
                 return AttackResult.Parry;
-            AttackRoll -= Defender.ParryChance - Attacker.GetParriedReduction - modifiers.ParryModifiers;
+            AttackRoll -= Defender.ParryChance - modifiers.ParryModifiers;
 
             decimal BlockRoll = (decimal)RNG.NextDouble(); //seperate roll for block
             if (BlockRoll < Defender.BlockChance || Defender.Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) != null)

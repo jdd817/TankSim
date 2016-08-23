@@ -1,0 +1,10 @@
+﻿<div class="tableSection">
+    <div>
+        <span title="Damage Taken">{{summary.DamageTaken | number}}</span>
+        <span title="Average Health Over 200 seconds">{{summary.AverageHealthOverall | number}}</span>
+    </div>
+    <div>
+        <span title="Self healing">{{summary.DamageHealed | number}}</span>
+        <span title="Net Damage (taken-healed)">{{summary.DamageTaken - summary.DamageHealed | number}}</span>
+    </div>
+</div>

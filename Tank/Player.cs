@@ -144,26 +144,18 @@ namespace Tank
         }
 
         [XmlIgnore]
-        public decimal MissChance
+        public virtual decimal MissChance
         { get { return Math.Max(0.0m, 0.075m - RatingConverter.GetRating(StatType.Hit, HitRating)); } }
 
         [XmlIgnore]
-        public decimal CritChance
+        public virtual decimal CritChance
         { get { return 0.05m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
 
         [XmlIgnore]
-        public decimal GetDodgedReduction
-        { get { return Math.Max(6.5m, RatingConverter.GetRating(StatType.Expertise, ExpertiseRating)); } }
+        public virtual decimal Mastery { get { return 0.12m + RatingConverter.GetRating(StatType.Mastery, MasteryRating); } }
 
         [XmlIgnore]
-        public decimal GetParriedReduction
-        { get { return Math.Max(14.0m, RatingConverter.GetRating(StatType.Expertise, ExpertiseRating)); } }
-
-        [XmlIgnore]
-        public decimal Mastery { get { return 0.12m + RatingConverter.GetRating(StatType.Mastery, MasteryRating); } }
-
-        [XmlIgnore]
-        public decimal Haste
+        public virtual decimal Haste
         { get { return RatingConverter.GetRating(StatType.Haste, HasteRating) + Buffs.GetPercentageAdjustment(StatType.Haste);} }
 
         public abstract int AttackPower
@@ -275,7 +267,14 @@ namespace Tank
 
         {
             foreach (var hot in TickingBuffs.OfBaseType<Buffs.HealOverTime>())
+            {
                 ApplyHealing(hot.HealingPerTick);
+                DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                {
+                    Time = DataLogging.DataLogManager.CurrentTime,
+                    DamageHealed = hot.HealingPerTick
+                });
+            }
         }
 
         public abstract void Reset();

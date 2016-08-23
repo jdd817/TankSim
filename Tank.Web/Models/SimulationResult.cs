@@ -14,5 +14,13 @@ namespace Tank.Web.Models
     {
         public string label { get; set; }
         public decimal[][] data { get; set; }
+        public SimulationSummary Summary { get; set; }
+    }
+
+    public class SimulationSummary
+    {
+        public int DamageTaken { get; set; }
+        public int DamageHealed { get; set; }
+        public int AverageHealthOverall { get; set; }
     }
 }

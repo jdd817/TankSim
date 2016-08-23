@@ -22,6 +22,10 @@ input{
     text-align:center;
 }
 
+.tableSection{
+    display:table;
+}
+
 .tableSection>div{
     display:table-row;
 }
@@ -49,8 +53,8 @@ input{
 .tankSection{
     background-color:#336633;
     border:3px solid #888888;
-    display:inline-block;
-    width:450px;
+    display:block;
+    width:1250px;
 }
 
 .tankContainer{
@@ -61,23 +65,46 @@ input{
 .healerSection{
     background-color:#333366;
     border:3px solid #888888;
-    display:inline-block;
+    display:inline-flex;
+    flex-direction:column;
+    width:335px;
+    min-height:350px;
 }
 
+.healerSection>div{
+    display:block;
+}
 
 
 .mobSection{
     background-color:#663333;
     border:3px solid #888888;
-    display:inline-block;
-    width:475px;
+    display:inline-flex;
+    /*max-width:835px;*/
+    width:905px;
+    min-height:350px;
+    flex-direction:column;
 }
 
 .mobContainer{
     border: 2px solid #330000;
-    display:inline-block;
+    display:inline-flex;
+    min-height:250px;
 }
 
 .mobAttackContainer{
     border: 1px solid #330000;
+}
+
+.resultSummary{
+    display:inline-block;
+    border:1px solid #888888;
+    width:200px;
+}
+
+.resultSummary span{
+    padding:2px;
+    background:#222222;
+    width:100px;
+    border:1px solid #111111;
 }

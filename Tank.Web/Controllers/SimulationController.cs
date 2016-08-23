@@ -14,7 +14,8 @@ namespace Tank.Web.Controllers
         [Route("api/simulation")]
         public SimulationResult SimulationStartPoint(SimulationParameters parameters)
         {
-            parameters.RunCount = Math.Min(parameters.RunCount, 25);
+            var maxRuns = Math.Max(1, 250 / (parameters.Mobs.Count * parameters.Tanks.Count));
+            parameters.RunCount = Math.Min(parameters.RunCount, maxRuns);
             if (parameters.RunCount > 1)
                 return SmoothResult(RunMultipleSimulations(parameters));
             else
@@ -42,7 +43,7 @@ namespace Tank.Web.Controllers
                 for (var i = min; i < max; i += 0.1m)
                     dataPoints.Add(new[] { i, plot.data.Where(d => d[0] >= i - 2.5m && d[0] <= i + 2.5m).Select(d => d[1]).Average() });
 
-                newResults.Add(new Plot { label = plot.label, data = dataPoints.ToArray() });
+                newResults.Add(new Plot { label = plot.label, data = dataPoints.ToArray(), Summary = plot.Summary });
             }
 
             return new SimulationResult { Results = newResults };
@@ -75,7 +76,13 @@ namespace Tank.Web.Controllers
                                 new[] {
                                     d.Key,
                                     d.Select(p=>p[1]).Sum() / parameters.RunCount
-                                }).ToArray()
+                                }).ToArray(),
+                          Summary = new SimulationSummary
+                          {
+                              DamageTaken = (int)r.Select(p => p.Summary.DamageTaken).Average(),
+                              DamageHealed = (int)r.Select(p => p.Summary.DamageHealed).Average(),
+                              AverageHealthOverall = (int)r.Select(p => p.Summary.AverageHealthOverall).Average()
+                          }
                       }).ToList()
             };
         }
@@ -84,17 +91,30 @@ namespace Tank.Web.Controllers
         {
             var grapher = new DataLogging.GraphLogger();
             DataLogging.DataLogManager.Loggers.Add(grapher);
+            var summaries = new Dictionary<string, SimulationSummary>();
 
             foreach (var tank in tanks)
             {
                 foreach (var mob in mobs)
                 {
                     RNG.Reseed(seed);
-                    grapher.RunName = String.Format("{0} - {1}", tank.Name, mob.Name);
-                    CombatEngine Engine = new CombatEngine();
+                    var runName= String.Format("{0} - {1}", tank.Name, mob.Name);
+                    grapher.RunName = runName;
 
+                    var summaryLogger = new DataLogging.SummaryLogger();
+                    DataLogging.DataLogManager.Loggers.Add(summaryLogger);
+
+                    CombatEngine Engine = new CombatEngine();
+                    
                     DataLogging.DataLogManager.Reset();
                     Engine.DoCombat(tank, mob, 200.0m, true, healers);
+
+                    DataLogging.DataLogManager.Loggers.Remove(summaryLogger);
+                    summaries.Add(runName, new SimulationSummary
+                    {
+                        DamageTaken = summaryLogger.DamageTaken,
+                        DamageHealed = summaryLogger.DamageHealed
+                    });
                 }
             }
             DataLogging.DataLogManager.Loggers.Remove(grapher);
@@ -109,7 +129,10 @@ namespace Tank.Web.Controllers
                 foreach (var run in grapher.Runs)
                     if (grapher.Lines[time].ContainsKey(run))
                         plots[run].Add(new[] { time, grapher.Lines[time][run] });
+
             }
+            foreach (var run in grapher.Runs)
+                summaries[run].AverageHealthOverall = (int)(plots[run].Select(d => d[1]).Sum() / 2000);
 
             return new SimulationResult
             {
@@ -117,7 +140,8 @@ namespace Tank.Web.Controllers
                   new Plot
                   {
                       label = p.Key,
-                      data = p.Value.ToArray()
+                      data = p.Value.ToArray(),
+                      Summary = summaries[p.Key]
                   }).ToList()
             };
         }

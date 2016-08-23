@@ -2,17 +2,19 @@
     <div class="configArea">
         <div class="tankSection">
             <h4>Tanks</h4>
-            <div ng-repeat="tank in parameters.Tanks" class="mobContainer">
-                <div><span class="clickable" ng-click="removeTank($index)">x</span></div>
+            <div ng-repeat="tank in parameters.Tanks" class="mobContainer">                
                 <tank-config tank="tank"></tank-config>
+                <div><span class="clickable" ng-click="removeTank($index)">x</span></div>
             </div>
             <div><span class="clickable" ng-click="addTank()">Add</span></div>
         </div>
         <div class="mobSection">
             <h4>Mobs</h4>
-            <div ng-repeat="mob in parameters.Mobs" class="mobContainer">
-                <div><span class="clickable" ng-click="removeMob($index)">x</span></div>
-                <mob-config mob="mob"></mob-config>
+            <div style="flex-direction:row">
+                <div ng-repeat="mob in parameters.Mobs" class="mobContainer">
+                    <mob-config mob="mob"></mob-config>
+                    <div><span class="clickable" ng-click="removeMob($index)">x</span></div>
+                </div>
             </div>
             <div><span class="clickable" ng-click="addMob()">Add</span></div>
         </div>
@@ -36,10 +38,17 @@
         </div>
         <textarea ng-model="jsonData"></textarea>
     </div>
-    <button ng-click="runSimulation()">Run Simulation</button>
+    <button ng-click="runSimulation()">Run Simulation</button> Please verify all mob and tank names are unique prior to submitting
     <loading-indicator></loading-indicator>
     <div class="resultsArea">
         <h4>Results</h4>
+        <div>
+            <div>Hover for description</div>
+            <div class=" resultSummary" ng-repeat="result in rawResults">
+                <div>{{result.label}}</div>
+                <result-summary summary="result.Summary"></result-summary>
+            </div>
+        </div>
         <div class="tableSection">
             <div>
                 <span><input type="checkbox" ng-model="chartOptions.series.lines.show" style="width:15px;"/></span>

@@ -12,11 +12,11 @@ namespace TankTests
     [TestFixture]
     public class WarriorStatsTest
     {
-        private Warrior War;
+        private Warrior player;
 
         public WarriorStatsTest()
         {
-            War = new Warrior()
+            player = new Warrior()
             {
                 Name = "Warrior",
                 MasteryRating = 1736,
@@ -42,67 +42,67 @@ namespace TankTests
         [Test]
         public void MasteryCorrect()
         {
-            War.Mastery.Should().BeApproximately(0.3567m, 0.0001m);
+            player.Mastery.Should().BeApproximately(0.3567m, 0.0001m);
         }
 
         [Test]
         public void CritCorrect()
         {
-            War.CritChance.Should().BeApproximately(0.1600m, 0.0001m);
+            player.CritChance.Should().BeApproximately(0.1600m, 0.0001m);
         }
 
         [Test]
         public void HasteCorrect()
         {
-            War.Haste.Should().BeApproximately(0.0800m, 0.0001m);
+            player.Haste.Should().BeApproximately(0.0800m, 0.0001m);
         }
 
         [Test]
         public void AttackPowerCorrect()
         {
-            War.AttackPower.Should().Be(4681);
+            player.AttackPower.Should().Be(4681);
         }
 
         [Test]
         public void VersatilityDamageIncreaseCorrect()
         {
-            War.VersatilityDamageIncrease.Should().BeApproximately(0.1093m, 0.0001m);
+            player.VersatilityDamageIncrease.Should().BeApproximately(0.1093m, 0.0001m);
         }
 
         [Test]
         public void VersatilityDamageReductionCorrect()
         {
-            War.VersatilityDamageReduction.Should().BeApproximately(0.0547m, 0.0001m);
+            player.VersatilityDamageReduction.Should().BeApproximately(0.0547m, 0.0001m);
         }
 
         [Test]
         public void LeechCorrect()
         {
-            War.LeechPercentage.Should().BeApproximately(0.0251m,0.0001m);
+            player.LeechPercentage.Should().BeApproximately(0.0251m,0.0001m);
         }
 
         [Test]
         public void DodgeCorrect()
         {
-            War.DodgeChance.Should().BeApproximately(0.0300m, 0.0001m);
+            player.DodgeChance.Should().BeApproximately(0.0300m, 0.0001m);
         }
 
         [Test]
         public void ParryCorrect()
         {
-            War.ParryChance.Should().BeApproximately(0.1623m, 0.0002m);
+            player.ParryChance.Should().BeApproximately(0.1623m, 0.0001m);
         }
 
         [Test]
         public void BlockCorrect()
         {
-            War.BlockChance.Should().BeApproximately(0.2731m, 0.0001m);
+            player.BlockChance.Should().BeApproximately(0.2731m, 0.0001m);
         }
 
         [Test]
         public void CritBlockCorrect()
         {
-            War.CritBlockChance.Should().BeApproximately(0.3567m, 0.0001m);
+            player.CritBlockChance.Should().BeApproximately(0.3567m, 0.0001m);
         }
     }
 }

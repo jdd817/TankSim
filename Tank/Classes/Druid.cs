@@ -44,16 +44,7 @@ namespace Tank.Classes
             }
         }
 
-        public override decimal DodgeChance
-        {
-            get
-            {
-                return BaseDodge
-                    + GetDiminishedAvoidance(
-                        RatingConverter.GetRating(StatType.Dodge, CritRating + Buffs.GetRatingAdjustment(StatType.Dodge))
-                            + Buffs.GetPercentageAdjustment(StatType.Dodge));
-            }
-        }
+        
 
         private int _rage;
 
@@ -82,6 +73,22 @@ namespace Tank.Classes
                     Agility
                     + Buffs.GetRatingAdjustment(StatType.AttackPower))
                     * (1 + Buffs.GetPercentageAdjustment(StatType.AttackPower)));
+            }
+        }
+
+        [XmlIgnore]
+        public override decimal CritChance
+        { get { return 0.15m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
+
+        [XmlIgnore]
+        public override decimal DodgeChance
+        {
+            get
+            {
+                return BaseDodge
+                    + GetDiminishedAvoidance(
+                        RatingConverter.GetRating(StatType.Dodge, CritRating + Buffs.GetRatingAdjustment(StatType.Dodge))
+                            + Buffs.GetPercentageAdjustment(StatType.Dodge));
             }
         }
 

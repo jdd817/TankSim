@@ -26,8 +26,8 @@ namespace Tank.Classes
         public DemonHunter()
         {
             V = 0.0315m;
-            BaseDodge = 0.03m;
-            BaseParry = 0.10m;
+            BaseDodge = 0.015m;
+            BaseParry = 0.03m;
 
             Reset();
         }
@@ -73,6 +73,34 @@ namespace Tank.Classes
                     * (1 + Buffs.GetPercentageAdjustment(StatType.AttackPower)));
             }
         }
+        
+        public virtual decimal CritChance
+        { get { return 0.15m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
+
+        public virtual decimal DodgeChance
+        {
+            get
+            {
+                return BaseDodge
+                    + GetDiminishedAvoidance(
+                        RatingConverter.GetRating(StatType.Dodge, Agility + Buffs.GetRatingAdjustment(StatType.Dodge))
+                            + Buffs.GetPercentageAdjustment(StatType.Dodge));
+            }
+        }
+
+        public virtual decimal ParryChance
+        {
+            get
+            {
+                return BaseParry
+                    + GetDiminishedAvoidance(
+                        RatingConverter.GetRating(StatType.Parry, CritRating + Buffs.GetRatingAdjustment(StatType.Parry))
+                        + Buffs.GetPercentageAdjustment(StatType.Parry));
+            }
+        }
+
+        public virtual decimal Haste
+        { get { return .012m + RatingConverter.GetRating(StatType.Haste, HasteRating) + Buffs.GetPercentageAdjustment(StatType.Haste); } }
 
         #endregion 
 

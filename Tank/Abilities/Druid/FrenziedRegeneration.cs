@@ -16,7 +16,7 @@ namespace Tank.Abilities.Druid
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var amountHealed = HealAmount;
+            var amountHealed = Math.Max((int)(Caster.MaxHealth * 0.05m), HealAmount);
 
             if (Caster.Buffs.GetBuff<Buffs.Druid.GuardianOfElune>() != null)
             {
@@ -37,8 +37,7 @@ namespace Tank.Abilities.Druid
         {
             get
             {
-                return (int)(
-                        DataLogging.DataLogManager.DamageSince(DataLogging.DataLogManager.CurrentTime - 5.0m)
+                return (int)(DataLogging.DataLogManager.DamageSince(DataLogging.DataLogManager.CurrentTime - 5.0m)
                         * 0.5m);
             }
         }

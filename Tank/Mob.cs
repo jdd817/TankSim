@@ -38,12 +38,6 @@ namespace Tank
         public decimal CritChance
         { get; set; }
 
-        public decimal GetDodgedReduction
-        { get; set; }
-
-        public decimal GetParriedReduction
-        { get; set; }
-
         [XmlIgnore]
         public IBuffManager Buffs
         { get; set; }

@@ -124,6 +124,8 @@
     <Content Include="App\HealsConfig\HealsConfig.js" />
     <Content Include="App\MobConfig\MobConfig.html" />
     <Content Include="App\MobConfig\MobConfig.js" />
+    <Content Include="App\ResultSummary\ResultSummary.html" />
+    <Content Include="App\ResultSummary\ResultSummary.js" />
     <Content Include="App\ResultsView\ResultsView.html" />
     <Content Include="App\ResultsView\ResultsView.js" />
     <Content Include="App\Shared\LoadingIndicator.js" />

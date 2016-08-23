@@ -3,7 +3,6 @@
         function (simulationApi, storage) {
             return {
                 restrict: 'E',
-                transclude: true,
                 templateUrl: $.url('app/TankUI/TankUI.html'),
                 scope: {
                 },
@@ -62,6 +61,7 @@
                     };
 
                     function displayResults(results) {
+                        $scope.rawResults = results.Results;
                         $scope.results = [];
 
                         var classes = {};

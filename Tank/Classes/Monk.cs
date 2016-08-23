@@ -12,8 +12,8 @@ namespace Tank.Classes
         public Monk()
         {
             V = 0.0315m;
-            BaseDodge = 0.03m;
-            BaseParry = 0.10m;
+            BaseDodge = 0.10m;
+            BaseParry = 0.03m;
 
             Reset();
         }
@@ -49,6 +49,9 @@ namespace Tank.Classes
                             + Buffs.GetPercentageAdjustment(StatType.Dodge));
             }
         }
+
+        public override decimal CritChance
+        { get { return 0.15m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
 
         #region class-specific counters
 
