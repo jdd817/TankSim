@@ -17,7 +17,7 @@ namespace Tank.Abilities.DemonHunter
             var soulFragments = Caster.Buffs.GetStacks(typeof(SoulFragment));
             Caster.Buffs.ClearBuff(typeof(SoulFragment));
 
-            healingDone += (int)(soulFragments * 21.25m * dh.AttackPower);
+            healingDone += (int)(soulFragments * 2.5m * dh.AttackPower);
 
             return new AbilityResult
             {
