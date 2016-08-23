@@ -18,7 +18,7 @@ namespace Tank.Abilities.DemonHunter
             var dh = Caster as Player;
             return new AbilityResult
             {
-                ResourceCost = ResourceCost,
+                ResourceCost = 20,
                 DamageDealt = 0,
                 CasterBuffsApplied = new[] { new Buffs.DemonHunter.DemonSpikes(dh.Mastery / 1.125m + .12m) }
             };

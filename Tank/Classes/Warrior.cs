@@ -11,15 +11,12 @@ namespace Tank.Classes
 {
     public class Warrior : Player
     {
-        static Warrior()
+        public Warrior()
         {
             BaseDodge = 0.03m;
             BaseParry = 0.10m;
             BaseBlock = 0.30m;
-        }
 
-        public Warrior()
-        {
             Reset();
         }
 
@@ -113,7 +110,6 @@ namespace Tank.Classes
             {
                 return new Abilities.Warrior.IgnorePain()
                 {
-                    ResourceCost = 60,
                     DamageAbsorbed = (int)(28.0m * AttackPower * (1.75m - 0.75m * CurrentHealth / MaxHealth))
                 };
             }

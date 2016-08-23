@@ -9,15 +9,12 @@ namespace Tank.Classes
 {
     public class Monk:Player
     {
-        static Monk()
+        public Monk()
         {
             V = 0.0315m;
             BaseDodge = 0.03m;
             BaseParry = 0.10m;
-        }
 
-        public Monk()
-        {
             Reset();
         }
 

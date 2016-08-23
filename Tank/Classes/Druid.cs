@@ -11,15 +11,13 @@ namespace Tank.Classes
 {
     public class Druid : Player
     {
-        static Druid()
+
+        public Druid()
         {
             BaseDodge = 0.10m;
             BaseParry = 0.00m;
             BaseBlock = 0.00m;
-        }
 
-        public Druid()
-        {
             RageCap = 100;
             Reset();
         }

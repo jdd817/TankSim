@@ -8,12 +8,6 @@ namespace Tank.Abilities.DeathKnight
 {
     public class Marrowrend : Ability
     {
-        public Marrowrend()
-        {
-            SecondaryResourceCost = 2;
-            ResourceGain = 20;
-        }
-        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var boneCharges = 3;

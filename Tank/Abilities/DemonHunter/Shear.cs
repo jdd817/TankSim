@@ -8,12 +8,7 @@ using Tank.Buffs.DemonHunter;
 namespace Tank.Abilities.DemonHunter
 {
     public class Shear : Ability
-    {
-        public Shear()
-        {
-            ResourceCost = -10;
-        }
-        
+    {        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             Buff[] buffs;

@@ -21,17 +21,13 @@ namespace Tank
             GCDLength = 1.5m;
         }
 
-        #region static constants
+        #region constants
 
-        protected static decimal BaseDodge;
-        protected static decimal BaseParry;
-        protected static decimal BaseBlock;
+        protected decimal BaseDodge;
+        protected decimal BaseParry;
+        protected decimal BaseBlock;
 
-        protected static decimal DodgeCap;
-        protected static decimal ParryCap;
-        protected static decimal BlockCap;
-
-        protected static decimal V = 0.018m;
+        protected decimal V = 0.018m;
 
         #endregion
 
@@ -204,17 +200,13 @@ namespace Tank
         public List<Weapon> Weapons
         { get; set; }
 
-        [XmlIgnore]
-        public decimal GCD
-        { get; set; }
-
         public decimal GCDLength { get; set; }
 
         #endregion
 
         #region public methods
         
-        public static decimal GetDiminishedAvoidance(decimal Avoidance)
+        protected decimal GetDiminishedAvoidance(decimal Avoidance)
         {
             /*
                 BLUE REGARDING DIMINISHING RETURNS:
@@ -270,7 +262,6 @@ namespace Tank
         {
             foreach (Weapon W in Weapons)
                 W.SwingTimer -= DeltaTime;
-            GCD = Math.Max(0, GCD - DeltaTime);
         }
 
         /// <summary>

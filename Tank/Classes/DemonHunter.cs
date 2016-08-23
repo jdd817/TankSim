@@ -22,15 +22,13 @@ namespace Tank.Classes
             Fel Devestation
             N/A except for Soul Barrier, which is not viable
         */
-        static DemonHunter()
+
+        public DemonHunter()
         {
             V = 0.0315m;
             BaseDodge = 0.03m;
             BaseParry = 0.10m;
-        }
 
-        public DemonHunter()
-        {
             Reset();
         }
 

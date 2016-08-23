@@ -15,11 +15,14 @@ namespace Tank.Abilities.DeathKnight
         
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
+            var runeCost = Caster.Buffs.GetBuff<Buffs.DeathKnight.CrimsonScourge>() != null ? 0 : 1;
+            Caster.Buffs.ClearBuff<Buffs.DeathKnight.CrimsonScourge>();
+
             return new AbilityResult
             {
                 CasterBuffsApplied = new[] { new Buffs.DeathKnight.DeathAndDecay() },
-                SecondaryResourceCost = 1,
-                ResourceCost = -10
+                SecondaryResourceCost = runeCost,
+                ResourceCost = -10  //need to test this - does it still generate 10 power when free?
             };
         }
     }

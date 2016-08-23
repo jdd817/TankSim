@@ -8,11 +8,6 @@ namespace Tank.Abilities.DeathKnight
 {
     public class DeathStrike : Ability
     {
-        public DeathStrike()
-        {
-            ResourceCost = 45;
-        }
-
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var healingDone = HealingAmount(Caster);

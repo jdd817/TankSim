@@ -7,13 +7,7 @@ using Tank.Buffs;
 namespace Tank.Abilities.DeathKnight
 {
     public class HeartStrike : Ability
-    {
-        public HeartStrike()
-        {
-            SecondaryResourceCost = 1;
-            ResourceGain = 18;
-        }
-        
+    {        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var healingPercentage = 0.0m;

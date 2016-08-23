@@ -8,11 +8,6 @@ namespace Tank.Abilities.DemonHunter
 {
     public class SoulCleave : Ability
     {
-        public SoulCleave()
-        {
-            ResourceCost = 60;
-        }
-        
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var dh = Caster as Player;
@@ -26,7 +21,7 @@ namespace Tank.Abilities.DemonHunter
 
             return new AbilityResult
             {
-                ResourceCost = ResourceCost,
+                ResourceCost = 60,
                 DamageDealt = 0,
                 SelfHealing = healingDone,
                 CasterBuffsApplied = new[] { new Buffs.DemonHunter.FeastOfSouls((int)(3.9m * dh.AttackPower * (dh.CurrentHealth * 1m / dh.MaxHealth))) },

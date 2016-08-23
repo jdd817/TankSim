@@ -12,15 +12,12 @@ namespace Tank.Classes
 {
     public class DeathKnight : Player
     {
-        static DeathKnight()
+        public DeathKnight()
         {
             BaseDodge = 0.03m;
             BaseParry = 0.10m;
             BaseBlock = 0.00m;
-        }
 
-        public DeathKnight()
-        {
             Reset();
         }
 
@@ -102,8 +99,7 @@ namespace Tank.Classes
                 }
                 if (Buffs.GetBuff(typeof(CrimsonScourge)) != null)
                 {
-                    Buffs.ClearBuff(typeof(CrimsonScourge));
-                    return new Abilities.DeathKnight.DeathAndDecay() { SecondaryResourceCost = 0 };
+                    return new Abilities.DeathKnight.DeathAndDecay();
                 }
 
                 var boneShield = Buffs.GetBuff(typeof(BoneShield));
@@ -172,10 +168,10 @@ namespace Tank.Classes
             RunicPower -= Result.ResourceCost;
             if (RunicPower > RunicPowerCap)
                 RunicPower = RunicPowerCap;
-            if (Ability.SecondaryResourceCost > 0)
+            if (Result.SecondaryResourceCost > 0)
             {
-                RunesAvailable -= Ability.SecondaryResourceCost;
-                for (var i = 0; i < Ability.SecondaryResourceCost; i++)
+                RunesAvailable -= Result.SecondaryResourceCost;
+                for (var i = 0; i < Result.SecondaryResourceCost; i++)
                     if (RuneCounters.Count < 3)
                         RuneCounters.Add(10.0m / (1.0m + Haste));
             }

@@ -10,23 +10,9 @@ namespace Tank.Abilities
     {
         public Ability()
         {
-            ResourceCost = 0;
-            ResourceGain = 0;
-            SecondaryResourceCost = 0;
-            
             Cooldown = 0;
             MaxCharges = 1;
         }
-
-        public int ResourceCost
-        { get; set; }
-
-        public int ResourceGain
-        { get; set; }
-
-        public int SecondaryResourceCost
-        { get; set; }
-        
 
         public decimal Cooldown { get; set; }
         public int MaxCharges { get; set; }
