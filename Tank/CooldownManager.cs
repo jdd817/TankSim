@@ -11,7 +11,8 @@ namespace Tank
     {
         public CooldownManager()
         {
-            Cooldowns = new Dictionary<Type, CooldownInfo>(); 
+            Cooldowns = new Dictionary<Type, CooldownInfo>();
+            GCDLength = 1.5m;
         }
         
         private Dictionary<Type, CooldownInfo> Cooldowns;
@@ -49,6 +50,18 @@ namespace Tank
                 Cooldowns.Add(ability.GetType(), new CooldownInfo { Charges = ability.MaxCharges, MaxCharges = ability.MaxCharges, CooldownLength = ability.Cooldown });
             }
             return Cooldowns[Ability].Charges;
+        }
+
+        public decimal CooldownRemaining<T>() where T : Ability
+        {
+            return CooldownRemaining(typeof(T));
+        }
+
+        public decimal CooldownRemaining(Type Ability)
+        {
+            if (!Cooldowns.ContainsKey(Ability))
+                return 0;
+            return Cooldowns[Ability].CooldownRemaining;
         }
 
         public void AbilityUsed(Ability ability, AbilityResult result)

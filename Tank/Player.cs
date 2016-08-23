@@ -213,17 +213,6 @@ namespace Tank
         #endregion
 
         #region public methods
-
-        /// <summary>
-        /// Applies diminishing returns to an avoidance stat
-        /// </summary>
-        /// <param name="BaseAvoidance"></param>
-        /// <returns></returns>
-        /*
-        public static decimal GetDiminishedAvoidance(decimal BaseAvoidance)
-        {
-            return GetDiminishedAvoidance(BaseAvoidance, AvoidanceCap, AvoidanceK);
-        }*/
         
         public static decimal GetDiminishedAvoidance(decimal Avoidance)
         {
@@ -277,7 +266,12 @@ namespace Tank
         /// Updates the player when the tick is done
         /// </summary>
         /// <param name="DeltaTime"></param>
-        public abstract void UpdateTimeElapsed(decimal DeltaTime);
+        public virtual void UpdateTimeElapsed(decimal DeltaTime)
+        {
+            foreach (Weapon W in Weapons)
+                W.SwingTimer -= DeltaTime;
+            GCD = Math.Max(0, GCD - DeltaTime);
+        }
 
         /// <summary>
         /// Called when the player is attacked
@@ -314,13 +308,6 @@ namespace Tank
                 }
             }
             return null;
-        }
-
-        protected void UpdateTimers(decimal DeltaTime)
-        {
-            foreach (Weapon W in Weapons)
-                W.SwingTimer -= DeltaTime;
-             GCD = Math.Max(0, GCD - DeltaTime);
         }
 
         #endregion

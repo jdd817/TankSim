@@ -113,11 +113,6 @@ namespace Tank.Classes
             ApplyHealing(Result.SelfHealing);
         }
 
-        public override void UpdateTimeElapsed(decimal DeltaTime)
-        {
-            UpdateTimers(DeltaTime);
-        }
-
         public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
         {
             DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()

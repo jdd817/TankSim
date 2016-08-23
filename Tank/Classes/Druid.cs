@@ -128,16 +128,15 @@ namespace Tank.Classes
 
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
-            Rage -= Result.ResourceCost;
             ApplyHealing(Result.SelfHealing);
+            Rage -= Result.ResourceCost;
             if (Ability.GetType() == typeof(Abilities.Attack))
                 Rage += 8;
-            
         }
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
-            UpdateTimers(DeltaTime);
+            base.UpdateTimeElapsed(DeltaTime);
 
             if(YserasGiftCD<=0 && CurrentHealth<MaxHealth)
             {
@@ -181,7 +180,7 @@ namespace Tank.Classes
 
         public override void ApplyHealing(int healingAmount)
         {
-            base.ApplyHealing((int)(healingAmount * (1 + Mastery) * 1.25m));
+            base.ApplyHealing((int)(healingAmount * (1 + Mastery * 1.25m)));
         }
     }
 }

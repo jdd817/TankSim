@@ -19,11 +19,12 @@ namespace Tank.Abilities.Druid
                 buffs.Add(new Buffs.Druid.Gore());
             }
 
+            var rageCost = Caster.Buffs.GetBuff<Buffs.Druid.Moonfire>() == null ? 0 : -15;
             Caster.Buffs.ClearBuff<Buffs.Druid.GalacticGuardian>();
 
             return new AbilityResult
             {
-                ResourceCost = Caster.Buffs.GetBuff<Buffs.Druid.Moonfire>() == null ? 0 : -15,
+                ResourceCost = rageCost,
                 TargetBuffsApplied = new[] { new Buffs.Druid.Moonfire() },
                 CasterBuffsApplied = buffs.ToArray(),
                 CooldownReduction = MangleReset.ToArray()

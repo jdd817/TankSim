@@ -125,8 +125,8 @@ namespace Tank.Classes
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
-            UpdateTimers(DeltaTime);
-            
+            base.UpdateTimeElapsed(DeltaTime);
+
             var healingOrbs = Buffs.GetBuff<Buffs.Monk.HealingOrb>();
             if (healingOrbs != null)
             {

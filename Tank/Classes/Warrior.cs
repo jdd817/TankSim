@@ -135,7 +135,7 @@ namespace Tank.Classes
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
-            UpdateTimers(DeltaTime);
+            base.UpdateTimeElapsed(DeltaTime);
             RevengeResetICD = Math.Max(0, RevengeResetICD - DeltaTime);
         }
 

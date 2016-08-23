@@ -185,7 +185,7 @@ namespace Tank.Classes
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
         {
-            UpdateTimers(DeltaTime);
+            base.UpdateTimeElapsed(DeltaTime);
 
             for (var i = 0; i < RuneCounters.Count; i++)
                 RuneCounters[i] -= DeltaTime;
