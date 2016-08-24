@@ -128,12 +128,5 @@ namespace Tank
             foreach (Buff B in actionResult.TargetBuffsApplied)
                 Mob.Buffs.AddBuff(B);
         }
-
-        public void DoNCombats(Player Tank, Mob Mob, decimal CombatDurration, int N)
-        {
-            int i;
-            for (i = 0; i < N; i++)
-                DoCombat(Tank, Mob, CombatDurration);
-        }
     }
 }
