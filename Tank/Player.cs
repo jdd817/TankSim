@@ -253,6 +253,8 @@ namespace Tank
         /// <param name="DeltaTime"></param>
         public virtual void UpdateTimeElapsed(decimal DeltaTime)
         {
+            UpdateFromTickingBuffs(Buffs.DecrementBuffTimers(DeltaTime));
+            Cooldowns.UpdateTimers(DeltaTime);
             foreach (Weapon W in Weapons)
                 W.SwingTimer -= DeltaTime;
         }

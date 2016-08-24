@@ -51,56 +51,18 @@ namespace Tank
                 Ability PlayerAction = Tank.GetAbilityUsed(Mob.Buffs);
 
                 if (PlayerAction != null)
-                {
-                    var modifiers = PlayerAction.GetModifiers(Tank.Buffs, Mob.Buffs);
-
-                    AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
-                        modifiers);
-
-                    var actionResult = PlayerAction.GetAbilityResult(Result, Tank, Mob);
-                    actionResult.AttackResult = Result;
-                    actionResult.Time = Time;
-
-                    Tank.Cooldowns.AbilityUsed(PlayerAction, actionResult);
-
-                    DataLogging.DataLogManager.UsedAbility(Time, PlayerAction.GetType().Name, actionResult);
-
-                    Tank.UpdateAbilityResults(Time, PlayerAction, actionResult);
-                    foreach (Buff B in actionResult.CasterBuffsApplied)
-                        Tank.Buffs.AddBuff(B);
-                    foreach (Buff B in actionResult.TargetBuffsApplied)
-                        Mob.Buffs.AddBuff(B);
-                }
+                    ProcessPlayerAction(Tank, Mob, Time, PlayerAction);
 
                 Attack PlayerAttack = Tank.GetAttack();
                 if (PlayerAttack != null)
-                {
-                    var modifiers = PlayerAttack.GetModifiers(Tank.Buffs, Mob.Buffs);
-                    AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
-                        modifiers);
-
-                    var actionResult = PlayerAttack.GetAbilityResult(Result, Tank, Mob);
-                    actionResult.AttackResult = Result;
-                    actionResult.Time = Time;
-
-                    Tank.UpdateAbilityResults(Time, PlayerAttack, actionResult);
-                }
+                    ProcessPlayerAttack(Tank, Mob, Time, PlayerAttack);
 
                 Attack MobAttack = Mob.GetAttack();
                 if (MobAttack != null)
-                {
-                    var modifiers = MobAttack.GetModifiers(Mob.Buffs, Tank.Buffs);
-                    AttackResult Result = CombatTable.GetAttackResult(Mob, Tank,
-                        modifiers);
-
-                    if (Tank.Armor > 0)
-                        MobAttack.Damage = (int)(MobAttack.Damage * (1m - Tank.ArmorDamageReduction));
-                    
-                    Tank.UpdateFromMobAttack(Time, MobAttack, Result);
-                }
+                    ProcessMobAttack(Tank, Mob, Time, MobAttack);
 
                 //healers
-                foreach(var healer in Healers)
+                foreach (var healer in Healers)
                 {
                     healer.HealTimer -= TimeIncrement;
                     if (healer.HealTimer <= 0)
@@ -111,17 +73,60 @@ namespace Tank
                 }
 
                 DataLogging.DataLogManager.LogHealth(Time, Tank.CurrentHealth);
-
-                Tank.UpdateFromTickingBuffs(Tank.Buffs.DecrementBuffTimers(TimeIncrement));
-                Mob.Buffs.DecrementBuffTimers(TimeIncrement);
-
-                Tank.Cooldowns.UpdateTimers(TimeIncrement);
+                
                 Tank.UpdateTimeElapsed(TimeIncrement);
                 Mob.UpdateTimeElapsed(TimeIncrement);
 
                 if (EndAtDeath && Tank.CurrentHealth <= 0)
                     break;
             }
+        }
+
+        private static void ProcessMobAttack(Player Tank, Mob Mob, decimal Time, Attack MobAttack)
+        {
+            var modifiers = MobAttack.GetModifiers(Mob.Buffs, Tank.Buffs);
+            AttackResult Result = CombatTable.GetAttackResult(Mob, Tank,
+                modifiers);
+
+            if (Tank.Armor > 0)
+                MobAttack.Damage = (int)(MobAttack.Damage * (1m - Tank.ArmorDamageReduction));
+
+            Tank.UpdateFromMobAttack(Time, MobAttack, Result);
+        }
+
+        private static void ProcessPlayerAttack(Player Tank, Mob Mob, decimal Time, Attack PlayerAttack)
+        {
+            var modifiers = PlayerAttack.GetModifiers(Tank.Buffs, Mob.Buffs);
+            AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
+                modifiers);
+
+            var actionResult = PlayerAttack.GetAbilityResult(Result, Tank, Mob);
+            actionResult.AttackResult = Result;
+            actionResult.Time = Time;
+
+            Tank.UpdateAbilityResults(Time, PlayerAttack, actionResult);
+        }
+
+        private static void ProcessPlayerAction(Player Tank, Mob Mob, decimal Time, Ability PlayerAction)
+        {
+            var modifiers = PlayerAction.GetModifiers(Tank.Buffs, Mob.Buffs);
+
+            AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
+                modifiers);
+
+            var actionResult = PlayerAction.GetAbilityResult(Result, Tank, Mob);
+            actionResult.AttackResult = Result;
+            actionResult.Time = Time;
+
+            Tank.Cooldowns.AbilityUsed(PlayerAction, actionResult);
+
+            DataLogging.DataLogManager.UsedAbility(Time, PlayerAction.GetType().Name, actionResult);
+
+            Tank.UpdateAbilityResults(Time, PlayerAction, actionResult);
+            foreach (Buff B in actionResult.CasterBuffsApplied)
+                Tank.Buffs.AddBuff(B);
+            foreach (Buff B in actionResult.TargetBuffsApplied)
+                Mob.Buffs.AddBuff(B);
         }
 
         public void DoNCombats(Player Tank, Mob Mob, decimal CombatDurration, int N)

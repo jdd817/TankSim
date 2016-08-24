@@ -109,7 +109,7 @@ namespace Tank.Classes
         {
             if (Cooldowns.OffGCD)
             {
-                if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.90m)
+                if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.75m)
                     return new Abilities.DemonHunter.FelDevestation();
 
                 if (Pain >= 80)

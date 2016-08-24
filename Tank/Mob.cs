@@ -57,6 +57,7 @@ namespace Tank
 
         public void UpdateTimeElapsed(decimal DeltaTime)
         {
+            Buffs.DecrementBuffTimers(DeltaTime);
             foreach (Weapon W in Weapons)
                 W.SwingTimer -= DeltaTime;
         }

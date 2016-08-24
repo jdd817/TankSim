@@ -24,7 +24,7 @@ namespace Tank.Abilities.DemonHunter
                 ResourceCost = 60,
                 DamageDealt = 0,
                 SelfHealing = healingDone,
-                CasterBuffsApplied = new[] { new Buffs.DemonHunter.FeastOfSouls((int)(3.9m * dh.AttackPower * (dh.CurrentHealth * 1m / dh.MaxHealth))) },
+                CasterBuffsApplied = new[] { new Buffs.DemonHunter.FeastOfSouls((int)(3.9m * dh.AttackPower * dh.HealthPercentage)) },
                 CooldownReduction = new[] { new CooldownReduction { Ability = typeof(Abilities.DemonHunter.DemonSpikes), ReductionType = ReductionType.By, Amount = soulFragments } }
             };
         }
