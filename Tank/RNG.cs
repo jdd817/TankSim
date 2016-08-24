@@ -5,26 +5,38 @@ using System.Text;
 
 namespace Tank
 {
-    public static class RNG
+    public interface IRng
     {
-        private static Random Rand = new Random();
+        void Reseed(int seed = 0);
+        double NextDouble();
+        int Next(int minValue, int maxValue);
+    }
 
-        public static void Reseed(int seed=0)
+    public class RNG:IRng
+    {
+        private Random _rand;
+
+        public RNG()
+        {
+            _rand = new Random();
+        }
+
+        public void Reseed(int seed=0)
         {
             if (seed == 0)
-                Rand = new Random();
+                _rand = new Random();
             else
-                Rand = new Random(seed);
+                _rand = new Random(seed);
         }
 
-        public static double NextDouble()
+        public double NextDouble()
         {
-            return Rand.NextDouble();
+            return _rand.NextDouble();
         }
 
-        public static int Next(int minValue, int maxValue)
+        public int Next(int minValue, int maxValue)
         {
-            return Rand.Next(minValue, maxValue);
+            return _rand.Next(minValue, maxValue);
         }
     }
 }

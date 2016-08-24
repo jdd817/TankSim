@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tank.Abilities.Warrior
 {
-    class Revenge:Ability
+    public class Revenge:Ability
     {
         public Revenge()
         {

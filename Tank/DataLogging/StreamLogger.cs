@@ -50,19 +50,20 @@ namespace Tank.DataLogging
         public void LogEvent(DamageEvent Event)
         {
             if (_eventWriter != null)
-                _eventWriter.WriteLine("[{0:0.00}] Mob {1} for {2} Damage {3} {4}",
+                _eventWriter.WriteLine("[{0:0.00}] {5} {1} for {2} Damage {3} {4}",
                     Event.Time,
                     Event.Result,
                     Event.DamageTaken,
                     Event.DamageBlocked > 0 ? String.Format("({0} blocked)", Event.DamageBlocked) : "",
-                    Event.DamageAbsorbed > 0 ? String.Format("({0} absorbed)", Event.DamageAbsorbed) : "");
+                    Event.DamageAbsorbed > 0 ? String.Format("({0} absorbed)", Event.DamageAbsorbed) : "",
+                    Event.Name ?? "Mob");
         }
 
         public void UsedAbility(decimal Time, string AbilityName, AbilityResult Result)
         {
             if (_abilityWriter != null)
                 _abilityWriter.WriteLine("[{0:0.00}] Used {1} {2}",
-                    Result.Time,
+                    Time,
                     AbilityName,
                     Result.SelfHealing > 0 ? String.Format("(+{0} Healed)", Result.SelfHealing) : ""
                     );

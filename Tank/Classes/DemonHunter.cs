@@ -23,11 +23,14 @@ namespace Tank.Classes
             N/A except for Soul Barrier, which is not viable
         */
 
-        public DemonHunter()
+        public DemonHunter(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
+            : base(buffManager, cooldownManager, abilityManager, rng)
         {
             V = 0.0315m;
             BaseDodge = 0.015m;
             BaseParry = 0.03m;
+
+            PainCap = 100;
 
             Reset();
         }
@@ -74,10 +77,10 @@ namespace Tank.Classes
             }
         }
         
-        public virtual decimal CritChance
+        public override decimal CritChance
         { get { return 0.15m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
 
-        public virtual decimal DodgeChance
+        public override decimal DodgeChance
         {
             get
             {
@@ -88,7 +91,7 @@ namespace Tank.Classes
             }
         }
 
-        public virtual decimal ParryChance
+        public override decimal ParryChance
         {
             get
             {
@@ -99,7 +102,7 @@ namespace Tank.Classes
             }
         }
 
-        public virtual decimal Haste
+        public override decimal Haste
         { get { return .012m + RatingConverter.GetRating(StatType.Haste, HasteRating) + Buffs.GetPercentageAdjustment(StatType.Haste); } }
 
         #endregion 
@@ -110,25 +113,25 @@ namespace Tank.Classes
             if (Cooldowns.OffGCD)
             {
                 if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.75m)
-                    return new Abilities.DemonHunter.FelDevestation();
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.FelDevestation>();
 
                 if (Pain >= 80)
-                    return new Abilities.DemonHunter.SoulCleave();
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.SoulCleave>();
 
                 if (Cooldowns.AbilityReady<Abilities.DemonHunter.ImmolationAura>())
-                    return new Abilities.DemonHunter.ImmolationAura();
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.ImmolationAura>();
 
                 if (Cooldowns.AbilityReady<Abilities.DemonHunter.SigilOfFlame>())
-                    return new Abilities.DemonHunter.SigilOfFlame();
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.SigilOfFlame>();
 
-                if(Cooldowns.AbilityReady<Abilities.DemonHunter.FelBlade>())
-                    return new Abilities.DemonHunter.FelBlade();
+                if (Cooldowns.AbilityReady<Abilities.DemonHunter.FelBlade>())
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.FelBlade>();
 
-                return new Abilities.DemonHunter.Shear();
+                return AbilityManger.GetAbility<Abilities.DemonHunter.Shear>();
             }
 
             if (Cooldowns.AbilityReady<Abilities.DemonHunter.DemonSpikes>() && Pain >= 20 && Buffs.GetBuff(typeof(Buffs.DemonHunter.DemonSpikes)) == null)
-                return new Abilities.DemonHunter.DemonSpikes();
+                return AbilityManger.GetAbility<Abilities.DemonHunter.DemonSpikes>();
 
             return null;
         }

@@ -13,12 +13,17 @@ namespace Tank
     /// </summary>
     public abstract class Player : Actor
     {
-        public Player()
+        protected IAbilityManager AbilityManger;
+        protected IRng Rng;
+
+        public Player(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
         {
-            Buffs = new BuffManager();
-            Cooldowns = new CooldownManager();
+            Buffs = buffManager;
+            Cooldowns = cooldownManager;
             Weapons = new List<Weapon>();
             GCDLength = 1.5m;
+            AbilityManger = abilityManager;
+            Rng = rng;
         }
 
         #region constants
@@ -272,10 +277,9 @@ namespace Tank
             foreach (var hot in TickingBuffs.OfBaseType<Buffs.HealOverTime>())
             {
                 ApplyHealing(hot.HealingPerTick);
-                DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                DataLogging.DataLogManager.UsedAbility(DataLogging.DataLogManager.CurrentTime, "Healed", new AbilityResult
                 {
-                    Time = DataLogging.DataLogManager.CurrentTime,
-                    DamageHealed = hot.HealingPerTick
+                    SelfHealing = hot.HealingPerTick
                 });
             }
         }
@@ -297,7 +301,7 @@ namespace Tank
                 if (W.SwingTimer <= 0)
                 {
                     W.SwingTimer += W.Speed;
-                    return new Abilities.Attack(W.Damage);
+                    return new Abilities.Attack(W.Damage(Rng));
                 }
             }
             return null;

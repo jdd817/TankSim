@@ -8,7 +8,14 @@ using Tank.Buffs.DemonHunter;
 namespace Tank.Abilities.DemonHunter
 {
     public class Shear : Ability
-    {        
+    {
+        private IRng _rng;
+
+        public Shear(IRng rng)
+        {
+            _rng = rng;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             Buff[] buffs;
@@ -25,12 +32,12 @@ namespace Tank.Abilities.DemonHunter
 
             CooldownReduction[] cdReduction;
 
-            if (RNG.NextDouble() <= 0.10)
+            if (_rng.NextDouble() <= 0.10)
                 cdReduction = new[] { new CooldownReduction { Ability = typeof(Abilities.DemonHunter.FelBlade), ReductionType = ReductionType.To, Amount = 0 } };
             else
                 cdReduction = new CooldownReduction[0];
 
-            if (RNG.NextDouble() <= shearChance)
+            if (_rng.NextDouble() <= shearChance)
             {
                 buffs = new[] { new SoulFragment() };
                 dh.ShearsSinceLastSoulFragment = 0;

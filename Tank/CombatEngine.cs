@@ -8,12 +8,18 @@ using Tank.Buffs;
 
 namespace Tank
 {
-    public class CombatEngine
+    public class CombatEngine : ICombatEngine
     {
-        public CombatEngine()
+        private ICombatTable _combatTable;
+
+        public CombatEngine(ICombatTable combatTable, IRng rng)
         {
             TimeIncrement = 0.1m;
+            _combatTable = combatTable;
+            Rng = rng;
         }
+
+        public IRng Rng { get; set; }
 
         public decimal TimeIncrement
         { get; set; }
@@ -82,10 +88,10 @@ namespace Tank
             }
         }
 
-        private static void ProcessMobAttack(Player Tank, Mob Mob, decimal Time, Attack MobAttack)
+        private void ProcessMobAttack(Player Tank, Mob Mob, decimal Time, Attack MobAttack)
         {
             var modifiers = MobAttack.GetModifiers(Mob.Buffs, Tank.Buffs);
-            AttackResult Result = CombatTable.GetAttackResult(Mob, Tank,
+            AttackResult Result = _combatTable.GetAttackResult(Mob, Tank,
                 modifiers);
 
             if (Tank.Armor > 0)
@@ -94,10 +100,10 @@ namespace Tank
             Tank.UpdateFromMobAttack(Time, MobAttack, Result);
         }
 
-        private static void ProcessPlayerAttack(Player Tank, Mob Mob, decimal Time, Attack PlayerAttack)
+        private void ProcessPlayerAttack(Player Tank, Mob Mob, decimal Time, Attack PlayerAttack)
         {
             var modifiers = PlayerAttack.GetModifiers(Tank.Buffs, Mob.Buffs);
-            AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
+            AttackResult Result = _combatTable.GetAttackResult(Tank, Mob,
                 modifiers);
 
             var actionResult = PlayerAttack.GetAbilityResult(Result, Tank, Mob);
@@ -107,11 +113,11 @@ namespace Tank
             Tank.UpdateAbilityResults(Time, PlayerAttack, actionResult);
         }
 
-        private static void ProcessPlayerAction(Player Tank, Mob Mob, decimal Time, Ability PlayerAction)
+        private void ProcessPlayerAction(Player Tank, Mob Mob, decimal Time, Ability PlayerAction)
         {
             var modifiers = PlayerAction.GetModifiers(Tank.Buffs, Mob.Buffs);
 
-            AttackResult Result = CombatTable.GetAttackResult(Tank, Mob,
+            AttackResult Result = _combatTable.GetAttackResult(Tank, Mob,
                 modifiers);
 
             var actionResult = PlayerAction.GetAbilityResult(Result, Tank, Mob);

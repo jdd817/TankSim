@@ -13,10 +13,11 @@ namespace Tank.Abilities.Warrior
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
+            var war = Caster as Player;
             return new AbilityResult
             {
                 ResourceCost = 60,
-                CasterBuffsApplied = new[] { new Buffs.Warrior.IgnorePain(this.DamageAbsorbed) }
+                CasterBuffsApplied = new[] { new Buffs.Warrior.IgnorePain((int)(28.0m * war.AttackPower * (1.75m - 0.75m * war.HealthPercentage))) }
             };
         }
 

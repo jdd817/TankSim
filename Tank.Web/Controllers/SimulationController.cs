@@ -10,6 +10,13 @@ namespace Tank.Web.Controllers
 {
     public class SimulationController : ApiController
     {
+        private ICombatEngine _combatEngine;
+
+        public SimulationController(ICombatEngine combatEngine)
+        {
+            _combatEngine = combatEngine;
+        }
+
         [HttpPost]
         [Route("api/simulation")]
         public SimulationResult SimulationStartPoint(SimulationParameters parameters)
@@ -97,19 +104,21 @@ namespace Tank.Web.Controllers
             {
                 foreach (var mob in mobs)
                 {
-                    RNG.Reseed(seed);
+                    _combatEngine.Rng.Reseed(seed);
                     var runName= String.Format("{0} - {1}", tank.Name, mob.Name);
                     grapher.RunName = runName;
 
                     var summaryLogger = new DataLogging.SummaryLogger();
+                    var streamLogger = new DataLogging.StreamLogger(new System.IO.StreamWriter(System.Web.HttpRuntime.AppDomainAppPath + "/" + runName + ".txt", true));
                     DataLogging.DataLogManager.Loggers.Add(summaryLogger);
-
-                    CombatEngine Engine = new CombatEngine();
+                    DataLogging.DataLogManager.Loggers.Add(streamLogger);
                     
                     DataLogging.DataLogManager.Reset();
-                    Engine.DoCombat(tank, mob, 200.0m, true, healers);
+                    _combatEngine.DoCombat(tank, mob, 200.0m, true, healers);
 
                     DataLogging.DataLogManager.Loggers.Remove(summaryLogger);
+                    DataLogging.DataLogManager.Loggers.Remove(streamLogger);
+                    streamLogger.Dispose();
                     summaries.Add(runName, new SimulationSummary
                     {
                         DamageTaken = summaryLogger.DamageTaken,
@@ -149,17 +158,18 @@ namespace Tank.Web.Controllers
         private List<Mob> GetMobs(SimulationParameters parameters)
         {
             return parameters.Mobs.Select(m =>
-                new Mob
-                {
-                    Name = m.Name,
-                    Weapons = m.Attacks.Select(a =>
-                          new Weapon
-                          {
-                              LowDamage = a.Damage,
-                              HighDamage = a.Damage,
-                              Speed = a.Period
-                          })
-                          .ToList()
+            {
+                var Mob = System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Tank.Mob)) as Tank.Mob;
+                Mob.Name = m.Name;
+                Mob.Weapons = m.Attacks.Select(a =>
+                      new Weapon
+                      {
+                          LowDamage = a.Damage,
+                          HighDamage = a.Damage,
+                          Speed = a.Period
+                      })
+                      .ToList();
+                return Mob;
                 })
                 .ToList();
         }
@@ -211,30 +221,15 @@ namespace Tank.Web.Controllers
             switch(tankData.Class)
             {
                 case "Death Knight":
-                    return new Classes.DeathKnight
-                    {
-                        RunicPowerCap = 125
-                    };
+                    return System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Classes.DeathKnight)) as Player;
                 case "Demon Hunter":
-                    return new Classes.DemonHunter
-                    {
-                        PainCap = 100
-                    };
+                    return System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Classes.DemonHunter)) as Player;
                 case "Warrior":
-                    return new Classes.Warrior
-                    {
-                        RageCap = 120
-                    };
+                    return System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Classes.Warrior)) as Player;
                 case "Monk":
-                    return new Classes.Monk
-                    {
-                        EnergyCap = 100
-                    };
+                    return System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Classes.Monk)) as Player;
                 case "Druid":
-                    return new Classes.Druid
-                    {
-                        RageCap = 100
-                    };
+                    return System.Web.Mvc.DependencyResolver.Current.GetService(typeof(Classes.Druid)) as Player;
                 default:
                     throw new InvalidOperationException("Unkown tank class");
             }

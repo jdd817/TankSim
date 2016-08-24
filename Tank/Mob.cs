@@ -8,6 +8,14 @@ namespace Tank
 {
     public class Mob:Actor
     {
+        private IRng _rng;
+
+        public Mob(IRng rng)
+            :this()
+        {
+            _rng = rng;
+        }
+
         public Mob()
         {
             Buffs = new BuffManager();
@@ -49,7 +57,7 @@ namespace Tank
                 if (W.SwingTimer <= 0)
                 {
                     W.SwingTimer += W.Speed;
-                    return new Abilities.Attack(W.Damage);
+                    return new Abilities.Attack(W.Damage(_rng));
                 }
             }
             return null;

@@ -1,4 +1,5 @@
 ﻿using FluentAssertions;
+using NSubstitute;
 using NUnit.Framework;
 using System;
 using System.Collections.Generic;
@@ -21,7 +22,7 @@ namespace TankTests
 
             cd.OffGCD.Should().BeTrue();
 
-            var ability = new Devastate();
+            var ability = new Devastate(Substitute.For<IRng>());
             var result = new AbilityResult();
 
             cd.AbilityUsed(ability, result);

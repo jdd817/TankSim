@@ -9,11 +9,14 @@ namespace Tank.Classes
 {
     public class Monk:Player
     {
-        public Monk()
+        public Monk(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
+            : base(buffManager, cooldownManager, abilityManager, rng)
         {
             V = 0.0315m;
             BaseDodge = 0.10m;
             BaseParry = 0.03m;
+
+            EnergyCap = 100;
 
             Reset();
         }
@@ -78,32 +81,32 @@ namespace Tank.Classes
             if (Cooldowns.OffGCD)
             {
                 if (Cooldowns.AbilityReady<Abilities.Monk.KegSmash>())
-                    return new Abilities.Monk.KegSmash();
+                    return AbilityManger.GetAbility<Abilities.Monk.KegSmash>();
                 if (Energy >= 65)
-                    return new Abilities.Monk.TigerPalm();
+                    return AbilityManger.GetAbility<Abilities.Monk.TigerPalm>();
                 if (Cooldowns.AbilityReady<Abilities.Monk.BlackoutStrike>())
-                    return new Abilities.Monk.BlackoutStrike();
+                    return AbilityManger.GetAbility<Abilities.Monk.BlackoutStrike>();
             }
 
             if (HealthPercentage <= 0.85m && Cooldowns.ChargesAvailable<Abilities.Monk.HealingElixer>() == 2)
-                return new Abilities.Monk.HealingElixer();
+                return AbilityManger.GetAbility<Abilities.Monk.HealingElixer>();
 
             if (CurrentHealth < MaxHealth * 0.35
                     && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() >= 2
                     && Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) == null)
-                return new Abilities.Monk.IronskinBrew();
-            
+                return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+
 
             //both ironskin and purifying brews are tracked under ironskin
             var stagger = Buffs.GetBuff(typeof(Buffs.Monk.Stagger)) as Buffs.Monk.Stagger;
-            if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.25m && Cooldowns.AbilityReady<Abilities.Monk.IronskinBrew>())
-                return new Abilities.Monk.PurifyingBrew();
+            if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.20m && Cooldowns.AbilityReady<Abilities.Monk.IronskinBrew>())
+                return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
 
-            if (stagger != null && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3 && stagger.DamageDelayed >= MaxHealth * 0.20m)
-                return new Abilities.Monk.PurifyingBrew();
+            if (stagger != null && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3 && stagger.DamageDelayed >= MaxHealth * 0.10m)
+                return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
 
             if (Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3)
-                return new Abilities.Monk.IronskinBrew();
+                return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
 
             return null;
         }
@@ -142,11 +145,9 @@ namespace Tank.Classes
                 {
                     var healingAmount = ApplyHealing((int)(healingOrbs.Stacks * AttackPower * 7.5m));
                     Buffs.ClearBuff<Buffs.Monk.HealingOrb>();
-                    DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                    DataLogging.DataLogManager.UsedAbility(DataLogging.DataLogManager.CurrentTime, "Healed", new AbilityResult
                     {
-                        Time = DataLogging.DataLogManager.CurrentTime,
-                        DamageTaken = healingAmount,
-                        Result = AttackResult.Hit
+                        SelfHealing = healingAmount
                     });
                 }
             }
@@ -181,7 +182,7 @@ namespace Tank.Classes
 
                 var healingOrbChance = (0.75m * DamageEvent.DamageTaken / MaxHealth) * (3 - 2m * CurrentHealth / MaxHealth);
 
-                if (RNG.NextDouble() <= (double)healingOrbChance)
+                if (Rng.NextDouble() <= (double)healingOrbChance)
                     Buffs.AddBuff(new Buffs.Monk.HealingOrb());
 
                 Buffs.AddBuff(new Buffs.Monk.Stagger((int)(DamageEvent.DamageTaken * staggerAmount)));
@@ -213,6 +214,7 @@ namespace Tank.Classes
                 stagger.DamageDelayed -= damageTaken;
                 DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
                 {
+                    Name = "Stagger",
                     Time = DataLogging.DataLogManager.CurrentTime,
                     DamageTaken = damageTaken,
                     Result = AttackResult.Hit
@@ -223,7 +225,7 @@ namespace Tank.Classes
         public override int ApplyHealing(int healingAmount)
         {
             var actualHealing = healingAmount;
-            if (RNG.NextDouble() < (double)CritChance)
+            if (Rng.NextDouble() < (double)CritChance)
                 actualHealing= (int)( healingAmount * 1.65m);
             
             CurrentHealth += actualHealing;

@@ -8,10 +8,14 @@ using System.Xml.Serialization;
 using System.Xml.Linq;
 using System.IO;
 
+using Ninject;
+
 namespace Tank.Console
 {
     class Program
     {
+        static IKernel kernel;
+
         static void Main(string[] args)
         {
             /*DataLogging.DataLogManager.Loggers.Add(new DataLogging.ConsoleLogger());
@@ -19,112 +23,104 @@ namespace Tank.Console
             DataLogging.DataLogManager.Loggers.Add(Summary);
             */
 
+            kernel = new Ninject.StandardKernel();
+            kernel.Load<Tank.CompositionRoot>();
 
-            Classes.DeathKnight Bart = new Classes.DeathKnight()
+            Classes.DeathKnight Bart = kernel.Get<Classes.DeathKnight>();
+            Bart.Name = "DK";
+            Bart.Armor = 2350;
+            Bart.MasteryRating = 1466;
+            Bart.CritRating = 1400;
+            Bart.HasteRating = 1418;
+            Bart.Strength = 4625;
+            Bart.Stamina = 8897;
+            Bart.RunicPowerCap = 125;
+            Bart.MaxHealth = 533280;
+            Bart.Weapons =new List<Weapon>
             {
-                Name = "DK",
-                Armor=2350,
-                MasteryRating = 1466,
-                CritRating = 1400,
-                HasteRating = 1418,
-                Strength = 4625,
-                Stamina = 8897,
-                RunicPowerCap = 125,
-                MaxHealth = 533280,
-                Weapons =
+                new Weapon()
                 {
-                    new Weapon()
-                    {
-                        LowDamage = 7720,
-                        HighDamage = 8584,
-                        Speed = 3.15m
-                    }
+                    LowDamage = 7720,
+                    HighDamage = 8584,
+                    Speed = 3.15m
                 }
             };
 
-            Classes.Warrior Dul = new Classes.Warrior()
+            Classes.Warrior Dul = kernel.Get<Classes.Warrior>();
+            Dul.Name = "War";
+            Dul.Armor = 3110;
+            Dul.MasteryRating = 1736;
+            Dul.CritRating = 1210;
+            Dul.HasteRating = 800;
+            Dul.Strength = 4691;
+            Dul.Stamina = 8243;
+            Dul.RageCap = 120;
+            Dul.MaxHealth = 494580;
+            Dul.Weapons = new List<Weapon>
             {
-                Name = "War",
-                Armor=3110,
-                MasteryRating = 1736,
-                CritRating = 1210,
-                HasteRating = 800,
-                Strength = 4691,
-                Stamina = 8243,
-                RageCap = 120,
-                MaxHealth = 494580,
-                Weapons =
+                new Weapon()
                 {
-                    new Weapon()
-                    {
-                        LowDamage = 5823,
-                        HighDamage = 6715,
-                        Speed = 2.41m
-                    }
+                    LowDamage = 5823,
+                    HighDamage = 6715,
+                    Speed = 2.41m
                 }
             };
 
-            Classes.DemonHunter Gut = new Classes.DemonHunter()
+            Classes.DemonHunter Gut = kernel.Get<Classes.DemonHunter>();
+            Gut.Name = "DHunter";
+            Gut.Armor = 2605;
+            Gut.MasteryRating = 1486;
+            Gut.CritRating = 2077;
+            Gut.HasteRating = 1951;
+            Gut.Agility = 5840;
+            Gut.Stamina = 8454;
+            Gut.PainCap = 100;
+            Gut.MaxHealth = 507240;
+            Gut.Weapons = new List<Weapon>
             {
-                Name = "DHunter",
-                Armor=2605,
-                MasteryRating = 1486,
-                CritRating = 2077,
-                HasteRating = 1951,
-                Agility = 5840,
-                Stamina = 8454,
-                PainCap = 100,
-                MaxHealth = 507240,
-                Weapons =
+                new Weapon()
                 {
-                    new Weapon()
-                    {
-                        LowDamage = 6469,
-                        HighDamage = 7377,
-                        Speed = 2.18m
-                    }
+                    LowDamage = 6469,
+                    HighDamage = 7377,
+                    Speed = 2.18m
                 }
             };
 
-            Classes.Monk Gut2 = new Classes.Monk()
+            Classes.Monk Gut2 = kernel.Get<Classes.Monk>();
+            Gut2.Name = "Monk";
+            Gut2.Armor = 1170;
+            Gut2.MasteryRating = 1689;
+            Gut2.CritRating = 1623;
+            Gut2.HasteRating = 946;
+            Gut2.Agility = 4670;
+            Gut2.Stamina = 8454;
+            Gut2.MaxHealth = 526920;
+            Gut2.Weapons =new List<Weapon>
             {
-                Name = "Monk",
-                Armor=1170,
-                MasteryRating = 1689,
-                CritRating = 1623,
-                HasteRating = 946,
-                Agility = 4670,
-                Stamina = 8454,
-                MaxHealth = 526920,
-                Weapons =
+                new Weapon()
                 {
-                    new Weapon()
-                    {
-                        LowDamage = 7413,
-                        HighDamage = 8140,
-                        Speed = 3.02m
-                    }
+                    LowDamage = 7413,
+                    HighDamage = 8140,
+                    Speed = 3.02m
                 }
             };
 
-            Classes.Druid Val = new Classes.Druid()
+            Classes.Druid Val = kernel.Get<Classes.Druid>();
+            Val.Name = "Druid";
+            Val.MaxHealth = 711166;
+            Val.Armor = 2458;
+            Val.Agility = 4619;
+            Val.MasteryRating = 2196;
+            Val.CritRating = 2024;
+            Val.HasteRating = 1627;
+            Val.VersatilityRating = 291;
+            Val.Weapons = new List<Weapon>
             {
-                Name="Druid",
-                MaxHealth = 711166,
-                Armor = 2458,
-                Agility = 4619,
-                MasteryRating = 2196,
-                CritRating = 2024,
-                HasteRating = 1627,
-                VersatilityRating = 291,
-                Weapons =
+                new Weapon()
                 {
-                    new Weapon()
-                    {
-                        LowDamage=7992,
-                        HighDamage=8883,
-                        Speed=3.1m
-                    }
+                    LowDamage=7992,
+                    HighDamage=8883,
+                    Speed=3.1m
                 }
             };
 
@@ -132,25 +128,25 @@ namespace Tank.Console
 
             var dps = 125000m;
 
-            var Mobs = new[]
-            {
-                new Mob()
-                {
-                    Name="Slow",
-                    Weapons =
+            var Mobs = new List<Mob>();
+
+            Mobs.Add(kernel.Get<Mob>());
+
+            Mobs[0].Name = "Slow";
+            Mobs[0].Weapons = new List<Weapon>
                     {
                         new Weapon()
                         {
-                            LowDamage=(int)(dps * 3.2m),
-                            HighDamage=(int)(dps * 3.2m),
-                            Speed=3.2m
+                            LowDamage = (int)(dps * 3.2m),
+                            HighDamage = (int)(dps * 3.2m),
+                            Speed = 3.2m
                         }
-                    }
-                },
-                new Mob()
-                {
-                    Name="Medium",
-                    Weapons =
+                    };
+
+            Mobs.Add(kernel.Get<Mob>());
+
+            Mobs[1].Name = "Medium";
+            Mobs[1].Weapons = new List<Weapon>
                     {
                         new Weapon()
                         {
@@ -158,13 +154,12 @@ namespace Tank.Console
                             HighDamage=(int)(dps * 1.6m),
                             Speed=1.6m
                         }
-                    }
-                },
+                    };
 
-                new Mob()
-                {
-                    Name="Fast",
-                    Weapons =
+            Mobs.Add(kernel.Get<Mob>());
+
+            Mobs[2].Name = "Fast";
+            Mobs[2].Weapons = new List<Weapon>
                     {
                         new Weapon()
                         {
@@ -172,13 +167,12 @@ namespace Tank.Console
                             HighDamage=(int)(dps * 0.8m),
                             Speed=0.8m
                         }
-                    }
-                },
+                    };
 
-                new Mob()
-                {
-                    Name="Combo",
-                    Weapons =
+            Mobs.Add(kernel.Get<Mob>());
+
+            Mobs[3].Name = "Combo";
+            Mobs[3].Weapons = new List<Weapon>
                     {
                         new Weapon()
                         {
@@ -192,9 +186,7 @@ namespace Tank.Console
                             HighDamage=(int)(dps/2m * 1.2m),
                             Speed=1.2m
                         }
-                    }
-                },
-            };
+                    };
 
             //Bart.Buffs.AddBuff(new Buffs.DeathKnight.Artifact.BloodFeast());
             //Bart.Buffs.AddBuff(new Buffs.DeathKnight.Artifact.SkeletalShattering());
@@ -215,7 +207,8 @@ namespace Tank.Console
             {
                 foreach (var mob in Mobs)
                 {
-                    RNG.Reseed(12500);
+                    var rng = kernel.Get<IRng>();
+                    rng.Reseed(12500);
                     grapher.RunName = String.Format("{0} - {1}", tank.Name, mob.Name);
                     System.Console.WriteLine("Running {0}", grapher.RunName);
                     var results = DoRun(tank, mob, grapher.RunName, healers);
@@ -255,7 +248,7 @@ namespace Tank.Console
 
         static DataLogging.SummaryLogger DoRun(Player Tank, Mob Mob, string Name, Healer[] healers)
         {
-            CombatEngine Engine = new CombatEngine();
+            var Engine = kernel.Get<ICombatEngine>();
 
             DataLogging.DataLogManager.Reset();
             var Logger = new DataLogging.StreamLogger(new StreamWriter(String.Format("c:\\tank\\{0}log.txt", Name)));

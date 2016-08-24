@@ -12,11 +12,15 @@ namespace Tank.Classes
 {
     public class DeathKnight : Player
     {
-        public DeathKnight()
+
+        public DeathKnight(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
+            : base(buffManager, cooldownManager, abilityManager, rng)
         {
             BaseDodge = 0.03m;
             BaseParry = 0.10m;
             BaseBlock = 0.00m;
+
+            RunicPowerCap = 125;
 
             Reset();
         }
@@ -93,68 +97,68 @@ namespace Tank.Classes
             {
                 var disease = MobBuffs.GetBuff(typeof(BloodPlague));
 
-                if ((disease == null || disease.TimeRemaining <= GCDLength*2) && Cooldowns.AbilityReady<Abilities.DeathKnight.BloodBoil>())
+                if ((disease == null || disease.TimeRemaining <= GCDLength * 2) && Cooldowns.AbilityReady<Abilities.DeathKnight.BloodBoil>())
                 {
-                    return new Abilities.DeathKnight.BloodBoil();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.BloodBoil>();
                 }
                 if (Buffs.GetBuff(typeof(CrimsonScourge)) != null)
                 {
-                    return new Abilities.DeathKnight.DeathAndDecay();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
                 }
 
                 var boneShield = Buffs.GetBuff(typeof(BoneShield));
 
                 if (CurrentHealth <= MaxHealth * 0.25 && RunicPower >= 45 &&
                     (boneShield != null && boneShield.TimeRemaining >= 5.0m))
-                    return new Abilities.DeathKnight.DeathStrike();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
                 if (_ignoreBoneShieldStacks)
                 {
                     if (RunesAvailable >= 3 && (boneShield == null || boneShield.Stacks <= 2))
-                        return new Abilities.DeathKnight.Marrowrend();
+                        return AbilityManger.GetAbility<Abilities.DeathKnight.Marrowrend>();
                 }
                 else if (RunesAvailable >= 2 && (boneShield == null || boneShield.Stacks <= 6 || boneShield.TimeRemaining <= 5.0m))
-                    return new Abilities.DeathKnight.Marrowrend();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.Marrowrend>();
 
                 if (CurrentHealth <= MaxHealth * 0.5 && RunicPower >= 45)
-                    return new Abilities.DeathKnight.DeathStrike();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
                 if (RunicPower >= 80)
-                    return new Abilities.DeathKnight.DeathStrike();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
                 if (RunicPower >= 45 && Abilities.DeathKnight.DeathStrike.HealingAmount(this) >= MaxHealth * 0.40m)
-                    return new Abilities.DeathKnight.DeathStrike();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
                 if (Buffs.GetStacks(typeof(Artifact.Consumption)) > 0 && Cooldowns.AbilityReady<Abilities.DeathKnight.Consumption>() && CurrentHealth <= MaxHealth * 0.80m)
                 {
-                    return new Abilities.DeathKnight.Consumption();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.Consumption>();
                 }
 
                 if (Cooldowns.AbilityReady<Abilities.DeathKnight.BloodBoil>())
                 {
-                    return new Abilities.DeathKnight.BloodBoil();
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.BloodBoil>();
                 }
 
-                if(_ignoreBoneShieldStacks)
+                if (_ignoreBoneShieldStacks)
                 {
-                    if(RunesAvailable>0)
+                    if (RunesAvailable > 0)
                     {
                         if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
-                            return new Abilities.DeathKnight.DeathAndDecay();
+                            return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
                         else
-                            return new Abilities.DeathKnight.HeartStrike();
+                            return AbilityManger.GetAbility<Abilities.DeathKnight.HeartStrike>();
                     }
                 }
                 else
-                if (RunesAvailable >= 4 || (RunesAvailable >= 1 
-                        && (boneShield != null && boneShield.Stacks >= 5 
-                            && (RunesAvailable>=3 || (RuneCounters.Where(rc=>rc<boneShield.TimeRemaining-GCDLength).Count() + RunesAvailable)>=3))))
+                if (RunesAvailable >= 4 || (RunesAvailable >= 1
+                        && (boneShield != null && boneShield.Stacks >= 5
+                            && (RunesAvailable >= 3 || (RuneCounters.Where(rc => rc < boneShield.TimeRemaining - GCDLength).Count() + RunesAvailable) >= 3))))
                 //if(RunesAvailable>=1)
                 {
                     if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
-                        return new Abilities.DeathKnight.DeathAndDecay();
+                        return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
                     else
-                        return new Abilities.DeathKnight.HeartStrike();
+                        return AbilityManger.GetAbility<Abilities.DeathKnight.HeartStrike>();
                 }
             }
 
@@ -221,10 +225,10 @@ namespace Tank.Classes
                 var boneShield = (BoneShield)Buffs.GetBuff(typeof(BoneShield));
                 if (boneShield != null && boneShield.Stacks > 0)
                 {
-                    var damageReduction = 0.80;
-                    if (Buffs.GetBuff(typeof(Artifact.SkeletalShattering)) != null && RNG.NextDouble() <= (double)CritChance)
+                    var damageReduction = 0.84;
+                    if (Buffs.GetBuff(typeof(Artifact.SkeletalShattering)) != null && Rng.NextDouble() <= (double)CritChance)
                         damageReduction -= 0.08;
-                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * 0.80);
+                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * damageReduction);
                     boneShield.Stacks--;
                 }
             }

@@ -7,7 +7,14 @@ using Tank.Buffs;
 namespace Tank.Abilities.DeathKnight
 {
     public class HeartStrike : Ability
-    {        
+    {
+        private IRng _rng;
+
+        public HeartStrike(IRng rng)
+        {
+            _rng = rng;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             var healingPercentage = 0.0m;
@@ -19,8 +26,8 @@ namespace Tank.Abilities.DeathKnight
             {
                 SecondaryResourceCost = 1,
                 ResourceCost = -18,
-                DamageDealt = (int)(Caster.Weapons[0].Damage * 2.58m * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m)),
-                SelfHealing = (int)(Caster.Weapons[0].Damage * 2.58m * healingPercentage * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m))
+                DamageDealt = (int)(Caster.Weapons[0].Damage(_rng) * 2.58m * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m)),
+                SelfHealing = (int)(Caster.Weapons[0].Damage(_rng) * 2.58m * healingPercentage * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m))
             };
         }
     }

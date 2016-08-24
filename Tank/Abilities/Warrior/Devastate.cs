@@ -5,8 +5,15 @@ using System.Text;
 
 namespace Tank.Abilities.Warrior
 {
-    class Devastate : Ability
+    public class Devastate : Ability
     {
+        private IRng _rng;
+
+        public Devastate(IRng rng)
+        {
+            _rng = rng;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
@@ -17,7 +24,7 @@ namespace Tank.Abilities.Warrior
 
         public IEnumerable<CooldownReduction> GetCooldownRedutions()
         {
-            if (RNG.NextDouble() <= 0.30)
+            if (_rng.NextDouble() <= 0.30)
                 yield return new CooldownReduction { Ability = typeof(Warrior.ShieldBlock), Amount = 0, ReductionType = ReductionType.To };
         }
     }

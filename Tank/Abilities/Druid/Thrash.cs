@@ -8,6 +8,13 @@ namespace Tank.Abilities.Druid
 {
     public class Thrash : Ability
     {
+        private IRng _rng;
+
+        public Thrash(IRng rng)
+        {
+            _rng = rng;
+        }
+
         public Thrash()
         {
             Cooldown = 6m;
@@ -18,7 +25,7 @@ namespace Tank.Abilities.Druid
             var MangleReset = new List<CooldownReduction>(); ;
             var buffs = new List<Buffs.Buff>() { new Buffs.Druid.RendAndTear() };
 
-            if (RNG.NextDouble() <= 0.15)
+            if (_rng.NextDouble() <= 0.15)
             {
                 MangleReset.Add(new CooldownReduction { Ability = typeof(Druid.Mangle), Amount = 0, ReductionType = ReductionType.To });
                 buffs.Add(new Buffs.Druid.Gore());

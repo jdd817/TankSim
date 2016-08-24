@@ -8,13 +8,9 @@ namespace Tank
 {
     public class Weapon
     {
-        [XmlIgnore]
-        public int Damage
+        public int Damage(IRng rng)
         {
-            get
-            {
-                return RNG.Next(LowDamage, HighDamage);
-            }
+            return rng.Next(LowDamage, HighDamage);
         }
 
         public int LowDamage
@@ -26,7 +22,6 @@ namespace Tank
         public decimal Speed
         { get; set; }
 
-        [XmlIgnore]
         public decimal SwingTimer
         { get; set; }
     }

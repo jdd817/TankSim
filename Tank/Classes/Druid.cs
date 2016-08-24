@@ -11,8 +11,8 @@ namespace Tank.Classes
 {
     public class Druid : Player
     {
-
-        public Druid()
+        public Druid(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
+            : base(buffManager, cooldownManager, abilityManager, rng)
         {
             BaseDodge = 0.10m;
             BaseParry = 0.00m;
@@ -100,33 +100,33 @@ namespace Tank.Classes
             if (Cooldowns.OffGCD)
             {
                 if (Buffs.GetBuff<Buffs.Druid.GalacticGuardian>() != null)
-                    return new Abilities.Druid.Moonfire();
+                    return AbilityManger.GetAbility<Abilities.Druid.Moonfire>();
                 if (Cooldowns.AbilityReady<Abilities.Druid.Mangle>())
-                    return new Abilities.Druid.Mangle();
+                    return AbilityManger.GetAbility<Abilities.Druid.Mangle>();
                 if (Cooldowns.AbilityReady<Abilities.Druid.Thrash>() && Rage >= 15)
-                    return new Abilities.Druid.Thrash();
+                    return AbilityManger.GetAbility<Abilities.Druid.Thrash>();
                 var moonfireDebuff = MobBuffs.GetBuff<Buffs.Druid.Moonfire>();
                 if (moonfireDebuff == null || moonfireDebuff.TimeRemaining <= GCDLength * 2m)
                 {
-                    return new Abilities.Druid.Moonfire();
+                    return AbilityManger.GetAbility<Abilities.Druid.Moonfire>();
                 }
                 if (Rage >= RageCap - 30)
                     return new Abilities.Druid.Maul();
-                return new Abilities.Druid.Swipe();
+                return AbilityManger.GetAbility<Abilities.Druid.Swipe>();
 
             }
 
             if (Cooldowns.AbilityReady<Abilities.Druid.BristlingFur>())
-                return new Abilities.Druid.BristlingFur();
+                return AbilityManger.GetAbility<Abilities.Druid.BristlingFur>();
 
             if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && HealthPercentage < 0.5m && Buffs.GetBuff<Buffs.Druid.FrenziedRegeneration>() == null)
-                return new Abilities.Druid.FrenziedRegeneration();
+                return AbilityManger.GetAbility<Abilities.Druid.FrenziedRegeneration>();
 
             if (Rage >= 45 && Cooldowns.AbilityReady<Abilities.Druid.Ironfur>())
-                return new Abilities.Druid.Ironfur();
+                return AbilityManger.GetAbility<Abilities.Druid.Ironfur>();
 
-            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && Abilities.Druid.FrenziedRegeneration.HealAmount+CurrentHealth<=MaxHealth)
-                return new Abilities.Druid.FrenziedRegeneration();
+            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && Abilities.Druid.FrenziedRegeneration.HealAmount + CurrentHealth <= MaxHealth)
+                return AbilityManger.GetAbility<Abilities.Druid.FrenziedRegeneration>();
 
             return null;
         }
@@ -148,10 +148,9 @@ namespace Tank.Classes
                 YserasGiftCD = 5m;
                 var healingAmount = (int)(MaxHealth * 0.03m);
                 CurrentHealth += healingAmount;
-                DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+                DataLogging.DataLogManager.UsedAbility(DataLogging.DataLogManager.CurrentTime,"Healed", new AbilityResult
                 {
-                    Time = DataLogging.DataLogManager.CurrentTime,
-                    DamageHealed = healingAmount
+                    SelfHealing = healingAmount
                 });
             }
             
@@ -179,7 +178,7 @@ namespace Tank.Classes
             if (Buffs.GetBuff<Buffs.Druid.BristlingFur>() != null)
                 Rage += (int)((100m * DamageEvent.DamageTaken) / MaxHealth);
 
-            if(RNG.NextDouble()<=0.10)
+            if(Rng.NextDouble()<=0.10)
             {
                 Buffs.AddBuff(new Buffs.Druid.GalacticGuardian());
             }

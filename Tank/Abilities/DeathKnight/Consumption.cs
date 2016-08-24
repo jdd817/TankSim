@@ -8,6 +8,13 @@ namespace Tank.Abilities.DeathKnight
 {
     public class Consumption:Ability
     {
+        private IRng _rng;
+
+        public Consumption(IRng rng)
+        {
+            _rng = rng;
+        }
+
         public Consumption()
         {
             Cooldown = 45m;
@@ -19,7 +26,7 @@ namespace Tank.Abilities.DeathKnight
             {
                 ResourceCost = 0,
                 DamageDealt = 0,
-                SelfHealing = (int)(Caster.Weapons[0].Damage*2.5m)
+                SelfHealing = (int)(Caster.Weapons[0].Damage(_rng)*2.5m)
             };
         }
     }

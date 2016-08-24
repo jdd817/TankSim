@@ -7,6 +7,9 @@ namespace Tank.DataLogging
 {
     public class DamageEvent
     {
+        public string Name
+        { get; set; }
+
         public decimal Time
         { get; set; }
 

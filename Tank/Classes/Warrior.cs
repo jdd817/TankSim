@@ -11,11 +11,14 @@ namespace Tank.Classes
 {
     public class Warrior : Player
     {
-        public Warrior()
+        public Warrior(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
+            : base(buffManager, cooldownManager, abilityManager, rng)
         {
             BaseDodge = 0.03m;
             BaseParry = 0.10m;
             BaseBlock = 0.30m;
+
+            RageCap = 120;
 
             Reset();
         }
@@ -97,22 +100,17 @@ namespace Tank.Classes
             if (Cooldowns.OffGCD)
             {
                 if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldSlam>())
-                    return new Abilities.Warrior.ShieldSlam();
+                    return AbilityManger.GetAbility<Abilities.Warrior.ShieldSlam>();
                 if (Cooldowns.AbilityReady<Abilities.Warrior.Revenge>())
-                    return new Abilities.Warrior.Revenge();
-                return new Abilities.Warrior.Devastate();
+                    return AbilityManger.GetAbility<Abilities.Warrior.Revenge>();
+                return AbilityManger.GetAbility<Abilities.Warrior.Devastate>();
             }
 
             if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldBlock>() && Rage >= 10 && Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) == null)
-                return new Abilities.Warrior.ShieldBlock();
+                return AbilityManger.GetAbility<Abilities.Warrior.ShieldBlock>();
 
             if (Rage >= 60 && Buffs.GetBuff(typeof(IgnorePain)) == null)
-            {
-                return new Abilities.Warrior.IgnorePain()
-                {
-                    DamageAbsorbed = (int)(28.0m * AttackPower * (1.75m - 0.75m * CurrentHealth / MaxHealth))
-                };
-            }
+                return AbilityManger.GetAbility<Abilities.Warrior.IgnorePain>();
 
             return null;
         }
@@ -162,7 +160,7 @@ namespace Tank.Classes
 
             if (Result == AttackResult.Block)
             {
-                if (RNG.NextDouble() < (double)CritBlockChance)
+                if (Rng.NextDouble() < (double)CritBlockChance)
                     DamageEvent.DamageTaken = (int)(MobAttack.Damage * 0.40);
                 else
                     DamageEvent.DamageTaken = (int)(MobAttack.Damage * 0.70);
