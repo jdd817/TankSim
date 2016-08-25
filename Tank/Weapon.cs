@@ -8,11 +8,6 @@ namespace Tank
 {
     public class Weapon
     {
-        public Weapon()
-        {
-            TwoHander = false;
-        }
-
         public int Damage
         {
             get

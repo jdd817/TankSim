@@ -97,6 +97,11 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Artifacts\DeathKnight.cs" />
     <Compile Include="Artifacts\IArtifact.cs" />
+    <Compile Include="CombatEngine\IAbilityHandler.cs" />
+    <Compile Include="CombatEngine\IAttackHandler.cs" />
+    <Compile Include="CombatEngine\MobAttackHandler.cs" />
+    <Compile Include="CombatEngine\PlayerAbilityHandler.cs" />
+    <Compile Include="CombatEngine\PlayerAttackHandler.cs" />
     <Compile Include="IAbilityManager.cs" />
     <Compile Include="ICombatEngine.cs" />
     <Compile Include="Managers\AbilityManager.cs" />
@@ -143,7 +148,7 @@
     <Compile Include="Classes\DemonHunter.cs" />
     <Compile Include="Classes\Druid.cs" />
     <Compile Include="Classes\Monk.cs" />
-    <Compile Include="CombatEngine.cs" />
+    <Compile Include="CombatEngine\CombatEngine.cs" />
     <Compile Include="CombatTable.cs" />
     <Compile Include="CompositionRoot.cs" />
     <Compile Include="Managers\CooldownManager.cs" />

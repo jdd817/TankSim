@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.CombatEngine;
 
 namespace Tank
 {
@@ -31,6 +32,9 @@ namespace Tank
             }
 
             Kernel.Rebind<IRng>().To<RNG>().InThreadScope();
+
+            Kernel.Rebind<IAttackHandler>().To<PlayerAttackHandler>().When(req => req.Target.Name.ToLower().Contains("player"));
+            Kernel.Bind<IAttackHandler>().To<MobAttackHandler>().When(req => req.Target.Name.ToLower().Contains("mob"));
         }
     }
 }
