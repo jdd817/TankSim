@@ -18,6 +18,8 @@ namespace Tank.Classes
 
             EnergyCap = 100;
 
+            UsesTwoHanders = true;
+
             Reset();
         }
 

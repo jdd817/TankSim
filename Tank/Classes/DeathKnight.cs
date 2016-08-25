@@ -22,6 +22,8 @@ namespace Tank.Classes
 
             RunicPowerCap = 125;
 
+            UsesTwoHanders = true;
+
             Reset();
         }
 

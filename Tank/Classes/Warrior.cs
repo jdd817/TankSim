@@ -20,6 +20,8 @@ namespace Tank.Classes
 
             RageCap = 120;
 
+            UsesTwoHanders = false;
+
             Reset();
         }
 

@@ -183,13 +183,16 @@ namespace Tank
         public decimal ArmorDamageReduction
         { get { return RatingConverter.GetRating(StatType.Armor, (int)((Armor + Buffs.GetRatingAdjustment(StatType.Armor)) * (1 + Buffs.GetPercentageAdjustment(StatType.Armor)))); } }
 
+
+        protected bool UsesTwoHanders { get; set; }
+
         public decimal WeaponDamage
         {
             get
             {
                 if (Weapons.Count == 0)
                     return 0;
-                if (Weapons[0].TwoHander)
+                if (UsesTwoHanders)
                     return Weapons[0].Damage + (3.3m * AttackPower / 14m);
                 else
                     return Weapons[0].Damage + (2.4m * AttackPower / 14m);

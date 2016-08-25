@@ -32,7 +32,5 @@ namespace Tank
 
         public decimal SwingTimer
         { get; set; }
-
-        public bool TwoHander { get; set; }
     }
 }

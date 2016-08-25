@@ -33,6 +33,8 @@ namespace Tank.Classes
 
             PainCap = 100;
 
+            UsesTwoHanders = false;
+
             Reset();
         }
 

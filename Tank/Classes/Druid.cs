@@ -18,6 +18,8 @@ namespace Tank.Classes
             BaseParry = 0.00m;
             BaseBlock = 0.00m;
 
+            UsesTwoHanders = false;
+
             RageCap = 100;
             Reset();
         }
