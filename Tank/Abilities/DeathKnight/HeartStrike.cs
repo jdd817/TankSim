@@ -17,6 +17,7 @@ namespace Tank.Abilities.DeathKnight
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
+            var player = Caster as Player;
             var healingPercentage = 0.0m;
             var bloodFeast = Caster.Buffs.GetBuff(typeof(Buffs.DeathKnight.Artifact.BloodFeast));
             if (bloodFeast != null)
@@ -26,8 +27,8 @@ namespace Tank.Abilities.DeathKnight
             {
                 SecondaryResourceCost = 1,
                 ResourceCost = -18,
-                DamageDealt = (int)(Caster.Weapons[0].Damage * 2.58m * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m)),
-                SelfHealing = (int)(Caster.Weapons[0].Damage * 2.58m * healingPercentage * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m))
+                DamageDealt = (int)(player.WeaponDamage * 2.58m * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m)),
+                SelfHealing = (int)(player.WeaponDamage * 2.58m * healingPercentage * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m))
             };
         }
     }

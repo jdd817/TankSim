@@ -8,6 +8,11 @@ namespace Tank
 {
     public class Weapon
     {
+        public Weapon()
+        {
+            TwoHander = false;
+        }
+
         public int Damage
         {
             get
@@ -27,5 +32,7 @@ namespace Tank
 
         public decimal SwingTimer
         { get; set; }
+
+        public bool TwoHander { get; set; }
     }
 }
