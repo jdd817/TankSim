@@ -302,7 +302,7 @@ namespace Tank
                 if (W.SwingTimer <= 0)
                 {
                     W.SwingTimer += W.Speed;
-                    return new Abilities.Attack(W.Damage(Rng));
+                    return new Abilities.Attack(W.Damage);
                 }
             }
             return null;

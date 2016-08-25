@@ -26,7 +26,7 @@ namespace Tank.Abilities.DeathKnight
             {
                 ResourceCost = 0,
                 DamageDealt = 0,
-                SelfHealing = (int)(Caster.Weapons[0].Damage(_rng)*2.5m)
+                SelfHealing = (int)(Caster.Weapons[0].Damage*2.5m)
             };
         }
     }

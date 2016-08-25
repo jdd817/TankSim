@@ -8,9 +8,12 @@ namespace Tank
 {
     public class Weapon
     {
-        public int Damage(IRng rng)
+        public int Damage
         {
-            return rng.Next(LowDamage, HighDamage);
+            get
+            {
+                return (LowDamage + HighDamage) / 2;
+            }
         }
 
         public int LowDamage
