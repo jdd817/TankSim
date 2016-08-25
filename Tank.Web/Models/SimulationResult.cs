@@ -15,6 +15,7 @@ namespace Tank.Web.Models
         public string label { get; set; }
         public decimal[][] data { get; set; }
         public SimulationSummary Summary { get; set; }
+        public string Log { get; set; }
     }
 
     public class SimulationSummary

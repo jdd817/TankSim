@@ -94,10 +94,30 @@ namespace Tank
             AttackResult Result = _combatTable.GetAttackResult(Mob, Tank,
                 modifiers);
 
-            if (Tank.Armor > 0)
-                MobAttack.Damage = (int)(MobAttack.Damage * (1m - Tank.ArmorDamageReduction));
+            var damageEvent = new DataLogging.DamageEvent()
+            {
+                Time = Time,
+                Result = Result,
+                DamageTaken = MobAttack.Damage,
+                RawDamage = MobAttack.Damage
+            };
 
-            Tank.UpdateFromMobAttack(Time, MobAttack, Result);
+            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
+            {
+                damageEvent.DamageTaken = 0;
+                damageEvent.RawDamage = 0;
+            }
+            else
+            {
+                if (Tank.Armor > 0)
+                    damageEvent.DamageTaken = (int)(damageEvent.DamageTaken * (1m - Tank.ArmorDamageReduction));
+
+                damageEvent.DamageTaken = (int)(damageEvent.DamageTaken * (1m - Tank.VersatilityDamageReduction) * (1m - Tank.Buffs.GetPercentageAdjustment(StatType.DamageReduction)));
+            }
+
+            damageEvent = Tank.UpdateFromMobAttack(damageEvent);
+            Tank.CurrentHealth -= damageEvent.DamageTaken;
+            DataLogging.DataLogManager.LogEvent(damageEvent);
         }
 
         private void ProcessPlayerAttack(Player Tank, Mob Mob, decimal Time, Attack PlayerAttack)

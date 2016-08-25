@@ -153,23 +153,11 @@ namespace Tank.Classes
             }
         }
 
-        public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
+        public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
         {
-            DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()
-            {
-                Time = CurrentTime,
-                Result = Result,
-                DamageTaken = MobAttack.Damage
-            };
-
-            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
-                DamageEvent.DamageTaken = 0;
-
-            if (Result == AttackResult.Dodge && Buffs.GetBuff(typeof(Buffs.Monk.ElusiveBrawler)) != null)
+            if (DamageEvent.Result == AttackResult.Dodge && Buffs.GetBuff(typeof(Buffs.Monk.ElusiveBrawler)) != null)
                 Buffs.ClearBuff(typeof(Buffs.Monk.ElusiveBrawler));
             
-            DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * (1m - VersatilityDamageReduction) * (1m - Buffs.GetPercentageAdjustment(StatType.DamageReduction)));
-
             if (DamageEvent.DamageTaken > 0)
             {
                 Buffs.AddBuff(new Buffs.Monk.ElusiveBrawler(Mastery));
@@ -178,14 +166,15 @@ namespace Tank.Classes
                 if (Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) != null)
                     staggerAmount += 0.40m;
 
-                CurrentHealth -= (int)(DamageEvent.DamageTaken * (1 - staggerAmount));
-
+                var damageStaggered = (int)(DamageEvent.DamageTaken * staggerAmount);
                 var healingOrbChance = (0.75m * DamageEvent.DamageTaken / MaxHealth) * (3 - 2m * CurrentHealth / MaxHealth);
 
+                DamageEvent.DamageTaken = DamageEvent.DamageTaken - damageStaggered;
+                
                 if (Rng.NextDouble() <= (double)healingOrbChance)
                     Buffs.AddBuff(new Buffs.Monk.HealingOrb());
 
-                Buffs.AddBuff(new Buffs.Monk.Stagger((int)(DamageEvent.DamageTaken * staggerAmount)));
+                Buffs.AddBuff(new Buffs.Monk.Stagger(damageStaggered));
 
                 if (CurrentHealth + DamageEvent.DamageTaken > MaxHealth * 0.35m && CurrentHealth < MaxHealth * 0.35m && Cooldowns.ChargesAvailable<Abilities.Monk.HealingElixer>() > 0)
                 {
@@ -197,7 +186,7 @@ namespace Tank.Classes
                 }
             }
 
-            DataLogging.DataLogManager.LogEvent(DamageEvent);
+            return DamageEvent;
         }
 
         public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)

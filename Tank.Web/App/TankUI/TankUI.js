@@ -1,6 +1,6 @@
 ﻿angular.module("Tank.Web")
-    .directive("tankUi", [ "simulationApi", "storage",
-        function (simulationApi, storage) {
+    .directive("tankUi", [ "simulationApi", "storage", "modals",
+        function (simulationApi, storage, modals) {
             return {
                 restrict: 'E',
                 templateUrl: $.url('app/TankUI/TankUI.html'),
@@ -58,6 +58,10 @@
                         storage.set(paramStorage, $scope.parameters);
                         simulationApi.runSimulation($scope.parameters)
                             .then(displayResults)
+                    };
+
+                    $scope.showLog = function (log) {
+                        modals.logView(log);
                     };
 
                     function displayResults(results) {

@@ -45,7 +45,7 @@
         <div>
             <div>Hover for description</div>
             <div class=" resultSummary" ng-repeat="result in rawResults">
-                <div>{{result.label}}</div>
+                <div ng-dblclick="showLog(result.Log)">{{result.label}}</div>
                 <result-summary summary="result.Summary"></result-summary>
             </div>
         </div>

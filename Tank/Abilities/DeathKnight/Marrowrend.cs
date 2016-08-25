@@ -23,7 +23,11 @@ namespace Tank.Abilities.DeathKnight
                 boneCharges++;
             return new AbilityResult
             {
-                CasterBuffsApplied = new[] { new Buffs.DeathKnight.BoneShield() { Stacks = boneCharges } },
+                CasterBuffsApplied = new[]
+                {
+                    new Buffs.DeathKnight.BoneShield(Caster.Buffs.GetBuff<Buffs.DeathKnight.Artifact.SkeletalShattering>()!=null,Caster.CritChance,_rng)
+                    { Stacks = boneCharges }
+                },
                 SecondaryResourceCost = 2,
                 ResourceCost = -20
             };

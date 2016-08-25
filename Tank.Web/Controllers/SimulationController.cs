@@ -50,7 +50,7 @@ namespace Tank.Web.Controllers
                 for (var i = min; i < max; i += 0.1m)
                     dataPoints.Add(new[] { i, plot.data.Where(d => d[0] >= i - 2.5m && d[0] <= i + 2.5m).Select(d => d[1]).Average() });
 
-                newResults.Add(new Plot { label = plot.label, data = dataPoints.ToArray(), Summary = plot.Summary });
+                newResults.Add(new Plot { label = plot.label, data = dataPoints.ToArray(), Summary = plot.Summary, Log = plot.Log });
             }
 
             return new SimulationResult { Results = newResults };
@@ -89,7 +89,8 @@ namespace Tank.Web.Controllers
                               DamageTaken = (int)r.Select(p => p.Summary.DamageTaken).Average(),
                               DamageHealed = (int)r.Select(p => p.Summary.DamageHealed).Average(),
                               AverageHealthOverall = (int)r.Select(p => p.Summary.AverageHealthOverall).Average()
-                          }
+                          },
+                          Log = r.Select(res => res.Log).Aggregate((a, b) => a + "\r\n\r\n" + b)
                       }).ToList()
             };
         }
@@ -99,6 +100,7 @@ namespace Tank.Web.Controllers
             var grapher = new DataLogging.GraphLogger();
             DataLogging.DataLogManager.Loggers.Add(grapher);
             var summaries = new Dictionary<string, SimulationSummary>();
+            var logs = new Dictionary<string, string>();
 
             foreach (var tank in tanks)
             {
@@ -108,8 +110,10 @@ namespace Tank.Web.Controllers
                     var runName= String.Format("{0} - {1}", tank.Name, mob.Name);
                     grapher.RunName = runName;
 
+                    var log = new System.Text.StringBuilder();
+                    
                     var summaryLogger = new DataLogging.SummaryLogger();
-                    var streamLogger = new DataLogging.StreamLogger(new System.IO.StreamWriter(System.Web.HttpRuntime.AppDomainAppPath + "/" + runName + ".txt", true));
+                    var streamLogger = new DataLogging.StreamLogger(new System.IO.StringWriter(log));
                     DataLogging.DataLogManager.Loggers.Add(summaryLogger);
                     DataLogging.DataLogManager.Loggers.Add(streamLogger);
                     
@@ -118,7 +122,11 @@ namespace Tank.Web.Controllers
 
                     DataLogging.DataLogManager.Loggers.Remove(summaryLogger);
                     DataLogging.DataLogManager.Loggers.Remove(streamLogger);
+
+                    logs.Add(runName, log.ToString());
+
                     streamLogger.Dispose();
+
                     summaries.Add(runName, new SimulationSummary
                     {
                         DamageTaken = summaryLogger.DamageTaken,
@@ -150,7 +158,8 @@ namespace Tank.Web.Controllers
                   {
                       label = p.Key,
                       data = p.Value.ToArray(),
-                      Summary = summaries[p.Key]
+                      Summary = summaries[p.Key],
+                      Log = logs[p.Key]
                   }).ToList()
             };
         }

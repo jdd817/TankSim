@@ -5,6 +5,7 @@ using System.Text;
 
 using System.Xml.Serialization;
 using Tank.Abilities;
+using Tank.DataLogging;
 
 namespace Tank
 {
@@ -269,7 +270,7 @@ namespace Tank
         /// </summary>
         /// <param name="MobAttack"></param>
         /// <param name="Result"></param>
-        public abstract void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result);
+        public abstract DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent);
 
         public virtual void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
 

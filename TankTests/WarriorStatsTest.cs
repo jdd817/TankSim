@@ -10,24 +10,20 @@ using Tank.Classes;
 namespace TankTests
 {
     [TestFixture]
-    public class WarriorStatsTest
+    public class WarriorStatsTest:TestBase<Warrior>
     {
-        private Warrior player;
-
         public WarriorStatsTest()
         {
-            player = new Warrior()
-            {
-                Name = "Warrior",
-                MasteryRating = 1736,
-                CritRating = 1210,
-                HasteRating = 800,
-                VersatilityRating = 1421,
-                Leech= 2,
-                Strength = 4681,
-                Stamina = 8243,
-                MaxHealth = 494580,
-                Weapons =
+            Service.Name = "Warrior";
+            Service.MasteryRating = 1736;
+            Service.CritRating = 1210;
+            Service.HasteRating = 800;
+            Service.VersatilityRating = 1421;
+            Service.Leech = 2;
+            Service.Strength = 4681;
+            Service.Stamina = 8243;
+            Service.MaxHealth = 494580;
+            Service.Weapons = new List<Weapon>
                 {
                     new Weapon()
                     {
@@ -35,74 +31,73 @@ namespace TankTests
                         HighDamage = 6715,
                         Speed = 2.41m
                     }
-                }
-            };
+                };
         }
 
         [Test]
         public void MasteryCorrect()
         {
-            player.Mastery.Should().BeApproximately(0.3567m, 0.0001m);
+            Service.Mastery.Should().BeApproximately(0.3567m, 0.0001m);
         }
 
         [Test]
         public void CritCorrect()
         {
-            player.CritChance.Should().BeApproximately(0.1600m, 0.0001m);
+            Service.CritChance.Should().BeApproximately(0.1600m, 0.0001m);
         }
 
         [Test]
         public void HasteCorrect()
         {
-            player.Haste.Should().BeApproximately(0.0800m, 0.0001m);
+            Service.Haste.Should().BeApproximately(0.0800m, 0.0001m);
         }
 
         [Test]
         public void AttackPowerCorrect()
         {
-            player.AttackPower.Should().Be(4681);
+            Service.AttackPower.Should().Be(4681);
         }
 
         [Test]
         public void VersatilityDamageIncreaseCorrect()
         {
-            player.VersatilityDamageIncrease.Should().BeApproximately(0.1093m, 0.0001m);
+            Service.VersatilityDamageIncrease.Should().BeApproximately(0.1093m, 0.0001m);
         }
 
         [Test]
         public void VersatilityDamageReductionCorrect()
         {
-            player.VersatilityDamageReduction.Should().BeApproximately(0.0547m, 0.0001m);
+            Service.VersatilityDamageReduction.Should().BeApproximately(0.0547m, 0.0001m);
         }
 
         [Test]
         public void LeechCorrect()
         {
-            player.LeechPercentage.Should().BeApproximately(0.0251m,0.0001m);
+            Service.LeechPercentage.Should().BeApproximately(0.0251m,0.0001m);
         }
 
         [Test]
         public void DodgeCorrect()
         {
-            player.DodgeChance.Should().BeApproximately(0.0300m, 0.0001m);
+            Service.DodgeChance.Should().BeApproximately(0.0300m, 0.0001m);
         }
 
         [Test]
         public void ParryCorrect()
         {
-            player.ParryChance.Should().BeApproximately(0.1623m, 0.0001m);
+            Service.ParryChance.Should().BeApproximately(0.1623m, 0.0001m);
         }
 
         [Test]
         public void BlockCorrect()
         {
-            player.BlockChance.Should().BeApproximately(0.2731m, 0.0001m);
+            Service.BlockChance.Should().BeApproximately(0.2731m, 0.0001m);
         }
 
         [Test]
         public void CritBlockCorrect()
         {
-            player.CritBlockChance.Should().BeApproximately(0.3567m, 0.0001m);
+            Service.CritBlockChance.Should().BeApproximately(0.3567m, 0.0001m);
         }
     }
 }

@@ -133,38 +133,28 @@ namespace Tank.Classes
             RevengeResetICD = Math.Max(0, RevengeResetICD - DeltaTime);
         }
 
-        public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
+        public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
         {
-            DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()
-            {
-                Time = CurrentTime,
-                Result = Result,
-                DamageTaken = MobAttack.Damage
-            };
-
-            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
+            if (DamageEvent.Result == AttackResult.Dodge || DamageEvent.Result == AttackResult.Parry)
             {
                 if (RevengeResetICD <= 0 && !Cooldowns.AbilityReady<Abilities.Warrior.Revenge>())
                 {
                     Cooldowns.ReduceTimers(new CooldownReduction { Ability = typeof(Abilities.Warrior.Revenge), Amount = 0, ReductionType = ReductionType.By });
                     RevengeResetICD = 3.0m;
                 }
-                DamageEvent.DamageTaken = 0;
             }
-
-            DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * (1m - VersatilityDamageReduction));
 
             //get rage
             //from blue: 50 * DamageTaken / MaxHealth
-            Rage += (int)((50m * DamageEvent.DamageTaken) / MaxHealth);
+            Rage += (int)((50m * DamageEvent.RawDamage) / MaxHealth);
 
-            if (Result == AttackResult.Block)
+            if (DamageEvent.Result == AttackResult.Block)
             {
                 if (Rng.NextDouble() < (double)CritBlockChance)
-                    DamageEvent.DamageTaken = (int)(MobAttack.Damage * 0.40);
+                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * 0.40);
                 else
-                    DamageEvent.DamageTaken = (int)(MobAttack.Damage * 0.70);
-                DamageEvent.DamageBlocked = MobAttack.Damage - DamageEvent.DamageTaken;
+                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * 0.70);
+                DamageEvent.DamageBlocked = DamageEvent.DamageTaken - DamageEvent.DamageTaken;
             }
 
             IgnorePain Barrier = (IgnorePain)Buffs.GetBuff(typeof(IgnorePain));
@@ -177,9 +167,7 @@ namespace Tank.Classes
                 Barrier.DamageRemaining -= BarrierHit;
             }
 
-            CurrentHealth -= DamageEvent.DamageTaken;
-
-            DataLogging.DataLogManager.LogEvent(DamageEvent);
+            return DamageEvent;
         }
     }
 }

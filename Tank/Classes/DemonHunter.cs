@@ -5,6 +5,7 @@ using System.Text;
 using System.Xml.Serialization;
 using Tank.Abilities;
 using Tank.Buffs;
+using Tank.DataLogging;
 
 namespace Tank.Classes
 {
@@ -142,27 +143,13 @@ namespace Tank.Classes
             ApplyHealing(Result.SelfHealing);
         }
 
-        public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
+        public override DamageEvent UpdateFromMobAttack(DamageEvent DamageEvent)
         {
-            DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()
-            {
-                Time = CurrentTime,
-                Result = Result,
-                DamageTaken = MobAttack.Damage
-            };
-
-            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
-                DamageEvent.DamageTaken = 0;
-            
             //get pain
             //absent finding a blue post regarding this, using the same formula as warrior rage
-            Pain += (int)((50m * DamageEvent.DamageTaken) / MaxHealth);
+            Pain += (int)((50m * DamageEvent.RawDamage) / MaxHealth);
 
-            DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * (1m - VersatilityDamageReduction) * (1m - Buffs.GetPercentageAdjustment(StatType.DamageReduction)));
-
-            CurrentHealth -= DamageEvent.DamageTaken;
-
-            DataLogging.DataLogManager.LogEvent(DamageEvent);
+            return DamageEvent;
         }
 
         public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)

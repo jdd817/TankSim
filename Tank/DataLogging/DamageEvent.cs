@@ -16,6 +16,9 @@ namespace Tank.DataLogging
         public AttackResult Result
         { get; set; }
 
+        public int RawDamage
+        { get; set; }
+
         public int DamageTaken
         { get; set; }
 

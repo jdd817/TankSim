@@ -35,6 +35,7 @@ namespace Tank.Classes
             RunesAvailable = 6;
 
             RuneCounters = new List<decimal>();
+            HitsLast5Secs = new List<decimal>();
             
             CurrentHealth = MaxHealth;
 
@@ -70,6 +71,7 @@ namespace Tank.Classes
         #region class-specific counters
 
         private List<decimal> RuneCounters;
+        private List<decimal> HitsLast5Secs;
 
         #endregion
 
@@ -112,12 +114,7 @@ namespace Tank.Classes
                     (boneShield != null && boneShield.TimeRemaining >= 5.0m))
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
-                if (_ignoreBoneShieldStacks)
-                {
-                    if (RunesAvailable >= 3 && (boneShield == null || boneShield.Stacks <= 2))
-                        return AbilityManger.GetAbility<Abilities.DeathKnight.Marrowrend>();
-                }
-                else if (RunesAvailable >= 2 && (boneShield == null || boneShield.Stacks <= 6 || boneShield.TimeRemaining <= 5.0m))
+                if (HitsLast5Secs.Count <= 5 && RunesAvailable >= 2 && (boneShield == null || boneShield.Stacks <= 6 || boneShield.TimeRemaining <= 5.0m))
                     return AbilityManger.GetAbility<Abilities.DeathKnight.Marrowrend>();
 
                 if (CurrentHealth <= MaxHealth * 0.5 && RunicPower >= 45)
@@ -139,7 +136,7 @@ namespace Tank.Classes
                     return AbilityManger.GetAbility<Abilities.DeathKnight.BloodBoil>();
                 }
 
-                if (_ignoreBoneShieldStacks)
+                if (HitsLast5Secs.Count > 5)
                 {
                     if (RunesAvailable > 0)
                     {
@@ -149,11 +146,9 @@ namespace Tank.Classes
                             return AbilityManger.GetAbility<Abilities.DeathKnight.HeartStrike>();
                     }
                 }
-                else
-                if (RunesAvailable >= 4 || (RunesAvailable >= 1
+                else if (RunesAvailable >= 4 || (RunesAvailable >= 1
                         && (boneShield != null && boneShield.Stacks >= 5
                             && (RunesAvailable >= 3 || (RuneCounters.Where(rc => rc < boneShield.TimeRemaining - GCDLength).Count() + RunesAvailable) >= 3))))
-                //if(RunesAvailable>=1)
                 {
                     if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
                         return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
@@ -199,40 +194,23 @@ namespace Tank.Classes
         private decimal _lastMobHit = -10;
         private bool _ignoreBoneShieldStacks = false;
 
-        public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
+        public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
         {
-            DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()
-            {
-                Time = CurrentTime,
-                Result = Result,
-                DamageTaken = MobAttack.Damage
-            };
+            HitsLast5Secs.Add(DamageEvent.Time);
+            HitsLast5Secs = HitsLast5Secs.Where(t => t >= DamageEvent.Time - 5).ToList();
 
-            //if (CurrentTime - _lastMobHit <= 1m)
-            //    _ignoreBoneShieldStacks = true;
-
-            _lastMobHit = CurrentTime;
-
-            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
-            {
-                DamageEvent.DamageTaken = 0;
-            }
-
-            DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * (1m - VersatilityDamageReduction));
-
+            _lastMobHit = DamageEvent.Time;
+            
             if (DamageEvent.DamageTaken > 0)
             {
                 var boneShield = (BoneShield)Buffs.GetBuff(typeof(BoneShield));
                 if (boneShield != null && boneShield.Stacks > 0)
                 {
-                    var damageReduction = 0.84;
-                    if (Buffs.GetBuff(typeof(Artifact.SkeletalShattering)) != null && Rng.NextDouble() <= (double)CritChance)
-                        damageReduction -= 0.08;
-                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * damageReduction);
                     boneShield.Stacks--;
                 }
             }
 
+            //need to move absorbs to the combat engine as well
             BloodShield Shield = (BloodShield)Buffs.GetBuff(typeof(BloodShield));
             if (Shield != null)
             {
@@ -242,9 +220,7 @@ namespace Tank.Classes
                 Shield.DamageRemaining -= Absorbed;
             }
 
-            CurrentHealth -= DamageEvent.DamageTaken;
-
-            DataLogging.DataLogManager.LogEvent(DamageEvent);
+            return DamageEvent;
         }
     }
 }

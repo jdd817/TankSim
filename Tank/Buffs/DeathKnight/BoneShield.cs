@@ -7,9 +7,17 @@ namespace Tank.Buffs.DeathKnight
 {
     public class BoneShield:Buff
     {
-        public BoneShield()
+        //need to fix this shit
+        private IRng _rng;
+        private bool _hasSkeletalShattering;
+        private decimal _critChance;
+
+        public BoneShield(bool hasSkeletalShattering, decimal critChance, IRng rng)
         {
             TimeRemaining = Durration;
+            rng = _rng;
+            _hasSkeletalShattering = hasSkeletalShattering;
+            _critChance = critChance;
         }
 
         public override decimal Durration { get { return 30.0m; } }
@@ -29,7 +37,15 @@ namespace Tank.Buffs.DeathKnight
             if (Stat == StatType.Haste)
                 return 0.10m;
             if (Stat == StatType.Stamina)
-                return 0.016m * Stacks;
+                return 0.02m * Stacks;
+            if (Stat == StatType.DamageReduction)
+            {
+                if (_hasSkeletalShattering && _rng.NextDouble() <= (double)_critChance)
+                    return 0.24m;
+                else
+                    return 0.16m;
+                
+            }
             return 0;
         }
     }

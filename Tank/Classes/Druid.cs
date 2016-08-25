@@ -157,35 +157,19 @@ namespace Tank.Classes
             YserasGiftCD = Math.Max(0, YserasGiftCD - DeltaTime);
         }
 
-        public override void UpdateFromMobAttack(decimal CurrentTime, Abilities.Attack MobAttack, AttackResult Result)
+        public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
         {
-            DataLogging.DamageEvent DamageEvent = new DataLogging.DamageEvent()
-            {
-                Time = CurrentTime,
-                Result = Result,
-                DamageTaken = MobAttack.Damage
-            };
-
-            if (Result == AttackResult.Dodge || Result == AttackResult.Parry)
-            {
-                DamageEvent.DamageTaken = 0;
-            }
-
-            DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * (1m - VersatilityDamageReduction));
-
             //get rage
             //from blue: 50 * DamageTaken / MaxHealth
             if (Buffs.GetBuff<Buffs.Druid.BristlingFur>() != null)
-                Rage += (int)((100m * DamageEvent.DamageTaken) / MaxHealth);
+                Rage += (int)((100m * DamageEvent.RawDamage) / MaxHealth);
 
             if(Rng.NextDouble()<=0.10)
             {
                 Buffs.AddBuff(new Buffs.Druid.GalacticGuardian());
             }
 
-            CurrentHealth -= DamageEvent.DamageTaken;
-
-            DataLogging.DataLogManager.LogEvent(DamageEvent);
+            return DamageEvent;
         }
 
         public override int ApplyHealing(int healingAmount)

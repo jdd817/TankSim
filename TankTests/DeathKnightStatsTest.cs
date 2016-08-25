@@ -10,25 +10,23 @@ using Tank.Classes;
 namespace TankTests
 {
     [TestFixture]
-    public class DeathKnightStatsTest
+    public class DeathKnightStatsTest:TestBase<DeathKnight>
     {
         private DeathKnight DK;
 
         public DeathKnightStatsTest()
         {
-            DK = new DeathKnight()
-            {
-                Name = "DK",
-                MasteryRating = 979,
-                CritRating = 1961,
-                HasteRating = 1384,
-                VersatilityRating = 841,
-                Leech = 0,
-                Strength = 4917,
-                Stamina = 9588,
-                RunicPowerCap = 125,
-                MaxHealth = 575280,
-                Weapons =
+            Service.Name = "DK";
+            Service.MasteryRating = 979;
+            Service.CritRating = 1961;
+            Service.HasteRating = 1384;
+            Service.VersatilityRating = 841;
+            Service.Leech = 0;
+            Service.Strength = 4917;
+            Service.Stamina = 9588;
+            Service.RunicPowerCap = 125;
+            Service.MaxHealth = 575280;
+            Service.Weapons = new List<Weapon>
                 {
                     new Weapon()
                     {
@@ -36,62 +34,61 @@ namespace TankTests
                         HighDamage = 9489,
                         Speed = 3.16m
                     }
-                }
-            };
+                };
         }
 
         [Test]
         public void MasteryCorrect()
         {
-            DK.Mastery.Should().BeApproximately(0.2535m, 0.0001m);
+            Service.Mastery.Should().BeApproximately(0.2535m, 0.0001m);
         }
 
         [Test]
         public void CritCorrect()
         {
-            DK.CritChance.Should().BeApproximately(0.2283m, 0.0001m);
+            Service.CritChance.Should().BeApproximately(0.2283m, 0.0001m);
         }
 
         [Test]
         public void HasteCorrect()
         {
-            DK.Haste.Should().BeApproximately(0.1384m, 0.0001m);
+            Service.Haste.Should().BeApproximately(0.1384m, 0.0001m);
         }
 
         [Test]
         public void AttackPowerCorrect()
         {
-            DK.AttackPower.Should().Be(4917);
+            Service.AttackPower.Should().Be(4917);
         }
 
         [Test]
         public void VersatilityDamageIncreaseCorrect()
         {
-            DK.VersatilityDamageIncrease.Should().BeApproximately(0.0647m, 0.0001m);
+            Service.VersatilityDamageIncrease.Should().BeApproximately(0.0647m, 0.0001m);
         }
 
         [Test]
         public void VersatilityDamageReductionCorrect()
         {
-            DK.VersatilityDamageReduction.Should().BeApproximately(0.0323m, 0.0001m);
+            Service.VersatilityDamageReduction.Should().BeApproximately(0.0323m, 0.0001m);
         }
 
         [Test]
         public void LeechCorrect()
         {
-            DK.LeechPercentage.Should().BeApproximately(0m, 0.0001m);
+            Service.LeechPercentage.Should().BeApproximately(0m, 0.0001m);
         }
 
         [Test]
         public void DodgeCorrect()
         {
-            DK.DodgeChance.Should().BeApproximately(0.0300m, 0.0001m);
+            Service.DodgeChance.Should().BeApproximately(0.0300m, 0.0001m);
         }
 
         [Test]
         public void ParryCorrect()
         {
-            DK.ParryChance.Should().BeApproximately(0.1898m, 0.0001m);
+            Service.ParryChance.Should().BeApproximately(0.1898m, 0.0001m);
         }
     }
 }
