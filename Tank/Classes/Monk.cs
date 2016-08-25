@@ -207,7 +207,7 @@ namespace Tank.Classes
             {
                 int damageTaken;
                 if (stagger.TimeRemaining > 0)
-                    damageTaken = (int)(stagger.DamageDelayed / (stagger.TimeRemaining * stagger.Tick));
+                    damageTaken = (int)(stagger.DamageDelayed / stagger.TimeRemaining * stagger.Tick);
                 else
                     damageTaken = stagger.DamageDelayed;
                 CurrentHealth -= damageTaken;

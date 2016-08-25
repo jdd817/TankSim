@@ -11,7 +11,7 @@ namespace Tank.Buffs.Monk
         public Stagger(int damageDelayed)
         {
             DamageDelayed = damageDelayed;
-            Tick = 1;
+            Tick = 0.5m;
         }
 
         public override decimal Durration
