@@ -134,6 +134,8 @@
   <ItemGroup>
     <Content Include="App\HealsConfig\HealsConfig.html" />
     <Content Include="App\HealsConfig\HealsConfig.js" />
+    <Content Include="App\LogView\LogView.html" />
+    <Content Include="App\LogView\LogView.js" />
     <Content Include="App\MobConfig\MobConfig.html" />
     <Content Include="App\MobConfig\MobConfig.js" />
     <Content Include="App\ResultSummary\ResultSummary.html" />
@@ -141,6 +143,7 @@
     <Content Include="App\ResultsView\ResultsView.html" />
     <Content Include="App\ResultsView\ResultsView.js" />
     <Content Include="App\Shared\LoadingIndicator.js" />
+    <Content Include="App\Shared\modals.js" />
     <Content Include="App\Shared\SimulationApi.js" />
     <Content Include="App\Shared\urlLocator.js" />
     <Content Include="App\Tank.Web.Module.js" />
@@ -984,6 +987,7 @@
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Styles\modal.css" />
     <Content Include="Styles\Tank.css" />
     <Content Include="Web.config" />
     <Content Include="Scripts\version.json" />
@@ -995,6 +999,11 @@
     <Compile Include="App_Start\NinjectWebCommon.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
+    <Compile Include="Compression\CompressedContent.cs" />
+    <Compile Include="Compression\CompressionHandler.cs" />
+    <Compile Include="Compression\Compressor.cs" />
+    <Compile Include="Compression\GZipCompressor.cs" />
+    <Compile Include="Compression\ICompressor.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\SimulationController.cs" />
     <Compile Include="Global.asax.cs">

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web.Http;
+using Tank.Web.Compression;
 
 namespace Tank.Web
 {
@@ -10,6 +11,7 @@ namespace Tank.Web
         public static void Register(HttpConfiguration config)
         {
             // Web API configuration and services
+            config.MessageHandlers.Insert(0, new CompressionHandler()); // first runs last
 
             // Web API routes
             config.MapHttpAttributeRoutes();
