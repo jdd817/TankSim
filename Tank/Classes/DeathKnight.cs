@@ -42,7 +42,8 @@ namespace Tank.Classes
             CurrentHealth = MaxHealth;
 
             //blues state this 0.018, testing indicates the number below - changed since said blue post? or armory not correct?
-            V = 0.0235m;
+            //V = 0.0235m;
+            V = 0.039m;
     }
 
     [XmlIgnore]
@@ -52,7 +53,7 @@ namespace Tank.Classes
             {
                 return BaseParry
                     + GetDiminishedAvoidance(
-                        RatingConverter.GetRating(StatType.Parry, (int)((Strength - 14) / 2.5m) + Buffs.GetRatingAdjustment(StatType.Parry))
+                        RatingConverter.GetRating(StatType.Parry, (int)(CritRating + Buffs.GetRatingAdjustment(StatType.Parry)))
                         + Buffs.GetPercentageAdjustment(StatType.Parry));
             }
         }

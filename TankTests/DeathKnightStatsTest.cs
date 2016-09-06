@@ -17,22 +17,22 @@ namespace TankTests
         public DeathKnightStatsTest()
         {
             Service.Name = "DK";
-            Service.MasteryRating = 979;
-            Service.CritRating = 1961;
-            Service.HasteRating = 1384;
-            Service.VersatilityRating = 841;
+            Service.MasteryRating = 5706;
+            Service.CritRating = 4520;
+            Service.HasteRating = 5347;
+            Service.VersatilityRating = 518;
             Service.Leech = 0;
-            Service.Strength = 4917;
-            Service.Stamina = 9588;
+            Service.Strength = 18382;
+            Service.Stamina = 35371;
             Service.RunicPowerCap = 125;
-            Service.MaxHealth = 575280;
+            Service.MaxHealth = 2122260;
             Service.Weapons = new List<Weapon>
                 {
                     new Weapon()
                     {
-                        LowDamage = 8423,
-                        HighDamage = 9489,
-                        Speed = 3.16m
+                        LowDamage = 4753,
+                        HighDamage = 7131,
+                        Speed = 3.60m
                     }
                 };
         }
@@ -40,37 +40,38 @@ namespace TankTests
         [Test]
         public void MasteryCorrect()
         {
-            Service.Mastery.Should().BeApproximately(0.2535m, 0.0001m);
+            var x = Service.Mastery;
+            x.Should().BeApproximately(0.3645m, 0.0001m);
         }
 
         [Test]
         public void CritCorrect()
         {
-            Service.CritChance.Should().BeApproximately(0.2283m, 0.0001m);
+            Service.CritChance.Should().BeApproximately(0.1791m, 0.0001m);
         }
 
         [Test]
         public void HasteCorrect()
         {
-            Service.Haste.Should().BeApproximately(0.1384m, 0.0001m);
+            Service.Haste.Should().BeApproximately(0.1645m, 0.0001m);
         }
 
         [Test]
         public void AttackPowerCorrect()
         {
-            Service.AttackPower.Should().Be(4917);
+            Service.AttackPower.Should().Be(18382);
         }
 
         [Test]
         public void VersatilityDamageIncreaseCorrect()
         {
-            Service.VersatilityDamageIncrease.Should().BeApproximately(0.0647m, 0.0001m);
+            Service.VersatilityDamageIncrease.Should().BeApproximately(0.0129m, 0.0001m);
         }
 
         [Test]
         public void VersatilityDamageReductionCorrect()
         {
-            Service.VersatilityDamageReduction.Should().BeApproximately(0.0323m, 0.0001m);
+            Service.VersatilityDamageReduction.Should().BeApproximately(0.0065m, 0.0001m);
         }
 
         [Test]
@@ -88,7 +89,13 @@ namespace TankTests
         [Test]
         public void ParryCorrect()
         {
-            Service.ParryChance.Should().BeApproximately(0.1898m, 0.0001m);
+            Service.ParryChance.Should().BeApproximately(0.1624m, 0.0001m);  //0.0878 before DR
+        }
+
+        [Test]
+        public void WeaponDamageCorrect()
+        {
+            Service.WeaponDamage.Should().BeApproximately(11144, 50m);
         }
     }
 }
