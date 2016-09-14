@@ -38,7 +38,12 @@
         </div>
         <textarea ng-model="jsonData"></textarea>
     </div>
-    <button ng-click="runSimulation()">Run Simulation</button> Please verify all mob and tank names are unique prior to submitting
+    <div>
+        <button ng-click="runSimulation()">Run Simulation</button> Please verify all mob and tank names are unique prior to submitting
+    </div>
+    <div>
+        <button ng-click="getWeights()">Get Weights</button> Will only use the first tank and mob
+    </div>
     <loading-indicator></loading-indicator>
     <div class="resultsArea">
         <h4>Results</h4>
@@ -59,6 +64,27 @@
         </div>
         <div style="display:inline-block" ng-repeat="result in results">
             <flot dataset="result" options="chartOptions" width="500px" height="300px"></flot>
+        </div>
+    </div>
+    <div>
+        Weights
+        <div class="tableSection">
+            <div>
+                <span>Mastery</span>
+                <span>{{weights.Mastery}}</span>
+            </div>
+            <div>
+                <span>Crit</span>
+                <span>{{weights.Crit}}</span>
+            </div>
+            <div>
+                <span>Haste</span>
+                <span>{{weights.Haste}}</span>
+            </div>
+            <div>
+                <span>Versatility</span>
+                <span>{{weights.Versatility}}</span>
+            </div>
         </div>
     </div>
 </div>

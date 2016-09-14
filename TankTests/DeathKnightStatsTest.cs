@@ -12,8 +12,6 @@ namespace TankTests
     [TestFixture]
     public class DeathKnightStatsTest:TestBase<DeathKnight>
     {
-        private DeathKnight DK;
-
         public DeathKnightStatsTest()
         {
             Service.Name = "DK";
@@ -96,6 +94,35 @@ namespace TankTests
         public void WeaponDamageCorrect()
         {
             Service.WeaponDamage.Should().BeApproximately(11144, 50m);
+        }
+    }
+
+    [TestFixture]
+    public class DeathKnightStatsTest2 : StatTests<DeathKnight>
+    {
+        public DeathKnightStatsTest2()
+        {
+            stats = new StatTestDescriptor
+            {
+                Crit = new StatDescriptor(2736, 0.1282m),
+                Haste = new StatDescriptor(3551, 0.1093m),
+                Mastery = new StatDescriptor(5769, 0.3672m),
+                Leech = new StatDescriptor(0, 0),
+                Versatility = new StatDescriptor(3614, 0.0903m),
+                Dodge = 0.0300m,
+                Parry = 0.1515m, //.0531 before DR
+                Block = 0m,
+                PrimaryStat = 18536,
+                Weapon = new Weapon
+                {
+                    LowDamage = 4935,
+                    HighDamage = 7405,
+                    Speed = 3.60m
+                },
+                WeaponDamage = 38000
+            };
+
+            Init();
         }
     }
 }

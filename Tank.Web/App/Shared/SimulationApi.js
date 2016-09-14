@@ -21,6 +21,14 @@
                         .success(deferred.resolve)
                         .error(deferred.reject);
                     return deferred.promise.then(endload, handleError);
+                },
+                getWeights: function (parameters) {
+                    loadingIndicator.startLoad();
+                    var deferred = $q.defer();
+                    $http.post($.url("api/Simulation/Weights"), parameters)
+                        .success(deferred.resolve)
+                        .error(deferred.reject);
+                    return deferred.promise.then(endload, handleError);
                 }
             };
         }]);

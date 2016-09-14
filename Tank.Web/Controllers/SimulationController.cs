@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
@@ -55,7 +56,7 @@ namespace Tank.Web.Controllers
 
             return new SimulationResult { Results = newResults };
         }
-        
+                
         public SimulationResult RunMultipleSimulations(SimulationParameters parameters)
         {
             var tanks = GetTanks(parameters).ToArray();
@@ -93,6 +94,55 @@ namespace Tank.Web.Controllers
                           Log = r.Select(res => res.Log).Aggregate((a, b) => a + "\r\n\r\n" + b)
                       }).ToList()
             };
+        }
+
+        [HttpPost]
+        [Route("api/simulation/weights")]
+        public StatWeights GetStatWeights(SimulationParameters parameters)
+        {
+            parameters.Tanks = parameters.Tanks.Take(1).ToList();
+            parameters.Mobs = parameters.Mobs.Take(1).ToList();
+
+            if (parameters.Tanks.Count < 1 || parameters.Mobs.Count < 1)
+                throw new InvalidOperationException("Must have at least 1 tank and 1 mob");
+
+            var results = new[]
+            {
+                GetResultsFor(parameters,t=>t.Mastery,500),
+                GetResultsFor(parameters, t => t.Crit, 500),
+                GetResultsFor(parameters,t=>t.Haste,500),
+                GetResultsFor(parameters,t=>t.Versatility,500),
+            };
+
+            var avgHealth = new decimal[]
+            {
+                results[0].Results[0].Summary.AverageHealthOverall,
+                results[1].Results[0].Summary.AverageHealthOverall,
+                results[2].Results[0].Summary.AverageHealthOverall,
+                results[3].Results[0].Summary.AverageHealthOverall,
+            };
+
+            var maxHealth = avgHealth.Max();
+
+            return new StatWeights
+            {
+                Mastery = avgHealth[0] / maxHealth,
+                Crit = avgHealth[1] / maxHealth,
+                Haste = avgHealth[2] / maxHealth,
+                Versatility = avgHealth[3] / maxHealth
+            };
+        }
+
+        private SimulationResult GetResultsFor(SimulationParameters parameters, Expression<Func<Models.Tank, int>> stat, int delta)
+        {
+            var set = Expression.AddAssign(stat.Body, Expression.Constant(delta));
+            var reset = Expression.SubtractAssign(stat.Body, Expression.Constant(delta));
+
+            Expression.Lambda(set, stat.Parameters).Compile().DynamicInvoke(parameters.Tanks[0]);
+            var simResult = RunSimulation(parameters);
+            Expression.Lambda(reset, stat.Parameters).Compile().DynamicInvoke(parameters.Tanks[0]);
+
+            return simResult;
         }
 
         private SimulationResult GetSingleResult(int seed, Player[] tanks, Healer[] healers, Mob[] mobs)

@@ -57,7 +57,13 @@
                     $scope.runSimulation = function () {
                         storage.set(paramStorage, $scope.parameters);
                         simulationApi.runSimulation($scope.parameters)
-                            .then(displayResults)
+                            .then(displayResults);
+                    };
+
+                    $scope.getWeights = function () {
+                        storage.set(paramStorage, $scope.parameters);
+                        simulationApi.getWeights($scope.parameters)
+                            .then(function (data) { $scope.weights = data; });
                     };
 
                     $scope.showLog = function (log) {

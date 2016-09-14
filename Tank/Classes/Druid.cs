@@ -80,7 +80,7 @@ namespace Tank.Classes
 
         [XmlIgnore]
         public override decimal CritChance
-        { get { return 0.15m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
+        { get { return 0.16m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
 
         [XmlIgnore]
         public override decimal DodgeChance

@@ -1011,6 +1011,7 @@
     </Compile>
     <Compile Include="Models\SimulationParameters.cs" />
     <Compile Include="Models\SimulationResult.cs" />
+    <Compile Include="Models\StatWeights.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
