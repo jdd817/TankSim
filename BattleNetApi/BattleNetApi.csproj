@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E9AE11C8-DE29-4BBB-9BA4-B83061545678}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>BattleNetApi</RootNamespace>
+    <AssemblyName>BattleNetApi</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
+      <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="RestSharp, Version=105.2.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\RestSharp.105.2.3\lib\net45\RestSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="ApiSegments\IBattleNetCharacter.cs" />
+    <Compile Include="ApiSegments\IBattleNetGuild.cs" />
+    <Compile Include="BattleNetModule.cs" />
+    <Compile Include="DataObjects\Achievement.cs" />
+    <Compile Include="DataObjects\AchievementCriteria.cs" />
+    <Compile Include="DataObjects\AchievementData.cs" />
+    <Compile Include="DataObjects\Appearance.cs" />
+    <Compile Include="DataObjects\ArtifactRelic.cs" />
+    <Compile Include="DataObjects\ArtifactTrait.cs" />
+    <Compile Include="DataObjects\ChallengeMode.cs" />
+    <Compile Include="DataObjects\ChallengeModeCriteria.cs" />
+    <Compile Include="DataObjects\Character.cs" />
+    <Compile Include="DataObjects\Emblem.cs" />
+    <Compile Include="DataObjects\Group.cs" />
+    <Compile Include="DataObjects\GuildMember.cs" />
+    <Compile Include="DataObjects\GuildProfile.cs" />
+    <Compile Include="DataObjects\GuildSummary.cs" />
+    <Compile Include="DataObjects\Item.cs" />
+    <Compile Include="DataObjects\ItemAppearance.cs" />
+    <Compile Include="DataObjects\ItemList.cs" />
+    <Compile Include="DataObjects\Map.cs" />
+    <Compile Include="DataObjects\News.cs" />
+    <Compile Include="DataObjects\PlayerStats.cs" />
+    <Compile Include="DataObjects\Realm.cs" />
+    <Compile Include="DataObjects\Specialization.cs" />
+    <Compile Include="DataObjects\Stat.cs" />
+    <Compile Include="DataObjects\Tooltip.cs" />
+    <Compile Include="IBattleNetClient.cs" />
+    <Compile Include="IBattleNetConfiguration.cs" />
+    <Compile Include="Impl\BattleNetCharacter.cs" />
+    <Compile Include="Impl\BattleNetClient.cs" />
+    <Compile Include="Impl\BattleNetGuild.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

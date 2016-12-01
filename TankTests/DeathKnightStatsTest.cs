@@ -125,4 +125,33 @@ namespace TankTests
             Init();
         }
     }
+
+    [TestFixture]
+    public class DeathKnightStatsTest3 : StatTests<DeathKnight>
+    {
+        public DeathKnightStatsTest3()
+        {
+            stats = new StatTestDescriptor
+            {
+                Crit = new StatDescriptor(6990, 0.2497m),
+                Haste = new StatDescriptor(7943, 0.2444m),
+                Mastery = new StatDescriptor(4403, 0.3087m),
+                Leech = new StatDescriptor(862, 0.0375m),
+                Versatility = new StatDescriptor(2470, 0.0618m),
+                Dodge = 0.0300m,
+                Parry = 0.2192m, //.1357 before DR
+                Block = 0m,
+                PrimaryStat = 23553,
+                Weapon = new Weapon
+                {
+                    LowDamage = 8239,
+                    HighDamage = 12360,
+                    Speed = 3.60m
+                },
+                WeaponDamage = (44691 + 49859) / 2
+            };
+
+            Init();
+        }
+    }
 }

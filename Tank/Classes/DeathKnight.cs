@@ -17,7 +17,7 @@ namespace Tank.Classes
             : base(buffManager, cooldownManager, abilityManager, rng)
         {
             BaseDodge = 0.03m;
-            BaseParry = 0.10m;
+            BaseParry = 0.06m;
             BaseBlock = 0.00m;
 
             RunicPowerCap = 125;
@@ -40,10 +40,6 @@ namespace Tank.Classes
             HitsLast5Secs = new List<decimal>();
             
             CurrentHealth = MaxHealth;
-
-            //blues state this 0.018, testing indicates the number below - changed since said blue post? or armory not correct?
-            //V = 0.0235m;
-            V = 0.039m;
     }
 
     [XmlIgnore]
@@ -54,6 +50,7 @@ namespace Tank.Classes
                 return BaseParry
                     + GetDiminishedAvoidance(
                         RatingConverter.GetRating(StatType.Parry, (int)(CritRating + Buffs.GetRatingAdjustment(StatType.Parry)))
+                        +RatingConverter.GetRating(StatType.PrimaryAvoidance, Strength)
                         + Buffs.GetPercentageAdjustment(StatType.Parry));
             }
         }

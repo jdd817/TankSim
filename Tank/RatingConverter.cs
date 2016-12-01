@@ -18,18 +18,20 @@ namespace Tank
             switch (ratingType)
             {
                 case StatType.Mastery:
-                    return Rating / 23330m;
+                    //return Rating / 23330m;
                 case StatType.Crit:
-                    return Rating / 35000m;
+                    return Rating / 35000m;  //increase to 40000 in 7.1.5
                 case StatType.Haste:
-                    return Rating / 32500m;
+                    return Rating / 32500m;  //increase to 37500 in 7.1.5
                 case StatType.Versatility:
-                    return Rating / 40200m;
+                    return Rating / 40000m;  //increase to 47500 in 7.1.5
                 case StatType.Leech:
-                    return Rating / 80.0m;
+                    return Rating / 22950m;
                 case StatType.Parry:
                 case StatType.Dodge:
                     return Rating / 51500m;
+                case StatType.PrimaryAvoidance:
+                    return Rating / 231500m;
                 case StatType.Armor:
                     return Rating / (Rating + 3609.9m);
                 default:

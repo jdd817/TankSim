@@ -16,6 +16,7 @@
         Leech,
         DamageReduction,
         Stamina,
+        PrimaryAvoidance,
         Armor
     }
 }

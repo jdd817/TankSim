@@ -100,4 +100,33 @@ namespace TankTests
             Service.CritBlockChance.Should().BeApproximately(0.3567m, 0.0001m);
         }
     }
+
+    [TestFixture]
+    public class WarriorStatsTest2 : StatTests<Warrior>
+    {
+        public WarriorStatsTest2()
+        {
+            stats = new StatTestDescriptor
+            {
+                Crit = new StatDescriptor(3386, 0.1467m),
+                Haste = new StatDescriptor(3032, 0.0933m),
+                Mastery = new StatDescriptor(6664, 0.2856m),
+                Leech = new StatDescriptor(0, 0),
+                Versatility = new StatDescriptor(4012, 0.1003m),
+                Dodge = 0.0300m,
+                Parry = 0.1399m, //.0657 before DR
+                Block = 0.2834m,
+                PrimaryStat = 20706,
+                Weapon = new Weapon
+                {
+                    LowDamage = 2787,
+                    HighDamage = 5177,
+                    Speed = 2.60m
+                },
+                WeaponDamage = (27515 + 30460) / 2
+            };
+
+            Init();
+        }
+    }
 }
