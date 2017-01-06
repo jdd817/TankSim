@@ -9,6 +9,7 @@ using System.Xml.Linq;
 using System.IO;
 
 using Ninject;
+using Tank.ItemOptimization;
 
 namespace Tank.Console
 {
@@ -18,6 +19,8 @@ namespace Tank.Console
 
         static void Main(string[] args)
         {
+            TestItemOptimizer();return;
+
             /*DataLogging.DataLogManager.Loggers.Add(new DataLogging.ConsoleLogger());
             DataLogging.SummaryLogger Summary= new DataLogging.SummaryLogger();
             DataLogging.DataLogManager.Loggers.Add(Summary);
@@ -289,5 +292,34 @@ namespace Tank.Console
 
             Doc.Save("c:\\tank.xml");
         }
+
+        static void TestItemOptimizer()
+        {
+            kernel = new Ninject.StandardKernel();
+            kernel.Load<Tank.ItemOptimization.ItemOptimizationModule>();
+            kernel.Bind<BattleNetApi.IBattleNetConfiguration>().To<BattleNetConfig>();
+            kernel.Load<BattleNetApi.BattleNetModule>();
+
+
+            var bloodDk = Presets.BloodDk;
+
+            var loader = kernel.Get<ArmoryLoader>();
+
+            var toon = loader.LoadCharacter("Bartenderizr", "Doomhammer");
+
+            var serializer = new Newtonsoft.Json.JsonSerializer();
+            serializer.Formatting = Newtonsoft.Json.Formatting.Indented;
+            using (var writer = new StreamWriter("c:\\dk.json"))
+                serializer.Serialize(writer, toon);
+        }
+    }
+
+    public class BattleNetConfig : BattleNetApi.IBattleNetConfiguration
+    {
+        public string ApiKey { get { return "nryb77x56ta2dmvpykhdwdc8kf56mym8"; } set { } }
+
+        public string ApiUrl { get { return "https://us.api.battle.net/wow"; } set { } }
+
+        public string Locale { get { return "en_us"; } set { } }
     }
 }

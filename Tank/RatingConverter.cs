@@ -18,7 +18,7 @@ namespace Tank
             switch (ratingType)
             {
                 case StatType.Mastery:
-                    //return Rating / 23330m;
+                    return Rating / (70000m / 3m);
                 case StatType.Crit:
                     return Rating / 35000m;  //increase to 40000 in 7.1.5
                 case StatType.Haste:

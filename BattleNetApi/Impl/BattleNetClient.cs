@@ -44,5 +44,17 @@ namespace BattleNetApi.Impl
                 return _guild;
             }
         }
+
+        private IBattleNetChallengeMode _challenge;
+
+        public IBattleNetChallengeMode Challenge
+        {
+            get
+            {
+                if (_challenge == null)
+                    _challenge = new BattleNetChallengeMode(_restClient);
+                return _challenge;
+            }
+        }
     }
 }

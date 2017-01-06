@@ -142,6 +142,7 @@
     <Content Include="App\ResultSummary\ResultSummary.js" />
     <Content Include="App\ResultsView\ResultsView.html" />
     <Content Include="App\ResultsView\ResultsView.js" />
+    <Content Include="App\Shared\armoryLoader.js" />
     <Content Include="App\Shared\LoadingIndicator.js" />
     <Content Include="App\Shared\modals.js" />
     <Content Include="App\Shared\SimulationApi.js" />
@@ -1004,6 +1005,7 @@
     <Compile Include="Compression\Compressor.cs" />
     <Compile Include="Compression\GZipCompressor.cs" />
     <Compile Include="Compression\ICompressor.cs" />
+    <Compile Include="Controllers\BattleNetController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="Controllers\SimulationController.cs" />
     <Compile Include="Global.asax.cs">
@@ -1033,6 +1035,10 @@
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BattleNetApi\BattleNetApi.csproj">
+      <Project>{e9ae11c8-de29-4bbb-9ba4-b83061545678}</Project>
+      <Name>BattleNetApi</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tank\Tank.csproj">
       <Project>{57cde6cd-8f93-4b5d-bf61-3f2e03b4e0f4}</Project>
       <Name>Tank</Name>

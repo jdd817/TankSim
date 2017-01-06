@@ -1,6 +1,6 @@
 ﻿angular.module("Tank.Web")
-    .directive("tankUi", [ "simulationApi", "storage", "modals",
-        function (simulationApi, storage, modals) {
+    .directive("tankUi", [ "simulationApi", "storage", "modals", "armoryLoader",
+        function (simulationApi, storage, modals, armoryLoader) {
             return {
                 restrict: 'E',
                 templateUrl: $.url('app/TankUI/TankUI.html'),
@@ -68,6 +68,15 @@
 
                     $scope.showLog = function (log) {
                         modals.logView(log);
+                    };
+
+                    $scope.armoryLoad = function () {
+                        var character = prompt("Enter Character Name");
+
+                        armoryLoader.getCharacter(character, "Doomhammer")
+                        .then(function (tank) {
+                            $scope.parameters.Tanks.push(tank);
+                        });
                     };
 
                     function displayResults(results) {

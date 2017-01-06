@@ -28,7 +28,7 @@ namespace Tank.Buffs.DeathKnight
         public override decimal GetPercentageModifier(StatType Stat)
         {
             if (Stat == StatType.AttackPower)
-                return 0.08m;            
+                return 0.08m;
             return 0;
         }
 

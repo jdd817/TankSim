@@ -24,6 +24,18 @@ namespace Tank.Classes
 
             UsesTwoHanders = true;
 
+            var artifact = new Artifacts.DeathKnight()
+            {
+                SkeletalShattering=1,
+                UmbilicusEternus=1,
+                UnendingThirst=1,
+                BloodFeast=1,
+                RattlingBones=1
+            };
+
+            foreach (var buff in artifact.GetArtifactBuffs())
+                Buffs.AddBuff(buff);
+
             Reset();
         }
 
@@ -120,10 +132,13 @@ namespace Tank.Classes
                 if (CurrentHealth <= MaxHealth * 0.5 && RunicPower >= 45)
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
-                if (RunicPower >= 80)
+                if (CurrentHealth < MaxHealth * 0.9 && RunicPower >= 80)
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
                 if (RunicPower >= 45 && Abilities.DeathKnight.DeathStrike.HealingAmount(this) >= MaxHealth * 0.40m)
+                    return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
+
+                if (RunicPower >= 110)
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
                 if (Buffs.GetStacks(typeof(Artifact.Consumption)) > 0 && Cooldowns.AbilityReady<Abilities.DeathKnight.Consumption>() && CurrentHealth <= MaxHealth * 0.80m)

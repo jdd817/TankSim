@@ -44,7 +44,10 @@ namespace Tank.DataLogging
         {
             if (!Lines.ContainsKey(Time))
                 Lines.Add(Time, new Dictionary<string, int>());
-            Lines[Time].Add(RunName, Health);
+            if (!Lines[Time].ContainsKey(RunName))
+                Lines[Time].Add(RunName, Health);
+            else
+                Lines[Time][RunName] = Health;
         }
 
         public void UsedAbility(decimal Time, string AbilityName, AbilityResult Result)

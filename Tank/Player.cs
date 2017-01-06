@@ -248,6 +248,7 @@ namespace Tank
 
         public virtual int ApplyHealing(int healingAmount)
         {
+            healingAmount += (int)(healingAmount * VersatilityDamageIncrease);
             CurrentHealth += healingAmount;
             return healingAmount;
         }

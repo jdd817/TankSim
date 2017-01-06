@@ -1,7 +1,7 @@
 ﻿<div>
     <div class="configArea">
         <div class="tankSection">
-            <h4>Tanks</h4>
+            <h4>Tanks</h4> <button ng-click="armoryLoad()">Load From Armory</button>
             <div ng-repeat="tank in parameters.Tanks" class="mobContainer">                
                 <tank-config tank="tank"></tank-config>
                 <div><span class="clickable" ng-click="removeTank($index)">x</span></div>

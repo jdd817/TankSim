@@ -11,6 +11,7 @@ namespace Tank.Web.App_Start
     using Ninject;
     using Ninject.Web.Common;
     using System.Web.Http;
+    using BattleNetApi;
 
     public static class NinjectWebCommon 
     {
@@ -66,6 +67,19 @@ namespace Tank.Web.App_Start
         private static void RegisterServices(IKernel kernel)
         {
             kernel.Load<Tank.CompositionRoot>();
-        }        
+
+            kernel.Bind<IBattleNetConfiguration>().To<BattleNetConfig>();
+
+            kernel.Load<BattleNetModule>();
+        }
+    }
+
+    public class BattleNetConfig : IBattleNetConfiguration
+    {
+        public string ApiKey { get { return "nryb77x56ta2dmvpykhdwdc8kf56mym8"; } set { } }
+
+        public string ApiUrl { get { return "https://us.api.battle.net/wow"; } set { } }
+
+        public string Locale { get { return "en_us"; } set { } }
     }
 }

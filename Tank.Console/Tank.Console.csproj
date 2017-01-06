@@ -32,6 +32,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="Ninject, Version=3.2.0.0, Culture=neutral, PublicKeyToken=c7192dc5380945e7, processorArchitecture=MSIL">
       <HintPath>..\packages\Ninject.3.2.2.0\lib\net45-full\Ninject.dll</HintPath>
       <Private>True</Private>
@@ -55,6 +59,14 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\BattleNetApi\BattleNetApi.csproj">
+      <Project>{e9ae11c8-de29-4bbb-9ba4-b83061545678}</Project>
+      <Name>BattleNetApi</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tank.ItemOptimization\Tank.ItemOptimization.csproj">
+      <Project>{14a3686f-58ba-4e5d-9b78-f1bbc5296ded}</Project>
+      <Name>Tank.ItemOptimization</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tank\Tank.csproj">
       <Project>{57cde6cd-8f93-4b5d-bf61-3f2e03b4e0f4}</Project>
       <Name>Tank</Name>

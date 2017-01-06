@@ -15,7 +15,7 @@ namespace Tank.Buffs.DeathKnight
         public BoneShield(bool hasSkeletalShattering, decimal critChance, IRng rng)
         {
             TimeRemaining = Durration;
-            rng = _rng;
+            _rng = rng;
             _hasSkeletalShattering = hasSkeletalShattering;
             _critChance = critChance;
         }

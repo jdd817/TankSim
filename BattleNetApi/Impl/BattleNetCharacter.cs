@@ -24,7 +24,7 @@ namespace BattleNetApi.Impl
             request.AddUrlSegment("realm", realm);
             request.AddUrlSegment("characterName", characterName);
             if (fields != null && fields.Length > 0)
-                request.AddUrlSegment("fields", fields.Select(x=>x.ToString()).Aggregate((a, b) => a + "," + b));
+                request.AddQueryParameter("fields", fields.Select(x=>x.ToString()).Aggregate((a, b) => a + "," + b));
 
             var response = _restClient.Get<Character>(request);
 
