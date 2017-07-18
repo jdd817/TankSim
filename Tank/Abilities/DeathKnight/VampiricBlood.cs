@@ -13,6 +13,11 @@ namespace Tank.Abilities.DeathKnight
             Cooldown = 60m;
         }
 
+        public override bool OnGCD
+        {
+            get { return false; }
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult

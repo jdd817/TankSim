@@ -7,7 +7,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
 {
     public class AllConsumingRot : PermanentBuff
     {
-        public override int MaxStacks { get { return 3; } }
+        public override int MaxStacks { get { return 6; } }
 
         public override decimal GetPercentageModifier(StatType Stat)
         {

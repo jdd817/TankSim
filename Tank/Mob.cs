@@ -19,6 +19,7 @@ namespace Tank
         public Mob()
         {
             Buffs = new BuffManager();
+            Buffs.Target = this;
             Weapons = new List<Weapon>();
         }
 

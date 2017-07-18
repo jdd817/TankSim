@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tank.Abilities;
+using Tank.Buffs;
 
 namespace Tank.CombatEngine
 {
@@ -42,6 +43,11 @@ namespace Tank.CombatEngine
 
                 damageEvent.DamageTaken = (int)(damageEvent.DamageTaken * (1m - Tank.VersatilityDamageReduction) * (1m - Tank.Buffs.GetPercentageAdjustment(StatType.DamageReduction)));
             }
+
+            var damageEffectStack = Tank.Buffs.GetEffectStack<IDamageTakenEffectStack>();
+
+            foreach (var effectStack in damageEffectStack)
+                effectStack.DamageTaken(Time, damageEvent, Tank);
 
             damageEvent = Tank.UpdateFromMobAttack(damageEvent);
             Tank.CurrentHealth -= damageEvent.DamageTaken;

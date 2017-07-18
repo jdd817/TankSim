@@ -5,11 +5,13 @@ using System.Text;
 
 namespace Tank.Buffs.DeathKnight
 {
-    public class BloodPlague:Buff
+    public class BloodPlague: HealOverTime
     {
-        public BloodPlague()
+        public BloodPlague(int healingAmount)
         {
             TimeRemaining = Durration;
+            HealingPerTick = healingAmount;
+            Tick = 1.0m;
         }
 
         public override decimal Durration { get { return 24.0m; } }

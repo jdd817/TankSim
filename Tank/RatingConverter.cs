@@ -18,13 +18,13 @@ namespace Tank
             switch (ratingType)
             {
                 case StatType.Mastery:
-                    return Rating / (70000m / 3m);
+                    return Rating / (80000m / 3m);
                 case StatType.Crit:
-                    return Rating / 35000m;  //increase to 40000 in 7.1.5
+                    return Rating / 40000m;  //increase to 40000 in 7.1.5
                 case StatType.Haste:
-                    return Rating / 32500m;  //increase to 37500 in 7.1.5
+                    return Rating / 37500m;  //increase to 37500 in 7.1.5
                 case StatType.Versatility:
-                    return Rating / 40000m;  //increase to 47500 in 7.1.5
+                    return Rating / 47500m;  //increase to 47500 in 7.1.5
                 case StatType.Leech:
                     return Rating / 22950m;
                 case StatType.Parry:
@@ -33,7 +33,7 @@ namespace Tank
                 case StatType.PrimaryAvoidance:
                     return Rating / 231500m;
                 case StatType.Armor:
-                    return Rating / (Rating + 3609.9m);
+                    return Rating / (Rating + 8164m); //based on lvl of attacker - 110=7390, 111 = 7648, 112=7906, 113(boss)=8164.  source: https://www.reddit.com/r/CompetitiveWoW/comments/5lj0kj/damage_reduction_calculation/
                 default:
                     return 0;
                     throw new InvalidOperationException("Unknown rating");

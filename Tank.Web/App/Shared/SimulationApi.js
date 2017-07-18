@@ -29,6 +29,28 @@
                         .success(deferred.resolve)
                         .error(deferred.reject);
                     return deferred.promise.then(endload, handleError);
+                },
+                getAvailableEffects: function (className) {
+                    loadingIndicator.startLoad();
+                    var deferred = $q.defer();
+                    var url = "api/effects";
+                    if (className != null)
+                        url += "/" + className.replace(" ", "");
+                    $http.get($.url(url))
+                        .success(deferred.resolve)
+                        .error(deferred.reject);
+                    return deferred.promise.then(endload, handleError);
+                },
+                getAvailableTalents: function (className) {
+                    loadingIndicator.startLoad();
+                    var deferred = $q.defer();
+                    var url = "api/talents";
+                    if (className != null)
+                        url += "/" + className.replace(" ","");
+                    $http.get($.url(url))
+                        .success(deferred.resolve)
+                        .error(deferred.reject);
+                    return deferred.promise.then(endload, handleError);
                 }
             };
         }]);

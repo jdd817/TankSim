@@ -15,9 +15,11 @@ namespace Tank
         }
 
         private Dictionary<string, Buff> Buffs;
+        public Actor Target { get; set; }
 
         public void AddBuff(Buff NewBuff)
         {
+            NewBuff.Target = Target;
             if (Buffs.ContainsKey(NewBuff.Name))
             {
                 Buffs[NewBuff.Name].Refresh(NewBuff);
@@ -34,10 +36,11 @@ namespace Tank
         {
             List<Buff> ExpiredBuffs = new List<Buff>();
             List<Buff> TickingBuffs = new List<Buff>();
-            foreach (Buff B in Buffs.Values.Where(b => !b.Permanent))
+            foreach (Buff B in Buffs.Values)
             {
                 B.TimeRemaining -= DeltaTime;
-                if (B.TimeRemaining <= 0 || B.Stacks <= 0)
+                B.TimerUpdated(DeltaTime);
+                if (!B.Permanent && (B.TimeRemaining <= 0 || B.Stacks <= 0))
                     ExpiredBuffs.Add(B);
                 if (B.Tick > 0)
                 {
@@ -46,6 +49,7 @@ namespace Tank
                     {
                         B.TickTimer += B.Tick;
                         TickingBuffs.Add(B);
+                        B.Ticked();
                     }
                 }
             }
@@ -105,7 +109,7 @@ namespace Tank
 
         public void ClearBuff(Type BuffType)
         {
-            ClearBuff(BuffType.Name);            
+            ClearBuff(BuffType.Name);
         }
 
         public void ClearBuff(string BuffName)
@@ -123,6 +127,27 @@ namespace Tank
             var nonPermanentBuffs = Buffs.Values.Where(b => !b.Permanent).ToList();
             foreach (var buff in nonPermanentBuffs)
                 Buffs.Remove(buff.Name);
+            foreach (var buff in Buffs.Values.OfBaseType<Buffs.Trinkets.RPPMTrinket>())
+                buff.ResetLastProcs();
+        }
+
+        public List<T> GetEffectStack<T>() where T : class, IEffectStack
+        {
+            var effectStack = Buffs.Values.OfBaseType<T>().ToList();
+
+            var replacingStack = effectStack.OfBaseType<IReplacingEffectStack>().ToList();
+
+            foreach(var replacingEffect in replacingStack)
+            {
+                var replacedEffect = effectStack.FirstOrDefault(b => b.GetType() == replacingEffect.ReplacedType);
+                if(replacedEffect!=null)
+                {
+                    replacingEffect.ReplacedEffect = replacedEffect;
+                    effectStack.Remove(replacedEffect);
+                }
+            }
+
+            return effectStack;
         }
     }
 }

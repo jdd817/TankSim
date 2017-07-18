@@ -26,7 +26,7 @@ namespace Tank.Abilities.DeathKnight
             return new AbilityResult
             {
                 SecondaryResourceCost = 1,
-                ResourceCost = -18,
+                ResourceCost = -15,
                 DamageDealt = (int)(player.WeaponDamage * 2.58m * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m)),
                 SelfHealing = (int)(player.WeaponDamage * 2.58m * healingPercentage * (1 + Caster.Buffs.GetStacks(typeof(Buffs.DeathKnight.Artifact.Veinrender)) * 0.4m))
             };

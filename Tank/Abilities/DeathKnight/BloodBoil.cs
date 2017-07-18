@@ -18,7 +18,7 @@ namespace Tank.Abilities.DeathKnight
         {
             return new AbilityResult
             {
-                TargetBuffsApplied = new[] { new Buffs.DeathKnight.BloodPlague() }
+                TargetBuffsApplied = new[] { new Buffs.DeathKnight.BloodPlague((int)((Caster as Player).AttackPower * 3.784m / 24m)) }
             };
         }
     }

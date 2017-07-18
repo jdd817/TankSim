@@ -10,7 +10,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
     {
         public override int MaxStacks
         {
-            get { return 3; }
+            get { return 6; }
         }
 
         public override decimal GetPercentageModifier(StatType Stat)

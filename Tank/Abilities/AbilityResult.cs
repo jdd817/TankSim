@@ -12,6 +12,7 @@ namespace Tank.Abilities
             CasterBuffsApplied = new Buffs.Buff[0];
             TargetBuffsApplied = new Buffs.Buff[0];
             CooldownReduction = new Abilities.CooldownReduction[0];
+            ChannelLength = 0;
         }
         public decimal Time { get; set; }
         public AttackResult AttackResult { get; set; }
@@ -23,6 +24,7 @@ namespace Tank.Abilities
         public int SelfHealing { get; set; }
         public int TartgetHealing { get; set; }
         public CooldownReduction[] CooldownReduction { get; set; }
+        public decimal ChannelLength { get; set; }
     }
 
     public class CooldownReduction

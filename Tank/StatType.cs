@@ -17,6 +17,7 @@
         DamageReduction,
         Stamina,
         PrimaryAvoidance,
-        Armor
+        Armor,
+        MaxHealth
     }
 }

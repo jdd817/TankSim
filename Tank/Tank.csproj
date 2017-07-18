@@ -97,6 +97,22 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Artifacts\DeathKnight.cs" />
     <Compile Include="Artifacts\IArtifact.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\CarrionFeast.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\Souldrinker.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\SouldrinkerActive.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\VampiricAura.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\VampiricAuraActive.cs" />
+    <Compile Include="Buffs\DeathKnight\SetBonuses\T19_2Pc.cs" />
+    <Compile Include="Buffs\DeathKnight\SetBonuses\T19_4Pc.cs" />
+    <Compile Include="Buffs\DeathKnight\SetBonuses\T20_2Pc.cs" />
+    <Compile Include="Buffs\DeathKnight\SetBonuses\T20_4Pc.cs" />
+    <Compile Include="Buffs\EffectAttribute.cs" />
+    <Compile Include="Buffs\Trinkets\ChronoShard.cs" />
+    <Compile Include="Buffs\Trinkets\DarkmoonDeckImmortality.cs" />
+    <Compile Include="Buffs\Trinkets\FeverishCarapace.cs" />
+    <Compile Include="Buffs\Trinkets\MementoOfAngerboda.cs" />
+    <Compile Include="Buffs\Trinkets\RPPMTrinket.cs" />
+    <Compile Include="Buffs\Trinkets\WrithingHeartOfDarkness.cs" />
     <Compile Include="CombatEngine\IAbilityHandler.cs" />
     <Compile Include="CombatEngine\IAttackHandler.cs" />
     <Compile Include="CombatEngine\MobAttackHandler.cs" />
@@ -173,11 +189,21 @@
     <Compile Include="RNG.cs" />
     <Compile Include="StatType.cs" />
     <Compile Include="Classes\Warrior.cs" />
+    <Compile Include="Talents\DeathKnight\Blooddrinker.cs" />
+    <Compile Include="Talents\DeathKnight\BloodMirror.cs" />
+    <Compile Include="Talents\DeathKnight\FoulBulwark.cs" />
+    <Compile Include="Talents\DeathKnight\Ossuary.cs" />
+    <Compile Include="Talents\DeathKnight\RapidDecomposition.cs" />
+    <Compile Include="Talents\DeathKnight\RedThirst.cs" />
+    <Compile Include="Talents\DeathKnight\RuneTap.cs" />
+    <Compile Include="Talents\DeathKnight\SpectralDeflection.cs" />
+    <Compile Include="Talents\TalentAttribute.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

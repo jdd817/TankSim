@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tank.Abilities;
+using Tank.Buffs;
 
 namespace Tank.CombatEngine
 {
@@ -25,6 +26,9 @@ namespace Tank.CombatEngine
             var actionResult = Attack.GetAbilityResult(Result, Tank, Mob);
             actionResult.AttackResult = Result;
             actionResult.Time = Time;
+
+            foreach (var effectStack in Tank.Buffs.GetEffectStack<IPlayerAbilityEffectStack>())
+                effectStack.ProcessAbilityUsed(Time, Attack, actionResult, Tank, Mob);
 
             Tank.UpdateAbilityResults(Time, Attack, actionResult);
         }

@@ -20,7 +20,7 @@ namespace Tank.Web.Controllers
         [HttpGet]
         public Models.Tank Character(string realm, string characterName)
         {
-            var armoryChar = _battleNet.Character.Stats(realm, characterName);
+            var armoryChar = _battleNet.Character.CharacterProfile(realm, characterName, CharacterFields.stats, CharacterFields.talents);
 
             return new Models.Tank()
             {
@@ -37,6 +37,14 @@ namespace Tank.Web.Controllers
                 WeaponHighDamage = (int)armoryChar.stats.mainHandDmgMax,
                 WeaponLowDamage = (int)armoryChar.stats.mainHandDmgMin,
                 WeaponSpeed = armoryChar.stats.mainHandSpeed,
+                Talents = armoryChar.talents.Where(t=>t.selected).SelectMany(t=>t.talents).Select(t => new Models.Talent
+                {
+                    Class = getClass(armoryChar.@class),
+                    Column = t.column + 1,
+                    Row = t.tier + 1,
+                    Name = t.spell.name.Replace(" ", ""),
+                    FullName = String.Format("Tank.Talents.{0}.{1}", getClass(armoryChar.@class).Replace(" ", ""), t.spell.name.Replace(" ", ""))
+                }).ToArray()
             };
         }
 

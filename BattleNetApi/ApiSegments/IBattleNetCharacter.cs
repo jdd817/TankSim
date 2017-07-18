@@ -16,6 +16,7 @@ namespace BattleNetApi.ApiSegments
         Character Guild(string realm, string characterName);
         Character Items(string realm, string characterName);
         Character Stats(string realm, string characterName);
+        Character Talents(string realm, string characterName);
     }
 }
 
@@ -38,6 +39,7 @@ namespace BattleNetApi
         quests,
         reputation,
         statistics,
-        stats
+        stats,
+        talents
     }
 }

@@ -12,5 +12,6 @@ namespace BattleNetApi
         IBattleNetGuild Guild { get; }
         IBattleNetCharacter Character { get; }
         IBattleNetChallengeMode Challenge { get; }
+        IBattleNetItem Item { get; }
     }
 }

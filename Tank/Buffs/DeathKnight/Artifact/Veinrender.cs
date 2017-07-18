@@ -12,7 +12,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
         {
             get
             {
-                return 3;
+                return 6;
             }
         }
 

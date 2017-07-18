@@ -60,5 +60,10 @@ namespace BattleNetApi.Impl
         {
             return CharacterProfile(realm, characterName, CharacterFields.stats);
         }
+
+        public Character Talents(string realm, string characterName)
+        {
+            return CharacterProfile(realm, characterName, CharacterFields.talents);
+        }
     }
 }

@@ -148,8 +148,12 @@
     <Content Include="App\Shared\SimulationApi.js" />
     <Content Include="App\Shared\urlLocator.js" />
     <Content Include="App\Tank.Web.Module.js" />
+    <Content Include="App\TankConfig\TalentConfig.html" />
+    <Content Include="App\TankConfig\TalentConfig.js" />
     <Content Include="App\TankConfig\TankConfig.html" />
     <Content Include="App\TankConfig\TankConfig.js" />
+    <Content Include="App\TankConfig\EffectConfig.html" />
+    <Content Include="App\TankConfig\EffectConfig.js" />
     <Content Include="App\TankUI\TankUI.html" />
     <Content Include="App\TankUI\TankUI.js" />
     <Content Include="Content\bootstrap.css" />
@@ -1011,9 +1015,11 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\Effect.cs" />
     <Compile Include="Models\SimulationParameters.cs" />
     <Compile Include="Models\SimulationResult.cs" />
     <Compile Include="Models\StatWeights.cs" />
+    <Compile Include="Models\Talent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -33,6 +33,17 @@ input{
     display:table-cell;
 }
 
+.talentTable>div>span{
+    padding:2px;
+    border:1px solid black;
+    height:25px;
+    min-width:40px;
+}
+
+.selectedTalent{
+    background-color:blue;
+}
+
 .configArea{
 
 }

@@ -50,6 +50,7 @@
   <ItemGroup>
     <Compile Include="ApiSegments\IBattleNetCharacter.cs" />
     <Compile Include="ApiSegments\IBattleNetGuild.cs" />
+    <Compile Include="ApiSegments\IBattleNetItem.cs" />
     <Compile Include="ApiSegments\IBattleNetList.cs" />
     <Compile Include="BattleNetModule.cs" />
     <Compile Include="DataObjects\Achievement.cs" />
@@ -85,6 +86,7 @@
     <Compile Include="DataObjects\Spell.cs" />
     <Compile Include="DataObjects\Stat.cs" />
     <Compile Include="DataObjects\Talent.cs" />
+    <Compile Include="DataObjects\TalentData.cs" />
     <Compile Include="DataObjects\Tooltip.cs" />
     <Compile Include="ApiSegments\IBattleNetChallengeMode.cs" />
     <Compile Include="IBattleNetClient.cs" />
@@ -93,6 +95,7 @@
     <Compile Include="Impl\BattleNetCharacter.cs" />
     <Compile Include="Impl\BattleNetClient.cs" />
     <Compile Include="Impl\BattleNetGuild.cs" />
+    <Compile Include="Impl\BattleNetItem.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

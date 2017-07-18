@@ -24,20 +24,43 @@ namespace Tank.Classes
 
             UsesTwoHanders = true;
 
-            var artifact = new Artifacts.DeathKnight()
+            MawOfTheDamned = new Artifacts.DeathKnight()
             {
-                SkeletalShattering=1,
-                UmbilicusEternus=1,
-                UnendingThirst=1,
-                BloodFeast=1,
-                RattlingBones=1
+                Consumption=1,
+                SanguinaryAffinity = 1,
+                VampiricFangs = 4,
+                RattlingBones = 1,
+                Bonebreaker = 4,
+                AllConsumingRot = 3,
+                UnendingThirst = 1,
+                GrimPerseverance = 4,
+                SkeletalShattering = 1,
+                BloodFeast = 1,
+                IronHeart = 4,
+                Veinrender = 3,
+                UmbilicusEternus = 1,
+                MouthOfHell = 1,
+                DanceOfDarkness = 4,
+                MeatShield = 3,
+                Coagulopathy = 3,
+                FortitudeOfTheEbonBlade = 1,
+                CarrionFeast = 4,
+                VampiricAura = 1,
+                Souldrinker = 1
             };
 
-            foreach (var buff in artifact.GetArtifactBuffs())
+            foreach (var buff in MawOfTheDamned.GetArtifactBuffs())
                 Buffs.AddBuff(buff);
+            /*
+            Buffs.AddBuff(new Buffs.DeathKnight.SetBonuses.T19_2Pc());
+            Buffs.AddBuff(new Buffs.DeathKnight.SetBonuses.T19_4Pc(rng));
+            Buffs.AddBuff(new Buffs.Trinkets.MementoOfAngerboda(rng, 4978));
+            Buffs.AddBuff(new Buffs.Trinkets.ChronoShard(rng, 9388));*/
 
             Reset();
         }
+
+        public Artifacts.DeathKnight MawOfTheDamned { get; set; }
 
         public override void Reset()
         {
@@ -49,7 +72,6 @@ namespace Tank.Classes
             RunesAvailable = 6;
 
             RuneCounters = new List<decimal>();
-            HitsLast5Secs = new List<decimal>();
             
             CurrentHealth = MaxHealth;
     }
@@ -69,7 +91,7 @@ namespace Tank.Classes
 
         private int _runicPower;
 
-        private int RunicPower
+        public int RunicPower
         {
             get { return _runicPower; }
             set { _runicPower = Math.Min(value, RunicPowerCap); }
@@ -83,7 +105,6 @@ namespace Tank.Classes
         #region class-specific counters
 
         private List<decimal> RuneCounters;
-        private List<decimal> HitsLast5Secs;
 
         #endregion
 
@@ -115,6 +136,7 @@ namespace Tank.Classes
                 {
                     return AbilityManger.GetAbility<Abilities.DeathKnight.BloodBoil>();
                 }
+
                 if (Buffs.GetBuff(typeof(CrimsonScourge)) != null)
                 {
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
@@ -123,11 +145,18 @@ namespace Tank.Classes
                 var boneShield = Buffs.GetBuff(typeof(BoneShield));
 
                 if (CurrentHealth <= MaxHealth * 0.25 && RunicPower >= 45 &&
-                    (boneShield != null && boneShield.TimeRemaining >= 5.0m))
+                    (boneShield != null && boneShield.Stacks > 2 && boneShield.TimeRemaining >= 5.0m))
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
-                if (HitsLast5Secs.Count <= 5 && RunesAvailable >= 2 && (boneShield == null || boneShield.Stacks <= 6 || boneShield.TimeRemaining <= 5.0m))
+                if (RunesAvailable >= 2 && (boneShield == null || boneShield.Stacks <= 6 || boneShield.TimeRemaining <= 5.0m))
                     return AbilityManger.GetAbility<Abilities.DeathKnight.Marrowrend>();
+
+                if(Buffs.GetBuff<Tank.Buffs.DeathKnight.SetBonuses.T20_2Pc>()!=null)
+                {
+                    var graveWarden = Buffs.GetBuff<Buffs.DeathKnight.SetBonuses.GraveWarden>();
+                    if (graveWarden == null || graveWarden.Durration <= GCDLength * 2)
+                        return AbilityManger.GetAbility<Abilities.DeathKnight.BloodBoil>();
+                }
 
                 if (CurrentHealth <= MaxHealth * 0.5 && RunicPower >= 45)
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
@@ -138,10 +167,10 @@ namespace Tank.Classes
                 if (RunicPower >= 45 && Abilities.DeathKnight.DeathStrike.HealingAmount(this) >= MaxHealth * 0.40m)
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
-                if (RunicPower >= 110)
+                if (RunicPower >= 80)
                     return AbilityManger.GetAbility<Abilities.DeathKnight.DeathStrike>();
 
-                if (Buffs.GetStacks(typeof(Artifact.Consumption)) > 0 && Cooldowns.AbilityReady<Abilities.DeathKnight.Consumption>() && CurrentHealth <= MaxHealth * 0.80m)
+                if (MawOfTheDamned.Consumption > 0 && Cooldowns.AbilityReady<Abilities.DeathKnight.Consumption>())
                 {
                     return AbilityManger.GetAbility<Abilities.DeathKnight.Consumption>();
                 }
@@ -150,20 +179,8 @@ namespace Tank.Classes
                 {
                     return AbilityManger.GetAbility<Abilities.DeathKnight.BloodBoil>();
                 }
-
-                if (HitsLast5Secs.Count > 5)
-                {
-                    if (RunesAvailable > 0)
-                    {
-                        if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
-                            return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
-                        else
-                            return AbilityManger.GetAbility<Abilities.DeathKnight.HeartStrike>();
-                    }
-                }
-                else if (RunesAvailable >= 4 || (RunesAvailable >= 1
-                        && (boneShield != null && boneShield.Stacks >= 5
-                            && (RunesAvailable >= 3 || (RuneCounters.Where(rc => rc < boneShield.TimeRemaining - GCDLength).Count() + RunesAvailable) >= 3))))
+                
+                if (RunesAvailable > 0 && boneShield!=null && boneShield.Stacks>=5)
                 {
                     if (Cooldowns.AbilityReady<Abilities.DeathKnight.DeathAndDecay>())
                         return AbilityManger.GetAbility<Abilities.DeathKnight.DeathAndDecay>();
@@ -205,26 +222,9 @@ namespace Tank.Classes
             while (RuneCounters.Count < 3 && RuneCounters.Count + RunesAvailable < 6)
                 RuneCounters.Add(10.0m / (1.0m + Haste));
         }
-
-        private decimal _lastMobHit = -10;
-        private bool _ignoreBoneShieldStacks = false;
-
+        
         public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
-        {
-            HitsLast5Secs.Add(DamageEvent.Time);
-            HitsLast5Secs = HitsLast5Secs.Where(t => t >= DamageEvent.Time - 5).ToList();
-
-            _lastMobHit = DamageEvent.Time;
-            
-            if (DamageEvent.DamageTaken > 0)
-            {
-                var boneShield = (BoneShield)Buffs.GetBuff(typeof(BoneShield));
-                if (boneShield != null && boneShield.Stacks > 0)
-                {
-                    boneShield.Stacks--;
-                }
-            }
-
+        {            
             //need to move absorbs to the combat engine as well
             BloodShield Shield = (BloodShield)Buffs.GetBuff(typeof(BloodShield));
             if (Shield != null)

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Abilities;
 
 namespace Tank.Buffs
 {
@@ -14,6 +15,8 @@ namespace Tank.Buffs
             Tick = 0;
         }
 
+        public Actor Target { get; set; }
+
         public decimal TimeRemaining
         { get; set; }
 
@@ -23,8 +26,8 @@ namespace Tank.Buffs
         public int Stacks
         { get; set; }
 
-        public abstract int MaxStacks
-        { get; }
+        public virtual int MaxStacks
+        { get { return 1; } }
 
         public decimal Tick { get; set; }
         public decimal TickTimer { get; set; }
@@ -34,14 +37,20 @@ namespace Tank.Buffs
         /// </summary>
         /// <param name="RatingType"></param>
         /// <returns></returns>
-        public abstract int GetRatingModifier(StatType RatingType);
+        public virtual int GetRatingModifier(StatType RatingType)
+        {
+            return 0;
+        }
 
         /// <summary>
         /// Gets a buffs modification to a chance of something
         /// </summary>
         /// <param name="Stat"></param>
         /// <returns></returns>
-        public abstract decimal GetPercentageModifier(StatType Stat);
+        public virtual decimal GetPercentageModifier(StatType Stat)
+        {
+            return 0;
+        }
 
         public virtual string Name
         { get { return this.GetType().Name; } }
@@ -53,6 +62,10 @@ namespace Tank.Buffs
             if (Stacks > MaxStacks)
                 Stacks = MaxStacks;
         }
+
+        public virtual void TimerUpdated(decimal delta) { }
+
+        public virtual void Ticked() { }
 
         public virtual bool Permanent { get { return false; } }
 
@@ -99,5 +112,39 @@ namespace Tank.Buffs
                     HealingPerTick,
                     TimeRemaining);
         }
+
+        public override int GetRatingModifier(StatType RatingType)
+        {
+            return 0;
+        }
+
+        public override decimal GetPercentageModifier(StatType Stat)
+        {
+            return 0;
+        }
+    }
+
+    public interface IEffectStack
+    { }
+
+    public interface IPlayerAbilityEffectStack:IEffectStack
+    {
+        void ProcessAbilityUsed(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result, Player tank, Mob mob);
+    }
+
+    public interface IHealingReceivedEffectStack:IEffectStack
+    {
+        void HealingReceived(decimal currentTime, int healingAmount, Player tank, Ability ability);
+    }
+
+    public interface IDamageTakenEffectStack:IEffectStack
+    {
+        void DamageTaken(decimal currentTime, DataLogging.DamageEvent damageEvent, Player tank);
+    }
+
+    public interface IReplacingEffectStack:IEffectStack
+    {
+        Type ReplacedType { get; }
+        IEffectStack ReplacedEffect { get; set; }
     }
 }

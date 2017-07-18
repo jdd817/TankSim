@@ -29,5 +29,6 @@ namespace BattleNetApi.DataObjects
         public GuildSummary guild { get; set; }
         public ItemList items { get; set; }
         public PlayerStats stats { get; set; }
+        public List<TalentData> talents { get; set; }
     }
 }

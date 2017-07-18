@@ -8,13 +8,6 @@ namespace Tank.Abilities.DeathKnight
 {
     public class Consumption:Ability
     {
-        private IRng _rng;
-
-        public Consumption(IRng rng)
-        {
-            _rng = rng;
-        }
-
         public Consumption()
         {
             Cooldown = 45m;

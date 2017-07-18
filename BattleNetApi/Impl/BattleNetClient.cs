@@ -56,5 +56,17 @@ namespace BattleNetApi.Impl
                 return _challenge;
             }
         }
+
+        private IBattleNetItem _item;
+
+        public IBattleNetItem Item
+        {
+            get
+            {
+                if (_item == null)
+                    _item = new BattleNetItem(_restClient);
+                return _item;
+            }
+        }
     }
 }

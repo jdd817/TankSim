@@ -76,12 +76,15 @@ namespace Tank.CombatEngine
                 if (MobAttack != null)
                     _mobAttackHandler.ProcessAttack(Tank, Mob, Time, MobAttack);
 
+                var healingEffectStack = Tank.Buffs.GetEffectStack<IHealingReceivedEffectStack>();
                 //healers
                 foreach (var healer in Healers)
                 {
                     healer.HealTimer -= TimeIncrement;
                     if (healer.HealTimer <= 0)
                     {
+                        foreach (var effect in healingEffectStack)
+                            effect.HealingReceived(Time, healer.HealAmount, Tank, null);
                         Tank.ApplyHealing(healer.HealAmount);
                         healer.HealTimer += healer.HealPeriod;
                     }

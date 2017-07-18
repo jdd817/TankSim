@@ -17,6 +17,8 @@ namespace Tank
         
         private Dictionary<Type, CooldownInfo> Cooldowns;
 
+        public Player Player { get; set; }
+
         public bool OffGCD
         {
             get { return GCDTimer <= 0; }
@@ -69,7 +71,13 @@ namespace Tank
             if (ability.OnGCD)
                 GCDTimer = GCDLength;
             if (!Cooldowns.ContainsKey(ability.CooldownType))
-                Cooldowns.Add(ability.CooldownType, new CooldownInfo { Charges = ability.MaxCharges, MaxCharges = ability.MaxCharges, CooldownLength = ability.Cooldown });
+                Cooldowns.Add(ability.CooldownType,
+                    new CooldownInfo
+                    {
+                        Charges = ability.MaxCharges,
+                        MaxCharges = ability.MaxCharges,
+                        CooldownLength = ability.Cooldown
+                    });
 
             var cdInfo = Cooldowns[ability.CooldownType];
             if (cdInfo.Charges == cdInfo.MaxCharges)
@@ -81,6 +89,7 @@ namespace Tank
 
         public void UpdateTimers(decimal DeltaTime)
         {
+            DeltaTime = DeltaTime * (1m + Player.Haste);
             foreach (var ability in Cooldowns.Values)
             {
                 if (ability.Charges < ability.MaxCharges)

@@ -28,6 +28,10 @@ namespace Tank.Artifacts
         public int MeatShield { get; set; }
         public int UmbilicusEternus { get; set; }
         public int Veinrender { get; set; }
+        public int FortitudeOfTheEbonBlade { get; set; }
+        public int CarrionFeast { get; set; }
+        public int VampiricAura { get; set; }
+        public int Souldrinker { get; set; }
 
         public IEnumerable<Buff> GetArtifactBuffs()
         {
@@ -51,6 +55,12 @@ namespace Tank.Artifacts
                 yield return new ArtifactBuffs.UnendingThirst() { Stacks = UnendingThirst };
             if (VampiricFangs > 0)
                 yield return new ArtifactBuffs.VampiricFangs() { Stacks = VampiricFangs };
+            if (CarrionFeast > 0)
+                yield return new ArtifactBuffs.CarrionFeast() { Stacks = CarrionFeast };
+            if (Souldrinker > 0)
+                yield return new ArtifactBuffs.SouldrinkerActive { Stacks = Souldrinker };
+            if (VampiricAura > 0)
+                yield return new ArtifactBuffs.VampiricAura { Stacks = VampiricAura };
         }
     }
 }

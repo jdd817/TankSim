@@ -19,6 +19,7 @@ namespace Tank.Console
 
         static void Main(string[] args)
         {
+            ILvlMetrics();return;
             TestItemOptimizer();return;
 
             /*DataLogging.DataLogManager.Loggers.Add(new DataLogging.ConsoleLogger());
@@ -302,15 +303,134 @@ namespace Tank.Console
 
 
             var bloodDk = Presets.BloodDk;
-
             var loader = kernel.Get<ArmoryLoader>();
+            var optimizer = kernel.Get<ItemOptimizer>();
 
+
+            /*
+            Character toon;
+            using (var reader = new Newtonsoft.Json.JsonTextReader(new StreamReader("c:\\dk.json")))
+                toon = new Newtonsoft.Json.JsonSerializer().Deserialize<Character>(reader);
+            
+            /*/
             var toon = loader.LoadCharacter("Bartenderizr", "Doomhammer");
 
             var serializer = new Newtonsoft.Json.JsonSerializer();
             serializer.Formatting = Newtonsoft.Json.Formatting.Indented;
             using (var writer = new StreamWriter("c:\\dk.json"))
                 serializer.Serialize(writer, toon);
+            /**/
+
+            foreach (var item in toon.EquippedItems)
+            {
+                System.Console.WriteLine("{0}: {1}", item.Key, item.Value.Name);
+            }
+
+            System.Console.WriteLine("\r\n\r\n");
+
+            optimizer.OptimizeGear(toon, bloodDk);
+
+            foreach(var item in toon.EquippedItems)
+            {
+                System.Console.WriteLine("{0}: {1}", item.Key, item.Value.Name);
+            }
+
+            System.Console.WriteLine("\r\nInventory:");
+            foreach (var item in toon.Inventory)
+                System.Console.WriteLine(item.Name);
+
+            System.Console.ReadKey();  
+        }
+
+        static void ILvlMetrics()
+        {
+            kernel = new Ninject.StandardKernel();
+            kernel.Load<Tank.ItemOptimization.ItemOptimizationModule>();
+            kernel.Bind<BattleNetApi.IBattleNetConfiguration>().To<BattleNetConfig>();
+            kernel.Load<BattleNetApi.BattleNetModule>();
+
+            var characters = new List<string>
+            {
+                "Bartenderizr",
+                "Chinlaau",
+                //"Destros",
+                "Diàblós",
+                "Donya",
+                "Galdaviz",
+                "Griek",
+                "Jhorlia",
+                "Lerrick",
+                "Lothis",
+                "Mahlona",
+                "Nepty",
+                "Prôfessôrôdd",
+                "Sisterkrisi",
+                "Tìnkybell",
+                "Treetugger",
+                "Whisperos",
+                "Winterborne",
+                "Xiall"
+            };
+
+            var bnet = kernel.Get<BattleNetApi.IBattleNetClient>();
+            var loader = kernel.Get<ArmoryLoader>();
+
+            var avgILevelList = new List<double>();
+            using (var writer = new StreamWriter("ilvl.txt"))
+            {
+                System.Console.SetOut(writer);
+                foreach (var character in characters)
+                {
+                    var toon = bnet.Character.Items(character == "Sisterkrisi" ? "Baelgun" : "Doomhammer", character);
+                    var items = GetEquippedItems(toon.items);
+
+                    var ilvl = items.Where(i => i.quality < 5)
+                        .Concat(toon.items.mainHand.relics.Select(r => bnet.Item.Item(r.itemId, r.bonusLists.ToArray())))
+                        .Average(i => i.itemLevel);
+                    System.Console.WriteLine("{0}\t{1:0.0000}", character, ilvl);
+
+                    avgILevelList.Add(ilvl);
+                }
+
+                System.Console.WriteLine("Avg item level excluding legendaries, subbing relics for artifacts {0:0.0000}", avgILevelList.Average());
+                //System.Console.ReadKey();
+            }
+        }
+
+        static IEnumerable<BattleNetApi.DataObjects.Item> GetEquippedItems(BattleNetApi.DataObjects.ItemList items)
+        {
+            if(items.head!=null)
+                yield return items.head;
+            if (items.neck != null)
+                yield return items.neck;
+            if (items.shoulder != null)
+                yield return items.shoulder;
+            if (items.back != null)
+                yield return items.back;
+            if (items.chest != null)
+                yield return items.chest;
+            if (items.wrist != null)
+                yield return items.wrist;
+            if (items.hands != null)
+                yield return items.hands;
+            if (items.waist != null)
+                yield return items.waist;
+            if (items.legs != null)
+                yield return items.legs;
+            if (items.feet != null)
+                yield return items.feet;
+            if (items.finger1 != null)
+                yield return items.finger1;
+            if (items.finger2 != null)
+                yield return items.finger2;
+            if (items.trinket1 != null)
+                yield return items.trinket1;
+            if (items.trinket2 != null)
+                yield return items.trinket2;
+            if (items.mainHand != null)
+                yield return items.mainHand;
+            if (items.mainHand != null)
+                yield return items.mainHand;
         }
     }
 

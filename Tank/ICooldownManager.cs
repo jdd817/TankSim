@@ -5,6 +5,8 @@ namespace Tank
 {
     public interface ICooldownManager
     {
+        Player Player { get; set; }
+
         decimal GCDLength { get; set; }
         decimal GCDTimer { get; }
         bool OffGCD { get; }

@@ -10,6 +10,8 @@ namespace Tank.ItemOptimization
     {
         public string Name { get; set; }
         public int Id { get; set; }
+        public int ItemLevel { get; set; }
+        public int Quality { get; set; }
         public ItemType Slot { get; set; }
         public Dictionary<StatType, int> Stats { get; set; }
     }

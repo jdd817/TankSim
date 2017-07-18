@@ -53,4 +53,13 @@
             <span><input type="text" ng-model="tank.WeaponSpeed" /></span>
         </div>
     </div>
+    <div class="tableSection talentSection">
+        <h4>Talents</h4>
+        <talent-config talents="tank.Talents" class-name="tank.Class"></talent-config>
+    </div>
+    <div class="tableSection trinketSection">
+        <h4>Effects</h4>
+        <effect-config effect="effect" available-effects="availableEffects" ng-repeat="effect in tank.Effects" remove="removeEffect($index)"></effect-config>
+        <effect-config effect="newEffect" available-effects="availableEffects" selected="addEffect()"></effect-config>
+    </div>
 </div>

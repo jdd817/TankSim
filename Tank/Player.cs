@@ -20,7 +20,9 @@ namespace Tank
         public Player(IBuffManager buffManager, ICooldownManager cooldownManager, IAbilityManager abilityManager, IRng rng)
         {
             Buffs = buffManager;
+            Buffs.Target = this;
             Cooldowns = cooldownManager;
+            Cooldowns.Player = this;
             Weapons = new List<Weapon>();
             GCDLength = 1.5m;
             AbilityManger = abilityManager;
@@ -45,7 +47,7 @@ namespace Tank
         {
             get
             {
-                return (int)(_maxHealth * (1.0m + Buffs.GetPercentageAdjustment(StatType.Stamina)));
+                return (int)(_maxHealth * (1.0m + Buffs.GetPercentageAdjustment(StatType.MaxHealth)) + Buffs.GetRatingAdjustment(StatType.MaxHealth));
             }
             set { _maxHealth = value; }
         }
@@ -111,7 +113,7 @@ namespace Tank
 
         public int Armor
         { get; set; }
-
+        
         #endregion
 
         #region calculated properties        
@@ -290,7 +292,6 @@ namespace Tank
         public abstract DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent);
 
         public virtual void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
-
         {
             foreach (var hot in TickingBuffs.OfBaseType<Buffs.HealOverTime>())
             {

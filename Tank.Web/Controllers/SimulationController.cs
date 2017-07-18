@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Ninject;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
@@ -12,10 +13,12 @@ namespace Tank.Web.Controllers
     public class SimulationController : ApiController
     {
         private ICombatEngine _combatEngine;
+        private Ninject.IKernel _kernel;
 
-        public SimulationController(ICombatEngine combatEngine)
+        public SimulationController(ICombatEngine combatEngine, Ninject.IKernel kernel)
         {
             _combatEngine = combatEngine;
+            _kernel = kernel;
         }
 
         [HttpPost]
@@ -144,6 +147,57 @@ namespace Tank.Web.Controllers
                 Haste = (baselineMetric / resultMetrics[2] - 1) / adjustment * 10000,
                 Versatility = (baselineMetric / resultMetrics[3] - 1) / adjustment * 10000
             };
+        }
+
+        [Route("api/effects/{Class}")]
+        [HttpGet]
+        public IEnumerable<Effect> GetAvailableEffects(string Class)
+        {
+            var assembly = System.Reflection.Assembly.GetAssembly(typeof(ICombatEngine));
+            var availableEffects = new List<Effect>();
+            foreach (var type in assembly.GetTypes())
+            {
+                var typeEffects = type.GetCustomAttributes(false).OfType<Buffs.EffectAttribute>().ToList();
+                if (typeEffects != null && typeEffects.Count > 0 && typeEffects.Any(te => te.Class == null || te.Class.Name == Class))
+                {
+                    availableEffects.Add(new Effect
+                    {
+                        Name = type.Name,
+                        FullName = type.FullName,
+                        Parameters = type.GetConstructors()
+                                .First()
+                                .GetParameters()
+                                .Where(p => p.ParameterType == typeof(int) || p.ParameterType == typeof(decimal))
+                                .Select(p =>new EffectParameter { Name = p.Name, Type=p.ParameterType }).ToList()
+                    });
+                }
+            }
+
+            return availableEffects;
+        }
+
+        [Route("api/talents/{Class}")]
+        [HttpGet]
+        public IEnumerable<Talent> GetAvailableTalents(string Class)
+        {
+            var assembly = System.Reflection.Assembly.GetAssembly(typeof(ICombatEngine));
+            var availableTalents = new List<Talent>();
+            foreach (var type in assembly.GetTypes())
+            {
+                var typeTalent = type.GetCustomAttributes(false).OfType<Talents.TalentAttribute>().FirstOrDefault();
+                if (typeTalent != null && typeTalent.Class.Name == Class)
+                {
+                    availableTalents.Add(new Talent
+                    {
+                        Name = type.Name,
+                        FullName = type.FullName,
+                        Column = typeTalent.Possition,
+                        Row = typeTalent.Tier
+                    });
+                }
+            }
+
+            return availableTalents;
         }
 
         private SimulationResult GetResultsFor(SimulationParameters parameters, Expression<Func<Models.Tank, int>> stat, int delta)
@@ -285,6 +339,41 @@ namespace Tank.Web.Controllers
                 }
             };
 
+            if (tankData.Effects == null)
+                tankData.Effects = new Effect[0];
+
+            foreach(var effect in tankData.Effects)
+            {
+                var effectType = System.Reflection.Assembly.GetAssembly(typeof(Player)).GetType(effect.FullName);
+                var parameters = effect.Parameters.Select(p => new Ninject.Parameters.ConstructorArgument(p.Name, Convert.ChangeType(p.Value, p.Type), false)).ToArray();
+                var effectBuff = _kernel.Get(
+                    effectType,
+                    parameters)
+                    as Buffs.Buff;
+
+
+                tank.Buffs.AddBuff(effectBuff);
+            }
+
+            if (tankData.Talents == null)
+                tankData.Talents = new Talent[0];
+
+            var talents = GetAvailableTalents(tankData.Class.Replace(" ", ""));
+            foreach(var talent in tankData.Talents)
+            {
+                var talentInfo = talents.FirstOrDefault(t => t.Row == talent.Row && t.Column == talent.Column);
+                if(talentInfo!=null)
+                {
+                    var talentType = System.Reflection.Assembly.GetAssembly(typeof(Player)).GetType(talentInfo.FullName);
+                    if(typeof(Buffs.Buff).IsAssignableFrom(talentType))
+                    {
+                        var talentBuff = _kernel.Get(talentType) as Buffs.Buff;
+
+                        tank.Buffs.AddBuff(talentBuff);
+                    }
+                }
+            }
+
             return tank;
         }
 
@@ -306,5 +395,7 @@ namespace Tank.Web.Controllers
                     throw new InvalidOperationException("Unkown tank class");
             }
         }
+
+        
     }
 }

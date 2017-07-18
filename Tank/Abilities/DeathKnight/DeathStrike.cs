@@ -21,9 +21,10 @@ namespace Tank.Abilities.DeathKnight
             }
 
             var resourceCost = 45;
-            var boneSheild = Caster.Buffs.GetBuff(typeof(Buffs.DeathKnight.BoneShield));
-            if (boneSheild != null && boneSheild.Stacks >= 5)
-                resourceCost -= 10;
+            //ossuary
+            //var boneSheild = Caster.Buffs.GetBuff(typeof(Buffs.DeathKnight.BoneShield));
+            //if (boneSheild != null && boneSheild.Stacks >= 5)
+            //    resourceCost -= 10;
 
             return new AbilityResult
             {

@@ -22,6 +22,8 @@ namespace Tank.ItemOptimization.BattleNetAdapters
             {
                 Id = source.id,
                 Name = source.name,
+                ItemLevel=source.itemLevel,
+                Quality=source.quality,
                 //Slot=source.sl
                 Stats = source.stats.Select(s => new { Stat = _statAdapter.Convert(s.stat), Value = s.amount })
                     .GroupBy(s => s.Stat)

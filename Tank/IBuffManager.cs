@@ -6,6 +6,7 @@ namespace Tank
 {
     public interface IBuffManager
     {
+        Actor Target { get; set; }
         void AddBuff(Buff NewBuff);
         void ClearAllNonPermanent();
         void ClearBuff(Type BuffType);
@@ -19,5 +20,6 @@ namespace Tank
         int GetRatingAdjustment(StatType RatingType);
         int GetStacks(Type BuffType);
         int GetStacks<T>() where T : Buff;
+        List<T> GetEffectStack<T>() where T : class, IEffectStack;
     }
 }

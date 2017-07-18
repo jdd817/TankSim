@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tank.Buffs.DeathKnight
 {
-    public class VampiricBlood:Buff
+    public class VampiricBlood : Buff
     {
         public VampiricBlood()
         {

@@ -39,11 +39,15 @@ namespace Tank.CombatEngine
                 return AttackResult.Parry;
             AttackRoll -= Defender.ParryChance - modifiers.ParryModifiers;
 
+            if (AttackRoll <= Attacker.CritChance - modifiers.CritModifiers)
+                return AttackResult.Crit;
+            AttackRoll -= Attacker.CritChance - modifiers.CritModifiers;
+
             decimal BlockRoll = (decimal)_rng.NextDouble(); //seperate roll for block
             if (BlockRoll < Defender.BlockChance || Defender.Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) != null)
                 return AttackResult.Block;
-            else
-                return AttackResult.Hit;
+            
+            return AttackResult.Hit;
         }
     }
 }

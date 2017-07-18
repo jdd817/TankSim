@@ -1,0 +1,13 @@
+﻿<div>
+    <span>
+        <span ng-show="effect!=null">{{effect.Name}}</span>
+        <select ng-show="effect==null" ng-model="effect" ng-options="effect.Name for effect in availableEffects">
+            <option label="None"></option>
+        </select>
+        <span ng-show="remove!=null" ng-click="remove()">X</span>
+    </span>
+    <div ng-repeat="param in effect.Parameters">
+        <span>{{param.Name}}</span>
+        <input type="text" ng-model="param.Value" />
+    </div>
+</div>

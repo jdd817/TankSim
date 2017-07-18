@@ -29,6 +29,8 @@ namespace Tank.Web.Models
         public int WeaponLowDamage { get; set; }
         public int WeaponHighDamage { get; set; }
         public decimal WeaponSpeed { get; set; }
+        public Effect[] Effects { get; set; }
+        public Talent[] Talents { get; set; }
     }
 
     public class Healer
