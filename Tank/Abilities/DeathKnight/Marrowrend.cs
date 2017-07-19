@@ -18,15 +18,12 @@ namespace Tank.Abilities.DeathKnight
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var boneCharges = 3;
-            if (Caster.Buffs.GetBuff(typeof(Buffs.DeathKnight.Artifact.RattlingBones)) != null && _rng.NextDouble() <= 0.30)
-                boneCharges++;
             return new AbilityResult
             {
                 CasterBuffsApplied = new List<Buff>()
                 {
                     new Buffs.DeathKnight.BoneShield(Caster.Buffs.GetBuff<Buffs.DeathKnight.Artifact.SkeletalShattering>()!=null,Caster.CritChance,_rng)
-                    { Stacks = boneCharges }
+                    { Stacks = 3 }
                 },
                 SecondaryResourceCost = 2,
                 ResourceCost = -20

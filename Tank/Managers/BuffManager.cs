@@ -133,14 +133,16 @@ namespace Tank
 
         public List<T> GetEffectStack<T>() where T : class, IEffectStack
         {
-            var effectStack = Buffs.Values.OfBaseType<T>().ToList();
+            var effectStack = Buffs.Values.OfBaseType<T>()
+                .OrderBy(e => e.GetType().GetCustomAttributes(false).OfType<EffectPriorityAttribute>().Select(p => p.Priority).DefaultIfEmpty(0).First())
+                .ToList();
 
             var replacingStack = effectStack.OfBaseType<IReplacingEffectStack>().ToList();
 
             foreach(var replacingEffect in replacingStack)
             {
                 var replacedEffect = effectStack.FirstOrDefault(b => b.GetType() == replacingEffect.ReplacedType);
-                if(replacedEffect!=null)
+                if (replacedEffect != null)
                 {
                     replacingEffect.ReplacedEffect = replacedEffect;
                     effectStack.Remove(replacedEffect);

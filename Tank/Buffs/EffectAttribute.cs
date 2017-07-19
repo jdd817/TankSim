@@ -10,4 +10,14 @@ namespace Tank.Buffs
     {
         public Type Class { get; set; }
     }
+    
+    public class EffectPriorityAttribute:Attribute
+    {
+        public EffectPriorityAttribute(int priority)
+        {
+            Priority = priority;
+        }
+
+        public int Priority { get; set; }
+    }
 }

@@ -16,7 +16,7 @@ namespace Tank.Abilities.Warrior
         {
             return new AbilityResult
             {
-                ResourceCost = -15
+                ResourceCost = -20
             };
         }
     }

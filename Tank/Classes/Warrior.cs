@@ -6,6 +6,7 @@ using System.Text;
 using Tank.Buffs.Warrior;
 using System.Xml.Serialization;
 using Tank.Abilities;
+using Tank.DataLogging;
 
 namespace Tank.Classes
 {
@@ -21,6 +22,8 @@ namespace Tank.Classes
             RageCap = 120;
 
             UsesTwoHanders = false;
+
+            Buffs.AddBuff(new Block(rng));
 
             Reset();
         }
@@ -94,8 +97,36 @@ namespace Tank.Classes
             }
         }
 
-        #endregion 
+        #endregion
 
+        #region class auras
+
+        [Buffs.EffectPriority(-1)]
+        private class Block : Buffs.PermanentBuff, Buffs.IDamageTakenEffectStack
+        {
+            private IRng _rng;
+
+            public Block(IRng rng)
+            {
+                _rng = rng;
+            }
+
+            public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
+            {
+                if (damageEvent.Result == AttackResult.Block)
+                {
+                    var damageBlocked = 0;
+                    if (_rng.NextDouble() <= (double)(Target as Warrior).CritBlockChance)
+                        damageBlocked = (int)(damageEvent.DamageTaken * 0.60);
+                    else
+                        damageBlocked = (int)(damageEvent.DamageTaken * 0.30);
+                    damageEvent.DamageBlocked = damageBlocked;
+                    damageEvent.DamageTaken = damageEvent.DamageTaken - damageBlocked;
+                }
+            }
+        }
+
+        #endregion
 
         public override Abilities.Ability GetAbilityUsed(IBuffManager MobBuffs)
         {
@@ -103,16 +134,24 @@ namespace Tank.Classes
             {
                 if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldSlam>())
                     return AbilityManger.GetAbility<Abilities.Warrior.ShieldSlam>();
-                if (Cooldowns.AbilityReady<Abilities.Warrior.Revenge>())
+                if (Cooldowns.AbilityReady<Abilities.Warrior.Revenge>() && Buffs.GetBuff<Buffs.Warrior.Revenge>() != null)
                     return AbilityManger.GetAbility<Abilities.Warrior.Revenge>();
-                return AbilityManger.GetAbility<Abilities.Warrior.Devastate>();
+                if (Cooldowns.AbilityReady<Abilities.Warrior.ThunderClap>())
+                    return AbilityManger.GetAbility<Abilities.Warrior.ThunderClap>();
+                if (Cooldowns.AbilityReady<Abilities.Warrior.Revenge>() && Buffs.GetBuff<Talents.Warrior.Vengeance_Revenge>() != null && Rage >= 60)
+                    return AbilityManger.GetAbility<Abilities.Warrior.Revenge>();
+                //return AbilityManger.GetAbility<Abilities.Warrior.Devastate>();
             }
 
-            if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldBlock>() && Rage >= 10 && Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) == null)
+            if (Cooldowns.AbilityReady<Abilities.Warrior.ShieldBlock>() && Rage >= 15 && Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) == null)
                 return AbilityManger.GetAbility<Abilities.Warrior.ShieldBlock>();
 
-            if (Rage >= 60 && Buffs.GetBuff(typeof(IgnorePain)) == null)
+            if ((Rage >= 60 && Buffs.GetBuff(typeof(IgnorePain)) == null && Buffs.GetBuff< Talents.Warrior.Vengeance_Revenge>()==null) ||
+                (Rage >= 40 && Buffs.GetBuff<Talents.Warrior.Vengeance_IgnorePain>() != null))
                 return AbilityManger.GetAbility<Abilities.Warrior.IgnorePain>();
+
+            if (Rage <= 20 && Buffs.GetBuff<Buffs.Warrior.SetBonuses.T20_2Pc>() != null && Cooldowns.AbilityReady<Abilities.Warrior.BerserkerRage>())
+                return AbilityManger.GetAbility<Abilities.Warrior.BerserkerRage>();
 
             return null;
         }
@@ -146,28 +185,7 @@ namespace Tank.Classes
             //get rage
             //from blue: 50 * DamageTaken / MaxHealth
             Rage += (int)((50m * DamageEvent.RawDamage) / MaxHealth);
-
-            if (DamageEvent.Result == AttackResult.Block)
-            {
-                var damageBlocked = 0;
-                if (Rng.NextDouble() < (double)CritBlockChance)
-                    damageBlocked = (int)(DamageEvent.DamageTaken * 0.60);
-                else
-                    damageBlocked = (int)(DamageEvent.DamageTaken * 0.30);
-                DamageEvent.DamageBlocked = damageBlocked;
-                DamageEvent.DamageTaken = DamageEvent.DamageTaken - damageBlocked;
-            }
-
-            IgnorePain Barrier = (IgnorePain)Buffs.GetBuff(typeof(IgnorePain));
-            if (Barrier != null)
-            {
-                var BarrierHit = Math.Min(Barrier.DamageRemaining, DamageEvent.DamageTaken);
-                int Absorbed = (int)(BarrierHit * 0.90m);
-                DamageEvent.DamageTaken = DamageEvent.DamageTaken - Absorbed;
-                DamageEvent.DamageAbsorbed = Absorbed;
-                Barrier.DamageRemaining -= BarrierHit;
-            }
-
+            
             return DamageEvent;
         }
     }

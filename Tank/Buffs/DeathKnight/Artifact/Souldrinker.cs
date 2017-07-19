@@ -19,25 +19,10 @@ namespace Tank.Buffs.DeathKnight.Artifact
         }
 
         public override decimal Durration
-        {
-            get
-            {
-                return 15.0m;
-            }
-        }
+        { get { return 15.0m} }
 
         public override int MaxStacks
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
-        }
+        { get { return 1; } }
 
         public override int GetRatingModifier(StatType RatingType)
         {

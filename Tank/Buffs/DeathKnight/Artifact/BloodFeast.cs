@@ -2,21 +2,18 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Abilities;
 
 namespace Tank.Buffs.DeathKnight.Artifact
 {
-    public class BloodFeast:PermanentBuff
+    [EffectPriority(2)]
+    public class BloodFeast:PermanentBuff, IPlayerAbilityEffectStack
     {
         public override int MaxStacks { get { return 1; } }
 
-        public override decimal GetPercentageModifier(StatType Stat)
+        public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
-            return 0;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
+            Result.SelfHealing = (int)(Result.DamageDealt * 0.25m);
         }
     }
 }

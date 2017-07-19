@@ -2,21 +2,31 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Abilities;
 
 namespace Tank.Buffs.DeathKnight.Artifact
 {
-    public class RattlingBones:PermanentBuff
+    public class RattlingBones:PermanentBuff, IPlayerAbilityEffectStack
     {
-        public override int MaxStacks { get { return 1; } }
+        private IRng _rng;
 
-        public override decimal GetPercentageModifier(StatType Stat)
+        public RattlingBones(IRng rng)
         {
-            return 0;
+            _rng = rng;
         }
 
-        public override int GetRatingModifier(StatType RatingType)
+        public override int MaxStacks { get { return 1; } }
+
+        public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
-            return 0;
+            if(Ability.GetType()==typeof(Abilities.DeathKnight.Marrowrend))
+            {
+                if(_rng.NextDouble()<=0.30)
+                {
+                    var boneShield = Result.CasterBuffsApplied.OfType<Buffs.DeathKnight.BoneShield>().First();
+                    boneShield.Stacks++;
+                }
+            }
         }
     }
 }

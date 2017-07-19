@@ -2,10 +2,12 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.DataLogging;
 
 namespace Tank.Buffs.Warrior
 {
-    public class IgnorePain : Buff
+    [EffectPriority(1)]
+    public class IgnorePain : Buff, IDamageTakenEffectStack
     {
         public IgnorePain(int DamageAbsorbed)
         {
@@ -15,23 +17,14 @@ namespace Tank.Buffs.Warrior
 
         public override decimal Durration { get { return 6.0m; } }
 
-        public override int MaxStacks
-        {
-            get { return 1; }
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
-        }
-
         public int DamageRemaining
         { get; set; }
+
+        public override void Refresh(Buff NewBuff)
+        {
+            base.Refresh(NewBuff);
+            DamageRemaining += (NewBuff as IgnorePain).DamageRemaining;
+        }
 
         public override string ToString()
         {
@@ -39,6 +32,15 @@ namespace Tank.Buffs.Warrior
                     Name,
                     DamageRemaining,
                     TimeRemaining);
+        }
+
+        public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
+        {
+            var BarrierHit = Math.Min(DamageRemaining, damageEvent.DamageTaken);
+            int Absorbed = (int)(BarrierHit * 0.90m);
+            damageEvent.DamageTaken = damageEvent.DamageTaken - Absorbed;
+            damageEvent.DamageAbsorbed = Absorbed;
+            DamageRemaining -= BarrierHit;
         }
     }
 }

@@ -19,10 +19,5 @@ namespace Tank.Buffs.DeathKnight.Artifact
                 return Stacks * 0.01m;
             return 0;
         }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
     }
 }

@@ -12,12 +12,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
         public override decimal GetPercentageModifier(StatType Stat)
         {
             if (Stat == StatType.Damage)
-                return 0.08m;
-            return 0;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
+                return 0.05m;
             return 0;
         }
     }

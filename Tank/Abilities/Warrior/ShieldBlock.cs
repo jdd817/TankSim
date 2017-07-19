@@ -18,7 +18,7 @@ namespace Tank.Abilities.Warrior
         {
             return new AbilityResult
             {
-                ResourceCost = 10,
+                ResourceCost = 15,
                 CasterBuffsApplied = new List<Buff>() { new Buffs.Warrior.ShieldBlock() }
             };
         }
