@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.Buffs;
 
 namespace Tank.Abilities.Druid
 {
@@ -13,7 +14,7 @@ namespace Tank.Abilities.Druid
             return new AbilityResult
             {
                 ResourceCost = 20,
-                CasterBuffsApplied = new[] { new Buffs.Druid.GuardianOfElune() }
+                CasterBuffsApplied = new List<Buff> { new Buffs.Druid.GuardianOfElune() }
             };
         }
     }

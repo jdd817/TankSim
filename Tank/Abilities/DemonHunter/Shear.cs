@@ -52,8 +52,8 @@ namespace Tank.Abilities.DemonHunter
             {
                 ResourceCost = -10,
                 DamageDealt = 0,
-                CasterBuffsApplied = buffs,
-                CooldownReduction = cdReduction
+                CasterBuffsApplied = buffs.ToList(),
+                CooldownReduction = cdReduction.ToList()
             };
         }
 

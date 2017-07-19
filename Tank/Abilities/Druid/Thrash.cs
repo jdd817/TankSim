@@ -34,8 +34,8 @@ namespace Tank.Abilities.Druid
             return new AbilityResult
             {
                 ResourceCost = -4,
-                CasterBuffsApplied = buffs.ToArray(),
-                CooldownReduction = MangleReset.ToArray()
+                CasterBuffsApplied = buffs,
+                CooldownReduction = MangleReset
             };
         }
     }

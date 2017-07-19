@@ -9,21 +9,21 @@ namespace Tank.Abilities
     {
         public AbilityResult()
         {
-            CasterBuffsApplied = new Buffs.Buff[0];
-            TargetBuffsApplied = new Buffs.Buff[0];
-            CooldownReduction = new Abilities.CooldownReduction[0];
+            CasterBuffsApplied = new List<Buffs.Buff>();
+            TargetBuffsApplied = new List<Buffs.Buff>();
+            CooldownReduction = new List<Abilities.CooldownReduction>();
             ChannelLength = 0;
         }
         public decimal Time { get; set; }
         public AttackResult AttackResult { get; set; }
         public int ResourceCost { get; set; }
         public int SecondaryResourceCost { get; set; }
-        public Buffs.Buff[] CasterBuffsApplied { get; set; }
-        public Buffs.Buff[] TargetBuffsApplied { get; set; }
+        public List<Buffs.Buff> CasterBuffsApplied { get; set; }
+        public List<Buffs.Buff> TargetBuffsApplied { get; set; }
         public int DamageDealt { get; set; }
         public int SelfHealing { get; set; }
         public int TartgetHealing { get; set; }
-        public CooldownReduction[] CooldownReduction { get; set; }
+        public List<CooldownReduction> CooldownReduction { get; set; }
         public decimal ChannelLength { get; set; }
     }
 

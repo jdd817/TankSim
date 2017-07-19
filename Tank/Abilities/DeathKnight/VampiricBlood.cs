@@ -22,7 +22,7 @@ namespace Tank.Abilities.DeathKnight
         {
             return new AbilityResult
             {
-                CasterBuffsApplied = new[] { new Buffs.DeathKnight.VampiricBlood() }
+                CasterBuffsApplied = new List<Buff>() { new Buffs.DeathKnight.VampiricBlood() }
             };
         }
     }

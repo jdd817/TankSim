@@ -88,6 +88,7 @@
     <Compile Include="Abilities\Monk\KegSmash.cs" />
     <Compile Include="Abilities\Monk\PurifyingBrew.cs" />
     <Compile Include="Abilities\Monk\TigerPalm.cs" />
+    <Compile Include="Abilities\Warrior\BerserkerRage.cs" />
     <Compile Include="Abilities\Warrior\Devastate.cs" />
     <Compile Include="Abilities\Warrior\Revenge.cs" />
     <Compile Include="Abilities\Warrior\IgnorePain.cs" />
@@ -111,8 +112,12 @@
     <Compile Include="Buffs\Trinkets\DarkmoonDeckImmortality.cs" />
     <Compile Include="Buffs\Trinkets\FeverishCarapace.cs" />
     <Compile Include="Buffs\Trinkets\MementoOfAngerboda.cs" />
+    <Compile Include="Buffs\Trinkets\RecompiledGuardianModule.cs" />
     <Compile Include="Buffs\Trinkets\RPPMTrinket.cs" />
     <Compile Include="Buffs\Trinkets\WrithingHeartOfDarkness.cs" />
+    <Compile Include="Buffs\Warrior\Revenge.cs" />
+    <Compile Include="Buffs\Warrior\SetBonuses\T20_2Pc.cs" />
+    <Compile Include="Buffs\Warrior\SetBonuses\T20_4Pc.cs" />
     <Compile Include="CombatEngine\IAbilityHandler.cs" />
     <Compile Include="CombatEngine\IAttackHandler.cs" />
     <Compile Include="CombatEngine\MobAttackHandler.cs" />
@@ -198,6 +203,13 @@
     <Compile Include="Talents\DeathKnight\RuneTap.cs" />
     <Compile Include="Talents\DeathKnight\SpectralDeflection.cs" />
     <Compile Include="Talents\TalentAttribute.cs" />
+    <Compile Include="Talents\Warrior\AngerManagement.cs" />
+    <Compile Include="Talents\Warrior\Devastator.cs" />
+    <Compile Include="Talents\Warrior\HeavyRepercussions.cs" />
+    <Compile Include="Talents\Warrior\Indomitable.cs" />
+    <Compile Include="Talents\Warrior\NeverSurrender.cs" />
+    <Compile Include="Talents\Warrior\Vengeance.cs" />
+    <Compile Include="Talents\Warrior\WarlordsChallenge.cs" />
     <Compile Include="Weapon.cs" />
   </ItemGroup>
   <ItemGroup>

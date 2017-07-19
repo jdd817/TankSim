@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.Buffs;
 
 namespace Tank.Abilities.Monk
 {
@@ -18,7 +19,7 @@ namespace Tank.Abilities.Monk
         {
             return new AbilityResult
             {
-                CasterBuffsApplied = new[] { new Buffs.Monk.IronskinBrew() }
+                CasterBuffsApplied = new List<Buff> { new Buffs.Monk.IronskinBrew() }
             };
         }
 

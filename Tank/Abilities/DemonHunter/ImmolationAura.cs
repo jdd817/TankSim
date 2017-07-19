@@ -18,7 +18,7 @@ namespace Tank.Abilities.DemonHunter
             {
                 ResourceCost = 0,
                 DamageDealt = 0,
-                CasterBuffsApplied = new[] { new Buffs.DemonHunter.ImmolationAura() }
+                CasterBuffsApplied = new List<Buffs.Buff>() { new Buffs.DemonHunter.ImmolationAura() }
             };
         }
     }

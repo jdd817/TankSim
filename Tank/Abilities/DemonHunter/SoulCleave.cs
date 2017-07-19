@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Buffs;
 using Tank.Buffs.DemonHunter;
 
 namespace Tank.Abilities.DemonHunter
@@ -24,8 +25,8 @@ namespace Tank.Abilities.DemonHunter
                 ResourceCost = 60,
                 DamageDealt = 0,
                 SelfHealing = healingDone,
-                CasterBuffsApplied = new[] { new Buffs.DemonHunter.FeastOfSouls((int)(3.9m * dh.AttackPower * dh.HealthPercentage)) },
-                CooldownReduction = new[] { new CooldownReduction { Ability = typeof(Abilities.DemonHunter.DemonSpikes), ReductionType = ReductionType.By, Amount = soulFragments } }
+                CasterBuffsApplied = new List<Buff>() { new Buffs.DemonHunter.FeastOfSouls((int)(3.9m * dh.AttackPower * dh.HealthPercentage)) },
+                CooldownReduction = new List<CooldownReduction>() { new CooldownReduction { Ability = typeof(Abilities.DemonHunter.DemonSpikes), ReductionType = ReductionType.By, Amount = soulFragments } }
             };
         }
     }

@@ -14,11 +14,7 @@ namespace Tank.Buffs.DeathKnight.SetBonuses
         {
             if(Ability.GetType()==typeof(Abilities.DeathKnight.BloodBoil))
             {
-                var graveWarden = new[] { new GraveWarden() };
-                if (Result.CasterBuffsApplied == null)
-                    Result.CasterBuffsApplied = graveWarden;
-                else
-                    Result.CasterBuffsApplied = Result.CasterBuffsApplied.Concat(graveWarden).ToArray();
+                Result.CasterBuffsApplied.Add(new GraveWarden());
             }
         }
     }

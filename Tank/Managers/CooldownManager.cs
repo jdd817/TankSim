@@ -84,7 +84,7 @@ namespace Tank
                 cdInfo.CooldownRemaining = cdInfo.CooldownLength;
             cdInfo.Charges--;
 
-            ReduceTimers(result.CooldownReduction);
+            ReduceTimers(result.CooldownReduction.ToArray());
         }
 
         public void UpdateTimers(decimal DeltaTime)

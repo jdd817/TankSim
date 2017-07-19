@@ -27,13 +27,11 @@ namespace Tank.CombatEngine
             var actionResult = PlayerAction.GetAbilityResult(Result, Tank, Mob);
             actionResult.AttackResult = Result;
             actionResult.Time = Time;
-
-            Tank.Cooldowns.AbilityUsed(PlayerAction, actionResult);
             
             foreach (var effectStack in Tank.Buffs.GetEffectStack<IPlayerAbilityEffectStack>().ToList())
-            {
                 effectStack.ProcessAbilityUsed(Time, PlayerAction, actionResult, Tank, Mob);
-            }
+
+            Tank.Cooldowns.AbilityUsed(PlayerAction, actionResult);
 
             DataLogging.DataLogManager.UsedAbility(Time, PlayerAction.GetType().Name, actionResult);
 

@@ -21,7 +21,7 @@ namespace Tank.Talents.DeathKnight
             return new AbilityResult
             {
                 SecondaryResourceCost = 1,
-                CasterBuffsApplied = new[] { new RuneTap_Buff() }
+                CasterBuffsApplied = new List<Buffs.Buff> { new RuneTap_Buff() }
             };
         }
     }

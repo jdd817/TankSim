@@ -20,7 +20,7 @@ namespace Tank.Abilities.DemonHunter
             {
                 ResourceCost = 20,
                 DamageDealt = 0,
-                CasterBuffsApplied = new[] { new Buffs.DemonHunter.DemonSpikes(dh.Mastery / 1.125m + .12m) }
+                CasterBuffsApplied = new List<Buffs.Buff>() { new Buffs.DemonHunter.DemonSpikes(dh.Mastery / 1.125m + .12m) }
             };
         }
     }

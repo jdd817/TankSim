@@ -18,7 +18,7 @@ namespace Tank.Abilities.Monk
             return new AbilityResult()
             {
                 ResourceCost = 40,
-                CooldownReduction = new[] { new CooldownReduction { Ability = typeof(IronskinBrew), Amount = 4m, ReductionType = ReductionType.By } }
+                CooldownReduction = new List<CooldownReduction>() { new CooldownReduction { Ability = typeof(IronskinBrew), Amount = 4m, ReductionType = ReductionType.By } }
             };
         }
     }

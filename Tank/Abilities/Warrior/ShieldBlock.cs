@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Buffs;
 
 namespace Tank.Abilities.Warrior
 {
@@ -18,7 +19,7 @@ namespace Tank.Abilities.Warrior
             return new AbilityResult
             {
                 ResourceCost = 10,
-                CasterBuffsApplied = new[] { new Buffs.Warrior.ShieldBlock() }
+                CasterBuffsApplied = new List<Buff>() { new Buffs.Warrior.ShieldBlock() }
             };
         }
 

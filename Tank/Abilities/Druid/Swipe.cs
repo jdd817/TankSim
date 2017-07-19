@@ -28,8 +28,8 @@ namespace Tank.Abilities.Druid
 
             return new AbilityResult
             {
-                CasterBuffsApplied = buffs.ToArray(),
-                CooldownReduction = MangleReset.ToArray()
+                CasterBuffsApplied = buffs,
+                CooldownReduction = MangleReset
             };
         }
     }

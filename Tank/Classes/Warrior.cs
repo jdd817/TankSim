@@ -52,7 +52,7 @@ namespace Tank.Classes
 
         private int _rage;
 
-        private int Rage
+        public int Rage
         {
             get { return _rage; }
             set { _rage = Math.Min(value, RageCap); }
@@ -139,11 +139,8 @@ namespace Tank.Classes
         {
             if (DamageEvent.Result == AttackResult.Dodge || DamageEvent.Result == AttackResult.Parry)
             {
-                if (RevengeResetICD <= 0 && !Cooldowns.AbilityReady<Abilities.Warrior.Revenge>())
-                {
-                    Cooldowns.ReduceTimers(new CooldownReduction { Ability = typeof(Abilities.Warrior.Revenge), Amount = 0, ReductionType = ReductionType.By });
-                    RevengeResetICD = 3.0m;
-                }
+                Cooldowns.ReduceTimers(new CooldownReduction { Ability = typeof(Abilities.Warrior.Revenge), Amount = 0, ReductionType = ReductionType.By });
+                Buffs.AddBuff(new Buffs.Warrior.Revenge());
             }
 
             //get rage
@@ -152,11 +149,13 @@ namespace Tank.Classes
 
             if (DamageEvent.Result == AttackResult.Block)
             {
+                var damageBlocked = 0;
                 if (Rng.NextDouble() < (double)CritBlockChance)
-                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * 0.40);
+                    damageBlocked = (int)(DamageEvent.DamageTaken * 0.60);
                 else
-                    DamageEvent.DamageTaken = (int)(DamageEvent.DamageTaken * 0.70);
-                DamageEvent.DamageBlocked = DamageEvent.DamageTaken - DamageEvent.DamageTaken;
+                    damageBlocked = (int)(DamageEvent.DamageTaken * 0.30);
+                DamageEvent.DamageBlocked = damageBlocked;
+                DamageEvent.DamageTaken = DamageEvent.DamageTaken - damageBlocked;
             }
 
             IgnorePain Barrier = (IgnorePain)Buffs.GetBuff(typeof(IgnorePain));

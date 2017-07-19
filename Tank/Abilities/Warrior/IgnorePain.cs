@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Buffs;
 
 namespace Tank.Abilities.Warrior
 {
@@ -17,7 +18,7 @@ namespace Tank.Abilities.Warrior
             return new AbilityResult
             {
                 ResourceCost = 60,
-                CasterBuffsApplied = new[] { new Buffs.Warrior.IgnorePain((int)(28.0m * war.AttackPower * (1.75m - 0.75m * war.HealthPercentage))) }
+                CasterBuffsApplied = new List<Buff>() { new Buffs.Warrior.IgnorePain((int)(28.0m * war.AttackPower)) }
             };
         }
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.Buffs;
 
 namespace Tank.Abilities.Druid
 {
@@ -32,9 +33,9 @@ namespace Tank.Abilities.Druid
             return new AbilityResult
             {
                 ResourceCost = rageCost,
-                TargetBuffsApplied = new[] { new Buffs.Druid.Moonfire() },
-                CasterBuffsApplied = buffs.ToArray(),
-                CooldownReduction = MangleReset.ToArray()
+                TargetBuffsApplied = new List<Buff> { new Buffs.Druid.Moonfire() },
+                CasterBuffsApplied = buffs,
+                CooldownReduction = MangleReset
             };
         }
     }

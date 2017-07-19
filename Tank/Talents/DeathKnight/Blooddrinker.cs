@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tank.Abilities;
+using Tank.Buffs;
 
 namespace Tank.Talents.DeathKnight
 {
@@ -22,7 +23,7 @@ namespace Tank.Talents.DeathKnight
                 ResourceCost = -10,
                 SecondaryResourceCost = 1,
                 ChannelLength = 3,
-                TargetBuffsApplied = new[] { new Blooddrinker_Buff((int)(13.5m * (Caster as Player).AttackPower / 3m)) }
+                TargetBuffsApplied = new List<Buff> { new Blooddrinker_Buff((int)(13.5m * (Caster as Player).AttackPower / 3m)) }
             };
         }
     }

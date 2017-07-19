@@ -20,7 +20,7 @@ namespace Tank.Abilities.DeathKnight
 
             return new AbilityResult
             {
-                CasterBuffsApplied = new[] { new Buffs.DeathKnight.DeathAndDecay() },
+                CasterBuffsApplied = new List<Buff>() { new Buffs.DeathKnight.DeathAndDecay() },
                 SecondaryResourceCost = runeCost,
                 ResourceCost = -10  //need to test this - does it still generate 10 power when free?
             };

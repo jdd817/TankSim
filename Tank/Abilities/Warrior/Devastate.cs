@@ -18,11 +18,11 @@ namespace Tank.Abilities.Warrior
         {
             return new AbilityResult
             {
-                CooldownReduction = GetCooldownRedutions().ToArray()
+                CooldownReduction = GetCooldownRedutions().ToList()
             };
         }
 
-        public IEnumerable<CooldownReduction> GetCooldownRedutions()
+        private IEnumerable<CooldownReduction> GetCooldownRedutions()
         {
             if (_rng.NextDouble() <= 0.30)
                 yield return new CooldownReduction { Ability = typeof(Warrior.ShieldBlock), Amount = 0, ReductionType = ReductionType.To };

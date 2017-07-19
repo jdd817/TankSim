@@ -147,4 +147,9 @@ namespace Tank.Buffs
         Type ReplacedType { get; }
         IEffectStack ReplacedEffect { get; set; }
     }
+
+    public interface IActionUponExpirationEffectStack:IEffectStack  //needs thought
+    {
+        AbilityResult GetAction();
+    }
 }
