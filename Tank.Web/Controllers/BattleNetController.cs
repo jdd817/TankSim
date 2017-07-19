@@ -54,6 +54,11 @@ namespace Tank.Web.Controllers
             {
                 case 8:return "Mage";
                 case 6:return "Death Knight";
+                case 1:return "Warrior";
+                case 11:return "Druid";
+                case 10:return "Monk";
+                case 12:return "Demon Hunter";
+                case 2:return "Paladin";
                 default:return "Unknown";
             }
         }

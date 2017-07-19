@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Tank.Talents.Warrior
 {
-    [Talent(typeof(Classes.Warrior),3,5)]
-    public class Indomitable:Buffs.PermanentBuff
+    [Talent(typeof(Classes.Warrior), 5, 3)]
+    public class Indomitable : Buffs.PermanentBuff
     {
         public override decimal GetPercentageModifier(StatType Stat)
         {

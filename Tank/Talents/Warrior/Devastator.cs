@@ -7,7 +7,7 @@ using Tank.Abilities;
 
 namespace Tank.Talents.Warrior
 {
-    [Talent(typeof(Classes.Warrior), 1, 5)]
+    [Talent(typeof(Classes.Warrior), 5, 1)]
     public class Devastator : Buffs.PermanentBuff, Buffs.IPlayerAbilityEffectStack
     {
         private IRng _rng;

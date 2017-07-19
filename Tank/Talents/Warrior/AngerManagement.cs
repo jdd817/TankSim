@@ -7,7 +7,7 @@ using Tank.Abilities;
 
 namespace Tank.Talents.Warrior
 {
-    [Talent(typeof(Classes.Warrior), 1, 7)]
+    [Talent(typeof(Classes.Warrior), 7, 1)]
     public class AngerManagement : Buffs.PermanentBuff, Buffs.IPlayerAbilityEffectStack
     {
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
