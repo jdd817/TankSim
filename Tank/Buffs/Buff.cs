@@ -112,15 +112,34 @@ namespace Tank.Buffs
                     HealingPerTick,
                     TimeRemaining);
         }
+    }
 
-        public override int GetRatingModifier(StatType RatingType)
+    public abstract class LeechOverTime:Buff
+    {
+        public int LeechPerTick { get; set; }
+
+        public Player Caster { get; set; }
+
+        public override void Ticked()
         {
-            return 0;
+            var healingEvent = new DataLogging.HealingEvent
+            {
+                Name = this.GetType().Name,
+                Amount = LeechPerTick,
+                Time=DataLogging.DataLogManager.CurrentTime
+            };
+            foreach (var effect in Caster.Buffs.GetEffectStack<IHealingReceivedEffectStack>())
+                effect.HealingReceived(healingEvent, Caster, null);
+            Caster.ApplyHealing(healingEvent.Amount);
+
         }
 
-        public override decimal GetPercentageModifier(StatType Stat)
+        public override string ToString()
         {
-            return 0;
+            return String.Format("{0}<{1}> ({2:0.00})",
+                    Name,
+                    LeechPerTick,
+                    TimeRemaining);
         }
     }
 

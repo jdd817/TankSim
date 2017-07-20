@@ -5,13 +5,14 @@ using System.Text;
 
 namespace Tank.Buffs.DeathKnight
 {
-    public class BloodPlague: HealOverTime
+    public class BloodPlague: LeechOverTime
     {
-        public BloodPlague(int healingAmount)
+        public BloodPlague(int leechPerTick, Player caster)
         {
             TimeRemaining = Durration;
-            HealingPerTick = healingAmount;
+            LeechPerTick = leechPerTick;
             Tick = 1.0m;
+            Caster = caster;
         }
 
         public override decimal Durration { get { return 24.0m; } }
@@ -19,16 +20,6 @@ namespace Tank.Buffs.DeathKnight
         public override int MaxStacks
         {
             get { return 1; }
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
         }
     }
 }
