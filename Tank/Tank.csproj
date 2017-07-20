@@ -98,6 +98,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Artifacts\DeathKnight.cs" />
     <Compile Include="Artifacts\IArtifact.cs" />
+    <Compile Include="Buffs\Common\Concordance.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\CarrionFeast.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\Souldrinker.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\SouldrinkerActive.cs" />
@@ -113,7 +114,7 @@
     <Compile Include="Buffs\Trinkets\FeverishCarapace.cs" />
     <Compile Include="Buffs\Trinkets\MementoOfAngerboda.cs" />
     <Compile Include="Buffs\Trinkets\RecompiledGuardianModule.cs" />
-    <Compile Include="Buffs\Trinkets\RPPMTrinket.cs" />
+    <Compile Include="Buffs\RPPMTrinket.cs" />
     <Compile Include="Buffs\Trinkets\WrithingHeartOfDarkness.cs" />
     <Compile Include="Buffs\Warrior\Revenge.cs" />
     <Compile Include="Buffs\Warrior\SetBonuses\T20_2Pc.cs" />
@@ -123,6 +124,7 @@
     <Compile Include="CombatEngine\MobAttackHandler.cs" />
     <Compile Include="CombatEngine\PlayerAbilityHandler.cs" />
     <Compile Include="CombatEngine\PlayerAttackHandler.cs" />
+    <Compile Include="DataLogging\HealingEvent.cs" />
     <Compile Include="Enums.cs" />
     <Compile Include="IAbilityManager.cs" />
     <Compile Include="ICombatEngine.cs" />

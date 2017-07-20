@@ -116,7 +116,7 @@ namespace Tank.Classes
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
             Energy -= Result.ResourceCost;
-            Result.SelfHealing = ApplyHealing(Result.SelfHealing);
+            //Result.SelfHealing = ApplyHealing(Result.SelfHealing);
 
             if (Ability.GetType()==typeof(Abilities.Monk.PurifyingBrew))
             {

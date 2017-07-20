@@ -135,7 +135,7 @@ namespace Tank.Classes
 
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
-            Result.SelfHealing = ApplyHealing(Result.SelfHealing);
+            //Result.SelfHealing = ApplyHealing(Result.SelfHealing);
             Rage -= Result.ResourceCost;
             if (Ability.GetType() == typeof(Abilities.Attack))
                 Rage += 8;

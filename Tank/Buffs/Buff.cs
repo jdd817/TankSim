@@ -134,7 +134,7 @@ namespace Tank.Buffs
 
     public interface IHealingReceivedEffectStack:IEffectStack
     {
-        void HealingReceived(decimal currentTime, int healingAmount, Player tank, Ability ability);
+        void HealingReceived(DataLogging.HealingEvent healingEvent, Player tank, Ability ability);
     }
 
     public interface IDamageTakenEffectStack:IEffectStack

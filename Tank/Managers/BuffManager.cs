@@ -127,7 +127,7 @@ namespace Tank
             var nonPermanentBuffs = Buffs.Values.Where(b => !b.Permanent).ToList();
             foreach (var buff in nonPermanentBuffs)
                 Buffs.Remove(buff.Name);
-            foreach (var buff in Buffs.Values.OfBaseType<Buffs.Trinkets.RPPMTrinket>())
+            foreach (var buff in Buffs.Values.OfBaseType<Buffs.RPPMBuff>())
                 buff.ResetLastProcs();
         }
 

@@ -5,13 +5,13 @@ using System.Text;
 using System.Threading.Tasks;
 using Tank.Abilities;
 
-namespace Tank.Buffs.Trinkets
+namespace Tank.Buffs
 {
-    public abstract class RPPMTrinket:PermanentBuff
+    public abstract class RPPMBuff:PermanentBuff
     {
         private IRng _rng;
 
-        public RPPMTrinket(IRng rng)
+        public RPPMBuff(IRng rng)
         {
             _rng = rng;
         }

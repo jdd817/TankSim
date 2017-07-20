@@ -8,7 +8,7 @@ using Tank.DataLogging;
 namespace Tank.Buffs.Trinkets
 {
     //[Effect]  NYI
-    public class RecompiledGuardianModule : RPPMTrinket, IDamageTakenEffectStack
+    public class RecompiledGuardianModule : RPPMBuff, IDamageTakenEffectStack
     {
         public RecompiledGuardianModule(IRng rng) : base(rng)
         {

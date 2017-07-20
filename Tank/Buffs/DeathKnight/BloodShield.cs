@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.DataLogging;
 
 namespace Tank.Buffs.DeathKnight
 {
-    public class BloodShield:Buff
+    public class BloodShield:Buff, IDamageTakenEffectStack
     {
         public BloodShield(int DamageAbsorbed)
         {
@@ -18,18 +19,6 @@ namespace Tank.Buffs.DeathKnight
         public override int MaxStacks
         {
             get { return 1; }
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            if (Stat == StatType.AttackPower)
-                return 0.08m;
-            return 0;
         }
 
         private int _damageRemaining;
@@ -57,6 +46,14 @@ namespace Tank.Buffs.DeathKnight
                     Name,
                     DamageRemaining,
                     TimeRemaining);
+        }
+
+        public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
+        {
+            int Absorbed = Math.Min(DamageRemaining, damageEvent.DamageTaken);
+            damageEvent.DamageTaken = damageEvent.DamageTaken - Absorbed;
+            damageEvent.DamageAbsorbed = Absorbed;
+            DamageRemaining -= Absorbed;
         }
     }
 }

@@ -24,29 +24,30 @@ namespace Tank.Classes
 
             UsesTwoHanders = true;
 
-            MawOfTheDamned = new Artifacts.DeathKnight()
+            MawOfTheDamned = new Artifacts.DeathKnight(rng)
             {
-                Consumption=1,
+                Consumption = 1,
                 SanguinaryAffinity = 1,
                 VampiricFangs = 4,
                 RattlingBones = 1,
                 Bonebreaker = 4,
-                AllConsumingRot = 3,
+                AllConsumingRot = 4,
                 UnendingThirst = 1,
                 GrimPerseverance = 4,
                 SkeletalShattering = 1,
                 BloodFeast = 1,
                 IronHeart = 4,
-                Veinrender = 3,
+                Veinrender = 4,
                 UmbilicusEternus = 1,
                 MouthOfHell = 1,
                 DanceOfDarkness = 4,
-                MeatShield = 3,
-                Coagulopathy = 3,
+                MeatShield = 4,
+                Coagulopathy = 4,
                 FortitudeOfTheEbonBlade = 1,
                 CarrionFeast = 4,
                 VampiricAura = 1,
-                Souldrinker = 1
+                Souldrinker = 1,
+                Concordance = 6
             };
 
             foreach (var buff in MawOfTheDamned.GetArtifactBuffs())
@@ -189,6 +190,9 @@ namespace Tank.Classes
                 }
             }
 
+            if (HealthPercentage <= 0.75m && Cooldowns.AbilityReady<Abilities.DeathKnight.VampiricBlood>())
+                return AbilityManger.GetAbility<Abilities.DeathKnight.VampiricBlood>();
+
             return null;
         }
 
@@ -207,7 +211,7 @@ namespace Tank.Classes
                         RuneCounters.Add(10.0m / (1.0m + Haste));
             }
 
-            ApplyHealing(Result.SelfHealing);
+            //ApplyHealing(Result.SelfHealing);
         }
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
@@ -224,17 +228,7 @@ namespace Tank.Classes
         }
         
         public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
-        {            
-            //need to move absorbs to the combat engine as well
-            BloodShield Shield = (BloodShield)Buffs.GetBuff(typeof(BloodShield));
-            if (Shield != null)
-            {
-                int Absorbed = Math.Min(Shield.DamageRemaining, DamageEvent.DamageTaken);
-                DamageEvent.DamageTaken = DamageEvent.DamageTaken - Absorbed;
-                DamageEvent.DamageAbsorbed = Absorbed;
-                Shield.DamageRemaining -= Absorbed;
-            }
-
+        {
             return DamageEvent;
         }
     }

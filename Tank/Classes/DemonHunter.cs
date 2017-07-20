@@ -142,7 +142,7 @@ namespace Tank.Classes
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
             Pain -= Result.ResourceCost;
-            ApplyHealing(Result.SelfHealing);
+            //ApplyHealing(Result.SelfHealing);
         }
 
         public override DamageEvent UpdateFromMobAttack(DamageEvent DamageEvent)

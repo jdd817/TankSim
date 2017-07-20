@@ -8,7 +8,7 @@ using Tank.DataLogging;
 namespace Tank.Buffs.Trinkets
 {
     [Effect]
-    public class FeverishCarapace : RPPMTrinket, IDamageTakenEffectStack
+    public class FeverishCarapace : RPPMBuff, IDamageTakenEffectStack
     {
         public FeverishCarapace(IRng rng) : base(rng)
         {

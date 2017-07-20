@@ -13,7 +13,8 @@ namespace Tank.Buffs.DeathKnight.Artifact
 
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
-            Result.SelfHealing = (int)(Result.DamageDealt * 0.25m);
+            if (Ability.GetType() == typeof(Abilities.DeathKnight.HeartStrike))
+                Result.SelfHealing = (int)(Result.DamageDealt * 0.25m);
         }
     }
 }

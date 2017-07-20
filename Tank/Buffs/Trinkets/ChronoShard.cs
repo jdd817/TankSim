@@ -8,7 +8,7 @@ using Tank.Abilities;
 namespace Tank.Buffs.Trinkets
 {
     [Effect]
-    public class ChronoShard : RPPMTrinket, IPlayerAbilityEffectStack
+    public class ChronoShard : RPPMBuff, IPlayerAbilityEffectStack
     {
         private int _amount;
         private IRng _rng;

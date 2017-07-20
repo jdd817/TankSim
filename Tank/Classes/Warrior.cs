@@ -159,7 +159,7 @@ namespace Tank.Classes
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
             Rage -= Result.ResourceCost;
-            ApplyHealing(Result.SelfHealing);
+            //ApplyHealing(Result.SelfHealing);
             if (Ability.GetType()==typeof(Abilities.Warrior.ShieldSlam))
             {
                 var shieldBlock = Buffs.GetBuff(typeof(ShieldBlock));

@@ -8,7 +8,7 @@ using Tank.Abilities;
 namespace Tank.Buffs.Trinkets
 {
     [Effect]
-    public class MementoOfAngerboda : RPPMTrinket, IPlayerAbilityEffectStack
+    public class MementoOfAngerboda : RPPMBuff, IPlayerAbilityEffectStack
     {
         private int _amount;
         private IRng _rng;

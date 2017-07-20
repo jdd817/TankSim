@@ -11,6 +11,13 @@ namespace Tank.Artifacts
 {
     public class DeathKnight:IArtifact
     {
+        private IRng _rng;
+
+        public DeathKnight(IRng rng)
+        {
+            _rng = rng;
+        }
+
         public int Consumption { get; set; }
         public int SanguinaryAffinity { get; set; }
         public int VampiricFangs { get; set; }
@@ -32,6 +39,7 @@ namespace Tank.Artifacts
         public int CarrionFeast { get; set; }
         public int VampiricAura { get; set; }
         public int Souldrinker { get; set; }
+        public int Concordance { get; set; }
 
         public IEnumerable<Buff> GetArtifactBuffs()
         {
@@ -46,7 +54,7 @@ namespace Tank.Artifacts
             if (MeatShield > 0)
                 yield return new ArtifactBuffs.MeatShield() { Stacks = MeatShield };
             if (RattlingBones > 0)
-                yield return new ArtifactBuffs.RattlingBones() { Stacks = RattlingBones };
+                yield return new ArtifactBuffs.RattlingBones(_rng) { Stacks = RattlingBones };
             if (SanguinaryAffinity > 0)
                 yield return new ArtifactBuffs.SanguinaryAffinity() { Stacks = SanguinaryAffinity };
             if (SkeletalShattering > 0)
@@ -61,6 +69,8 @@ namespace Tank.Artifacts
                 yield return new ArtifactBuffs.SouldrinkerActive { Stacks = Souldrinker };
             if (VampiricAura > 0)
                 yield return new ArtifactBuffs.VampiricAura { Stacks = VampiricAura };
+            if (Concordance > 0)
+                yield return new Buffs.Common.Concordance(_rng) { Stacks = Concordance };
         }
     }
 }

@@ -36,6 +36,18 @@ namespace Tank.CombatEngine
             DataLogging.DataLogManager.UsedAbility(Time, PlayerAction.GetType().Name, actionResult);
 
             Tank.UpdateAbilityResults(Time, PlayerAction, actionResult);
+            if(actionResult.SelfHealing>0)
+            {
+                var healingEvent = new DataLogging.HealingEvent
+                {
+                    Name = PlayerAction.GetType().Name,
+                    Amount = actionResult.SelfHealing,
+                    Time = Time
+                };
+                foreach (var effect in Tank.Buffs.GetEffectStack<IHealingReceivedEffectStack>())
+                    effect.HealingReceived(healingEvent, Tank, null);
+                Tank.ApplyHealing(healingEvent.Amount);
+            }
             foreach (Buff B in actionResult.CasterBuffsApplied)
                 Tank.Buffs.AddBuff(B);
             foreach (Buff B in actionResult.TargetBuffsApplied)

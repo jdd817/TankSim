@@ -2,31 +2,38 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Abilities;
+using Tank.DataLogging;
 
 namespace Tank.Buffs.DeathKnight
 {
-    public class VampiricBlood : Buff
+    public class VampiricBlood : Buff, IHealingReceivedEffectStack
     {
         public VampiricBlood()
         {
             TimeRemaining = Durration;
+            PercentageGain = 0.30m;
         }
 
         public override decimal Durration { get { return 10.0m; } }
+
+        public decimal PercentageGain { get; set; }
 
         public override int MaxStacks
         {
             get { return 1; }
         }
 
-        public override int GetRatingModifier(StatType RatingType)
+        public override decimal GetPercentageModifier(StatType Stat)
         {
+            if (Stat == StatType.MaxHealth)
+                return PercentageGain;
             return 0;
         }
 
-        public override decimal GetPercentageModifier(StatType Stat)
+        public void HealingReceived(HealingEvent healingEvent, Player tank, Ability ability)
         {
-            return 0;
+            healingEvent.Amount = (int)(healingEvent.Amount * (1m + PercentageGain));
         }
     }
 }

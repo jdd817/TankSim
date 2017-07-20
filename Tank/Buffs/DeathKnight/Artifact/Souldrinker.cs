@@ -19,7 +19,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
         }
 
         public override decimal Durration
-        { get { return 15.0m} }
+        { get { return 15.0m; } }
 
         public override int MaxStacks
         { get { return 1; } }

@@ -157,29 +157,29 @@ namespace Tank
 
         [XmlIgnore]
         public virtual decimal CritChance
-        { get { return 0.05m + RatingConverter.GetRating(StatType.Crit, CritRating); } }
+        { get { return 0.05m + RatingConverter.GetRating(StatType.Crit, CritRating + Buffs.GetRatingAdjustment(StatType.Crit)) + Buffs.GetPercentageAdjustment(StatType.Crit); } }
 
         [XmlIgnore]
-        public virtual decimal Mastery { get { return 0.12m + RatingConverter.GetRating(StatType.Mastery, MasteryRating); } }
+        public virtual decimal Mastery { get { return 0.12m + RatingConverter.GetRating(StatType.Mastery, MasteryRating + Buffs.GetRatingAdjustment(StatType.Mastery)) + Buffs.GetPercentageAdjustment(StatType.Mastery); } }
 
         [XmlIgnore]
         public virtual decimal Haste
-        { get { return RatingConverter.GetRating(StatType.Haste, HasteRating) + Buffs.GetPercentageAdjustment(StatType.Haste);} }
+        { get { return RatingConverter.GetRating(StatType.Haste, HasteRating + Buffs.GetRatingAdjustment(StatType.Haste)) + Buffs.GetPercentageAdjustment(StatType.Haste);} }
 
         public abstract int AttackPower
         { get; }
 
         [XmlIgnore]
         public decimal VersatilityDamageIncrease
-        { get { return RatingConverter.GetRating(StatType.Versatility, VersatilityRating) + Buffs.GetPercentageAdjustment(StatType.Versatility); } }
+        { get { return RatingConverter.GetRating(StatType.Versatility, VersatilityRating + Buffs.GetRatingAdjustment(StatType.Versatility)) + Buffs.GetPercentageAdjustment(StatType.Versatility); } }
 
         [XmlIgnore]
         public decimal VersatilityDamageReduction
-        { get { return (RatingConverter.GetRating(StatType.Versatility, VersatilityRating) + Buffs.GetPercentageAdjustment(StatType.Versatility)) / 2m; } }
+        { get { return (RatingConverter.GetRating(StatType.Versatility, VersatilityRating + Buffs.GetRatingAdjustment(StatType.Versatility)) + Buffs.GetPercentageAdjustment(StatType.Versatility)) / 2m; } }
 
         [XmlIgnore]
         public decimal LeechPercentage
-        { get { return RatingConverter.GetRating(StatType.Leech, Leech) + Buffs.GetPercentageAdjustment(StatType.Leech); } }
+        { get { return RatingConverter.GetRating(StatType.Leech, Leech + Buffs.GetRatingAdjustment(StatType.Leech)) + Buffs.GetPercentageAdjustment(StatType.Leech); } }
 
         [XmlIgnore]
         public decimal ArmorDamageReduction

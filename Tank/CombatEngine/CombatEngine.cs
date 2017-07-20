@@ -83,9 +83,15 @@ namespace Tank.CombatEngine
                     healer.HealTimer -= TimeIncrement;
                     if (healer.HealTimer <= 0)
                     {
+                        var healingEvent = new DataLogging.HealingEvent
+                        {
+                            Name = "Healer",
+                            Amount = healer.HealAmount,
+                            Time = Time
+                        };
                         foreach (var effect in healingEffectStack)
-                            effect.HealingReceived(Time, healer.HealAmount, Tank, null);
-                        Tank.ApplyHealing(healer.HealAmount);
+                            effect.HealingReceived(healingEvent, Tank, null);
+                        Tank.ApplyHealing(healingEvent.Amount);
                         healer.HealTimer += healer.HealPeriod;
                     }
                 }
