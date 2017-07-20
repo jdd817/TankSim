@@ -60,7 +60,6 @@ namespace Tank.CombatEngine
                 healer.HealTimer = 0;            
             Tank.Reset();
             Mob.Reset();
-            Mob.GetAttack(); //start mobs on the swing timer to simulate players always getting the jump
             for (decimal Time = 0; Time < Durration; Time += TimeIncrement)
             {
                 Ability PlayerAction = Tank.GetAbilityUsed(Mob.Buffs);

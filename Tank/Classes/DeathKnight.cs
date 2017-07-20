@@ -75,9 +75,9 @@ namespace Tank.Classes
             RuneCounters = new List<decimal>();
             
             CurrentHealth = MaxHealth;
-    }
+        }
 
-    [XmlIgnore]
+        [XmlIgnore]
         public override decimal ParryChance
         {
             get

@@ -114,7 +114,7 @@
     <Compile Include="Buffs\Trinkets\FeverishCarapace.cs" />
     <Compile Include="Buffs\Trinkets\MementoOfAngerboda.cs" />
     <Compile Include="Buffs\Trinkets\RecompiledGuardianModule.cs" />
-    <Compile Include="Buffs\RPPMTrinket.cs" />
+    <Compile Include="Buffs\RPPMBuff.cs" />
     <Compile Include="Buffs\Trinkets\WrithingHeartOfDarkness.cs" />
     <Compile Include="Buffs\Warrior\Revenge.cs" />
     <Compile Include="Buffs\Warrior\SetBonuses\T20_2Pc.cs" />

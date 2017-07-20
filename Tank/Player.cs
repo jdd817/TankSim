@@ -153,7 +153,7 @@ namespace Tank
 
         [XmlIgnore]
         public virtual decimal MissChance
-        { get { return Math.Max(0.0m, 0.075m - RatingConverter.GetRating(StatType.Hit, HitRating)); } }
+        { get { return 0m; } }
 
         [XmlIgnore]
         public virtual decimal CritChance

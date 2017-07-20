@@ -73,8 +73,9 @@ namespace Tank
 
         public void Reset()
         {
+            Buffs.ClearAllNonPermanent();
             foreach (var w in Weapons)
-                w.SwingTimer = 0;
+                w.SwingTimer = w.Speed;
         }
 
         public List<Weapon> Weapons
