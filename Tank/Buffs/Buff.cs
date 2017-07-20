@@ -126,12 +126,12 @@ namespace Tank.Buffs
             {
                 Name = this.GetType().Name,
                 Amount = LeechPerTick,
-                Time=DataLogging.DataLogManager.CurrentTime
+                Time = DataLogging.DataLogManager.CurrentTime
             };
             foreach (var effect in Caster.Buffs.GetEffectStack<IHealingReceivedEffectStack>())
                 effect.HealingReceived(healingEvent, Caster, null);
             Caster.ApplyHealing(healingEvent.Amount);
-
+            DataLogging.DataLogManager.LogHeal(healingEvent);
         }
 
         public override string ToString()

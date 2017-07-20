@@ -13,6 +13,7 @@ namespace Tank.DataLogging
         private TextWriter _abilityWriter;
         private TextWriter _healthWriter;
         private TextWriter _buffWriter;
+        private TextWriter _healWriter;
 
         public StreamLogger(TextWriter outputWriter)
         {
@@ -20,17 +21,20 @@ namespace Tank.DataLogging
             _abilityWriter = outputWriter;
             _healthWriter = outputWriter;
             _buffWriter = outputWriter;
+            _healWriter = outputWriter;
         }
 
         public StreamLogger(TextWriter eventWriter,
             TextWriter abilityWriter,
             TextWriter healthWriter,
-            TextWriter buffWriter)
+            TextWriter buffWriter,
+            TextWriter healWriter)
         {
             _eventWriter = eventWriter;
             _abilityWriter = abilityWriter;
             _healthWriter = healthWriter;
             _buffWriter = buffWriter;
+            _healWriter = healWriter;
         }
 
         public void Dispose()
@@ -91,6 +95,17 @@ namespace Tank.DataLogging
                     Time,
                     buff,
                     buffAction);
+            }
+        }
+
+        public void LogHeal(HealingEvent healingEvent)
+        {
+            if(_healWriter!=null)
+            {
+                _healWriter.WriteLine("[{0:0.00}] {1} healed for {2}",
+                    healingEvent.Time,
+                    healingEvent.Name,
+                    healingEvent.Amount);
             }
         }
 

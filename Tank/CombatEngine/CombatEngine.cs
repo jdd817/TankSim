@@ -92,6 +92,7 @@ namespace Tank.CombatEngine
                             effect.HealingReceived(healingEvent, Tank, null);
                         Tank.ApplyHealing(healingEvent.Amount);
                         healer.HealTimer += healer.HealPeriod;
+                        DataLogging.DataLogManager.LogHeal(healingEvent);
                     }
                 }
 

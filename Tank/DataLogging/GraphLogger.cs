@@ -40,6 +40,10 @@ namespace Tank.DataLogging
         {
         }
 
+        public void LogHeal(HealingEvent healingEvent)
+        {
+        }
+
         public void LogHealth(decimal Time, int Health)
         {
             if (!Lines.ContainsKey(Time))

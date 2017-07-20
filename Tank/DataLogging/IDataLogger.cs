@@ -14,6 +14,8 @@ namespace Tank.DataLogging
         void LogHealth(decimal Time, int Health);
 
         void LogBuff(decimal Time, BuffAction buffAction, Buffs.Buff buff);
+
+        void LogHeal(HealingEvent healingEvent);
     }
 
     public enum BuffAction

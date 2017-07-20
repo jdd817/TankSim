@@ -41,12 +41,13 @@ namespace Tank.CombatEngine
                 var healingEvent = new DataLogging.HealingEvent
                 {
                     Name = PlayerAction.GetType().Name,
-                    Amount = actionResult.SelfHealing,
+                    Amount = (int)(actionResult.SelfHealing * (1m + Tank.VersatilityDamageIncrease)),
                     Time = Time
                 };
                 foreach (var effect in Tank.Buffs.GetEffectStack<IHealingReceivedEffectStack>())
                     effect.HealingReceived(healingEvent, Tank, null);
                 Tank.ApplyHealing(healingEvent.Amount);
+                DataLogging.DataLogManager.LogHeal(healingEvent);
             }
             foreach (Buff B in actionResult.CasterBuffsApplied)
                 Tank.Buffs.AddBuff(B);

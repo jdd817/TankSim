@@ -31,6 +31,10 @@ namespace Tank.DataLogging
         public void LogBuff(decimal Time, BuffAction buffAction, Buffs.Buff buff)
         { }
 
+        public void LogHeal(HealingEvent healingEvent)
+        {
+        }
+
         public void Dispose()
         {
             _writer.Flush();

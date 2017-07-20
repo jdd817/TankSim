@@ -55,6 +55,12 @@ namespace Tank.DataLogging
                 Logger.LogBuff(Time, buffAction, buff);
         }
 
+        public static void LogHeal(HealingEvent healingEvent)
+        {
+            foreach (IDataLogger Logger in Loggers)
+                Logger.LogHeal(healingEvent);
+        }
+
         public static decimal CurrentTime { get { return _currentTime; } }
 
         public static int DamageSince(decimal Time)

@@ -79,6 +79,10 @@ namespace Tank.DataLogging
             Cmd.ExecuteNonQuery();
         }
 
+        public void LogHeal(HealingEvent healingEvent)
+        {
+        }
+
         public void LogBuff(decimal Time, BuffAction buffAction, Buffs.Buff buff)
         { }
 
