@@ -20,6 +20,8 @@ namespace Tank
         public void AddBuff(Buff NewBuff)
         {
             NewBuff.Target = Target;
+            foreach (var effect in GetEffectStack<IBuffAppliedEffectStack>())
+                effect.BuffApplied(NewBuff);
             if (Buffs.ContainsKey(NewBuff.Name))
             {
                 Buffs[NewBuff.Name].Refresh(NewBuff);

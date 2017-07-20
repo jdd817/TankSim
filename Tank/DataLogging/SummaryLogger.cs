@@ -58,14 +58,14 @@ namespace Tank.DataLogging
                 DamageEvents.Add(Event.DamageTaken);
             if (Event.DamageAbsorbed > 0)
                 AbsorbedEvents.Add(Event.DamageAbsorbed);
-            if (Event.DamageHealed > 0)
-                HealEvents.Add(Event.DamageHealed);
+            //if (Event.DamageHealed > 0)
+            //    HealEvents.Add(Event.DamageHealed);
         }
 
         public void UsedAbility(decimal Time, string AbilityName, AbilityResult Result)
         {
-            if (Result.SelfHealing > 0)
-                HealEvents.Add(Result.SelfHealing);
+            //if (Result.SelfHealing > 0)
+            //    HealEvents.Add(Result.SelfHealing);
         }
 
         public void LogHealth(decimal Time, int Health)
@@ -76,6 +76,8 @@ namespace Tank.DataLogging
 
         public void LogHeal(HealingEvent healingEvent)
         {
+            if (healingEvent.Amount > 0 && healingEvent.Name!="Healer")
+                HealEvents.Add(healingEvent.Amount);
         }
 
         #endregion

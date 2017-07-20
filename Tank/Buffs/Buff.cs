@@ -81,7 +81,7 @@ namespace Tank.Buffs
                     Name,
                     TimeRemaining);
         }
-        
+
     }
 
     public abstract class PermanentBuff : Buff
@@ -101,7 +101,7 @@ namespace Tank.Buffs
         }
     }
 
-    public abstract class HealOverTime:Buff
+    public abstract class HealOverTime : Buff
     {
         public int HealingPerTick { get; set; }
 
@@ -114,7 +114,7 @@ namespace Tank.Buffs
         }
     }
 
-    public abstract class LeechOverTime:Buff
+    public abstract class LeechOverTime : Buff
     {
         public int LeechPerTick { get; set; }
 
@@ -146,29 +146,34 @@ namespace Tank.Buffs
     public interface IEffectStack
     { }
 
-    public interface IPlayerAbilityEffectStack:IEffectStack
+    public interface IPlayerAbilityEffectStack : IEffectStack
     {
         void ProcessAbilityUsed(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result, Player tank, Mob mob);
     }
 
-    public interface IHealingReceivedEffectStack:IEffectStack
+    public interface IHealingReceivedEffectStack : IEffectStack
     {
         void HealingReceived(DataLogging.HealingEvent healingEvent, Player tank, Ability ability);
     }
 
-    public interface IDamageTakenEffectStack:IEffectStack
+    public interface IDamageTakenEffectStack : IEffectStack
     {
         void DamageTaken(decimal currentTime, DataLogging.DamageEvent damageEvent, Player tank);
     }
 
-    public interface IReplacingEffectStack:IEffectStack
+    public interface IReplacingEffectStack : IEffectStack
     {
         Type ReplacedType { get; }
         IEffectStack ReplacedEffect { get; set; }
     }
 
-    public interface IActionUponExpirationEffectStack:IEffectStack  //needs thought
+    public interface IActionUponExpirationEffectStack : IEffectStack  //needs thought
     {
         AbilityResult GetAction();
+    }
+
+    public interface IBuffAppliedEffectStack : IEffectStack
+    {
+        void BuffApplied(Buff buff);
     }
 }
