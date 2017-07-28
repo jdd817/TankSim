@@ -11,7 +11,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
     public class Veinrender : PermanentBuff, IPlayerAbilityEffectStack
     {
         public override int MaxStacks
-        { get { return 6; } }
+        { get { return 7; } }
 
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {

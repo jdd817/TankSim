@@ -10,7 +10,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
     public class CarrionFeast : PermanentBuff, IPlayerAbilityEffectStack
     {
         public override int MaxStacks
-        { get { return 6; } }
+        { get { return 7; } }
 
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player Tank, Mob Mob)
         {

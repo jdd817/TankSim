@@ -8,7 +8,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
 {
     public class Bonebreaker:PermanentBuff, IPlayerAbilityEffectStack
     {
-        public override int MaxStacks { get { return 6; } }
+        public override int MaxStacks { get { return 7; } }
 
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
