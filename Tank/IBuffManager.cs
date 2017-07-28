@@ -8,6 +8,7 @@ namespace Tank
     {
         Actor Target { get; set; }
         void AddBuff(Buff NewBuff);
+        void ClearAll();
         void ClearAllNonPermanent();
         void ClearBuff(Type BuffType);
         void ClearBuff(string BuffName);

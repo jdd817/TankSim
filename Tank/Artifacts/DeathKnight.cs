@@ -47,7 +47,7 @@ namespace Tank.Artifacts
                 yield return new ArtifactBuffs.AllConsumingRot() { Stacks = AllConsumingRot };
             if (BloodFeast > 0)
                 yield return new ArtifactBuffs.BloodFeast() { Stacks = BloodFeast };
-            if (Bonebreaker>0)
+            if (Bonebreaker > 0)
                 yield return new ArtifactBuffs.Bonebreaker() { Stacks = Bonebreaker };
             if (Consumption > 0)
                 yield return new ArtifactBuffs.Consumption() { Stacks = Consumption };
@@ -71,6 +71,8 @@ namespace Tank.Artifacts
                 yield return new ArtifactBuffs.VampiricAura { Stacks = VampiricAura };
             if (Concordance > 0)
                 yield return new Buffs.Common.Concordance(_rng) { Stacks = Concordance };
+            if (UmbilicusEternus > 0)
+                yield return new ArtifactBuffs.UmbilicusEternus { Stacks = UmbilicusEternus };
         }
     }
 }

@@ -176,4 +176,19 @@ namespace Tank.Buffs
     {
         void BuffApplied(Buff buff);
     }
+
+    public interface IBuffFadedEffectStack:IEffectStack
+    {
+        void BuffFaded(Buff buff);
+    }
+
+    public interface IBuffTickedEffectStack:IEffectStack
+    {
+        void BuffTicked(Buff buff);
+    }
+
+    public interface IDebuffTickedEffectStack:IEffectStack
+    {
+        void BuffTicked(Buff buff);
+    }
 }

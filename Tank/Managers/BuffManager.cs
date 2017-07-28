@@ -38,6 +38,9 @@ namespace Tank
         {
             List<Buff> ExpiredBuffs = new List<Buff>();
             List<Buff> TickingBuffs = new List<Buff>();
+
+            var buffTickedEffects = this.GetEffectStack<IBuffTickedEffectStack>();
+
             foreach (Buff B in Buffs.Values)
             {
                 B.TimeRemaining -= DeltaTime;
@@ -52,13 +55,19 @@ namespace Tank
                         B.TickTimer += B.Tick;
                         TickingBuffs.Add(B);
                         B.Ticked();
+                        foreach (var effect in buffTickedEffects)
+                            effect.BuffTicked(B);
                     }
                 }
             }
 
+            var buffExpiredEffects = this.GetEffectStack<IBuffFadedEffectStack>();
+
             foreach (Buff Expired in ExpiredBuffs)
             {
                 Buffs.Remove(Expired.Name);
+                foreach (var effect in buffExpiredEffects)
+                    effect.BuffFaded(Expired);
                 DataLogging.DataLogManager.LogBuff(DataLogging.DataLogManager.CurrentTime, DataLogging.BuffAction.Faded, Expired);
             }
 
@@ -122,6 +131,11 @@ namespace Tank
                 Buffs.Remove(BuffName);
                 DataLogging.DataLogManager.LogBuff(DataLogging.DataLogManager.CurrentTime, DataLogging.BuffAction.Faded, cleared);
             }
+        }
+
+        public void ClearAll()
+        {
+            Buffs.Clear();
         }
 
         public void ClearAllNonPermanent()

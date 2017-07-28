@@ -98,10 +98,12 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Artifacts\DeathKnight.cs" />
     <Compile Include="Artifacts\IArtifact.cs" />
+    <Compile Include="Buffs\AbsorbShield.cs" />
     <Compile Include="Buffs\Common\Concordance.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\CarrionFeast.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\Souldrinker.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\SouldrinkerActive.cs" />
+    <Compile Include="Buffs\DeathKnight\Artifact\UmbilicusEternus.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\VampiricAura.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\VampiricAuraActive.cs" />
     <Compile Include="Buffs\DeathKnight\SetBonuses\T19_2Pc.cs" />

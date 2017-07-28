@@ -14,7 +14,7 @@ namespace Tank.Buffs.DeathKnight.Artifact
         {
             if(Ability.GetType()==typeof(Tank.Abilities.DeathKnight.VampiricBlood))
             {
-                var buff = Result.TargetBuffsApplied.OfType<Tank.Buffs.DeathKnight.VampiricBlood>().FirstOrDefault();
+                var buff = Result.CasterBuffsApplied.OfType<Tank.Buffs.DeathKnight.VampiricBlood>().FirstOrDefault();
                 if(buff!=null)
                 {
                     buff.PercentageGain += 0.10m * Stacks;
