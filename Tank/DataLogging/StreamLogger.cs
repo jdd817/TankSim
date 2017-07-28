@@ -66,10 +66,14 @@ namespace Tank.DataLogging
         public void UsedAbility(decimal Time, string AbilityName, AbilityResult Result)
         {
             if (_abilityWriter != null)
-                _abilityWriter.WriteLine("[{0:0.00}] Used {1} {2}",
+                _abilityWriter.WriteLine("[{0:0.00}] Used{1}{2}{3}{4}",
                     Time,
                     AbilityName,
-                    Result.SelfHealing > 0 ? String.Format("(+{0} Healed)", Result.SelfHealing) : ""
+                    Result.SelfHealing > 0 ? String.Format(" (+{0} Healed)", Result.SelfHealing) : "",
+                    Result.ResourceCost != 0 ? String.Format(" ({1} {0} Primary)",
+                        Math.Abs(Result.ResourceCost), Result.ResourceCost > 0 ? "Used" : "Gained") : "",
+                    Result.SecondaryResourceCost != 0 ? String.Format(" ({1} {0} Secondary)",
+                        Math.Abs(Result.SecondaryResourceCost), Result.SecondaryResourceCost > 0 ? "Used" : "Gained") : ""
                     );
         }
 

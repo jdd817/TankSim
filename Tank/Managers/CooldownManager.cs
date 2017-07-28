@@ -13,6 +13,7 @@ namespace Tank
         {
             Cooldowns = new Dictionary<Type, CooldownInfo>();
             GCDLength = 1.5m;
+            RealGCDTimer = 1.0m;
         }
         
         private Dictionary<Type, CooldownInfo> Cooldowns;
@@ -21,11 +22,12 @@ namespace Tank
 
         public bool OffGCD
         {
-            get { return GCDTimer <= 0; }
+            get { return GCDTimer <= 0 && RealGCDTimer >= 1m; }  //gcd cannot go below 1sec
         }
 
         public decimal GCDLength { get; set; }
         public decimal GCDTimer { get; private set; }
+        private decimal RealGCDTimer { get; set; }
 
         public bool AbilityReady<T>() where T : Ability
         {
@@ -69,7 +71,10 @@ namespace Tank
         public void AbilityUsed(Ability ability, AbilityResult result)
         {
             if (ability.OnGCD)
+            {
                 GCDTimer = GCDLength;
+                RealGCDTimer = 0;
+            }
             if (!Cooldowns.ContainsKey(ability.CooldownType))
                 Cooldowns.Add(ability.CooldownType,
                     new CooldownInfo
@@ -89,6 +94,7 @@ namespace Tank
 
         public void UpdateTimers(decimal DeltaTime)
         {
+            RealGCDTimer += DeltaTime;
             DeltaTime = DeltaTime * (1m + Player.Haste);
             foreach (var ability in Cooldowns.Values)
             {
@@ -136,6 +142,7 @@ namespace Tank
         {
             Cooldowns = new Dictionary<Type, CooldownInfo>();
             GCDTimer = 0;
+            RealGCDTimer = 1.0m;
         }
 
         class CooldownInfo

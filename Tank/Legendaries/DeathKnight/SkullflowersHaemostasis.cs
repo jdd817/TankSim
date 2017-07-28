@@ -26,10 +26,10 @@ namespace Tank.Legendaries.DeathKnight
 
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
-            if(Ability.GetType()==typeof(Abilities.DeathKnight.DeathStrike))
+            if (Ability.GetType() == typeof(Abilities.DeathKnight.DeathStrike))
             {
-                Result.DamageDealt = (int)(Result.DamageDealt * Stacks * 0.20m);
-                Result.SelfHealing = (int)(Result.SelfHealing * Stacks * 0.20m);
+                Result.DamageDealt = (int)(Result.DamageDealt * (1m + Stacks * 0.20m));
+                Result.SelfHealing = (int)(Result.SelfHealing * (1m + Stacks * 0.20m));
                 Stacks = 0;
             }
         }
