@@ -19,7 +19,7 @@ namespace Tank.Talents.Warrior
 
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
-            if(Ability.GetType()==typeof(Abilities.Attack))
+            if(Ability.GetType()==typeof(Abilities.Attack) && (Result.AttackResult==AttackResult.Hit || Result.AttackResult==AttackResult.Crit))
             {
                 var extraDamage = (int)(2.78m * tank.WeaponDamage);  //this may not be accurate
                 Result.DamageDealt += extraDamage;

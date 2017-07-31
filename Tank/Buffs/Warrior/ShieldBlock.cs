@@ -2,10 +2,13 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using Tank.Abilities;
+using Tank.DataLogging;
 
 namespace Tank.Buffs.Warrior
 {
-    public class ShieldBlock : Buff
+    [EffectPriority(-10)]
+    public class ShieldBlock : Buff, IDamageTakenEffectStack
     {
         public ShieldBlock()
         {
@@ -19,14 +22,10 @@ namespace Tank.Buffs.Warrior
             get { return 1; }
         }
 
-        public override int GetRatingModifier(StatType RatingType)
+        public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
         {
-            return 0;
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
+            if (damageEvent.Result == AttackResult.Hit || damageEvent.Result == AttackResult.Crit)
+                damageEvent.Result = AttackResult.Block;
         }
     }
 }

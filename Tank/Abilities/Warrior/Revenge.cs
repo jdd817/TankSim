@@ -31,7 +31,7 @@ namespace Tank.Abilities.Warrior
         private IEnumerable<CooldownReduction> GetCooldownRedutions()
         {
             if (_rng.NextDouble() <= 0.30)
-                yield return new CooldownReduction { Ability = typeof(Warrior.ShieldBlock), Amount = 0, ReductionType = ReductionType.To };
+                yield return new CooldownReduction { Ability = typeof(Warrior.ShieldSlam), Amount = 0, ReductionType = ReductionType.To };
         }
     }
 }

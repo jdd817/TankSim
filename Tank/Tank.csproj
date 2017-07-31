@@ -150,6 +150,9 @@
     <Compile Include="Legendaries\DeathKnight\ShacklesOfBryndaor.cs" />
     <Compile Include="Legendaries\DeathKnight\SkullflowersHaemostasis.cs" />
     <Compile Include="Legendaries\DeathKnight\SoulflayersCorruption.cs" />
+    <Compile Include="Legendaries\Warrior\KakushansStormscaleGauntlets.cs" />
+    <Compile Include="Legendaries\Warrior\MannorothsBloodlettingManacles.cs" />
+    <Compile Include="Legendaries\Warrior\ThundergodsVigor.cs" />
     <Compile Include="Managers\AbilityManager.cs" />
     <Compile Include="Managers\BuffManager.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\AllConsumingRot.cs" />
@@ -239,9 +242,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Legendaries\Warrior\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

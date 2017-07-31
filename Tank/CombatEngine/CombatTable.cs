@@ -44,7 +44,7 @@ namespace Tank.CombatEngine
             AttackRoll -= Attacker.CritChance - modifiers.CritModifiers;
 
             decimal BlockRoll = (decimal)_rng.NextDouble(); //seperate roll for block
-            if (BlockRoll < Defender.BlockChance || Defender.Buffs.GetBuff(typeof(Buffs.Warrior.ShieldBlock)) != null)
+            if (BlockRoll < Defender.BlockChance)
                 return AttackResult.Block;
             
             return AttackResult.Hit;
