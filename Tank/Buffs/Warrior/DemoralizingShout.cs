@@ -12,8 +12,15 @@ namespace Tank.Buffs.Warrior
         {
             get
             {
-                return 10m;
+                return 8m;
             }
+        }
+
+        public override decimal GetPercentageModifier(StatType Stat)
+        {
+            if (Stat == StatType.DamageReduction)
+                return 0.20m;
+            return 0;
         }
     }
 }

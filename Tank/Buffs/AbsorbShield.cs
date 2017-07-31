@@ -50,7 +50,7 @@ namespace Tank.Buffs
         {
             int Absorbed = Math.Min(DamageRemaining, damageEvent.DamageTaken);
             damageEvent.DamageTaken = damageEvent.DamageTaken - Absorbed;
-            damageEvent.DamageAbsorbed = Absorbed;
+            damageEvent.DamageAbsorbed += Absorbed;
             DamageRemaining -= Absorbed;
         }
 

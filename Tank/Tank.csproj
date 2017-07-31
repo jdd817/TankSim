@@ -89,6 +89,7 @@
     <Compile Include="Abilities\Monk\PurifyingBrew.cs" />
     <Compile Include="Abilities\Monk\TigerPalm.cs" />
     <Compile Include="Abilities\Warrior\BerserkerRage.cs" />
+    <Compile Include="Abilities\Warrior\DemoralizingShout.cs" />
     <Compile Include="Abilities\Warrior\Devastate.cs" />
     <Compile Include="Abilities\Warrior\Revenge.cs" />
     <Compile Include="Abilities\Warrior\IgnorePain.cs" />

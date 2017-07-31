@@ -18,7 +18,7 @@ namespace Tank.Abilities.Warrior
             return new AbilityResult
             {
                 ResourceCost = 60,
-                CasterBuffsApplied = new List<Buff>() { new Buffs.Warrior.IgnorePain((int)(28.0m * war.AttackPower)) }
+                CasterBuffsApplied = new List<Buff>() { new Buffs.Warrior.IgnorePain((int)(22.3m * war.AttackPower * (1m + war.VersatilityDamageIncrease))) }
             };
         }
 

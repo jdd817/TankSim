@@ -21,7 +21,7 @@ namespace Tank.Buffs.Warrior.Artifact
             if(damageEvent.Result==AttackResult.Block)
             {
                 //we dont have a result for crit blocks, so look at the damage blocked.. it should be more than unblocked for crits, less for non-crits
-                if (damageEvent.DamageBlocked< (damageEvent.DamageTaken+damageEvent.DamageAbsorbed) && _rng.NextDouble()<0.25)
+                if (damageEvent.DamageBlocked> (damageEvent.DamageTaken+damageEvent.DamageAbsorbed) && _rng.NextDouble()<0.25)
                 {
                     tank.Buffs.AddBuff(new ScalesOfEarth_Buff());
                 }

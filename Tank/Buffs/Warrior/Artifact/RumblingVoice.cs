@@ -3,16 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.Abilities;
 
 namespace Tank.Buffs.Warrior.Artifact
 {
-    public class RumblingVoice : PermanentBuff, IBuffAppliedEffectStack
+    public class RumblingVoice : PermanentBuff, IPlayerAbilityEffectStack
     {
-        public void BuffApplied(Buff buff)
+        public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
-            if (buff.GetType() == typeof(DemoralizingShout))
+            if(Ability.GetType()==typeof(Abilities.Warrior.DemoralizingShout))
             {
-                buff.TimeRemaining = buff.TimeRemaining * 1.5m;
+                var demoShout = Result.TargetBuffsApplied.OfType<DemoralizingShout>().First();
+                demoShout.TimeRemaining *= 1.5m;
             }
         }
     }

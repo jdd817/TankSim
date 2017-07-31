@@ -13,7 +13,7 @@ namespace Tank.Buffs.Warrior.Artifact
         {
             if (Ability.GetType() == typeof(Abilities.Warrior.ShieldSlam) || Ability.GetType() == typeof(Abilities.Warrior.ThunderClap))
             {
-                if (tank.Buffs.GetBuff<DemoralizingShout>() != null)
+                if (mob.Buffs.GetBuff<DemoralizingShout>() != null)
                 {
                     Result.ResourceCost = (int)(Result.ResourceCost * 1.5m);
                 }

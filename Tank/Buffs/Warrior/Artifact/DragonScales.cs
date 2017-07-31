@@ -22,7 +22,7 @@ namespace Tank.Buffs.Warrior.Artifact
             {
                 if(_rng.NextDouble()<=0.20)
                 {
-
+                    tank.Buffs.AddBuff(new DragonScales_Buff());
                 }
             }
         }

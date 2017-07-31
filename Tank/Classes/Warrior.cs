@@ -134,7 +134,7 @@ namespace Tank.Classes
 
         #region class auras
 
-        [Buffs.EffectPriority(-1)]
+        [Buffs.EffectPriority(-5)]
         private class Block : Buffs.PermanentBuff, Buffs.IDamageTakenEffectStack
         {
             private IRng _rng;
@@ -185,6 +185,9 @@ namespace Tank.Classes
 
             if (Rage <= 20 && Buffs.GetBuff<Buffs.Warrior.SetBonuses.T20_2Pc>() != null && Cooldowns.AbilityReady<Abilities.Warrior.BerserkerRage>())
                 return AbilityManger.GetAbility<Abilities.Warrior.BerserkerRage>();
+
+            if (Cooldowns.AbilityReady<Abilities.Warrior.DemoralizingShout>())
+                return AbilityManger.GetAbility<Abilities.Warrior.DemoralizingShout>();
 
             return null;
         }

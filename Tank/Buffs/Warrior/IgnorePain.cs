@@ -11,11 +11,11 @@ namespace Tank.Buffs.Warrior
     {
         public IgnorePain(int DamageAbsorbed)
         {
-            TimeRemaining = 6.0m;
+            TimeRemaining = Durration;
             DamageRemaining = DamageAbsorbed;
         }
 
-        public override decimal Durration { get { return 6.0m; } }
+        public override decimal Durration { get { return 15.0m; } }
 
         public int DamageRemaining
         { get; set; }
@@ -24,6 +24,8 @@ namespace Tank.Buffs.Warrior
         {
             base.Refresh(NewBuff);
             DamageRemaining += (NewBuff as IgnorePain).DamageRemaining;
+            if (DamageRemaining > Target.MaxHealth)
+                DamageRemaining = Target.MaxHealth;
         }
 
         public override string ToString()
@@ -39,7 +41,7 @@ namespace Tank.Buffs.Warrior
             var BarrierHit = Math.Min(DamageRemaining, damageEvent.DamageTaken);
             int Absorbed = (int)(BarrierHit * 0.90m);
             damageEvent.DamageTaken = damageEvent.DamageTaken - Absorbed;
-            damageEvent.DamageAbsorbed = Absorbed;
+            damageEvent.DamageAbsorbed += Absorbed;
             DamageRemaining -= BarrierHit;
         }
     }

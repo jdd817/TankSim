@@ -7,7 +7,7 @@ using Tank.DataLogging;
 
 namespace Tank.Buffs.Warrior.Artifact
 {
-    [EffectPriority(-10)]
+    [EffectPriority(-4)]
     public class BastionOfTheAspects : PermanentBuff, IDamageTakenEffectStack
     {
         public override int MaxStacks { get { return 7; } }
