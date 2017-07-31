@@ -61,8 +61,13 @@ namespace Tank.Classes
             set { _rage = Math.Min(value, RageCap); }
         }
 
+        public int _rageCap;
+
         public int RageCap
-        { get; set; }
+        {
+            get { return _rageCap + Buffs.GetRatingAdjustment(StatType.ResourceCap); }
+            set { _rageCap = value; }
+        }
 
         #region class-specific counters
         

@@ -18,6 +18,7 @@
         Stamina,
         PrimaryAvoidance,
         Armor,
-        MaxHealth
+        MaxHealth,
+        ResourceCap
     }
 }

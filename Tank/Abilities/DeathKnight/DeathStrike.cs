@@ -12,13 +12,7 @@ namespace Tank.Abilities.DeathKnight
         {
             var healingDone = HealingAmount(Caster);
 
-            var shieldModifier = 0.12m;
-            var tank = Caster as Player;
-            if (tank != null)
-            {
-                var mastery = RatingConverter.GetRating(StatType.Mastery, tank.MasteryRating);
-                shieldModifier += mastery * 0.60m;
-            }
+            
 
             var resourceCost = 45;
             //ossuary
@@ -31,7 +25,7 @@ namespace Tank.Abilities.DeathKnight
                 ResourceCost = resourceCost,
                 DamageDealt = 0,
                 SelfHealing = healingDone,
-                CasterBuffsApplied = new List<Buff>() { new Buffs.DeathKnight.BloodShield((int)(healingDone * shieldModifier)) },
+                //CasterBuffsApplied = new List<Buff>() { new Buffs.DeathKnight.BloodShield((int)(healingDone * shieldModifier)) },
             };
         }
 

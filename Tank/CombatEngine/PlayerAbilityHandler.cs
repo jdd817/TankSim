@@ -45,7 +45,7 @@ namespace Tank.CombatEngine
                     Time = Time
                 };
                 foreach (var effect in Tank.Buffs.GetEffectStack<IHealingReceivedEffectStack>())
-                    effect.HealingReceived(healingEvent, Tank, null);
+                    effect.HealingReceived(healingEvent, Tank, PlayerAction);
                 Tank.ApplyHealing(healingEvent.Amount);
                 DataLogging.DataLogManager.LogHeal(healingEvent);
             }

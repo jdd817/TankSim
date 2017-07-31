@@ -24,6 +24,8 @@ namespace Tank.Classes
 
             UsesTwoHanders = true;
 
+            Buffs.AddBuff(new DeathKnightMastery());
+
             MawOfTheDamned = new Artifacts.DeathKnight(rng)
             {
                 Consumption = 1,
@@ -98,8 +100,13 @@ namespace Tank.Classes
             set { _runicPower = Math.Min(value, RunicPowerCap); }
         }
 
+        private int _runicPowerCap;
+
         public int RunicPowerCap
-        { get; set; }
+        {
+            get { return _runicPowerCap + Buffs.GetRatingAdjustment(StatType.ResourceCap); }
+            set { _runicPowerCap = value; }
+        }
 
         public int RunesAvailable { get; set; }
 

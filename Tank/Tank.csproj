@@ -98,6 +98,7 @@
     <Compile Include="Actor.cs" />
     <Compile Include="Artifacts\DeathKnight.cs" />
     <Compile Include="Artifacts\IArtifact.cs" />
+    <Compile Include="Artifacts\Warrior.cs" />
     <Compile Include="Buffs\AbsorbShield.cs" />
     <Compile Include="Buffs\Common\Concordance.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\CarrionFeast.cs" />
@@ -106,6 +107,7 @@
     <Compile Include="Buffs\DeathKnight\Artifact\UmbilicusEternus.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\VampiricAura.cs" />
     <Compile Include="Buffs\DeathKnight\Artifact\VampiricAuraActive.cs" />
+    <Compile Include="Buffs\DeathKnight\DeathKnightMastery.cs" />
     <Compile Include="Buffs\DeathKnight\SetBonuses\T19_2Pc.cs" />
     <Compile Include="Buffs\DeathKnight\SetBonuses\T19_4Pc.cs" />
     <Compile Include="Buffs\DeathKnight\SetBonuses\T20_2Pc.cs" />
@@ -118,6 +120,14 @@
     <Compile Include="Buffs\Trinkets\RecompiledGuardianModule.cs" />
     <Compile Include="Buffs\RPPMBuff.cs" />
     <Compile Include="Buffs\Trinkets\WrithingHeartOfDarkness.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\DragonScales.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\DragonSkin.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\Intolerance.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\MightOfTheVrykul.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\RumblingVoice.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\ScalesOfEarth.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\VrykulShieldTraining.cs" />
+    <Compile Include="Buffs\Warrior\DemoralizingShout.cs" />
     <Compile Include="Buffs\Warrior\Revenge.cs" />
     <Compile Include="Buffs\Warrior\SetBonuses\T20_2Pc.cs" />
     <Compile Include="Buffs\Warrior\SetBonuses\T20_4Pc.cs" />
@@ -130,6 +140,10 @@
     <Compile Include="Enums.cs" />
     <Compile Include="IAbilityManager.cs" />
     <Compile Include="ICombatEngine.cs" />
+    <Compile Include="Legendaries\Common\Prydaz.cs" />
+    <Compile Include="Legendaries\DeathKnight\LanathelsLament.cs" />
+    <Compile Include="Legendaries\DeathKnight\RattlegoreBoneLegplates.cs" />
+    <Compile Include="Legendaries\DeathKnight\ServiceOfGorefiend.cs" />
     <Compile Include="Legendaries\DeathKnight\ShacklesOfBryndaor.cs" />
     <Compile Include="Legendaries\DeathKnight\SkullflowersHaemostasis.cs" />
     <Compile Include="Legendaries\DeathKnight\SoulflayersCorruption.cs" />
@@ -222,7 +236,9 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Legendaries\Warrior\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

@@ -41,7 +41,10 @@ namespace Tank.CombatEngine
                 if (Tank.Armor > 0)
                     damageEvent.DamageTaken = (int)(damageEvent.DamageTaken * (1m - Tank.ArmorDamageReduction));
 
-                damageEvent.DamageTaken = (int)(damageEvent.DamageTaken * (1m - Tank.VersatilityDamageReduction) * (1m - Tank.Buffs.GetPercentageAdjustment(StatType.DamageReduction)));
+                damageEvent.DamageTaken = (int)(damageEvent.DamageTaken 
+                    * (1m - Tank.VersatilityDamageReduction) 
+                    * (1m - Tank.Buffs.GetPercentageAdjustment(StatType.DamageReduction))
+                    * (1m - Mob.Buffs.GetPercentageAdjustment(StatType.DamageReduction)));
             }
 
             var damageEffectStack = Tank.Buffs.GetEffectStack<IDamageTakenEffectStack>();

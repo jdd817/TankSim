@@ -41,7 +41,7 @@ namespace Tank
 
             var buffTickedEffects = this.GetEffectStack<IBuffTickedEffectStack>();
 
-            foreach (Buff B in Buffs.Values)
+            foreach (Buff B in Buffs.Values.ToList())
             {
                 B.TimeRemaining -= DeltaTime;
                 B.TimerUpdated(DeltaTime);

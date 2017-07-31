@@ -19,6 +19,7 @@ namespace Tank.Buffs.DeathKnight
             _rng = rng;
             _hasSkeletalShattering = hasSkeletalShattering;
             _critChance = critChance;
+            BaseDamageReduction = 0.16m;
         }
 
         public override decimal Durration { get { return 30.0m; } }
@@ -27,6 +28,8 @@ namespace Tank.Buffs.DeathKnight
         {
             get { return 10; }
         }
+
+        public decimal BaseDamageReduction { get; set; }
 
         public override decimal GetPercentageModifier(StatType Stat)
         {
@@ -64,9 +67,9 @@ namespace Tank.Buffs.DeathKnight
         internal decimal GetDamageReduction(Player tank)
         {
             if (_hasSkeletalShattering && _rng.NextDouble() <= (double)tank.CritChance)
-                return 0.24m;
+                return BaseDamageReduction + 0.08m;
             else
-                return 0.16m;
+                return BaseDamageReduction;
         }
     }
 }
