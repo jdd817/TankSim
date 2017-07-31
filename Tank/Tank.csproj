@@ -120,10 +120,12 @@
     <Compile Include="Buffs\Trinkets\RecompiledGuardianModule.cs" />
     <Compile Include="Buffs\RPPMBuff.cs" />
     <Compile Include="Buffs\Trinkets\WrithingHeartOfDarkness.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\BastionOfTheAspects.cs" />
     <Compile Include="Buffs\Warrior\Artifact\DragonScales.cs" />
     <Compile Include="Buffs\Warrior\Artifact\DragonSkin.cs" />
     <Compile Include="Buffs\Warrior\Artifact\Intolerance.cs" />
     <Compile Include="Buffs\Warrior\Artifact\MightOfTheVrykul.cs" />
+    <Compile Include="Buffs\Warrior\Artifact\NeltharionsThunder.cs" />
     <Compile Include="Buffs\Warrior\Artifact\RumblingVoice.cs" />
     <Compile Include="Buffs\Warrior\Artifact\ScalesOfEarth.cs" />
     <Compile Include="Buffs\Warrior\Artifact\VrykulShieldTraining.cs" />

@@ -25,8 +25,36 @@ namespace Tank.Classes
 
             Buffs.AddBuff(new Block(rng));
 
+            ScaleOfTheEarthWarder = new Artifacts.Warrior(rng)
+            {
+                BastionOfTheAspects = 4,
+                DragonScales = 1,
+                DragonSkin = 4,
+                GleamingScales = 1,
+                Intolerance = 4,
+                LeapingGiants = 4,
+                MightOfTheVrykul = 1,
+                ProtectionOfTheValarjar = 1,
+                RageOfTheFallen = 4,
+                ReflectivePlating = 1,
+                RumblingVoice = 1,
+                ScalesOfEarth = 1,
+                ShatterTheBones = 4,
+                ThunderCrash = 4,
+                Toughness = 4,
+                VrykulShieldTraining = 4,
+                WallOfSteel = 1,
+                WillToSurvive = 4,
+                Concordance = 1
+            };
+
+            foreach (var buff in ScaleOfTheEarthWarder.GetArtifactBuffs())
+                Buffs.AddBuff(buff);
+
             Reset();
         }
+
+        public Artifacts.Warrior ScaleOfTheEarthWarder { get; set; }
 
         public override void Reset()
         {
