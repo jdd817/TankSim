@@ -26,7 +26,7 @@ namespace Tank
                 case StatType.Versatility:
                     return Rating / 47500m;  //increase to 47500 in 7.1.5
                 case StatType.Leech:
-                    return Rating / 22950m;
+                    return Rating / 23000m;
                 case StatType.Parry:
                 case StatType.Dodge:
                     return Rating / 51500m;

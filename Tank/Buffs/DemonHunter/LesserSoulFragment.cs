@@ -25,7 +25,14 @@ namespace Tank.Buffs.DemonHunter
             if(NewBuff.Stacks + Stacks>MaxStacks)
             {
                 var fragmentsConsumed = (NewBuff.Stacks + Stacks) - MaxStacks;
+                var amountHealed = fragmentsConsumed * GetHealing();
                 (Target as Player).ApplyHealing(fragmentsConsumed * GetHealing());
+                DataLogging.DataLogManager.LogHeal(new DataLogging.HealingEvent
+                {
+                    Name = "LesserSoulFragment",
+                    Amount = amountHealed,
+                    Time = DataLogging.DataLogManager.CurrentTime
+                });
             }
             base.Refresh(NewBuff);
         }

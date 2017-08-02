@@ -258,6 +258,7 @@
     <Compile Include="Talents\DemonHunter\Fallout.cs" />
     <Compile Include="Talents\DemonHunter\FeastOfSouls.cs" />
     <Compile Include="Talents\DemonHunter\FeedTheDemon.cs" />
+    <Compile Include="Talents\DemonHunter\Felblade.cs" />
     <Compile Include="Talents\DemonHunter\FelDevestation.cs" />
     <Compile Include="Talents\DemonHunter\Fracture.cs" />
     <Compile Include="Talents\DemonHunter\SoulBarrier.cs" />

@@ -24,7 +24,7 @@ namespace BattleNetApi.DataObjects
         public decimal mastery { get; set; }
         public int masteryRating { get; set; }
         public decimal leech { get; set; }
-        public int leechRating { get; set; }
+        public decimal leechRating { get; set; }
         public decimal leechRatingBonus { get; set; }
         public int versatility { get; set; }
         public decimal versatilityDamageDoneBonus { get; set; }

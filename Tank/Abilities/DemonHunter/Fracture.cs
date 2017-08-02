@@ -12,6 +12,7 @@ namespace Tank.Abilities.DemonHunter
         {
             return new AbilityResult
             {
+                ResourceCost = 30,
                 DamageDealt = (int)(13.48m * (Caster as Player).WeaponDamage),
                 CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.LesserSoulFragment { Stacks = 2 } }
             };

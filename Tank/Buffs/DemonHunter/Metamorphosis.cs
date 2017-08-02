@@ -43,5 +43,11 @@ namespace Tank.Buffs.DemonHunter
                     Result.CasterBuffsApplied.Add(new LesserSoulFragment());
             }
         }
+
+        public override void Refresh(Buff NewBuff)
+        {
+            if (NewBuff.TimeRemaining > TimeRemaining)
+                TimeRemaining = NewBuff.TimeRemaining;
+        }
     }
 }

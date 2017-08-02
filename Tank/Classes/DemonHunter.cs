@@ -107,7 +107,8 @@ namespace Tank.Classes
                 return (int)((
                     Agility
                     + Buffs.GetRatingAdjustment(StatType.AttackPower))
-                    * (1 + Buffs.GetPercentageAdjustment(StatType.AttackPower)));
+                    * (1m + Mastery * (2m / 3m))
+                    * (1m + Buffs.GetPercentageAdjustment(StatType.AttackPower)));
             }
         }
         
@@ -146,26 +147,45 @@ namespace Tank.Classes
         {
             if (Cooldowns.OffGCD)
             {
-                if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.75m)
-                    return AbilityManger.GetAbility<Abilities.DemonHunter.FelDevestation>();
+                if (Cooldowns.AbilityReady<Abilities.DemonHunter.SoulCarver>())
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.SoulCarver>();
 
-                if (Pain >= 80)
+                //if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.75m)
+                //    return AbilityManger.GetAbility<Abilities.DemonHunter.FelDevestation>();
+
+                if (Buffs.GetBuff<Talents.DemonHunter.Fracture>() != null)
+                {
+                    var soulFragments = Buffs.GetStacks<Buffs.DemonHunter.LesserSoulFragment>();
+                    if (soulFragments < 3 && Pain >= 30)
+                        return AbilityManger.GetAbility<Abilities.DemonHunter.Fracture>();
+                }
+
+                if (Pain >= 70)
                     return AbilityManger.GetAbility<Abilities.DemonHunter.SoulCleave>();
-
+                
                 if (Cooldowns.AbilityReady<Abilities.DemonHunter.ImmolationAura>())
                     return AbilityManger.GetAbility<Abilities.DemonHunter.ImmolationAura>();
 
+                if (Buffs.GetBuff<Talents.DemonHunter.Felblade>() != null && Cooldowns.AbilityReady<Abilities.DemonHunter.FelBlade>())
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.FelBlade>();
+
                 if (Cooldowns.AbilityReady<Abilities.DemonHunter.SigilOfFlame>())
                     return AbilityManger.GetAbility<Abilities.DemonHunter.SigilOfFlame>();
-
-                if (Cooldowns.AbilityReady<Abilities.DemonHunter.FelBlade>())
-                    return AbilityManger.GetAbility<Abilities.DemonHunter.FelBlade>();
+                
+                if (Pain >= 60 && HealthPercentage <= 0.75m)
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.SoulCleave>();
 
                 return AbilityManger.GetAbility<Abilities.DemonHunter.Shear>();
             }
 
             if (Cooldowns.AbilityReady<Abilities.DemonHunter.DemonSpikes>() && Pain >= 20 && Buffs.GetBuff(typeof(Buffs.DemonHunter.DemonSpikes)) == null)
                 return AbilityManger.GetAbility<Abilities.DemonHunter.DemonSpikes>();
+
+            if (Cooldowns.AbilityReady<Abilities.DemonHunter.Metamorphosis>() && Buffs.GetBuff<Buffs.DemonHunter.FieryBrand>() == null && Buffs.GetBuff<Buffs.DemonHunter.Metamorphosis>() == null)
+                return AbilityManger.GetAbility<Abilities.DemonHunter.Metamorphosis>();
+
+            if (Cooldowns.AbilityReady<Abilities.DemonHunter.FieryBrand>() && Buffs.GetBuff<Buffs.DemonHunter.Metamorphosis>() == null)
+                return AbilityManger.GetAbility<Abilities.DemonHunter.FieryBrand>();
 
             return null;
         }

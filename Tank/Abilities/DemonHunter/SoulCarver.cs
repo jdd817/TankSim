@@ -8,6 +8,11 @@ namespace Tank.Abilities.DemonHunter
 {
     public class SoulCarver : Ability
     {
+        public SoulCarver()
+        {
+            Cooldown = 60m;
+        }
+
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
