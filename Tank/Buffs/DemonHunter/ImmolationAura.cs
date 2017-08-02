@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tank.Buffs.DemonHunter
 {
-    public class ImmolationAura:Buff
+    public class ImmolationAura : Buff
     {
         public ImmolationAura()
         {
@@ -18,16 +18,6 @@ namespace Tank.Buffs.DemonHunter
         public override int MaxStacks
         {
             get { return 1; }
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
         }
     }
 }

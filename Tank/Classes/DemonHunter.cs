@@ -35,8 +35,39 @@ namespace Tank.Classes
 
             UsesTwoHanders = false;
 
+            AldrachiWarblades = new Artifacts.DemonHunter(rng)
+            {
+                SoulCarver = 1,
+                TormentedSouls = 1,
+                ShatterTheSouls = 4,
+                SiphonPower = 1,
+                DefensiveSpikes = 1,
+                Painbringer = 1,
+                AldrachiDesign = 4,
+                FieryDemise = 4,
+                FueledByPain = 1,
+                EmbraceThePain = 4,
+                DemonicFlames = 1,
+                HonedWarblades = 4,
+                WillOfTheIllidari = 4,
+                AuraOfPain = 4,
+                CharredWarblades = 1,
+                DevourSouls = 4,
+                InternalForce = 4,
+                Soulgorger = 1,
+                EruptingSouls = 1,
+                LingeringOrdeal = 4,
+                FlamingSoul = 1,
+                Concordance = 6
+            };
+
+            foreach (var buff in AldrachiWarblades.GetArtifactBuffs())
+                Buffs.AddBuff(buff);
+
             Reset();
         }
+
+        public Artifacts.DemonHunter AldrachiWarblades { get; set; }
 
         public override void Reset()
         {
@@ -52,7 +83,7 @@ namespace Tank.Classes
 
         private int _pain;
 
-        private int Pain
+        public int Pain
         {
             get { return _pain; }
             set { _pain = Math.Min(value, PainCap); }

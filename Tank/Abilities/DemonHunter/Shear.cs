@@ -29,6 +29,8 @@ namespace Tank.Abilities.DemonHunter
             var dh = Caster as Classes.DemonHunter;
 
             var shearChance = GetShearChance(dh.ShearsSinceLastSoulFragment);
+            if ((Caster as Player).HealthPercentage < 0.50m)
+                shearChance += Caster.Buffs.GetStacks<Buffs.DemonHunter.Artifact.ShatterTheSouls>() * 0.05;
 
             CooldownReduction[] cdReduction;
 
