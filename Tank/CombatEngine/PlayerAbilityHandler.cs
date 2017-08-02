@@ -49,6 +49,23 @@ namespace Tank.CombatEngine
                 Tank.ApplyHealing(healingEvent.Amount);
                 DataLogging.DataLogManager.LogHeal(healingEvent);
             }
+
+            //leech - applying vers to it.  need to find a source confirming or denying that vers applies to leech
+            var leechAmount = (int)(actionResult.DamageDealt * Tank.LeechPercentage * (1m + Tank.VersatilityDamageIncrease));
+            if (leechAmount > 0)
+            {
+                var healingEvent = new DataLogging.HealingEvent
+                {
+                    Name = "Leech",
+                    Amount = leechAmount,
+                    Time = Time
+                };
+                foreach (var effect in Tank.Buffs.GetEffectStack<IHealingReceivedEffectStack>())
+                    effect.HealingReceived(healingEvent, Tank, null);
+                Tank.ApplyHealing(healingEvent.Amount);
+                DataLogging.DataLogManager.LogHeal(healingEvent);
+            }
+
             foreach (Buff B in actionResult.CasterBuffsApplied)
                 Tank.Buffs.AddBuff(B);
             foreach (Buff B in actionResult.TargetBuffsApplied)

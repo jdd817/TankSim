@@ -242,6 +242,7 @@
     <Compile Include="Talents\DemonHunter\FeedTheDemon.cs" />
     <Compile Include="Talents\DemonHunter\FelDevestation.cs" />
     <Compile Include="Talents\DemonHunter\Fracture.cs" />
+    <Compile Include="Talents\DemonHunter\SoulBarrier.cs" />
     <Compile Include="Talents\DemonHunter\SpiritBomb.cs" />
     <Compile Include="Talents\TalentAttribute.cs" />
     <Compile Include="Talents\Warrior\AngerManagement.cs" />

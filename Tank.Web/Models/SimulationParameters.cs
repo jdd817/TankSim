@@ -26,6 +26,7 @@ namespace Tank.Web.Models
         public int Crit { get; set; }
         public int Haste { get; set; }
         public int Versatility { get; set; }
+        public int Leech { get; set; }
         public int WeaponLowDamage { get; set; }
         public int WeaponHighDamage { get; set; }
         public decimal WeaponSpeed { get; set; }

@@ -7,8 +7,8 @@ using Tank.Buffs;
 
 namespace Tank.Talents.DemonHunter
 {
-    [Talent(typeof(Classes.DemonHunter),2,4)]
-    public class Fracture:PermanentBuff
+    [Talent(typeof(Classes.DemonHunter), 4, 2)]
+    public class Fracture : PermanentBuff
     {
     }
 }

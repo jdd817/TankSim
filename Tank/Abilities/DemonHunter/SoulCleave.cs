@@ -16,7 +16,7 @@ namespace Tank.Abilities.DemonHunter
             var healingDone = (int)(12.75m * dh.AttackPower * (1.0m + dh.VersatilityDamageIncrease));
 
             var soulFragments = Caster.Buffs.GetBuff<LesserSoulFragment>();
-            healingDone += soulFragments.GetTotalHealing();
+            healingDone += soulFragments != null ? soulFragments.GetTotalHealing() : 0;
             Caster.Buffs.ClearBuff(typeof(LesserSoulFragment));
 
             return new AbilityResult
@@ -24,7 +24,14 @@ namespace Tank.Abilities.DemonHunter
                 ResourceCost = 60,
                 DamageDealt = (int)(7.42m*(Caster as Player).WeaponDamage),
                 SelfHealing = healingDone,
-                CooldownReduction = new List<CooldownReduction>() { new CooldownReduction { Ability = typeof(Abilities.DemonHunter.DemonSpikes), ReductionType = ReductionType.By, Amount = soulFragments.Stacks } }
+                CooldownReduction = new List<CooldownReduction>() {
+                    new CooldownReduction
+                    {
+                        Ability = typeof(Abilities.DemonHunter.DemonSpikes),
+                        ReductionType = ReductionType.By,
+                        Amount = soulFragments!=null? soulFragments.Stacks:0
+                    }
+                }
             };
         }
     }

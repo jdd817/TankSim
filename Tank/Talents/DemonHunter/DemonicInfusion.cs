@@ -7,7 +7,7 @@ using Tank.Buffs;
 
 namespace Tank.Talents.DemonHunter
 {
-    [Talent(typeof(Classes.DemonHunter), 2, 7)]
+    [Talent(typeof(Classes.DemonHunter), 7, 2)]
     public class DemonicInfusion : PermanentBuff
     {
     }

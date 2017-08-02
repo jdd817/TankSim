@@ -7,7 +7,7 @@ using Tank.Buffs;
 
 namespace Tank.Talents.DemonHunter
 {
-    [Talent(typeof(Classes.DemonHunter), 1, 4)]
+    [Talent(typeof(Classes.DemonHunter), 4, 1)]
     public class FeedTheDemon : PermanentBuff, IBuffFadedEffectStack
     {
         public void BuffFaded(Buff buff)

@@ -329,6 +329,7 @@ namespace Tank.Web.Controllers
             tank.CritRating = tankData.Crit;
             tank.HasteRating = tankData.Haste;
             tank.VersatilityRating = tankData.Versatility;
+            tank.Leech = tankData.Leech;
             tank.Weapons = new List<Weapon>
             {
                 new Weapon

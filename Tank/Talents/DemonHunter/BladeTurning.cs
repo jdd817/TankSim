@@ -9,7 +9,7 @@ using Tank.DataLogging;
 
 namespace Tank.Talents.DemonHunter
 {
-    [Talent(typeof(Classes.DemonHunter), 2, 6)]
+    [Talent(typeof(Classes.DemonHunter), 6,2)]
     public class BladeTurning : PermanentBuff, IDamageTakenEffectStack
     {
         public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)

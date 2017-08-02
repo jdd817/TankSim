@@ -68,7 +68,7 @@ namespace Tank.Artifacts
             if (Souldrinker > 0)
                 yield return new ArtifactBuffs.SouldrinkerActive { Stacks = Souldrinker };
             if (VampiricAura > 0)
-                yield return new ArtifactBuffs.VampiricAura { Stacks = VampiricAura };
+                yield return new ArtifactBuffs.VampiricAuraActive { Stacks = VampiricAura };
             if (Concordance > 0)
                 yield return new Buffs.Common.Concordance(_rng) { Stacks = Concordance };
             if (UmbilicusEternus > 0)

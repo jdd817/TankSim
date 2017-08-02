@@ -7,8 +7,8 @@ using Tank.Buffs;
 
 namespace Tank.Talents.DemonHunter
 {
-    [Talent(typeof(Classes.DemonHunter),1,6)]
-    public class FelDevestation:PermanentBuff
+    [Talent(typeof(Classes.DemonHunter), 6, 1)]
+    public class FelDevestation : PermanentBuff
     {
     }
 }

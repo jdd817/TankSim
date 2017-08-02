@@ -8,7 +8,7 @@ using Tank.Buffs;
 
 namespace Tank.Talents.DemonHunter
 {
-    [Talent(typeof(Classes.DemonHunter), 1, 2)]
+    [Talent(typeof(Classes.DemonHunter), 2, 1)]
     public class FeastOfSouls : PermanentBuff, IPlayerAbilityEffectStack
     {
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)

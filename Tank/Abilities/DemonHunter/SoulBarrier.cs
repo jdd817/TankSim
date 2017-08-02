@@ -19,7 +19,7 @@ namespace Tank.Abilities.DemonHunter
             var dh = Caster as Player;
             
             var soulFragments = Caster.Buffs.GetBuff<LesserSoulFragment>();
-            var healingDone = soulFragments.GetTotalHealing();
+            var healingDone = soulFragments != null ? soulFragments.GetTotalHealing() : 0;
             Caster.Buffs.ClearBuff(typeof(LesserSoulFragment));
 
             return new AbilityResult
@@ -27,7 +27,7 @@ namespace Tank.Abilities.DemonHunter
                 ResourceCost = 60,
                 DamageDealt = (int)(7.42m * (Caster as Player).WeaponDamage),
                 SelfHealing = healingDone,
-                CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.SoulBarrier(dh, soulFragments.Stacks) }
+                CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.SoulBarrier(dh, soulFragments != null ? soulFragments.Stacks : 0) }
             };
         }
     }

@@ -16,14 +16,6 @@ namespace Tank.Buffs.DeathKnight.Artifact
             }
         }
 
-        public override int MaxStacks
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
         public override decimal GetPercentageModifier(StatType Stat)
         {
             if (Stat == StatType.Leech)

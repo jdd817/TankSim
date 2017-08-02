@@ -31,6 +31,7 @@ namespace Tank.Web.Controllers
                 Haste = armoryChar.stats.hasteRating,
                 Versatility = armoryChar.stats.versatility,
                 Mastery = armoryChar.stats.masteryRating,
+                Leech = armoryChar.stats.leechRating,
                 Strength = armoryChar.stats.str,
                 Agility = armoryChar.stats.agi,
                 MaxHealth = armoryChar.stats.health,
