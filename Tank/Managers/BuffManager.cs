@@ -129,6 +129,10 @@ namespace Tank
             {
                 var cleared = Buffs[BuffName];
                 Buffs.Remove(BuffName);
+                
+                foreach (var effect in GetEffectStack<IBuffFadedEffectStack>())
+                    effect.BuffFaded(cleared);
+    
                 DataLogging.DataLogManager.LogBuff(DataLogging.DataLogManager.CurrentTime, DataLogging.BuffAction.Faded, cleared);
             }
         }

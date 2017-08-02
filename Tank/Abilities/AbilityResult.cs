@@ -37,6 +37,7 @@ namespace Tank.Abilities
     public enum ReductionType
     {
         To,
-        By
+        By,
+        Recharge
     }
 }

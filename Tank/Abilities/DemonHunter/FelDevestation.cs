@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.Buffs;
 
 namespace Tank.Abilities.DemonHunter
 {
@@ -18,8 +19,21 @@ namespace Tank.Abilities.DemonHunter
             return new AbilityResult
             {
                 ResourceCost = 30,
-                SelfHealing = (Caster as Classes.DemonHunter).AttackPower * 25
+                TargetBuffsApplied = new List<Buff> { new FelDevestation_Buff((int)(11.5m * (Caster as Player).AttackPower), Caster as Player) }
             };
         }
+    }
+
+    public class FelDevestation_Buff : LeechOverTime
+    {
+        public FelDevestation_Buff(int leechPerTick, Player caster)
+        {
+            Caster = caster;
+            LeechPerTick = leechPerTick;
+            TickTimer = 1;
+        }
+
+        public override decimal Durration
+        { get { return 2m; } }
     }
 }

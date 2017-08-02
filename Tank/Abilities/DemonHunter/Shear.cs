@@ -39,7 +39,7 @@ namespace Tank.Abilities.DemonHunter
 
             if (_rng.NextDouble() <= shearChance)
             {
-                buffs = new[] { new SoulFragment() };
+                buffs = new[] { new LesserSoulFragment() };
                 dh.ShearsSinceLastSoulFragment = 0;
             }
             else

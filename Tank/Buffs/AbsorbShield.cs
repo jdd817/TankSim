@@ -21,7 +21,7 @@ namespace Tank.Buffs
 
         private int _damageRemaining;
 
-        public int DamageRemaining
+        public virtual int DamageRemaining
         {
             get { return _damageRemaining; }
             set
@@ -46,7 +46,7 @@ namespace Tank.Buffs
                     TimeRemaining);
         }
 
-        public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
+        public virtual void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
         {
             int Absorbed = Math.Min(DamageRemaining, damageEvent.DamageTaken);
             damageEvent.DamageTaken = damageEvent.DamageTaken - Absorbed;

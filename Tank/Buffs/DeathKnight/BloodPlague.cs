@@ -16,10 +16,5 @@ namespace Tank.Buffs.DeathKnight
         }
 
         public override decimal Durration { get { return 24.0m; } }
-
-        public override int MaxStacks
-        {
-            get { return 1; }
-        }
     }
 }

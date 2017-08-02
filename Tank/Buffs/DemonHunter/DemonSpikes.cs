@@ -5,28 +5,18 @@ using System.Text;
 
 namespace Tank.Buffs.DemonHunter
 {
-    public class DemonSpikes:Buff
+    public class DemonSpikes : Buff
     {
-        public DemonSpikes(decimal damageReduction)
+        public DemonSpikes(Player tank)
         {
             TimeRemaining = 6.0m;
-            DamageReduction = damageReduction;
+            DamageReduction = tank.Mastery / 1.125m + .12m;
         }
 
         public decimal DamageReduction
         { get; set; }
 
         public override decimal Durration { get { return 6.0m; } }
-
-        public override int MaxStacks
-        {
-            get { return 1; }
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
 
         public override decimal GetPercentageModifier(StatType Stat)
         {

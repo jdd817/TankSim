@@ -126,6 +126,16 @@ namespace Tank
 
                 if (cdReduction.ReductionType == ReductionType.To)
                     cdInfo.CooldownRemaining = cdReduction.Amount;
+                else if(cdReduction.ReductionType==ReductionType.Recharge)
+                {
+                    if (cdReduction.Amount <= 0)
+                    {
+                        cdInfo.Charges = cdInfo.MaxCharges;
+                        cdInfo.CooldownLength = 0;
+                    }
+                    else
+                        cdInfo.Charges += (int)cdReduction.Amount;
+                }
                 else
                     cdInfo.CooldownRemaining -= cdReduction.Amount;
 
@@ -147,7 +157,17 @@ namespace Tank
 
         class CooldownInfo
         {
-            public int Charges { get; set; }
+            private int _charges;
+            public int Charges
+            {
+                get { return _charges; }
+                set
+                {
+                    _charges = value;
+                    if (_charges > MaxCharges)
+                        _charges = MaxCharges;
+                }
+            }
             public decimal CooldownRemaining { get; set; }
             public int MaxCharges { get; set; }
             public decimal CooldownLength { get; set; }
