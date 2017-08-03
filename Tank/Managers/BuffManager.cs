@@ -30,6 +30,7 @@ namespace Tank
             else
             {
                 Buffs.Add(NewBuff.Name, NewBuff);
+                NewBuff.Applied();
                 DataLogging.DataLogManager.LogBuff(DataLogging.DataLogManager.CurrentTime, DataLogging.BuffAction.Applied, NewBuff);
             }
         }

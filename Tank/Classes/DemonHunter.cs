@@ -178,7 +178,9 @@ namespace Tank.Classes
                 return AbilityManger.GetAbility<Abilities.DemonHunter.Shear>();
             }
 
-            if (Cooldowns.AbilityReady<Abilities.DemonHunter.DemonSpikes>() && Pain >= 20 && Buffs.GetBuff(typeof(Buffs.DemonHunter.DemonSpikes)) == null)
+            if (Cooldowns.AbilityReady<Abilities.DemonHunter.DemonSpikes>() && Pain >= 20
+                && Buffs.GetBuff(typeof(Buffs.DemonHunter.DemonSpikes)) == null
+                && Buffs.GetBuff(typeof(Buffs.DemonHunter.Metamorphosis)) == null)
                 return AbilityManger.GetAbility<Abilities.DemonHunter.DemonSpikes>();
 
             if (Cooldowns.AbilityReady<Abilities.DemonHunter.Metamorphosis>() && Buffs.GetBuff<Buffs.DemonHunter.FieryBrand>() == null && Buffs.GetBuff<Buffs.DemonHunter.Metamorphosis>() == null)

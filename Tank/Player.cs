@@ -296,9 +296,11 @@ namespace Tank
             foreach (var hot in TickingBuffs.OfBaseType<Buffs.HealOverTime>())
             {
                 ApplyHealing(hot.HealingPerTick);
-                DataLogging.DataLogManager.UsedAbility(DataLogging.DataLogManager.CurrentTime, "Healed", new AbilityResult
+                DataLogging.DataLogManager.LogHeal(new HealingEvent
                 {
-                    SelfHealing = hot.HealingPerTick
+                    Name = String.Format("{0} Tick", hot.Name),
+                    Amount = hot.HealingPerTick,
+                    Time = DataLogManager.CurrentTime
                 });
             }
         }

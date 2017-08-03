@@ -44,6 +44,12 @@ namespace Tank.Buffs.DemonHunter
             }
         }
 
+        public override void Applied()
+        {
+            var oldMaxHealth = (int)(Target.MaxHealth / (1m + HealthGain));
+            Target.CurrentHealth += Target.MaxHealth - oldMaxHealth;
+        }
+
         public override void Refresh(Buff NewBuff)
         {
             if (NewBuff.TimeRemaining > TimeRemaining)

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Tank.Buffs.DemonHunter
 {
-    public class LesserSoulFragment:Buff
+    public class LesserSoulFragment : Buff
     {
         public LesserSoulFragment()
         {
@@ -22,7 +22,7 @@ namespace Tank.Buffs.DemonHunter
 
         public override void Refresh(Buff NewBuff)
         {
-            if(NewBuff.Stacks + Stacks>MaxStacks)
+            if (NewBuff.Stacks + Stacks > MaxStacks)
             {
                 var fragmentsConsumed = (NewBuff.Stacks + Stacks) - MaxStacks;
                 var amountHealed = fragmentsConsumed * GetHealing();

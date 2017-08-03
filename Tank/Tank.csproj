@@ -175,6 +175,7 @@
     <Compile Include="Legendaries\DeathKnight\ShacklesOfBryndaor.cs" />
     <Compile Include="Legendaries\DeathKnight\SkullflowersHaemostasis.cs" />
     <Compile Include="Legendaries\DeathKnight\SoulflayersCorruption.cs" />
+    <Compile Include="Legendaries\DemonHunter\KirelNarak.cs" />
     <Compile Include="Legendaries\Warrior\KakushansStormscaleGauntlets.cs" />
     <Compile Include="Legendaries\Warrior\MannorothsBloodlettingManacles.cs" />
     <Compile Include="Legendaries\Warrior\ThundergodsVigor.cs" />

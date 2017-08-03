@@ -14,7 +14,7 @@ namespace Tank.Buffs.DemonHunter.Artifact
         public void ProcessAbilityUsed(decimal CurrentTime, Ability Ability, AbilityResult Result, Player tank, Mob mob)
         {
             if (Ability.GetType() == typeof(Abilities.DemonHunter.SoulCleave))
-                Result.SelfHealing = (int)(Result.SelfHealing * 0.03m * Stacks);
+                Result.SelfHealing = (int)(Result.SelfHealing * (1m + 0.03m * Stacks));
         }
     }
 }

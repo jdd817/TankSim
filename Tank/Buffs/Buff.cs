@@ -63,6 +63,9 @@ namespace Tank.Buffs
                 Stacks = MaxStacks;
         }
 
+        public virtual void Applied()
+        { }
+
         public virtual void TimerUpdated(decimal delta) { }
 
         public virtual void Ticked() { }

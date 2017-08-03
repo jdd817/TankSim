@@ -35,5 +35,11 @@ namespace Tank.Buffs.DeathKnight
         {
             healingEvent.Amount = (int)(healingEvent.Amount * (1m + PercentageGain));
         }
+
+        public override void Applied()
+        {
+            var oldMaxHealth = (int)(Target.MaxHealth / (1m + PercentageGain));
+            Target.CurrentHealth += Target.MaxHealth - oldMaxHealth;
+        }
     }
 }
