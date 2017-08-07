@@ -30,7 +30,7 @@ namespace Tank.Abilities.DemonHunter
         {
             Caster = caster;
             LeechPerTick = leechPerTick;
-            TickTimer = 1;
+            Tick = 1;
         }
 
         public override decimal Durration

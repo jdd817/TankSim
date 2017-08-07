@@ -17,6 +17,8 @@ namespace Tank.Abilities.DemonHunter
         {
             return new AbilityResult
             {
+                DamageDealt = (int)(5.6m * (Caster as Player).WeaponDamage),
+                DamageType = DamageType.Fire,
                 ResourceCost = -20
             };
         }

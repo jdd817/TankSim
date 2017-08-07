@@ -53,7 +53,7 @@ namespace Tank.Abilities.DemonHunter
             return new AbilityResult
             {
                 ResourceCost = -10,
-                DamageDealt = 0,
+                DamageDealt = (int)(3.4m * (Caster as Player).WeaponDamage),
                 CasterBuffsApplied = buffs.ToList(),
                 CooldownReduction = cdReduction.ToList()
             };

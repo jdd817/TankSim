@@ -17,6 +17,8 @@ namespace Tank.Abilities.DemonHunter
         {
             return new AbilityResult
             {
+                DamageDealt = (int)(8.13m * (Caster as Player).AttackPower),
+                DamageType=DamageType.Fire,
                 TargetBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.FieryBrand() }
             };
         }

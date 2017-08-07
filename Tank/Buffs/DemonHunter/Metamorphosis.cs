@@ -11,7 +11,7 @@ namespace Tank.Buffs.DemonHunter
     {
         public Metamorphosis()
         {
-            TickTimer = 1;
+            Tick = 1;
             HealthGain = 0.30m;
         }
 

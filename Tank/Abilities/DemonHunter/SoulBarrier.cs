@@ -24,8 +24,8 @@ namespace Tank.Abilities.DemonHunter
 
             return new AbilityResult
             {
-                ResourceCost = 60,
-                DamageDealt = (int)(7.42m * (Caster as Player).WeaponDamage),
+                ResourceCost = 10,
+                DamageDealt = 0,
                 SelfHealing = healingDone,
                 CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.SoulBarrier(dh, soulFragments != null ? soulFragments.Stacks : 0) }
             };

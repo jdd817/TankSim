@@ -17,8 +17,9 @@ namespace Tank.Abilities.DemonHunter
             return new AbilityResult
             {
                 ResourceCost = 0,
-                DamageDealt = 0,
-                CasterBuffsApplied = new List<Buffs.Buff>() { new Buffs.DemonHunter.ImmolationAura() }
+                DamageDealt = (int)((Caster as Player).AttackPower * 2.43m),
+                DamageType = DamageType.Fire,
+                CasterBuffsApplied = new List<Buffs.Buff>() { new Buffs.DemonHunter.ImmolationAura((Caster as Player).AttackPower) }
             };
         }
     }

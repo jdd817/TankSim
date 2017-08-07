@@ -13,6 +13,7 @@ namespace Tank.Abilities
             TargetBuffsApplied = new List<Buffs.Buff>();
             CooldownReduction = new List<Abilities.CooldownReduction>();
             ChannelLength = 0;
+            DamageType = DamageType.Physical;
         }
         public decimal Time { get; set; }
         public AttackResult AttackResult { get; set; }
@@ -25,6 +26,7 @@ namespace Tank.Abilities
         public int TartgetHealing { get; set; }
         public List<CooldownReduction> CooldownReduction { get; set; }
         public decimal ChannelLength { get; set; }
+        public DamageType DamageType { get; set; }
     }
 
     public class CooldownReduction
@@ -32,6 +34,14 @@ namespace Tank.Abilities
         public Type Ability { get; set; }
         public ReductionType ReductionType { get; set; }
         public decimal Amount { get; set; }
+    }
+
+    public enum DamageType
+    {
+        Physical,
+        Fire,
+        Shadow,
+        Chaos,
     }
 
     public enum ReductionType

@@ -18,6 +18,7 @@ namespace Tank.Abilities.DemonHunter
             return new AbilityResult
             {
                 DamageDealt = (int)(10.14m * (Caster as Player).WeaponDamage),
+                DamageType = DamageType.Fire,
                 CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.LesserSoulFragment { Stacks = 2 }, new SoulCarver_Buff() }
             };
         }
@@ -27,7 +28,7 @@ namespace Tank.Abilities.DemonHunter
     {
         public SoulCarver_Buff()
         {
-            TickTimer = 1m;
+            Tick = 1m;
         }
 
         public override decimal Durration { get { return 3m; } }

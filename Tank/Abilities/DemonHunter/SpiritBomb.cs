@@ -25,7 +25,9 @@ namespace Tank.Abilities.DemonHunter
             {
                 ResourceCost = 0,
                 DamageDealt = damageDone,
+                DamageType = DamageType.Fire,
                 SelfHealing = healingDone,
+                CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.DemonHunter.Frailty() }
             };
         }
     }

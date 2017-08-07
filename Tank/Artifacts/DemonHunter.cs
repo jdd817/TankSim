@@ -71,6 +71,10 @@ namespace Tank.Artifacts
                 yield return new ArtifactBuffs.DemonicFlames { Stacks = DemonicFlames };
             if (HonedWarblades > 0)
                 yield return new ArtifactBuffs.HonedWarblades { Stacks = HonedWarblades };
+            if (CharredWarblades > 0)
+                yield return new ArtifactBuffs.CharredWarblades { Stacks = CharredWarblades };
+            if (FieryDemise > 0)
+                yield return new ArtifactBuffs.FieryDemise { Stacks = FieryDemise };
         }
     }
 }

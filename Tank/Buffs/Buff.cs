@@ -104,6 +104,19 @@ namespace Tank.Buffs
         }
     }
 
+    public abstract class DamageOverTime:Buff
+    {
+        public int DamagePerTick { get; set; }
+
+        public override string ToString()
+        {
+            return String.Format("{0}<{1}> ({2:0.00})",
+                    Name,
+                    DamagePerTick,
+                    TimeRemaining);
+        }
+    }
+
     public abstract class HealOverTime : Buff
     {
         public int HealingPerTick { get; set; }

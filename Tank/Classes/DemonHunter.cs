@@ -150,8 +150,12 @@ namespace Tank.Classes
                 if (Cooldowns.AbilityReady<Abilities.DemonHunter.SoulCarver>())
                     return AbilityManger.GetAbility<Abilities.DemonHunter.SoulCarver>();
 
-                //if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.75m)
-                //    return AbilityManger.GetAbility<Abilities.DemonHunter.FelDevestation>();
+                if (Buffs.GetBuff<Buffs.DemonHunter.Frailty>() == null
+                    && Buffs.GetBuff<Talents.DemonHunter.SpiritBomb>() != null)
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.SpiritBomb>();
+
+                if (Pain >= 30 && Cooldowns.AbilityReady<Abilities.DemonHunter.FelDevestation>() && HealthPercentage <= 0.75m)
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.FelDevestation>();
 
                 if (Buffs.GetBuff<Talents.DemonHunter.Fracture>() != null)
                 {
@@ -159,6 +163,11 @@ namespace Tank.Classes
                     if (soulFragments < 3 && Pain >= 30)
                         return AbilityManger.GetAbility<Abilities.DemonHunter.Fracture>();
                 }
+
+                if (Buffs.GetBuff<Talents.DemonHunter.SoulBarrier>() != null
+                    && Pain >= 10
+                    && Cooldowns.AbilityReady<Abilities.DemonHunter.SoulBarrier>())
+                    return AbilityManger.GetAbility<Abilities.DemonHunter.SoulBarrier>();
 
                 if (Pain >= 70)
                     return AbilityManger.GetAbility<Abilities.DemonHunter.SoulCleave>();
@@ -183,7 +192,15 @@ namespace Tank.Classes
                 && Buffs.GetBuff(typeof(Buffs.DemonHunter.Metamorphosis)) == null)
                 return AbilityManger.GetAbility<Abilities.DemonHunter.DemonSpikes>();
 
-            if (Cooldowns.AbilityReady<Abilities.DemonHunter.Metamorphosis>() && Buffs.GetBuff<Buffs.DemonHunter.FieryBrand>() == null && Buffs.GetBuff<Buffs.DemonHunter.Metamorphosis>() == null)
+            if (Buffs.GetBuff<Talents.DemonHunter.DemonicInfusion>() != null
+                    && Cooldowns.AbilityReady<Abilities.DemonHunter.DemonicInfusion>()
+                    && Buffs.GetBuff(typeof(Buffs.DemonHunter.DemonSpikes)) == null
+                    && !Cooldowns.AbilityReady<Abilities.DemonHunter.DemonSpikes>())
+                return AbilityManger.GetAbility<Abilities.DemonHunter.DemonicInfusion>();
+
+            if (Cooldowns.AbilityReady<Abilities.DemonHunter.Metamorphosis>() 
+                && Buffs.GetBuff<Buffs.DemonHunter.FieryBrand>() == null 
+                && Buffs.GetBuff<Buffs.DemonHunter.Metamorphosis>() == null)
                 return AbilityManger.GetAbility<Abilities.DemonHunter.Metamorphosis>();
 
             if (Cooldowns.AbilityReady<Abilities.DemonHunter.FieryBrand>() && Buffs.GetBuff<Buffs.DemonHunter.Metamorphosis>() == null)
@@ -210,8 +227,6 @@ namespace Tank.Classes
         public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
         {
             base.UpdateFromTickingBuffs(TickingBuffs);
-            foreach (var aura in TickingBuffs.OfType<Buffs.DemonHunter.ImmolationAura>())
-                Pain += 2;
         }
     }
 }

@@ -122,10 +122,12 @@
     <Compile Include="Buffs\DeathKnight\SetBonuses\T20_2Pc.cs" />
     <Compile Include="Buffs\DeathKnight\SetBonuses\T20_4Pc.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\AldrachiDesign.cs" />
+    <Compile Include="Buffs\DemonHunter\Artifact\CharredWarblades.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\DefensiveSpikes.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\DemonicFlames.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\DevourSouls.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\EmbraceThePain.cs" />
+    <Compile Include="Buffs\DemonHunter\Artifact\FieryDemise.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\FlamingSoul.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\HonedWarblades.cs" />
     <Compile Include="Buffs\DemonHunter\Artifact\LingeringOrdeal.cs" />
@@ -137,8 +139,11 @@
     <Compile Include="Buffs\DemonHunter\FieryBrand.cs" />
     <Compile Include="Buffs\DemonHunter\Frailty.cs" />
     <Compile Include="Buffs\DemonHunter\Metamorphosis.cs" />
+    <Compile Include="Buffs\DemonHunter\SetBonuses\T20_2Pc.cs" />
+    <Compile Include="Buffs\DemonHunter\SetBonuses\T20_4Pc.cs" />
     <Compile Include="Buffs\DemonHunter\SoulBarrier.cs" />
     <Compile Include="Buffs\EffectAttribute.cs" />
+    <Compile Include="Buffs\DemonHunter\SigilOfFlame.cs" />
     <Compile Include="Buffs\Trinkets\ChronoShard.cs" />
     <Compile Include="Buffs\Trinkets\DarkmoonDeckImmortality.cs" />
     <Compile Include="Buffs\Trinkets\FeverishCarapace.cs" />
