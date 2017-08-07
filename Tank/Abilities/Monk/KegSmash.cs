@@ -17,6 +17,7 @@ namespace Tank.Abilities.Monk
         {
             return new AbilityResult()
             {
+                DamageDealt = (int)(6.70m * (Caster as Player).AttackPower),
                 ResourceCost = 40,
                 CooldownReduction = new List<CooldownReduction>() { new CooldownReduction { Ability = typeof(IronskinBrew), Amount = 4m, ReductionType = ReductionType.By } }
             };

@@ -16,21 +16,10 @@ namespace Tank.Buffs.Monk
             }
         }
 
-        public override int MaxStacks
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
         public override decimal GetPercentageModifier(StatType Stat)
         {
-            return 0;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
+            if (Stat == StatType.StaggerAmount)
+                return 0.35m;
             return 0;
         }
     }

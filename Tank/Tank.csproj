@@ -90,6 +90,8 @@
     <Compile Include="Abilities\Druid\Swipe.cs" />
     <Compile Include="Abilities\Druid\Thrash.cs" />
     <Compile Include="Abilities\Monk\BlackoutStrike.cs" />
+    <Compile Include="Abilities\Monk\BreathOfFire.cs" />
+    <Compile Include="Abilities\Monk\FortifyingBrew.cs" />
     <Compile Include="Abilities\Monk\HealingElixer.cs" />
     <Compile Include="Abilities\Monk\IronskinBrew.cs" />
     <Compile Include="Abilities\Monk\KegSmash.cs" />
@@ -144,6 +146,11 @@
     <Compile Include="Buffs\DemonHunter\SoulBarrier.cs" />
     <Compile Include="Buffs\EffectAttribute.cs" />
     <Compile Include="Buffs\DemonHunter\SigilOfFlame.cs" />
+    <Compile Include="Buffs\Monk\ElusiveBrawlerAura.cs" />
+    <Compile Include="Buffs\Monk\FortifyingBrew.cs" />
+    <Compile Include="Buffs\Monk\HealingElixerAura.cs" />
+    <Compile Include="Buffs\Monk\HealingOrbAura.cs" />
+    <Compile Include="Buffs\Monk\StaggerAura.cs" />
     <Compile Include="Buffs\Trinkets\ChronoShard.cs" />
     <Compile Include="Buffs\Trinkets\DarkmoonDeckImmortality.cs" />
     <Compile Include="Buffs\Trinkets\FeverishCarapace.cs" />

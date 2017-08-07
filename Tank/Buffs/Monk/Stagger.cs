@@ -14,38 +14,32 @@ namespace Tank.Buffs.Monk
             Tick = 0.5m;
         }
 
-        public override decimal Durration
-        {
-            get
-            {
-                return 10.0m;
-            }
-        }
-
-        public override int MaxStacks
-        {
-            get
-            {
-                return 1;
-            }
-        }
+        public override decimal Durration { get { return 10.0m; } } 
 
         public int DamageDelayed { get; set; }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
 
         public override void Refresh(Buff NewBuff)
         {
             base.Refresh(NewBuff);
             DamageDelayed += (NewBuff as Stagger).DamageDelayed;
+        }
+
+        public override void Ticked()
+        {
+            int damageTaken;
+            if (TimeRemaining > 0)
+                damageTaken = (int)(DamageDelayed / TimeRemaining * Tick);
+            else
+                damageTaken = DamageDelayed;
+            Target.CurrentHealth -= damageTaken;
+            DamageDelayed -= damageTaken;
+            DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
+            {
+                Name = "Stagger",
+                Time = DataLogging.DataLogManager.CurrentTime,
+                DamageTaken = damageTaken,
+                Result = AttackResult.Hit
+            });
         }
 
         public override string ToString()

@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Tank.Abilities;
+using Tank.DataLogging;
 
 namespace Tank.Classes
 {
@@ -19,6 +20,11 @@ namespace Tank.Classes
             EnergyCap = 100;
 
             UsesTwoHanders = true;
+
+            Buffs.AddBuff(new Buffs.Monk.GiftOfTheOxAura(rng));
+            Buffs.AddBuff(new Buffs.Monk.StaggerAura());
+            Buffs.AddBuff(new Buffs.Monk.HealingElixerAura());
+            Buffs.AddBuff(new Buffs.Monk.CelestialFortuneAura(rng));
 
             Reset();
         }
@@ -116,16 +122,6 @@ namespace Tank.Classes
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
             Energy -= Result.ResourceCost;
-            //Result.SelfHealing = ApplyHealing(Result.SelfHealing);
-
-            if (Ability.GetType()==typeof(Abilities.Monk.PurifyingBrew))
-            {
-                var stagger = Buffs.GetBuff<Buffs.Monk.Stagger>();
-                if(stagger!=null)
-                {
-                    stagger.DamageDelayed = stagger.DamageDelayed / 2;
-                }
-            }
         }
 
         public override void UpdateTimeElapsed(decimal DeltaTime)
@@ -138,7 +134,7 @@ namespace Tank.Classes
                 bool absorbOrbs = false;
                 if (healingOrbs.Stacks >= 3)
                     absorbOrbs = true;
-                if (1.0m * CurrentHealth / MaxHealth <= 0.50m)
+                if (HealthPercentage <= 0.50m)
                     absorbOrbs = true;
                 if (healingOrbs.TimeRemaining <= 0.25m)
                     absorbOrbs = true;
@@ -147,81 +143,26 @@ namespace Tank.Classes
                 {
                     var healingAmount = ApplyHealing((int)(healingOrbs.Stacks * AttackPower * 7.5m));
                     Buffs.ClearBuff<Buffs.Monk.HealingOrb>();
-                    DataLogging.DataLogManager.UsedAbility(DataLogging.DataLogManager.CurrentTime, "Healed", new AbilityResult
+                    DataLogging.DataLogManager.LogHeal(new HealingEvent
                     {
-                        SelfHealing = healingAmount
+                        Time = DataLogging.DataLogManager.CurrentTime,
+                        Name = "GiftOfTheOx",
+                        Amount = healingAmount
                     });
                 }
             }
         }
 
-        public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
+        public override DamageEvent UpdateFromMobAttack(DamageEvent DamageEvent)
         {
-            if (DamageEvent.Result == AttackResult.Dodge && Buffs.GetBuff(typeof(Buffs.Monk.ElusiveBrawler)) != null)
-                Buffs.ClearBuff(typeof(Buffs.Monk.ElusiveBrawler));
-            
-            if (DamageEvent.DamageTaken > 0)
-            {
-                Buffs.AddBuff(new Buffs.Monk.ElusiveBrawler(Mastery));
-
-                var staggerAmount = 0.45m;
-                if (Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) != null)
-                    staggerAmount += 0.40m;
-
-                var damageStaggered = (int)(DamageEvent.DamageTaken * staggerAmount);
-                var healingOrbChance = (0.75m * DamageEvent.DamageTaken / MaxHealth) * (3 - 2m * CurrentHealth / MaxHealth);
-
-                DamageEvent.DamageTaken = DamageEvent.DamageTaken - damageStaggered;
-                
-                if (Rng.NextDouble() <= (double)healingOrbChance)
-                    Buffs.AddBuff(new Buffs.Monk.HealingOrb());
-
-                Buffs.AddBuff(new Buffs.Monk.Stagger(damageStaggered));
-
-                if (CurrentHealth + DamageEvent.DamageTaken > MaxHealth * 0.35m && CurrentHealth < MaxHealth * 0.35m && Cooldowns.ChargesAvailable<Abilities.Monk.HealingElixer>() > 0)
-                {
-                    var elixer = new Abilities.Monk.HealingElixer();
-                    var result = elixer.GetAbilityResult(AttackResult.Hit, this, null);
-                    result.SelfHealing = ApplyHealing(result.SelfHealing);
-                    Cooldowns.AbilityUsed(elixer, result);
-                    DataLogging.DataLogManager.UsedAbility(DamageEvent.Time, elixer.GetType().Name, result);
-                }
-            }
-
             return DamageEvent;
         }
-
-        public override void UpdateFromTickingBuffs(IEnumerable<Buffs.Buff> TickingBuffs)
-        {
-            base.UpdateFromTickingBuffs(TickingBuffs);
-            foreach (var stagger in TickingBuffs.OfType<Buffs.Monk.Stagger>())
-            {
-                int damageTaken;
-                if (stagger.TimeRemaining > 0)
-                    damageTaken = (int)(stagger.DamageDelayed / stagger.TimeRemaining * stagger.Tick);
-                else
-                    damageTaken = stagger.DamageDelayed;
-                CurrentHealth -= damageTaken;
-                stagger.DamageDelayed -= damageTaken;
-                DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
-                {
-                    Name = "Stagger",
-                    Time = DataLogging.DataLogManager.CurrentTime,
-                    DamageTaken = damageTaken,
-                    Result = AttackResult.Hit
-                });
-            }
-        }
-
+        
         public override int ApplyHealing(int healingAmount)
         {
-            var actualHealing = healingAmount;
-            if (Rng.NextDouble() < (double)CritChance)
-                actualHealing= (int)( healingAmount * 1.65m);
-            
-            CurrentHealth += actualHealing;
+            CurrentHealth += healingAmount;
 
-            return actualHealing;
+            return healingAmount;
         }
     }
 }

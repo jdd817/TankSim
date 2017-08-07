@@ -15,7 +15,10 @@ namespace Tank.Abilities.Monk
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            return new AbilityResult();
+            return new AbilityResult()
+            {
+                DamageDealt = (int)(3.735m * (Caster as Player).AttackPower)
+            };
         }
     }
 }

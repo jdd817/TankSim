@@ -19,6 +19,7 @@
         PrimaryAvoidance,
         Armor,
         MaxHealth,
-        ResourceCap
+        ResourceCap,
+        StaggerAmount
     }
 }

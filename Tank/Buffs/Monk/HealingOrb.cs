@@ -23,15 +23,5 @@ namespace Tank.Buffs.Monk
                 return 100;
             }
         }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
-        }
     }
 }
