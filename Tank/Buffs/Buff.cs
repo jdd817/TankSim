@@ -57,7 +57,10 @@ namespace Tank.Buffs
 
         public virtual void Refresh(Buff NewBuff)
         {
-            TimeRemaining = NewBuff.Durration;
+            if (NewBuff.TimeRemaining < NewBuff.Durration)
+                TimeRemaining += NewBuff.TimeRemaining;
+            else
+                TimeRemaining = NewBuff.Durration;
             Stacks += NewBuff.Stacks;
             if (Stacks > MaxStacks)
                 Stacks = MaxStacks;

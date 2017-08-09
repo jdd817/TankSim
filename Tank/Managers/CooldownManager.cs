@@ -51,7 +51,7 @@ namespace Tank
             if (!Cooldowns.ContainsKey(Ability))
             {
                 var ability = (Ability)Activator.CreateInstance(Ability);
-                Cooldowns.Add(ability.GetType(), new CooldownInfo { Charges = ability.MaxCharges, MaxCharges = ability.MaxCharges, CooldownLength = ability.Cooldown });
+                Cooldowns.Add(ability.GetType(), new CooldownInfo { MaxCharges = ability.MaxCharges, Charges = ability.MaxCharges,  CooldownLength = ability.Cooldown });
             }
             return Cooldowns[Ability].Charges;
         }

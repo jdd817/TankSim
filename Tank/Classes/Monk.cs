@@ -137,22 +137,10 @@ namespace Tank.Classes
                         return AbilityManger.GetAbility<Abilities.Monk.TigerPalm>();
                 }
 
-                if (CurrentHealth < MaxHealth * 0.35
-                        && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() >= 2
-                        && Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) == null)
-                    return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+                var brew = GetBrewUsage();
 
-
-                //both ironskin and purifying brews are tracked under ironskin
-                var stagger = Buffs.GetBuff(typeof(Buffs.Monk.Stagger)) as Buffs.Monk.Stagger;
-                if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.20m && Cooldowns.AbilityReady<Abilities.Monk.IronskinBrew>())
-                    return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
-
-                if (stagger != null && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3 && stagger.DamageDelayed >= MaxHealth * 0.10m)
-                    return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
-
-                if (Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3)
-                    return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+                if (brew != null)
+                    return brew;
             }
             else
             {
@@ -187,22 +175,10 @@ namespace Tank.Classes
 
                 if(!Buffs.BuffActive<Talents.Monk.BlackoutCombo_Buff>())
                 {
-                    if (CurrentHealth < MaxHealth * 0.35
-                        && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() >= 2
-                        && Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) == null)
-                        return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+                    var brew = GetBrewUsage();
 
-
-                    //both ironskin and purifying brews are tracked under ironskin
-                    var stagger = Buffs.GetBuff(typeof(Buffs.Monk.Stagger)) as Buffs.Monk.Stagger;
-                    if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.20m && Cooldowns.AbilityReady<Abilities.Monk.IronskinBrew>())
-                        return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
-
-                    if (stagger != null && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3 && stagger.DamageDelayed >= MaxHealth * 0.10m)
-                        return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
-
-                    if (Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3)
-                        return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+                    if (brew != null)
+                        return brew;
                 }
             }
 
@@ -211,8 +187,41 @@ namespace Tank.Classes
                 && Cooldowns.ChargesAvailable<Abilities.Monk.HealingElixer>() == 2)
                 return AbilityManger.GetAbility<Abilities.Monk.HealingElixer>();
 
+            if (HealthPercentage <= 0.60m
+                && Cooldowns.AbilityReady<Abilities.Monk.FortifyingBrew>())
+                return AbilityManger.GetAbility<Abilities.Monk.FortifyingBrew>();
+
+            if (HealthPercentage <= 0.60m
+                && Buffs.BuffActive<Talents.Monk.DampenHarm>()
+                && Cooldowns.AbilityReady<Abilities.Monk.DampenHarm>()
+                && !Buffs.BuffActive<Buffs.Monk.FortifyingBrew>())
+                return AbilityManger.GetAbility<Abilities.Monk.DampenHarm>();
+
             return null;
         }
+
+        private Abilities.Ability GetBrewUsage()
+        {
+            if (HealthPercentage <= 0.5m
+                        && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() >= 2
+                        && Buffs.GetBuff(typeof(Buffs.Monk.IronskinBrew)) == null)
+                return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+
+
+            //both ironskin and purifying brews are tracked under ironskin
+            var stagger = Buffs.GetBuff(typeof(Buffs.Monk.Stagger)) as Buffs.Monk.Stagger;
+            if (stagger != null && stagger.DamageDelayed >= MaxHealth * 0.10m && Cooldowns.AbilityReady<Abilities.Monk.IronskinBrew>() && !Buffs.BuffActive<Buffs.Monk.Artifact.BrewStache_Buff>())
+                return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
+
+            if (stagger != null && Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3 && stagger.DamageDelayed >= MaxHealth * 0.05m)
+                return AbilityManger.GetAbility<Abilities.Monk.PurifyingBrew>();
+
+            if (Cooldowns.ChargesAvailable<Abilities.Monk.IronskinBrew>() == 3)
+                return AbilityManger.GetAbility<Abilities.Monk.IronskinBrew>();
+
+            return null;
+        }
+
 
         public override void UpdateAbilityResults(decimal CurrentTime, Abilities.Ability Ability, AbilityResult Result)
         {
