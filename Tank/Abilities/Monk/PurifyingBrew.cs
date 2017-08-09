@@ -19,7 +19,9 @@ namespace Tank.Abilities.Monk
             var stagger = Caster.Buffs.GetBuff<Buffs.Monk.Stagger>();
             if (stagger != null)
             {
-                stagger.DamageDelayed = (int)(stagger.DamageDelayed * 0.60m);
+                var staggerReduction = 0.40m + Caster.Buffs.GetStacks<Buffs.Monk.Artifact.StaggeringAround>() * 0.01m;
+                
+                stagger.DamageDelayed = (int)(stagger.DamageDelayed * (1-staggerReduction));
             }
 
             return new AbilityResult

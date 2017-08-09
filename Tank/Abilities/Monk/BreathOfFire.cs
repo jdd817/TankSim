@@ -18,7 +18,8 @@ namespace Tank.Abilities.Monk
             return new AbilityResult
             {
                 DamageDealt = (int)(1.8m * (Caster as Player).AttackPower),
-                DamageType = DamageType.Fire
+                DamageType = DamageType.Fire,
+                CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.Monk.BreathOfFire() }
             };
         }
     }

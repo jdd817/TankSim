@@ -23,5 +23,7 @@ namespace Tank.Buffs.Monk
                 return 100;
             }
         }
+
+        public bool GreaterOrb { get; set; }
     }
 }

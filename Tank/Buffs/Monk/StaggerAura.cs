@@ -7,13 +7,16 @@ using Tank.DataLogging;
 
 namespace Tank.Buffs.Monk
 {
+    [EffectPriority(5)]
     public class StaggerAura : PermanentBuff, IDamageTakenEffectStack
     {
         public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
         {
+            if (damageEvent.Name == "Stagger")
+                return;
             if (damageEvent.DamageTaken > 0)
             {
-                var staggerAmount = 0.45m + tank.Buffs.GetPercentageAdjustment(StatType.StaggerAmount);
+                var staggerAmount = 0.40m + tank.Buffs.GetPercentageAdjustment(StatType.StaggerAmount);
 
                 var damageStaggered = (int)(damageEvent.DamageTaken * staggerAmount);
                 

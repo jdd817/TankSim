@@ -26,11 +26,7 @@ namespace Tank.Buffs.Monk
 
         public override void Ticked()
         {
-            int damageTaken;
-            if (TimeRemaining > 0)
-                damageTaken = (int)(DamageDelayed / TimeRemaining * Tick);
-            else
-                damageTaken = DamageDelayed;
+            int damageTaken = TickDamage;
             Target.CurrentHealth -= damageTaken;
             DamageDelayed -= damageTaken;
             DataLogging.DataLogManager.LogEvent(new DataLogging.DamageEvent
@@ -40,6 +36,16 @@ namespace Tank.Buffs.Monk
                 DamageTaken = damageTaken,
                 Result = AttackResult.Hit
             });
+        }
+
+        public int TickDamage
+        {
+            get
+            {
+                return (TimeRemaining > 0)
+                    ? (int)(DamageDelayed / TimeRemaining * Tick)
+                    : DamageDelayed;
+            }
         }
 
         public override string ToString()

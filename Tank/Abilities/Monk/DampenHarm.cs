@@ -6,20 +6,20 @@ using System.Threading.Tasks;
 
 namespace Tank.Abilities.Monk
 {
-    public class ExplodingKeg : Ability
+    public class DampenHarm : Ability
     {
-        public ExplodingKeg()
+        public DampenHarm()
         {
-            Cooldown = 75m;
+            Cooldown = 120m;
         }
+
+        public override bool OnGCD { get { return false; } }
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
             return new AbilityResult
             {
-                DamageDealt = 9 * (Caster as Player).AttackPower,
-                DamageType = DamageType.Fire,
-                CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.Monk.ExplodingKeg() }
+                CasterBuffsApplied = new List<Buffs.Buff> { new Buffs.Monk.DampenHarm() }
             };
         }
     }

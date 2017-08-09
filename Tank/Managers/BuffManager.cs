@@ -103,6 +103,11 @@ namespace Tank
                 return null;
         }
 
+        public bool BuffActive<T>() where T : Buff
+        {
+            return Buffs.ContainsKey(typeof(T).Name);
+        }
+
         public int GetStacks<T>() where T : Buff
         {
             return GetStacks(typeof(T));

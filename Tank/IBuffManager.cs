@@ -17,6 +17,7 @@ namespace Tank
         Buff GetBuff(Type BuffType);
         Buff GetBuff(string BuffName);
         T GetBuff<T>() where T : Buff;
+        bool BuffActive<T>() where T : Buff;
         decimal GetPercentageAdjustment(StatType ChanceType);
         int GetRatingAdjustment(StatType RatingType);
         int GetStacks(Type BuffType);
