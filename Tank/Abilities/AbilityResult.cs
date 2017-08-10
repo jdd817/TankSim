@@ -42,6 +42,7 @@ namespace Tank.Abilities
         Fire,
         Shadow,
         Chaos,
+        Arcane,
     }
 
     public enum ReductionType

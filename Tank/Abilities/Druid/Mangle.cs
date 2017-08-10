@@ -15,15 +15,12 @@ namespace Tank.Abilities.Druid
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var rageGen = -6;
-            if(Caster.Buffs.GetBuff<Buffs.Druid.Gore>()!=null)
-            {
-                rageGen = -10;
-                Caster.Buffs.ClearBuff<Buffs.Druid.Gore>();
-            }
+            var isBleeding = Target.Buffs.BuffActive<Buffs.Druid.Thrash>();
+
             return new AbilityResult
             {
-                ResourceCost = rageGen
+                DamageDealt = (int)(3.87m * (Caster as Player).WeaponDamage * (isBleeding ? 1.2m : 1m)),
+                ResourceCost = -5
             };
         }
     }

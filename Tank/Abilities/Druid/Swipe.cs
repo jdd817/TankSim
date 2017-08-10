@@ -17,19 +17,15 @@ namespace Tank.Abilities.Druid
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var MangleReset = new List<CooldownReduction>(); ;
             var buffs = new List<Buffs.Buff>() { };
 
             if (_rng.NextDouble() <= 0.15)
-            {
-                MangleReset.Add(new CooldownReduction { Ability = typeof(Druid.Mangle), Amount = 0, ReductionType = ReductionType.To });
                 buffs.Add(new Buffs.Druid.Gore());
-            }
 
             return new AbilityResult
             {
-                CasterBuffsApplied = buffs,
-                CooldownReduction = MangleReset
+                DamageDealt = (int)(1.46m * (Caster as Player).WeaponDamage),
+                CasterBuffsApplied = buffs
             };
         }
     }

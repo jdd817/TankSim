@@ -24,24 +24,11 @@ namespace Tank.Buffs.Druid
             }
         }
 
-        public override int MaxStacks
-        {
-            get
-            {
-                return 1;
-            }
-        }
-
         public override decimal GetPercentageModifier(StatType Stat)
         {
             if (Stat == StatType.Armor)
-                return 0.75m;
+                return 0.65m;
             return 0m;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
         }
 
         public override string Name

@@ -21,6 +21,9 @@ namespace Tank.Classes
             UsesTwoHanders = false;
 
             RageCap = 100;
+
+            Buffs.AddBuff(new Buffs.Druid.BearForm());
+
             Reset();
         }
 
@@ -113,7 +116,7 @@ namespace Tank.Classes
                     return AbilityManger.GetAbility<Abilities.Druid.Moonfire>();
                 }
                 if (Rage >= RageCap - 30)
-                    return new Abilities.Druid.Maul();
+                    return AbilityManger.GetAbility<Abilities.Druid.Maul>();
                 return AbilityManger.GetAbility<Abilities.Druid.Swipe>();
 
             }

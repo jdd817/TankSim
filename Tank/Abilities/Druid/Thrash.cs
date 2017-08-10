@@ -13,29 +13,22 @@ namespace Tank.Abilities.Druid
         public Thrash(IRng rng)
         {
             _rng = rng;
-        }
-
-        public Thrash()
-        {
             Cooldown = 6m;
         }
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var MangleReset = new List<CooldownReduction>(); ;
-            var buffs = new List<Buffs.Buff>() { new Buffs.Druid.RendAndTear() };
+            var buffs = new List<Buffs.Buff>() { };
 
             if (_rng.NextDouble() <= 0.15)
-            {
-                MangleReset.Add(new CooldownReduction { Ability = typeof(Druid.Mangle), Amount = 0, ReductionType = ReductionType.To });
                 buffs.Add(new Buffs.Druid.Gore());
-            }
 
             return new AbilityResult
             {
+                DamageDealt = (int)(0.553m * (Caster as Player).AttackPower),
                 ResourceCost = -4,
                 CasterBuffsApplied = buffs,
-                CooldownReduction = MangleReset
+                TargetBuffsApplied = new List<Buffs.Buff> { new Buffs.Druid.Thrash((int)(0.605m * (Caster as Player).AttackPower)) }
             };
         }
     }

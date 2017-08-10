@@ -81,12 +81,14 @@
     <Compile Include="Abilities\DemonHunter\SoulCarver.cs" />
     <Compile Include="Abilities\DemonHunter\SoulCleave.cs" />
     <Compile Include="Abilities\DemonHunter\SpiritBomb.cs" />
+    <Compile Include="Abilities\Druid\Barkskin.cs" />
     <Compile Include="Abilities\Druid\BristlingFur.cs" />
     <Compile Include="Abilities\Druid\FrenziedRegeneration.cs" />
     <Compile Include="Abilities\Druid\Ironfur.cs" />
     <Compile Include="Abilities\Druid\Mangle.cs" />
     <Compile Include="Abilities\Druid\Maul.cs" />
     <Compile Include="Abilities\Druid\Moonfire.cs" />
+    <Compile Include="Abilities\Druid\SurvivalInstincts.cs" />
     <Compile Include="Abilities\Druid\Swipe.cs" />
     <Compile Include="Abilities\Druid\Thrash.cs" />
     <Compile Include="Abilities\Monk\BlackoutStrike.cs" />
@@ -115,6 +117,10 @@
     <Compile Include="Artifacts\Monk.cs" />
     <Compile Include="Artifacts\Warrior.cs" />
     <Compile Include="Buffs\AbsorbShield.cs" />
+    <Compile Include="Buffs\Druid\Barkskin.cs" />
+    <Compile Include="Buffs\Druid\BearForm.cs" />
+    <Compile Include="Buffs\Druid\SurvivalInstincts.cs" />
+    <Compile Include="Buffs\Druid\Thrash.cs" />
     <Compile Include="Buffs\Monk\Artifact\BrewStache.cs" />
     <Compile Include="Buffs\Monk\Artifact\DarkSideOfTheMoon.cs" />
     <Compile Include="Buffs\Monk\Artifact\DraughtOfDarkness.cs" />

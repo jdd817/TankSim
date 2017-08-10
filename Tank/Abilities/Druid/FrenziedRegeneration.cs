@@ -19,11 +19,6 @@ namespace Tank.Abilities.Druid
         {
             var amountHealed = Math.Max((int)(Caster.MaxHealth * 0.05m), HealAmount);
 
-            if (Caster.Buffs.GetBuff<Buffs.Druid.GuardianOfElune>() != null)
-            {
-                amountHealed = (int)(amountHealed * 1.20m);
-                Caster.Buffs.ClearBuff<Buffs.Druid.GuardianOfElune>();
-            }
             return new AbilityResult
             {
                 ResourceCost = 10,
