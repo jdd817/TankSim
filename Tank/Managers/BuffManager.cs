@@ -155,6 +155,8 @@ namespace Tank
                 Buffs.Remove(buff.Name);
             foreach (var buff in Buffs.Values.OfBaseType<Buffs.RPPMBuff>())
                 buff.ResetLastProcs();
+            foreach (var buff in Buffs.Values.OfBaseType<PermanentBuff>())
+                buff.Reset();
         }
 
         public List<T> GetEffectStack<T>() where T : class, IEffectStack

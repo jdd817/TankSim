@@ -3,35 +3,21 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Tank.DataLogging;
 
 namespace Tank.Buffs.Druid
 {
-    public class BristlingFur : Buff
+    public class BristlingFur : Buff, IDamageTakenEffectStack
     {
-        public override decimal Durration
-        {
-            get
-            {
-                return 8m;
-            }
-        }
+        public override decimal Durration { get { return 8m; } }
 
-        public override int MaxStacks
+        public void DamageTaken(decimal currentTime, DamageEvent damageEvent, Player tank)
         {
-            get
-            {
-                return 1;
-            }
-        }
-
-        public override decimal GetPercentageModifier(StatType Stat)
-        {
-            return 0;
-        }
-
-        public override int GetRatingModifier(StatType RatingType)
-        {
-            return 0;
+            //get rage
+            //from blue: 50 * DamageTaken / MaxHealth
+            //from icy: BristlingFurRage = 100 * Damage / ExpectedMaxHealth
+            //using icy as its likely more recent than the blue i found 
+            (tank as Classes.Druid).Rage += (int)(100m * (damageEvent.RawDamage / tank.MaxHealth));
         }
     }
 }

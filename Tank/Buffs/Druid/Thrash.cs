@@ -6,11 +6,12 @@ using System.Threading.Tasks;
 
 namespace Tank.Buffs.Druid
 {
-    public class Thrash:DamageOverTime
+    public class Thrash : DamageOverTime
     {
         public Thrash(int damage)
         {
-            DamagePerTick = (int)(damage / Durration);
+            Tick = 3m;
+            DamagePerTick = (int)(damage * Tick / Durration);
         }
 
         public override int MaxStacks { get { return 3; } }

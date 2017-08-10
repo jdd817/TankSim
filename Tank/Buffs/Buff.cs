@@ -105,6 +105,9 @@ namespace Tank.Buffs
                 return 60;
             }
         }
+
+        public virtual void Reset()
+        { }
     }
 
     public abstract class DamageOverTime:Buff

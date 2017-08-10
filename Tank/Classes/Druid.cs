@@ -53,7 +53,7 @@ namespace Tank.Classes
 
         private int _rage;
 
-        private int Rage
+        public int Rage
         {
             get { return _rage; }
             set { _rage = Math.Min(value, RageCap); }
@@ -104,7 +104,7 @@ namespace Tank.Classes
         {
             if (Cooldowns.OffGCD)
             {
-                if (Buffs.GetBuff<Buffs.Druid.GalacticGuardian>() != null)
+                if (Buffs.GetBuff<Talents.Druid.GalacticGuardian_Buff>() != null)
                     return AbilityManger.GetAbility<Abilities.Druid.Moonfire>();
                 if (Cooldowns.AbilityReady<Abilities.Druid.Mangle>())
                     return AbilityManger.GetAbility<Abilities.Druid.Mangle>();
@@ -121,7 +121,7 @@ namespace Tank.Classes
 
             }
 
-            if (Cooldowns.AbilityReady<Abilities.Druid.BristlingFur>())
+            if (Buffs.BuffActive<Talents.Druid.BristlingFur>() && Cooldowns.AbilityReady<Abilities.Druid.BristlingFur>())
                 return AbilityManger.GetAbility<Abilities.Druid.BristlingFur>();
 
             if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && HealthPercentage < 0.5m && Buffs.GetBuff<Buffs.Druid.FrenziedRegeneration>() == null)
@@ -144,36 +144,8 @@ namespace Tank.Classes
                 Rage += 8;
         }
 
-        public override void UpdateTimeElapsed(decimal DeltaTime)
-        {
-            base.UpdateTimeElapsed(DeltaTime);
-
-            if(YserasGiftCD<=0 && CurrentHealth<MaxHealth)
-            {
-                YserasGiftCD = 5m;
-                var healingAmount = (int)(MaxHealth * 0.03m);
-                CurrentHealth += healingAmount;
-                DataLogging.DataLogManager.UsedAbility(DataLogging.DataLogManager.CurrentTime,"Healed", new AbilityResult
-                {
-                    SelfHealing = healingAmount
-                });
-            }
-            
-            YserasGiftCD = Math.Max(0, YserasGiftCD - DeltaTime);
-        }
-
         public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
         {
-            //get rage
-            //from blue: 50 * DamageTaken / MaxHealth
-            if (Buffs.GetBuff<Buffs.Druid.BristlingFur>() != null)
-                Rage += (int)((100m * DamageEvent.RawDamage) / MaxHealth);
-
-            if(Rng.NextDouble()<=0.10)
-            {
-                Buffs.AddBuff(new Buffs.Druid.GalacticGuardian());
-            }
-
             return DamageEvent;
         }
 
