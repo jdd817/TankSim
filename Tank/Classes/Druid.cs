@@ -24,8 +24,39 @@ namespace Tank.Classes
 
             Buffs.AddBuff(new Buffs.Druid.BearForm());
 
+            ClawsOfUrsoc = new Artifacts.Druid(rng)
+            {
+                RageOfTheSleeper = 1,
+                IronClaws = 1,
+                ViciousBites = 4,
+                Wildflesh = 4,
+                JaggedClaws = 4,
+                ReinforcedFur = 4,
+                AdaptiveFur = 1,
+                BearHug = 1,
+                PerpetualSpring = 4,
+                EmbraceOfTheNightmare = 1,
+                SharpenedInstincts = 4,
+                RoarOfTheCrowd = 1,
+                Mauler = 4,
+                UrsocsEndurance = 4,
+                GoryFur = 1,
+                BestialFortitude = 4,
+                BloodyPaws = 1,
+                FortitudeOfTheCenarionCircle = 1,
+                ScintillatingMoonlight = 4,
+                Fleshknitting = 1,
+                PawsitiveOutlook = 1,
+                Concordance = 6
+            };
+
+            foreach (var buff in ClawsOfUrsoc.GetArtifactBuffs())
+                Buffs.AddBuff(buff);
+
             Reset();
         }
+
+        public Artifacts.Druid ClawsOfUrsoc { get; set; }
 
         public override void Reset()
         {
@@ -94,6 +125,14 @@ namespace Tank.Classes
                     + GetDiminishedAvoidance(
                         RatingConverter.GetRating(StatType.Dodge, CritRating + Buffs.GetRatingAdjustment(StatType.Dodge))
                             + Buffs.GetPercentageAdjustment(StatType.Dodge));
+            }
+        }
+
+        public double GoreChance
+        {
+            get
+            {
+                return Buffs.BuffActive<Buffs.Druid.Artifact.BearHug>() ? 0.20 : 0.15;
             }
         }
 

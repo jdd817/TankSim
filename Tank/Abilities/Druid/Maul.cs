@@ -20,7 +20,7 @@ namespace Tank.Abilities.Druid
         {
             var buffs = new List<Buffs.Buff>() { new Buffs.Druid.GuardianOfElune() };
 
-            if (_rng.NextDouble() <= 0.15)
+            if (_rng.NextDouble() <= (Caster as Classes.Druid).GoreChance)
                 buffs.Add(new Buffs.Druid.Gore());
 
             return new AbilityResult

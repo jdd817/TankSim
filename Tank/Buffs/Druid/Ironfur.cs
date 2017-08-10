@@ -10,6 +10,7 @@ namespace Tank.Buffs.Druid
     {
         public Ironfur()
         {
+            ArmorIncrease = 0.65m;
             buffId = _buffCounter++;
         }
 
@@ -24,10 +25,12 @@ namespace Tank.Buffs.Druid
             }
         }
 
+        public decimal ArmorIncrease { get; set; }
+
         public override decimal GetPercentageModifier(StatType Stat)
         {
             if (Stat == StatType.Armor)
-                return 0.65m;
+                return ArmorIncrease;
             return 0m;
         }
 
