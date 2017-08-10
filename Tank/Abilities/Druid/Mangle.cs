@@ -15,7 +15,7 @@ namespace Tank.Abilities.Druid
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var isBleeding = Target.Buffs.BuffActive<Buffs.Druid.Thrash>();
+            var isBleeding = Caster.Buffs.BuffActive<Buffs.Druid.Thrash>();
 
             return new AbilityResult
             {

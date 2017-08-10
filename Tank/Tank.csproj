@@ -138,6 +138,7 @@
     <Compile Include="Buffs\Druid\Artifact\Wildflesh.cs" />
     <Compile Include="Buffs\Druid\Barkskin.cs" />
     <Compile Include="Buffs\Druid\BearForm.cs" />
+    <Compile Include="Buffs\Druid\DruidMasteryAura.cs" />
     <Compile Include="Buffs\Druid\GuardianOfUrsoc.cs" />
     <Compile Include="Buffs\Druid\LunarBeam.cs" />
     <Compile Include="Buffs\Druid\Pulverize.cs" />

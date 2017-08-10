@@ -22,7 +22,7 @@ namespace Tank.Talents.Druid
         {
             if(Result.DamageDealt>0)
             {
-                if (_rng.NextDouble() > 0.07)
+                if (_rng.NextDouble() < 0.07)
                 {
                     Result.CasterBuffsApplied.Add(new GalacticGuardian_Buff());
                     Result.TargetBuffsApplied.Add(new Buffs.Druid.Moonfire());
@@ -41,6 +41,7 @@ namespace Tank.Talents.Druid
             {
                 Result.ResourceCost = -8;
                 Result.DamageDealt *= 3;
+                TimeRemaining = 0;
             }
         }
     }

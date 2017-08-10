@@ -23,6 +23,7 @@ namespace Tank.Classes
             RageCap = 100;
 
             Buffs.AddBuff(new Buffs.Druid.BearForm());
+            Buffs.AddBuff(new Buffs.Druid.DruidMasteryAura());
 
             ClawsOfUrsoc = new Artifacts.Druid(rng)
             {
@@ -143,12 +144,16 @@ namespace Tank.Classes
         {
             if (Cooldowns.OffGCD)
             {
-                if (Buffs.GetBuff<Talents.Druid.GalacticGuardian_Buff>() != null)
-                    return AbilityManger.GetAbility<Abilities.Druid.Moonfire>();
                 if (Cooldowns.AbilityReady<Abilities.Druid.Mangle>())
                     return AbilityManger.GetAbility<Abilities.Druid.Mangle>();
-                if (Cooldowns.AbilityReady<Abilities.Druid.Thrash>() && Rage >= 15)
+                if (Buffs.GetBuff<Talents.Druid.GalacticGuardian_Buff>() != null)
+                    return AbilityManger.GetAbility<Abilities.Druid.Moonfire>();
+                if (Cooldowns.AbilityReady<Abilities.Druid.Thrash>())
                     return AbilityManger.GetAbility<Abilities.Druid.Thrash>();
+                if (Buffs.BuffActive<Talents.Druid.Pulverize>()
+                    && Cooldowns.AbilityReady<Abilities.Druid.Pulverize>()
+                    && Buffs.GetStacks<Buffs.Druid.Thrash>() >= 2)
+                    return AbilityManger.GetAbility<Abilities.Druid.Pulverize>();
                 var moonfireDebuff = MobBuffs.GetBuff<Buffs.Druid.Moonfire>();
                 if (moonfireDebuff == null || moonfireDebuff.TimeRemaining <= GCDLength * 2m)
                 {
@@ -160,16 +165,37 @@ namespace Tank.Classes
 
             }
 
-            if (Buffs.BuffActive<Talents.Druid.BristlingFur>() && Cooldowns.AbilityReady<Abilities.Druid.BristlingFur>())
-                return AbilityManger.GetAbility<Abilities.Druid.BristlingFur>();
+            if (!Buffs.BuffActive<Buffs.Druid.SurvivalInstincts>())
+            {
+                if (Cooldowns.AbilityReady<Abilities.Druid.SurvivalInstincts>() 
+                    && Cooldowns.CooldownRemaining<Abilities.Druid.SurvivalInstincts>() <= 120m
+                    && !Buffs.BuffActive<Buffs.Druid.Barkskin>()
+                    && !Buffs.BuffActive<Buffs.Druid.RageOfTheSleeper>())
+                    return AbilityManger.GetAbility<Abilities.Druid.SurvivalInstincts>();
 
-            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && HealthPercentage < 0.5m && Buffs.GetBuff<Buffs.Druid.FrenziedRegeneration>() == null)
+                if (Cooldowns.AbilityReady<Abilities.Druid.RageOfTheSleeper>()
+                    && !Buffs.BuffActive<Buffs.Druid.Barkskin>()
+                    && HealthPercentage <= 0.90m)
+                    return AbilityManger.GetAbility<Abilities.Druid.RageOfTheSleeper>();
+
+                if (Cooldowns.AbilityReady<Abilities.Druid.Barkskin>()
+                    && !Buffs.BuffActive<Buffs.Druid.RageOfTheSleeper>())
+                    return AbilityManger.GetAbility<Abilities.Druid.Barkskin>();
+
+                if (Buffs.BuffActive<Talents.Druid.BristlingFur>() && Cooldowns.AbilityReady<Abilities.Druid.BristlingFur>())
+                    return AbilityManger.GetAbility<Abilities.Druid.BristlingFur>();
+                
+                if (Rage >= 45 && Cooldowns.AbilityReady<Abilities.Druid.Ironfur>())
+                    return AbilityManger.GetAbility<Abilities.Druid.Ironfur>();
+            }
+
+            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() 
+                && HealthPercentage < 0.5m && !Buffs.BuffActive<Buffs.Druid.FrenziedRegeneration>())
                 return AbilityManger.GetAbility<Abilities.Druid.FrenziedRegeneration>();
 
-            if (Rage >= 45 && Cooldowns.AbilityReady<Abilities.Druid.Ironfur>())
-                return AbilityManger.GetAbility<Abilities.Druid.Ironfur>();
-
-            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>() && Abilities.Druid.FrenziedRegeneration.HealAmount + CurrentHealth <= MaxHealth)
+            if (Rage >= 10 && Cooldowns.AbilityReady<Abilities.Druid.FrenziedRegeneration>()
+                && HealthPercentage < 0.90m && !Buffs.BuffActive<Buffs.Druid.FrenziedRegeneration>()
+                && Abilities.Druid.FrenziedRegeneration.HealAmount + CurrentHealth <= MaxHealth)
                 return AbilityManger.GetAbility<Abilities.Druid.FrenziedRegeneration>();
 
             return null;
@@ -186,11 +212,6 @@ namespace Tank.Classes
         public override DataLogging.DamageEvent UpdateFromMobAttack(DataLogging.DamageEvent DamageEvent)
         {
             return DamageEvent;
-        }
-
-        public override int ApplyHealing(int healingAmount)
-        {
-            return base.ApplyHealing((int)(healingAmount * (1 + Mastery * 1.25m)));
         }
     }
 }

@@ -18,7 +18,7 @@ namespace Tank.Abilities.Druid
 
         public override AbilityResult GetAbilityResult(AttackResult Result, Actor Caster, Actor Target)
         {
-            var buffs = new List<Buffs.Buff>() { };
+            var buffs = new List<Buffs.Buff>() { new Buffs.Druid.Thrash((int)(0.605m * (Caster as Player).AttackPower)) };
 
             if (_rng.NextDouble() <= (Caster as Classes.Druid).GoreChance)
                 buffs.Add(new Buffs.Druid.Gore());
@@ -27,8 +27,7 @@ namespace Tank.Abilities.Druid
             {
                 DamageDealt = (int)(0.553m * (Caster as Player).AttackPower),
                 ResourceCost = -4,
-                CasterBuffsApplied = buffs,
-                TargetBuffsApplied = new List<Buffs.Buff> { new Buffs.Druid.Thrash((int)(0.605m * (Caster as Player).AttackPower)) }
+                CasterBuffsApplied = buffs
             };
         }
     }
