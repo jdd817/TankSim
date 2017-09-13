@@ -143,6 +143,8 @@
     <Compile Include="Buffs\Druid\LunarBeam.cs" />
     <Compile Include="Buffs\Druid\Pulverize.cs" />
     <Compile Include="Buffs\Druid\RageOfTheSleeper.cs" />
+    <Compile Include="Buffs\Druid\SetBonuses\T20_2Pc.cs" />
+    <Compile Include="Buffs\Druid\SetBonuses\T20_4Pc.cs" />
     <Compile Include="Buffs\Druid\SurvivalInstincts.cs" />
     <Compile Include="Buffs\Druid\Thrash.cs" />
     <Compile Include="Buffs\Monk\Artifact\BrewStache.cs" />
@@ -302,6 +304,18 @@
     <Compile Include="IBuffManager.cs" />
     <Compile Include="ICooldownManager.cs" />
     <Compile Include="Mob.cs" />
+    <Compile Include="Netherlight\Light\InfusionOfLight.cs" />
+    <Compile Include="Netherlight\Light\LightsEmbrace.cs" />
+    <Compile Include="Netherlight\Light\LightSpeed.cs" />
+    <Compile Include="Netherlight\Light\RefractiveShell.cs" />
+    <Compile Include="Netherlight\Light\SecureInTheLight.cs" />
+    <Compile Include="Netherlight\Light\Shocklight.cs" />
+    <Compile Include="Netherlight\Shadow\ChaoticDarkness.cs" />
+    <Compile Include="Netherlight\Shadow\DarkSorrows.cs" />
+    <Compile Include="Netherlight\Shadow\MasterOfShadows.cs" />
+    <Compile Include="Netherlight\Shadow\MurderousIntent.cs" />
+    <Compile Include="Netherlight\Shadow\Shadowbind.cs" />
+    <Compile Include="Netherlight\Shadow\TormentTheWeak.cs" />
     <Compile Include="Player.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RatingConverter.cs" />

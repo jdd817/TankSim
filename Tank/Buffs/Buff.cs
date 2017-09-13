@@ -125,7 +125,7 @@ namespace Tank.Buffs
 
     public abstract class HealOverTime : Buff
     {
-        public int HealingPerTick { get; set; }
+        public virtual int HealingPerTick { get; set; }
 
         public override string ToString()
         {
